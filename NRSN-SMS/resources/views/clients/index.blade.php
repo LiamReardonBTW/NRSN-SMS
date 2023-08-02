@@ -1,23 +1,22 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Clients List') }}
+            {{ __('Clients') }}
         </h2>
     </x-slot>
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-
+            <div class="bg-blue-600 overflow-hidden shadow-xl sm:rounded-lg">
                 <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+                    <h2 class="px-5 py-3 font-semibold text-3xl text-white leading-tight">Clients List</h2>
 
-
-                    <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-                        <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                            <thead class="text-xs text-white uppercase bg-blue-600 dark:bg-gray-700 dark:text-gray-400">
+                    <div class="relative overflow-x-auto shadow-md sm:rounded bg-white">
+                        <table class="w-full text-sm text-left text-gray-500 dark:text-gray-100 bg-gray-100">
+                            <thead class="text-xs text-white uppercase bg-blue-600 dark:bg-gray-700 dark:text-gray-400 ">
                                 <tr>
                                     <th scope="col" class="px-6 py-3">
-                                        Cliend ID
+                                        Client ID
                                     </th>
                                     <th scope="col" class="px-6 py-3">
                                         <div class="flex items-center">
@@ -118,18 +117,22 @@
                                         <td scope="row" class="px-6 py-4">
                                             {{$client->created_at}}
                                         </td>
-                                        <td class="px-6 py-4">
-                                            <div>
-                                                <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-                                            </div>
-                                            <div class="mt-4">
-                                                <a href="#" class="mt-2 font-medium text-red-600 dark:text-red-500 hover:underline">Remove</a>
-                                            </div>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                                <a href="#" class="px-3 py-1 border-sm bg-gray-200 rounded text-blue-600 dark:text-blue-500 hover:bg-gray-300">View</a>
+                                                <a href="#" class="px-3 py-1 bg-gray-200 rounded text-violet-500 dark:text-violet-500 hover:bg-gray-300">Edit</a>
+                                                <a href="#" class="px-3 py-1 bg-gray-200 rounded font-medium text-red-600 dark:text-red-500 hover:bg-gray-300">Remove</a>
                                         </td>
                                     </tr>
                                 @endforeach
                             </tbody>
                         </table>
+
+                        <div class="block mt-8 p-5">
+                            <x-button class="bg-green-600">
+                                <a href="{{ route('clients.create')}}" > Add Client </a>
+                            </x-button>
+                        </div>
+
                     </div>
                 </div>
 
