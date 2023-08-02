@@ -84,45 +84,50 @@
                                         </div>
                                     </th>
                                     <th scope="col" class="px-6 py-3">
-                                        <span class="sr-only">Edit</span>
+                                        <span>Actions</span>
                                     </th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                                    <th scope="row" class="px-6 py-4">
-                                        1
-                                    </th>
-                                    <td class="px-6 py-4">
-                                        John
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        Doe
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        Yes
-                                    </td>
-                                    </th>
-                                    <td class="px-6 py-4">
-                                        04 123 456
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        johndoe@gmail.com
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        123 Address Drive, Suburb
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        12345467
-                                        123456
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        02/08/2023
-                                    </td>
-                                    <td class="px-6 py-4 text-right">
-                                        <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-                                    </td>
-                                </tr>
+                                @foreach ($clients as $client)
+                                    <tr>
+                                        <td scope="row" class="px-6 py-4">
+                                            {{$client->id}}
+                                        </td>
+                                        <td scope="row" class="px-6 py-4">
+                                            {{$client->first_name}}
+                                        </td>
+                                        <td scope="row" class="px-6 py-4">
+                                            {{$client->last_name}}
+                                        </td>
+                                        <td scope="row" class="px-6 py-4">
+                                            {{$client->active}}
+                                        </td>
+                                        <td scope="row" class="px-6 py-4">
+                                            {{$client->phone}}
+                                        </td>
+                                        <td scope="row" class="px-6 py-4">
+                                            {{$client->email}}
+                                        </td>
+                                        <td scope="row" class="px-6 py-4">
+                                            {{$client->address}}
+                                        </td>
+                                        <td scope="row" class="px-6 py-4">
+                                            {{$client->invoicing_codes}}
+                                        </td>
+                                        <td scope="row" class="px-6 py-4">
+                                            {{$client->created_at}}
+                                        </td>
+                                        <td class="px-6 py-4">
+                                            <div>
+                                                <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                                            </div>
+                                            <div class="mt-4">
+                                                <a href="#" class="mt-2 font-medium text-red-600 dark:text-red-500 hover:underline">Remove</a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
