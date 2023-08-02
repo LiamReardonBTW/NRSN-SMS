@@ -37,7 +37,7 @@ class ClientSeeder extends Seeder
             'phone' => '+1 (536) 268-6362',
             'email' => 'masahe@mailinator.com',
             'address' => '421 Timber Street, Bonogin',
-            'invoicing_codes' => 'test']
+            'invoicing_codes' => '552-1235']
         ]);
     }
 }
