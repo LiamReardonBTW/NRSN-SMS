@@ -10,52 +10,71 @@
             <div class="bg-blue-600 overflow-hidden shadow-xl sm:rounded-lg">
                 <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
                     <h2 class="px-5 py-3 font-semibold text-3xl text-white leading-tight">Add Client</h2>
+                    <form method="post" action="{{ route('clients.store') }}">
+                        @csrf
+                        <div class="shadow overflow-hidden sm:rounded-md">
+                            <div class="px-4 py-5 bg-white sm:p-6">
+                                <label for="first_name" class="block font-medium text-sm text-gray-700">First Name</label>
+                                <x-input type="text" name="first_name" id="first_name" class="form-input rounded-md shadow-sm mt-1 block w-full"
+                                       value="{{ old('first_name', '') }}" />
+                                @error('first_name')
+                                    <p class="text-sm text-red-600">{{ $message }}</p>
+                                @enderror
+                            </div>
 
-                    <div class="bg-white px-4 py-4">
-                        <form class="w-full max-w-lg" >
-                            <div class="flex flex-wrap -mx-3 mb-6">
-                              <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-                                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
-                                  First Name
-                                </label>
-                                <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-first-name" type="text" placeholder="Jane">
-                              </div>
-                              <div class="w-full md:w-1/2 px-3">
-                                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">
-                                  Last Name
-                                </label>
-                                <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-last-name" type="text" placeholder="Doe">
-                              </div>
+                            <div class="px-4 py-5 bg-white sm:p-6">
+                                <label for="last_name" class="block font-medium text-sm text-gray-700">Last Name</label>
+                                <x-input type="text" name="last_name" id="last_name" class="form-input rounded-md shadow-sm mt-1 block w-full"
+                                       value="{{ old('last_name', '') }}" />
+                                @error('last_name')
+                                    <p class="text-sm text-red-600">{{ $message }}</p>
+                                @enderror
                             </div>
-                            <div class="flex flex-wrap -mx-3 mb-6">
-                              <div class="w-full px-3">
-                                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-email">
-                                  Email
-                                </label>
-                                <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-email" type="email" placeholder="client@gmail.com">
-                              </div>
+
+                            <div class="px-4 py-5 bg-white sm:p-6">
+                                <label for="phone" class="block font-medium text-sm text-gray-700">Phone #</label>
+                                <x-input type="string" name="phone" id="phone" class="form-input rounded-md shadow-sm mt-1 block w-full"
+                                       value="{{ old('phone', '') }}" />
+                                @error('phone')
+                                    <p class="text-sm text-red-600">{{ $message }}</p>
+                                @enderror
                             </div>
-                            <div class="flex flex-wrap -mx-3 mb-2">
-                              <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-                                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-address">
-                                  Address
-                                </label>
-                                <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-address" type="text" placeholder="123 Mary St, Burleigh, 4220">
-                              </div>
-                              <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-                                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-invoice-code">
-                                  Invoice Code
-                                </label>
-                                <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-invoice-code" type="text" placeholder="90210">
-                              </div>
+
+                            <div class="px-4 py-5 bg-white sm:p-6">
+                                <label for="email" class="block font-medium text-sm text-gray-700">Email</label>
+                                <x-input type="email" name="email" id="email" class="form-input rounded-md shadow-sm mt-1 block w-full"
+                                       value="{{ old('email', '') }}" />
+                                @error('email')
+                                    <p class="text-sm text-red-600">{{ $message }}</p>
+                                @enderror
                             </div>
-                          </form>
-                          <x-button class="mb-4 ml-4 bg-green-600">
-                            <a href="#" > Add Client </a>
-                        </x-button>
-                    </div>
-                    </div>
-                </div>
+
+                            <div class="px-4 py-5 bg-white sm:p-6">
+                                <label for="address" class="block font-medium text-sm text-gray-700">Address</label>
+                                <x-input type="text" name="address" id="address" class="form-input rounded-md shadow-sm mt-1 block w-full"
+                                       value="{{ old('address', '') }}" />
+                                @error('address')
+                                    <p class="text-sm text-red-600">{{ $message }}</p>
+                                @enderror
+                            </div>
+
+                            <div class="px-4 py-5 bg-white sm:p-6">
+                                <label for="invoicing_codes" class="block font-medium text-sm text-gray-700">Invoicing Codes</label>
+                                <x-input type="text" name="invoicing_codes" id="invoicing_codes" class="form-input rounded-md shadow-sm mt-1 block w-full"
+                                       value="{{ old('invoicing_codes', '') }}" />
+                                @error('invoicing_codes')
+                                    <p class="text-sm text-red-600">{{ $message }}</p>
+                                @enderror
+                            </div>
+
+
+                            <div class="flex items-center justify-end px-4 py-3 bg-gray-50 text-right sm:px-6">
+                                <button class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">
+                                    Create
+                                </button>
+                            </div>
+                        </div>
+                    </form>
 
             </div>
         </div>

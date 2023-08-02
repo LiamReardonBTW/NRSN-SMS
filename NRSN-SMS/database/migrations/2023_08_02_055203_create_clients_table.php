@@ -15,11 +15,11 @@ return new class extends Migration
             $table->id();
             $table->string('first_name');
             $table->string('last_name');
-            $table->boolean('active');
-            $table->string('phone');
+            $table->boolean('active')->default(1);
+            $table->string('phone')->nullable();
             $table->string('email');
             $table->string('address');
-            $table->string('invoicing_codes');
+            $table->string('invoicing_codes')->nullable();
             $table->timestamps();
         });
     }
