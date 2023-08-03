@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Worker;
+namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreClientRequest;
@@ -8,16 +8,16 @@ use App\Http\Requests\UpdateClientRequest;
 use App\Models\Client;
 
 
-class MyClientController extends Controller
+class ClientController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $myclients = Client::all();
+        $clients = Client::all();
 
-        return view('worker/myclients.index', compact('myclients'));
+        return view('clients.index', compact('clients'));
     }
 
     /**
@@ -25,7 +25,7 @@ class MyClientController extends Controller
      */
     public function create()
     {
-        return view('worker/myclients.create');
+        return view('clients.create');
     }
 
     /**
@@ -35,7 +35,7 @@ class MyClientController extends Controller
     {
         Client::create($request->validated());
 
-        return redirect()->route('worker/myclients.index');
+        return redirect()->route('clients.index');
     }
 
     /**
@@ -43,7 +43,7 @@ class MyClientController extends Controller
      */
     public function show(Client $client)
     {
-        return view('worker/myclients.show', compact('client'));
+        return view('clients.show', compact('client'));
     }
 
     /**
@@ -51,7 +51,7 @@ class MyClientController extends Controller
      */
     public function edit(Client $client)
     {
-        return view('worker/myclients.edit', compact('client'));
+        return view('clients.edit', compact('client'));
     }
 
     /**
@@ -61,7 +61,7 @@ class MyClientController extends Controller
     {
         $client->update($request->validated());
 
-        return redirect()->route('worker/myclients.index');
+        return redirect()->route('clients.index');
     }
 
     /**
@@ -71,6 +71,6 @@ class MyClientController extends Controller
     {
         $client->delete();
 
-        return redirect()->route('worker/myclients.index');
+        return redirect()->route('clients.index');
     }
 }

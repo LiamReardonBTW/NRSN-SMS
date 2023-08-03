@@ -10,7 +10,7 @@
             <div class="bg-blue-600 overflow-hidden shadow-xl sm:rounded-lg">
                 <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
                     <h2 class="px-5 py-3 font-semibold text-3xl text-white leading-tight">Add Client</h2>
-                    <form method="post" action="{{ route('myclients.store') }}">
+                    <form method="post" action="{{ route('clients.store') }}">
                         @csrf
                         <div class="shadow overflow-hidden sm:rounded-md">
                             <div class="px-4 py-5 bg-white sm:p-6">

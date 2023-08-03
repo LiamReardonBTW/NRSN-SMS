@@ -17,8 +17,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::resource('clients', App\Http\Controllers\ClientController::class);
+
 Route::group(['middleware' => 'auth'], function(){
-    Route::resource('myclients', App\Http\Controllers\Worker\MyClientController::class);
+    Route::resource('clients', App\Http\Controllers\ClientController::class);
 });
 
 Route::middleware([
