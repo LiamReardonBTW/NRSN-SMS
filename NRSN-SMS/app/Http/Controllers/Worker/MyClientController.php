@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Worker;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreClientRequest;
@@ -8,16 +8,16 @@ use App\Http\Requests\UpdateClientRequest;
 use App\Models\Client;
 
 
-class ClientController extends Controller
+class MyClientController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $clients = Client::all();
+        $myclients = Client::all();
 
-        return view('clients.index', compact('clients'));
+        return view('worker/myclients.index', compact('myclients'));
     }
 
     /**
@@ -25,7 +25,7 @@ class ClientController extends Controller
      */
     public function create()
     {
-        return view('clients.create');
+        return view('worker/myclients.create');
     }
 
     /**
@@ -35,7 +35,7 @@ class ClientController extends Controller
     {
         Client::create($request->validated());
 
-        return redirect()->route('clients.index');
+        return redirect()->route('worker/myclients.index');
     }
 
     /**
@@ -43,7 +43,7 @@ class ClientController extends Controller
      */
     public function show(Client $client)
     {
-        return view('clients.show', compact('client'));
+        return view('worker/myclients.show', compact('client'));
     }
 
     /**
@@ -51,7 +51,7 @@ class ClientController extends Controller
      */
     public function edit(Client $client)
     {
-        return view('clients.edit', compact('client'));
+        return view('worker/myclients.edit', compact('client'));
     }
 
     /**
@@ -61,7 +61,7 @@ class ClientController extends Controller
     {
         $client->update($request->validated());
 
-        return redirect()->route('clients.index');
+        return redirect()->route('worker/myclients.index');
     }
 
     /**
@@ -71,6 +71,6 @@ class ClientController extends Controller
     {
         $client->delete();
 
-        return redirect()->route('clients.index');
+        return redirect()->route('worker/myclients.index');
     }
 }

@@ -88,7 +88,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($clients as $client)
+                                @foreach ($myclients as $client)
                                     <tr>
                                         <td scope="row" class="px-6 py-4">
                                             {{$client->id}}
@@ -129,7 +129,7 @@
 
                         <div class="block mt-8 p-5">
                             <x-button class="bg-green-600">
-                                <a href="{{ route('clients.create')}}" > Add Client </a>
+                                <a href="{{ route('myclients.create')}}" > Add Client </a>
                             </x-button>
                         </div>
 
