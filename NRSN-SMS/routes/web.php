@@ -19,6 +19,10 @@ Route::get('/', function () {
 
 Route::resource('clients', App\Http\Controllers\ClientController::class);
 
+Route::group(['middleware' => 'auth'], function(){
+    Route::resource('clients', App\Http\Controllers\ClientController::class);
+});
+
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
