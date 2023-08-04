@@ -25,22 +25,21 @@
     <div class="min-h-screen bg-gray-100">
         @livewire('navigation-menu')
 
-        <!-- Page Heading -->
-        @if (isset($header))
-            <header class="bg-blue-100 border-b-2 border-t-2 border-blue-600">
-                <div class="max-w-screen-2xl mx-auto py-1 px-4 sm:px-6 lg:px-8 text-l">
-                    <a href="{{ route('dashboard') }}" class="font-bold text-xl">Shift Management System</a>
-                    <div class="border-t-2 border-gray-600 mb-1">
-                    </div>
-                    {{ $header }}
-                </div>
-            </header>
-        @endif
+
 
         <!-- Page Content -->
         <main>
             <div class="max-w-screen-2xl mx-auto sm:px-6 lg:px-8">
+
                 <div class="bg-gray-50 overflow-hidden shadow-xl min-h-screen">
+                    <!-- Page Heading -->
+                    @if (isset($header))
+                        <header class="pt-6 pb-6">
+                            <div class="max-w-screen-2xl mx-auto sm:px-6 lg:px-8 text-4xl font-bold">
+                                {{ $header }}
+                            </div>
+                        </header>
+                    @endif
                     {{ $slot }}
                 </div>
             </div>

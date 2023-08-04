@@ -3,7 +3,7 @@
         {{ __('Dashboard') }}
     </x-slot>
 
-    <div class="px-6 lg:px-8 py-6">
+    <div class="px-6 lg:px-8 pb-6">
         <h1 class="text-2xl font-medium text-gray-900">
             Welcome <span class="text-green-600 font-bold">{{ Auth::user()->first_name }}</span>!
         </h1>
