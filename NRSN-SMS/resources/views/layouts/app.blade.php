@@ -24,31 +24,28 @@
 
     <div class="min-h-screen bg-gray-100">
         @livewire('navigation-menu')
-
-
-
         <!-- Page Content -->
         <main>
             <div class="max-w-screen-2xl mx-auto sm:px-6 lg:px-8">
+                <div class="bg-gray-50 shadow-xl min-h-screen">
 
-                <div class="bg-gray-50 overflow-hidden shadow-xl min-h-screen">
                     <!-- Page Heading -->
                     @if (isset($header))
                         <header class="pt-6 pb-6">
-                            <div class="max-w-screen-2xl mx-auto sm:px-6 lg:px-8 text-4xl font-bold">
+                            <div class="px-4 lg:px-8 text-4xl font-bold">
                                 {{ $header }}
                             </div>
                         </header>
                     @endif
+
+                    <!-- Main Content -->
                     {{ $slot }}
+
                 </div>
             </div>
         </main>
     </div>
-
     @stack('modals')
-
     @livewireScripts
 </body>
-
 </html>
