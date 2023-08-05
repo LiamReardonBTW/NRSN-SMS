@@ -22,17 +22,17 @@
 <body class="font-sans antialiased">
     <x-banner />
 
-    <div class="min-h-screen bg-gray-100">
+    <div class="bg-gray-100 border-b-2 border-gray-400">
         @livewire('navigation-menu')
         <!-- Page Content -->
         <main>
-            <div class="max-w-screen-2xl mx-auto sm:px-6 lg:px-8">
-                <div class="bg-gray-50 shadow-xl min-h-screen">
+            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                <div class="bg-gray-50 shadow-xl min-h-screen  border-x-2 border-gray-400">
 
                     <!-- Page Heading -->
                     @if (isset($header))
-                        <header class="pt-6 pb-6">
-                            <div class="px-4 lg:px-8 text-4xl font-bold">
+                        <header class="pt-3 pb-3 mb-5 bg-blue-300 bg-opacity-20 border-b-2 border-blue-200">
+                            <div class="px-4 lg:px-8 text-2xl font-bold">
                                 {{ $header }}
                             </div>
                         </header>
@@ -42,9 +42,15 @@
                     {{ $slot }}
 
                 </div>
+
             </div>
-        </main>
+
     </div>
+    <div class="max-w-7xl bg-gray-50 h-16 text-center px-5 py-5">
+        Footer
+    </div>
+    </main>
+
     @stack('modals')
     @livewireScripts
 </body>
