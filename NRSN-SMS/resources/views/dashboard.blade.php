@@ -3,6 +3,18 @@
         Welcome <span class="text-green-600 font-bold">{{ Auth::user()->first_name }}</span>!
     </x-slot>
 
+    {{-- Placeholder to-do list --}}
+    <h1 class="ml-8 mb-8 text-red-600 text-xl font-bold">
+        NEXT:
+        <br>- ADMIN:'ALL CLIENTS'(SHOW, EDIT, DELETE)
+        <br>- ROLES (LARAVEL DAILY VIDEO)
+        <br>- ADMIN: 'ALL USERS' PAGE AND FUNCTIONALITY
+        <br>- ADMIN: 'ALL SHIFTS' PAGE AND FUNCTIONALITY
+        <br>- WORKER: 'SHIFTS' PAGE AND FUNCTIONALITY
+        <br>- MANAGER: 'SHIFT MANAGEMENT' PAGE AND FUNCTIONALITY
+        <br>- MANAGER: 'WORKER MANAGEMENT' PAGE AND FUNCTIONALITY
+</h1>
+
     {{-- Worker Dash Content --}}
     <h1 class="text-2xl text-blue-500 font-bold mx-4">Worker</h1>
     <div

@@ -46,7 +46,7 @@
             </div>
 
     </div>
-    <div class="max-w-7xl bg-gray-50 h-16 text-center px-5 py-5">
+    <div class="bg-gray-50 h-16 text-center px-5 py-5">
         Footer
     </div>
     </main>
