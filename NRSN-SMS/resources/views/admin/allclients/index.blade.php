@@ -143,7 +143,7 @@
         </div>
         <div class="block pb-12 pt-12">
             <x-button class="bg-green-600 h-12">
-                <a href="{{ route('clients.create') }}" class="text-2xl"> Add Client </a>
+                <a href="{{ route('allclients.create') }}" class="text-2xl"> Add Client </a>
             </x-button>
         </div>
     </div>

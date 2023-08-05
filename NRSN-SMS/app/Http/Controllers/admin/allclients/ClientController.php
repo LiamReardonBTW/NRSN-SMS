@@ -1,23 +1,26 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\admin\allclients;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreClientRequest;
 use App\Http\Requests\UpdateClientRequest;
 use App\Models\Client;
-
+use App\Http\Controllers\Controller;
 
 class ClientController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
+
+
+
     public function index()
     {
         $clients = Client::all();
 
-        return view('clients.index', compact('clients'));
+        return view('admin/allclients.index', compact('clients'));
     }
 
     /**
@@ -25,7 +28,7 @@ class ClientController extends Controller
      */
     public function create()
     {
-        return view('clients.create');
+        return view('admin/allclients.create');
     }
 
     /**
@@ -35,7 +38,7 @@ class ClientController extends Controller
     {
         Client::create($request->validated());
 
-        return redirect()->route('clients.index');
+        return redirect()->route('allclients.index');
     }
 
     /**
@@ -43,7 +46,7 @@ class ClientController extends Controller
      */
     public function show(Client $client)
     {
-        return view('clients.show', compact('client'));
+        return view('admin/allclients.show', compact('client'));
     }
 
     /**
@@ -51,7 +54,7 @@ class ClientController extends Controller
      */
     public function edit(Client $client)
     {
-        return view('clients.edit', compact('client'));
+        return view('admin/allclients.edit', compact('client'));
     }
 
     /**
@@ -61,7 +64,7 @@ class ClientController extends Controller
     {
         $client->update($request->validated());
 
-        return redirect()->route('clients.index');
+        return redirect()->route('allclients.index');
     }
 
     /**
@@ -71,6 +74,6 @@ class ClientController extends Controller
     {
         $client->delete();
 
-        return redirect()->route('clients.index');
+        return redirect()->route('allclients.index');
     }
 }

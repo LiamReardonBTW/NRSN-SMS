@@ -3,6 +3,8 @@
         {{ __('Dashboard') }}
     </x-slot>
 
+
+
     <div class="px-6 lg:px-8 pb-6">
         <h1 class="text-2xl font-medium text-gray-900">
             Welcome <span class="text-green-600 font-bold">{{ Auth::user()->first_name }}</span>!
@@ -117,7 +119,7 @@
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 px-6 lg:px-8 py-2">
 
             {{-- Admin All Clients Card --}}
-            <a class="bg-red-400 p-5 rounded-2xl hover:bg-red-300" href="{{ route('clients.index') }}">
+            <a class="bg-red-400 p-5 rounded-2xl hover:bg-red-300" href="{{ route('allclients.index') }}">
                 <div class="flex items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         class="w-6 h-6 stroke-black">

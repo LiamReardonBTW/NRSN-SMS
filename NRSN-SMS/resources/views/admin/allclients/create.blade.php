@@ -6,7 +6,7 @@
     <div class="max-w-screen-2xl px-4 lg:px-8">
 
         <div class="relative overflow-x-auto bg-blue-200 shadow-xl rounded-lg ">
-            <form method="post" action="{{ route('clients.store') }}">
+            <form method="post" action="{{ route('allclients.store') }}">
                 @csrf
 
                 <div class="text-2xl font-medium  overflow-hidden grid grid-cols-1 md:grid-cols-3  px-6 lg:px-8">
