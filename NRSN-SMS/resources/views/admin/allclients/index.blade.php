@@ -115,7 +115,7 @@
                             <td class="whitespace-nowrap text-sm text-white font-bold">
                                 <a href="{{ route('allclients.show', $client->id) }}"
                                     class="inline-block px-2 mx-1 py-1 bg-green-600 rounded hover:shadow-xl hover:bg-green-500">View</a>
-                                <a href="#"
+                                <a href="{{ route('allclients.edit', $client->id) }}"
                                     class="inline-block px-2 mx-1 py-1 bg-blue-600 rounded hover:shadow-xl hover:bg-blue-500">Edit</a>
                                 <form class="inline-block" action="{{ route('allclients.destroy', $client->id) }}"
                                     method="POST" onsubmit="return confirm('Are you sure?');">

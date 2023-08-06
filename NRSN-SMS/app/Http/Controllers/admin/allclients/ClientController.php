@@ -61,9 +61,17 @@ class ClientController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Client $client)
+    public function edit(Client $client, $id)
     {
-        return view('admin/allclients.edit', compact('client'));
+        $selectedClient = Client::find($id);
+
+        if ($selectedClient === null) {
+            return redirect()->route('allclients.index');
+         }
+        else
+        {
+        return view('admin/allclients.edit', compact('selectedClient'));
+        }
     }
 
     /**
