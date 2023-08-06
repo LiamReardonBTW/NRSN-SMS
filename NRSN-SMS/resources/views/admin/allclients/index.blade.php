@@ -114,11 +114,16 @@
                             </td>
                             <td class="whitespace-nowrap text-sm text-white font-bold">
                                 <a href="{{ route('allclients.show', $client->id) }}"
-                                    class="px-2 mx-1 py-1 bg-green-600 rounded hover:shadow-xl hover:bg-green-500">View</a>
+                                    class="inline-block px-2 mx-1 py-1 bg-green-600 rounded hover:shadow-xl hover:bg-green-500">View</a>
                                 <a href="#"
-                                    class="px-2 mx-1 py-1 bg-blue-600 rounded hover:shadow-xl hover:bg-violet-500">Edit</a>
-                                <a href="#"
-                                    class="px-2 mx-1 py-1 bg-red-500 rounded hover:shadow-xl hover:bg-red-500">Remove</a>
+                                    class="inline-block px-2 mx-1 py-1 bg-blue-600 rounded hover:shadow-xl hover:bg-blue-500">Edit</a>
+                                <form class="inline-block" action="{{ route('allclients.destroy', $client->id) }}"
+                                    method="POST" onsubmit="return confirm('Are you sure?');">
+                                    <input type="hidden" name="_method" value="DELETE">
+                                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                    <input type="submit" class="px-2 mx-1 py-1 bg-red-600 rounded hover:shadow-xl hover:bg-red-500"
+                                        value="Delete">
+                                </form>
                             </td>
                         </tr>
                     @endforeach
@@ -129,8 +134,10 @@
 
         </div>
         <div class="block pb-12 pt-12">
-                <a href="{{ route('allclients.create') }}" class="inline-flex items-center mx-4 px-6 py-4 bg-green-700 border border-transparent rounded-md font-semibold text-base text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150"> Add Client </a>
-        </a>
+            <a href="{{ route('allclients.create') }}"
+                class="inline-flex items-center mx-4 px-6 py-4 bg-green-700 border border-transparent rounded-md font-semibold text-base text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">
+                Add Client </a>
+            </a>
         </div>
     </div>
 </x-app-layout>
