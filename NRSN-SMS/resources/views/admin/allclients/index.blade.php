@@ -5,12 +5,12 @@
     <div class="px-4 lg:px-8">
         <div class="relative overflow-auto border-2 border-blue-600 rounded">
             <table class="w-full text-left text-gray-800 bg-gray-100">
-                <thead class="text-sm uppercase text-gray-50 bg-blue-800 dark:bg-gray-700 dark:text-gray-400">
+                <thead class="text-xs uppercase text-gray-50 bg-blue-800 dark:bg-gray-700 dark:text-gray-400">
                     <tr>
-                        <th scope="col" class="px-3 py-3">
+                        <th scope="col" class="px-1 py-1 border-r-2 border-blue-500 border-b-2">
                             Client ID
                         </th>
-                        <th scope="col" class="px-3 py-3">
+                        <th scope="col" class="px-1 py-1 border-r-2 border-blue-500 border-b-2 ">
                             <div class="flex items-center">
                                 First Name
                                 <a href="#"><svg class="w-3 h-3 ml-1.5" aria-hidden="true"
@@ -20,7 +20,7 @@
                                     </svg></a>
                             </div>
                         </th>
-                        <th scope="col" class="px-3 py-3">
+                        <th scope="col" class="px-1 py-1 border-r-2 border-blue-500 border-b-2 ">
                             <div class="flex items-center">
                                 Last Name
                                 <a href="#"><svg class="w-3 h-3 ml-1.5" aria-hidden="true"
@@ -30,7 +30,7 @@
                                     </svg></a>
                             </div>
                         </th>
-                        <th scope="col" class="px-3 py-3">
+                        <th scope="col" class="px-1 py-1 border-r-2 border-blue-500 border-b-2 ">
                             <div class="flex items-center">
                                 Active
                                 <a href="#"><svg class="w-3 h-3 ml-1.5" aria-hidden="true"
@@ -40,7 +40,7 @@
                                     </svg></a>
                             </div>
                         </th>
-                        <th scope="col" class="px-3 py-3">
+                        <th scope="col" class="px-1 py-1 border-r-2 border-blue-500 border-b-2 ">
                             <div class="flex items-center">
                                 Phone
                                 <a href="#"><svg class="w-3 h-3 ml-1.5" aria-hidden="true"
@@ -50,7 +50,7 @@
                                     </svg></a>
                             </div>
                         </th>
-                        <th scope="col" class="px-3 py-3">
+                        <th scope="col" class="px-1 py-1 border-r-2 border-blue-500 border-b-2 ">
                             <div class="flex items-center">
                                 Email
                                 <a href="#"><svg class="w-3 h-3 ml-1.5" aria-hidden="true"
@@ -60,7 +60,7 @@
                                     </svg></a>
                             </div>
                         </th>
-                        <th scope="col" class="px-3 py-3">
+                        <th scope="col" class="px-1 py-1 border-r-2 border-blue-500 border-b-2 ">
                             <div class="flex items-center">
                                 Address
                                 <a href="#"><svg class="w-3 h-3 ml-1.5" aria-hidden="true"
@@ -70,7 +70,7 @@
                                     </svg></a>
                             </div>
                         </th>
-                        <th scope="col" class="px-3 py-3">
+                        <th scope="col" class="px-1 py-1 border-r-2 border-blue-500 border-b-2 ">
                             <div class="flex items-center">
                                 Invoicing Codes
                                 <a href="#"><svg class="w-3 h-3 ml-1.5" aria-hidden="true"
@@ -80,7 +80,7 @@
                                     </svg></a>
                             </div>
                         </th>
-                        <th scope="col" class="px-3 py-3">
+                        <th scope="col" class="px-1 py-1 border-r-2 border-blue-500 border-b-2 ">
                             <div class="flex items-center">
                                 Added
                                 <a href="#"><svg class="w-3 h-3 ml-1.5" aria-hidden="true"
@@ -90,48 +90,48 @@
                                     </svg></a>
                             </div>
                         </th>
-                        <th scope="col" class="px-3 py-3">
+                        <th scope="col" class="px-1 py-1 border-r-2 border-blue-500 border-b-2 ">
                             <span>Actions</span>
                         </th>
                     </tr>
                 </thead>
-                <tbody class="text-base font-bold">
+                <tbody class="text-xs font-bold">
                     @foreach ($clients as $client)
                         <tr class="even:bg-gray-50 odd:bg-gray-200 hover:bg-blue-200">
-                            <td scope="row" class="px-2 py-1">
+                            <td scope="row" class="px-1 py-1 text-center">
                                 {{ $client->id }}
                             </td>
-                            <td scope="row" class="px-2 py-1">
+                            <td scope="row" class="px-1 py-1">
                                 {{ $client->first_name }}
                             </td>
-                            <td scope="row" class="px-2 py-1">
+                            <td scope="row" class="px-1 py-1">
                                 {{ $client->last_name }}
                             </td>
-                            <td scope="row" class="px-2 py-1">
+                            <td scope="row" class="px-1 py-1 text-center">
                                 {{ $client->active }}
                             </td>
-                            <td scope="row" class="px-2 py-1">
+                            <td scope="row" class="px-1 py-1">
                                 {{ $client->phone }}
                             </td>
-                            <td scope="row" class="px-2 py-1">
+                            <td scope="row" class="px-1 py-1">
                                 {{ $client->email }}
                             </td>
-                            <td scope="row" class="px-2 py-1">
+                            <td scope="row" class="px-1 py-1">
                                 {{ $client->address }}
                             </td>
-                            <td scope="row" class="px-2 py-1">
+                            <td scope="row" class="px-1 py-1">
                                 {{ $client->invoicing_codes }}
                             </td>
-                            <td scope="row" class="px-2 py-1">
+                            <td scope="row" class="px-1 py-1">
                                 {{ $client->created_at }}
                             </td>
-                            <td class="whitespace-nowrap text-base text-white font-medium">
+                            <td class="whitespace-nowrap text-sm text-white font-bold">
                                 <a href="#"
-                                    class="px-3 mx-2 py-1 bg-green-600 rounded hover:shadow-xl hover:bg-green-500">View</a>
+                                    class="px-2 mx-1 py-1 bg-green-600 rounded hover:shadow-xl hover:bg-green-500">View</a>
                                 <a href="#"
-                                    class="px-3 mx-2 py-1 bg-violet-600 rounded hover:shadow-xl hover:bg-violet-500">Edit</a>
+                                    class="px-2 mx-1 py-1 bg-blue-600 rounded hover:shadow-xl hover:bg-violet-500">Edit</a>
                                 <a href="#"
-                                    class="px-3 mx-2 py-1 bg-red-600 rounded hover:shadow-xl hover:bg-red-500">Remove</a>
+                                    class="px-2 mx-1 py-1 bg-red-500 rounded hover:shadow-xl hover:bg-red-500">Remove</a>
                             </td>
                         </tr>
                     @endforeach
