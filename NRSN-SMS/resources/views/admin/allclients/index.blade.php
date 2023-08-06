@@ -126,7 +126,7 @@
                                 {{ $client->created_at }}
                             </td>
                             <td class="whitespace-nowrap text-sm text-white font-bold">
-                                <a href="#"
+                                <a href="{{ route('allclients.show', $client->id) }}"
                                     class="px-2 mx-1 py-1 bg-green-600 rounded hover:shadow-xl hover:bg-green-500">View</a>
                                 <a href="#"
                                     class="px-2 mx-1 py-1 bg-blue-600 rounded hover:shadow-xl hover:bg-violet-500">Edit</a>
