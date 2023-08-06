@@ -77,11 +77,12 @@ class ClientController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateClientRequest $request, Client $client)
+    public function update(UpdateClientRequest $request, Client $client, $id)
     {
-        $client->update($request->validated());
+        Client::where('id', $id )->update(
+            ($request->validated()));
 
-        return redirect()->route('allclients.index');
+        return redirect()->route('allclients.show',$id);
     }
 
     /**
