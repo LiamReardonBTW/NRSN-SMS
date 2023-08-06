@@ -142,9 +142,8 @@
 
         </div>
         <div class="block pb-12 pt-12">
-            <x-button class="bg-green-600 h-12">
-                <a href="{{ route('allclients.create') }}" class="text-2xl"> Add Client </a>
-            </x-button>
+                <a href="{{ route('allclients.create') }}" class="inline-flex items-center mx-4 px-6 py-4 bg-green-700 border border-transparent rounded-md font-semibold text-base text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150"> Add Client </a>
+        </a>
         </div>
     </div>
 </x-app-layout>
