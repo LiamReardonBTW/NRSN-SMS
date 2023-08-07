@@ -80,7 +80,7 @@
                                     </svg></a>
                             </div>
                         </th>
-                        <th scope="col" class="px-2 py-1 border-r-2 border-blue-500 border-b-2 ">
+                        <th scope="col" class="w-48 text-right px-2 py-1 border-r-2 border-blue-500 border-b-2 ">
                             <span class="mr-28">Actions</span>
                         </th>
                     </tr>

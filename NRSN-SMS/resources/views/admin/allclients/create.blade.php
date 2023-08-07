@@ -15,45 +15,30 @@
                             Name</label>
                         <x-input type="text" name="first_name" id="first_name"
                             class="form-input rounded-md shadow-sm block w-full" value="{{ old('first_name', '') }}" />
-                        @error('first_name')
-                            <p class="text-sm text-red-600">{{ $message }}</p>
-                        @enderror
                     </div>
 
                     <div class="mx-4 my-2">
                         <label for="last_name">Last Name</label>
                         <x-input type="text" name="last_name" id="last_name"
                             class="form-input rounded-md shadow-sm block w-full" value="{{ old('last_name', '') }}" />
-                        @error('last_name')
-                            <p class="text-sm text-red-600">{{ $message }}</p>
-                        @enderror
                     </div>
 
                     <div class="mx-4 my-2">
                         <label for="phone">Phone #</label>
                         <x-input type="string" name="phone" id="phone"
                             class="form-input rounded-md shadow-sm block w-full" value="{{ old('phone', '') }}" />
-                        @error('phone')
-                            <p class="text-sm text-red-600">{{ $message }}</p>
-                        @enderror
                     </div>
 
                     <div class="mx-4 my-2">
                         <label for="email">Email</label>
                         <x-input type="email" name="email" id="email"
                             class="form-input rounded-md shadow-sm block w-full" value="{{ old('email', '') }}" />
-                        @error('email')
-                            <p class="text-sm text-red-600">{{ $message }}</p>
-                        @enderror
                     </div>
 
                     <div class="mx-4 my-2">
                         <label for="address">Address</label>
                         <x-input type="text" name="address" id="address"
                             class="form-input rounded-md shadow-sm block w-full" value="{{ old('address', '') }}" />
-                        @error('address')
-                            <p class="text-sm text-red-600">{{ $message }}</p>
-                        @enderror
                     </div>
 
                     <div class="mx-4 my-2">
@@ -62,9 +47,6 @@
                         <x-input type="text" name="invoicing_codes" id="invoicing_codes"
                             class="form-input rounded-md shadow-sm block w-full"
                             value="{{ old('invoicing_codes', '') }}" />
-                        @error('invoicing_codes')
-                            <p class="text-sm text-red-600">{{ $message }}</p>
-                        @enderror
                     </div>
 
                 </div>

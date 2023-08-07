@@ -1,65 +1,52 @@
 <x-app-layout>
     <x-slot name="header">
-        {{ __('Add Client') }}
+        Add Shift:
     </x-slot>
 
     <div class="max-w-screen-2xl px-4 lg:px-8">
 
         <div class="relative overflow-x-auto bg-blue-200 shadow-xl rounded-lg ">
-            <form method="post" action="{{ route('allusers.store') }}">
+            <form method="post" action="{{ route('allshifts.store') }}">
                 @csrf
 
                 <div class="text-2xl font-medium  overflow-hidden grid grid-cols-1 md:grid-cols-3  px-6 lg:px-8">
-                    <div class="mx-4 my-2">
-                        <label for="first_name">First
-                            Name</label>
-                        <x-input type="text" name="first_name" id="first_name"
-                            class="form-input rounded-md shadow-sm block w-full" value="{{ old('first_name', '') }}" />
-                        @error('first_name')
-                            <p class="text-sm text-red-600">{{ $message }}</p>
-                        @enderror
+
+                    <!-- First Name -->
+                    <div class="mx-4 my-5">
+                        <label for="id">Shift ID</label>
+                        <x-input disabled type="text" name="id" id="id"
+                            class="form-input rounded-md shadow-sm block w-full" value="{{ old('id', '') }}" />
                     </div>
 
-                    <div class="mx-4 my-2">
-                        <label for="last_name">Last Name</label>
-                        <x-input type="text" name="last_name" id="last_name"
-                            class="form-input rounded-md shadow-sm block w-full" value="{{ old('last_name', '') }}" />
-                        @error('last_name')
-                            <p class="text-sm text-red-600">{{ $message }}</p>
-                        @enderror
+                    <!-- Last Name -->
+                    <div class="mx-4 my-5">
+                        <label for="created_at">Date/Time</label>
+                        <x-input disabled type="timestamp" name="created_at" id="created_at"
+                            class="form-input rounded-md shadow-sm block w-full" value="{{ old('created_at', '') }}" />
                     </div>
 
-                    <div class="mx-4 my-2">
-                        <label for="email">Email</label>
-                        <x-input type="email" name="email" id="email"
-                            class="form-input rounded-md shadow-sm block w-full" value="{{ old('email', '') }}" />
-                        @error('email')
-                            <p class="text-sm text-red-600">{{ $message }}</p>
-                        @enderror
-                    </div>
-
-                    <div class="mx-4 my-2">
-                        <label for="password">Password</label>
-                        <x-input type="string" name="password" id="password"
-                            class="form-input rounded-md shadow-sm block w-full" value="{{ old('password', '') }}" />
-                        @error('password')
-                            <p class="text-sm text-red-600">{{ $message }}</p>
-                        @enderror
+                    <!-- Phone # -->
+                    <div class="mx-4 my-5">
+                        <label for="submitted_by">By</label>
+                        <x-input type="string" name="submitted_by" id="submitted_by"
+                            class="form-input rounded-md shadow-sm block w-full" value="{{ old('submitted_by', '') }}" />
                     </div>
 
                 </div>
                 <div
                     class="flex items-center justify-start pb-6 py-3 text-right sm:px-6 grid grid-cols-1 md:grid-cols-3 lg:gap-8 px-6 lg:px-8 py-2">
                     <a href="{{ URL::previous() }}"
-                        class="inline-flex items-center mx-4 px-6 py-4 bg-red-700 border border-transparent rounded-md font-semibold text-base text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">
+                        class="inline-flex items-center mx-4 px-6 py-4 bg-red-700 border border-transparent rounded-md font-semibold text-base text-white uppercase tracking-widest hover:bg-red-500 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">
                         Back
                     </a>
                     <button
-                        class="inline-flex items-center mx-4 px-6 py-4 bg-green-800 border border-transparent rounded-md font-semibold text-base text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">
-                        Create
+                        class="inline-flex items-center mx-4 px-6 py-4 bg-green-800 border border-transparent rounded-md font-semibold text-base text-white uppercase tracking-widest hover:bg-green-500 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">
+                        Submit
                     </button>
                 </div>
+
             </form>
+
         </div>
     </div>
 </x-app-layout>
