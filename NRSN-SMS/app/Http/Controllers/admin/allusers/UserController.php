@@ -38,53 +38,35 @@ class UserController extends Controller
     public function store(StoreUserRequest $request)
     {
         User::create($request->validated());
+
         return redirect()->route('allusers.index');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(User $user, $id)
+    public function show(User $alluser)
     {
-        $selectedUser = User::find($id);
-
-        if ($selectedUser === null) {
-            return redirect()->route('allusers.index');
-         }
-        else
-        {
-        return view('admin/allusers.show', compact('selectedUser'));
-        }
+        return view('admin/allusers.show', compact('alluser'));
     }
-
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(User $user, $id)
+    public function edit(User $alluser)
     {
-        $selectedUser = User::find($id);
-
-        if ($selectedUser === null) {
-            return redirect()->route('allusers.index');
-         }
-        else
-        {
-        return view('admin/allusers.edit', compact('selectedUser'));
-        }
+        return view('admin/allusers.edit', compact('alluser'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateUserRequest $request, User $user, $id)
+    public function update(UpdateUserRequest $request, User $alluser)
     {
-        User::where('id', $id )->update(
-            ($request->validated()));
+        $alluser->update($request->validated());
 
-        return redirect()->route('allusers.show',$id);
+        return redirect()->route('allusers.show', $alluser);
     }
-
     /**
      * Remove the specified resource from storage.
      */

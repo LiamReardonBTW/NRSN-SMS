@@ -1,13 +1,13 @@
 <x-app-layout>
     <x-slot name="header">
-        User: {{ $selectedUser->first_name }} {{ $selectedUser->last_name }}
+        User: {{ $alluser->first_name }} {{ $alluser->last_name }}
 
     </x-slot>
 
     <div class="max-w-screen-2xl px-4 lg:px-8">
 
         <div class="relative overflow-x-auto bg-blue-200 shadow-xl rounded-lg ">
-            <form method="post" action="{{ route('allusers.update', $selectedUser->id) }}">
+            <form method="post" action="{{ route('allusers.update', $alluser->id) }}">
                 @csrf
                 @method('PUT')
 
@@ -19,7 +19,7 @@
                             Name</label>
                         <x-input type="text" name="first_name" id="first_name"
                             class="form-input rounded-md shadow-sm block w-full"
-                            value="{{ $selectedUser->first_name }}" />
+                            value="{{ $alluser->first_name }}" />
                     </div>
 
                     <!-- Last Name -->
@@ -27,14 +27,14 @@
                         <label for="last_name">Last Name</label>
                         <x-input type="text" name="last_name" id="last_name"
                             class="form-input rounded-md shadow-sm block w-full"
-                            value="{{ $selectedUser->last_name }}" />
+                            value="{{ $alluser->last_name }}" />
                     </div>
 
                     <!-- Email -->
                     <div class="mx-4 my-5">
                         <label for="email">Email</label>
                         <x-input type="email" name="email" id="email"
-                            class="form-input rounded-md shadow-sm block w-full" value="{{ $selectedUser->email }}" />
+                            class="form-input rounded-md shadow-sm block w-full" value="{{ $alluser->email }}" />
                     </div>
                 </div>
 
@@ -43,7 +43,7 @@
                     <div class="mx-4 my-5">
                         <label for="client_id">User ID</label>
                         <x-input disabled type="text" name="client_id" id="client_id"
-                            class="form-input rounded-md shadow-sm block w-full" value="{{ $selectedUser->id }}" />
+                            class="form-input rounded-md shadow-sm block w-full" value="{{ $alluser->id }}" />
                     </div>
 
                     <!-- Added -->
@@ -51,7 +51,7 @@
                         <label for="created_at">Added</label>
                         <x-input disabled type="text" name="created_at" id="created_at"
                             class="form-input rounded-md shadow-sm block w-full"
-                            value="{{ $selectedUser->created_at }}" />
+                            value="{{ $alluser->created_at }}" />
                     </div>
 
                     <!-- Last Updated -->
@@ -59,7 +59,7 @@
                         <label for="updated_at">Last Updated</label>
                         <x-input disabled type="text" name="updated_at" id="updated_at"
                             class="form-input rounded-md shadow-sm block w-full"
-                            value="{{ $selectedUser->updated_at }}" />
+                            value="{{ $alluser->updated_at }}" />
                     </div>
 
                 </div>
