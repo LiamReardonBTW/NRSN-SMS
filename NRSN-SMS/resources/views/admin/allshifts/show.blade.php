@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
-        alluser: {{ $alluser->first_name }} {{ $alluser->last_name }}
+        Shift ID: {{ $allshift->id }}
 
     </x-slot>
 
@@ -12,53 +12,20 @@
 
                 <div class="text-2xl font-medium  overflow-hidden grid grid-cols-1 md:grid-cols-3  px-6 lg:px-8">
 
-                    <!-- First Name -->
+                    <!-- Shift ID -->
                     <div class="mx-4 my-5">
-                        <label for="first_name">First
-                            Name</label>
-                        <x-input disabled type="text" name="first_name" id="first_name"
-                            class="form-input rounded-md shadow-sm block w-full" value="{{ $alluser->first_name }}" />
-                    </div>
-
-                    <!-- Last Name -->
-                    <div class="mx-4 my-5">
-                        <label for="last_name">Last Name</label>
-                        <x-input disabled type="text" name="last_name" id="last_name"
-                            class="form-input rounded-md shadow-sm block w-full" value="{{ $alluser->last_name }}" />
-                    </div>
-
-                    <!-- Email -->
-                    <div class="mx-4 my-5">
-                        <label for="email">Email</label>
-                        <x-input disabled type="email" name="email" id="email"
-                            class="form-input rounded-md shadow-sm block w-full" value="{{ $alluser->email }}" />
-                    </div>
-                </div>
-
-                <div class="text-2xl font-medium  overflow-hidden grid grid-cols-1 md:grid-cols-3  px-6 lg:px-8">
-                    <!-- alluser ID -->
-                    <div class="mx-4 my-5">
-                        <label for="client_id">User ID</label>
-                        <x-input disabled type="text" name="client_id" id="client_id"
-                            class="form-input rounded-md shadow-sm block w-full" value="{{ $alluser->id }}" />
+                        <label for="shift_id">Shift ID</label>
+                        <x-input disabled type="text" name="shift_id" id="shift_id"
+                            class="form-input rounded-md shadow-sm block w-full" value="{{ $allshift->id }}" />
                     </div>
 
                     <!-- Added -->
                     <div class="mx-4 my-5">
                         <label for="created_at">Added</label>
                         <x-input disabled type="text" name="created_at" id="created_at"
-                            class="form-input rounded-md shadow-sm block w-full" value="{{ $alluser->created_at }}" />
+                            class="form-input rounded-md shadow-sm block w-full" value="{{ $allshift->created_at }}" />
                     </div>
-
-                    <!-- Last Updated -->
-                    <div class="mx-4 my-5">
-                        <label for="updated_at">Last Updated</label>
-                        <x-input disabled type="text" name="updated_at" id="updated_at"
-                            class="form-input rounded-md shadow-sm block w-full" value="{{ $alluser->updated_at }}" />
-                    </div>
-
                 </div>
-
 
             </form>
             <div

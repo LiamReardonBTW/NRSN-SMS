@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
-        alluser: {{ $alluser->first_name }} {{ $alluser->last_name }}
+        User: {{ $alluser->first_name }} {{ $alluser->last_name }}
 
     </x-slot>
 
