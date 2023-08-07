@@ -21,11 +21,14 @@
                     <x-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                         {{ __('DASHBOARD') }}
                     </x-nav-link>
-                    <x-nav-link href="{{ route('allclients.index') }}" :active="request()->routeIs('clients.index')">
+                    <x-nav-link href="{{ route('allclients.index') }}" :active="request()->routeIs('allclients.index')">
                         {{ __('ALL CLIENTS') }}
                     </x-nav-link>
-                    <x-nav-link href="{{ route('allusers.index') }}" :active="request()->routeIs('clients.index')">
+                    <x-nav-link href="{{ route('allusers.index') }}" :active="request()->routeIs('allusers.index')">
                         {{ __('ALL USERS') }}
+                    </x-nav-link>
+                    <x-nav-link href="{{ route('allshifts.index') }}" :active="request()->routeIs('allshifts.index')">
+                        {{ __('ALL SHIFTS') }}
                     </x-nav-link>
                 </div>
 
@@ -113,11 +116,14 @@
             <x-responsive-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                 {{ __('Home') }}
             </x-responsive-nav-link>
-            <x-responsive-nav-link href="{{ route('allclients.index') }}" :active="request()->routeIs('clients.index')">
+            <x-responsive-nav-link href="{{ route('allclients.index') }}" :active="request()->routeIs('allclients.index')">
                 {{ __('All Clients') }}
             </x-responsive-nav-link>
-            <x-responsive-nav-link href="{{ route('allusers.index') }}" :active="request()->routeIs('clients.index')">
+            <x-responsive-nav-link href="{{ route('allusers.index') }}" :active="request()->routeIs('allusers.index')">
                 {{ __('All Users') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link href="{{ route('allshifts.index') }}" :active="request()->routeIs('allshifts.index')">
+                {{ __('All Shifts') }}
             </x-responsive-nav-link>
         </div>
 
