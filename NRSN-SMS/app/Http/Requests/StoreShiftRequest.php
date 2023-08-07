@@ -11,7 +11,7 @@ class StoreShiftRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,9 @@ class StoreShiftRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'submitted_by' => [
+                'required', 'string',
+            ],
         ];
     }
 }

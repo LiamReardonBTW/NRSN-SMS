@@ -40,8 +40,8 @@
                                     </svg></a>
                             </div>
                         </th>
-                        <th scope="col" class="px-2 py-1 border-r-2 border-blue-500 border-b-2 ">
-                            <span>Actions</span>
+                        <th scope="col" class="text-right px-2 py-1 border-r-2 border-blue-500 border-b-2 ">
+                            <span class="mr-28">Actions</span>
                         </th>
                     </tr>
                 </thead>
@@ -60,7 +60,7 @@
                             <td scope="row" class="px-1 py-1">
                                 {{ $user->email }}
                             </td>
-                            <td class="whitespace-nowrap text-sm text-white font-bold">
+                            <td class="whitespace-nowrap text-sm text-white font-bold float-right py-3">
                                 <a href="{{ route('allusers.show', $user->id) }}"
                                     class="inline-block px-2 mx-1 py-1 bg-green-600 rounded hover:shadow-xl hover:bg-green-500">View</a>
                                 <a href="{{ route('allusers.edit', $user->id) }}"

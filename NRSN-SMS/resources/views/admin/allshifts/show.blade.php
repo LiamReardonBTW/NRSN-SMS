@@ -25,6 +25,13 @@
                         <x-input disabled type="text" name="created_at" id="created_at"
                             class="form-input rounded-md shadow-sm block w-full" value="{{ $allshift->created_at }}" />
                     </div>
+
+                    <!-- Submitted By -->
+                    <div class="mx-4 my-5">
+                        <label for="submitted_by">Submitted by</label>
+                        <x-input disabled type="text" name="submitted_by" id="submitted_by"
+                            class="form-input rounded-md shadow-sm block w-full" value="{{ $allshift->submitted_by }}" />
+                    </div>
                 </div>
 
             </form>

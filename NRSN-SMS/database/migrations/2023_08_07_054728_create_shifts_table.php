@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('shifts', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->string('submitted_by');
         });
     }
 
