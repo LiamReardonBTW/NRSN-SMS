@@ -20,6 +20,7 @@ Route::get('/', function () {
 
 Route::group(['middleware' => 'auth'], function(){
     Route::resource('admin/allclients', App\Http\Controllers\admin\allclients\ClientController::class);
+    Route::resource('admin/allusers', App\Http\Controllers\admin\allusers\UserController::class);
 });
 
 Route::middleware([

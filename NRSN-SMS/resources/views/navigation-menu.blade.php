@@ -24,6 +24,9 @@
                     <x-nav-link href="{{ route('allclients.index') }}" :active="request()->routeIs('clients.index')">
                         {{ __('ALL CLIENTS') }}
                     </x-nav-link>
+                    <x-nav-link href="{{ route('allusers.index') }}" :active="request()->routeIs('clients.index')">
+                        {{ __('ALL USERS') }}
+                    </x-nav-link>
                 </div>
 
             </div>
@@ -112,6 +115,9 @@
             </x-responsive-nav-link>
             <x-responsive-nav-link href="{{ route('allclients.index') }}" :active="request()->routeIs('clients.index')">
                 {{ __('All Clients') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link href="{{ route('allusers.index') }}" :active="request()->routeIs('clients.index')">
+                {{ __('All Users') }}
             </x-responsive-nav-link>
         </div>
 
