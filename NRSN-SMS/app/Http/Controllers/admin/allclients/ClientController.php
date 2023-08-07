@@ -53,36 +53,27 @@ class ClientController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Client $client, $id)
+    public function edit(Client $allclient)
     {
-        $selectedClient = Client::find($id);
-
-        if ($selectedClient === null) {
-            return redirect()->route('allclients.index');
-         }
-        else
-        {
-        return view('admin/allclients.edit', compact('selectedClient'));
-        }
+        return view('admin/allclients.edit', compact('allclient'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateClientRequest $request, Client $client, $id)
+    public function update(UpdateClientRequest $request, Client $allclient)
     {
-        Client::where('id', $id )->update(
-            ($request->validated()));
+        $allclient->update($request->validated());
 
-        return redirect()->route('allclients.show',$id);
+        return redirect()->route('allclients.show', $allclient);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Client $client, $id)
+    public function destroy(Client $allclient)
     {
-        Client::destroy($id);
+        $allclient->delete();
         return redirect()->route('allclients.index');
     }
 }
