@@ -69,7 +69,8 @@
                                     method="POST" onsubmit="return confirm('Are you sure?');">
                                     <input type="hidden" name="_method" value="DELETE">
                                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                    <input type="submit" class="px-2 mx-1 py-1 bg-red-600 rounded hover:shadow-xl hover:bg-red-500"
+                                    <input type="submit"
+                                        class="px-2 mx-1 py-1 bg-red-600 rounded hover:shadow-xl hover:bg-red-500"
                                         value="Delete">
                                 </form>
                             </td>
@@ -82,8 +83,12 @@
 
         </div>
         <div class="block pb-12 pt-12">
+            <a href="{{ URL::previous() }}"
+                class="inline-flex items-center mx-4 px-6 py-4 bg-red-700 border border-transparent rounded-md font-semibold text-base text-white uppercase tracking-widest hover:bg-red-500 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">
+                Back
+            </a>
             <a href="{{ route('allusers.create') }}"
-                class="inline-flex items-center mx-4 px-6 py-4 bg-green-700 border border-transparent rounded-md font-semibold text-base text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">
+                class="inline-flex items-center mx-4 px-6 py-4 bg-green-700 border border-transparent rounded-md font-semibold text-base text-white uppercase tracking-widest hover:bg-green-500 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">
                 Add User </a>
             </a>
         </div>

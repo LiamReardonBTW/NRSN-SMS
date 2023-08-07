@@ -7,7 +7,7 @@
     <div class="max-w-screen-2xl px-4 lg:px-8">
 
         <div class="relative overflow-x-auto bg-blue-200 shadow-xl rounded-lg ">
-            <form method="post" action="{{ route('allclients.update', $allclient->id) }}">
+            <form method="post" action="{{ route('allclients.update', $allclient) }}">
                 @csrf
                 @method('PUT')
                 <div class="text-2xl font-medium  overflow-hidden grid grid-cols-1 md:grid-cols-3  px-6 lg:px-8">
@@ -17,16 +17,14 @@
                         <label for="first_name">First
                             Name</label>
                         <x-input type="text" name="first_name" id="first_name"
-                            class="form-input rounded-md shadow-sm block w-full"
-                            value="{{ $allclient->first_name }}" />
+                            class="form-input rounded-md shadow-sm block w-full" value="{{ $allclient->first_name }}" />
                     </div>
 
                     <!-- Last Name -->
                     <div class="mx-4 my-5">
                         <label for="last_name">Last Name</label>
                         <x-input type="text" name="last_name" id="last_name"
-                            class="form-input rounded-md shadow-sm block w-full"
-                            value="{{ $allclient->last_name }}" />
+                            class="form-input rounded-md shadow-sm block w-full" value="{{ $allclient->last_name }}" />
                     </div>
 
 
@@ -51,8 +49,7 @@
                     <div class="mx-4 my-5">
                         <label for="address">Address</label>
                         <x-input type="text" name="address" id="address"
-                            class="form-input rounded-md shadow-sm block w-full"
-                            value="{{ $allclient->address }}" />
+                            class="form-input rounded-md shadow-sm block w-full" value="{{ $allclient->address }}" />
                     </div>
 
                     <!-- Invoicing Codes -->
@@ -100,12 +97,12 @@
                 </div>
                 <div
                     class="flex items-center justify-start pb-6 py-3 text-right sm:px-6 grid grid-cols-1 md:grid-cols-3 lg:gap-8 px-6 lg:px-8 py-2">
-                    <a href="{{ route('allusers.index') }}"
-                    class="inline-flex items-center mx-4 px-6 py-4 bg-red-700 border border-transparent rounded-md font-semibold text-base text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">
-                    Back
-                </a>
+                    <a href="{{ URL::previous() }}"
+                        class="inline-flex items-center mx-4 px-6 py-4 bg-red-700 border border-transparent rounded-md font-semibold text-base text-white uppercase tracking-widest hover:bg-red-500 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">
+                        Back
+                    </a>
                     <button
-                        class="inline-flex items-center mx-4 px-6 py-4 bg-green-800 border border-transparent rounded-md font-semibold text-base text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">
+                        class="inline-flex items-center mx-4 px-6 py-4 bg-green-800 border border-transparent rounded-md font-semibold text-base text-white uppercase tracking-widest hover:bg-green-500 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">
                         Submit
                     </button>
                 </div>
