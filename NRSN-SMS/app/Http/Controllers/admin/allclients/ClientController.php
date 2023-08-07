@@ -45,17 +45,9 @@ class ClientController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Client $client, $id)
+    public function show(Client $allclient)
     {
-        $selectedClient = Client::find($id);
-
-        if ($selectedClient === null) {
-            return redirect()->route('allclients.index');
-         }
-        else
-        {
-        return view('admin/allclients.show', compact('selectedClient'));
-        }
+        return view('admin/allclients.show', compact('allclient'));
     }
 
     /**

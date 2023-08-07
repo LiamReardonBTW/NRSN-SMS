@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
-        Client: {{ $selectedClient->first_name }} {{ $selectedClient->last_name }}
+        Client: {{ $allclient->first_name }} {{ $allclient->last_name }}
 
     </x-slot>
 
@@ -18,7 +18,7 @@
                             Name</label>
                         <x-input disabled type="text" name="first_name" id="first_name"
                             class="form-input rounded-md shadow-sm block w-full"
-                            value="{{ $selectedClient->first_name }}" />
+                            value="{{ $allclient->first_name }}" />
                     </div>
 
                     <!-- Last Name -->
@@ -26,7 +26,7 @@
                         <label for="last_name">Last Name</label>
                         <x-input disabled type="text" name="last_name" id="last_name"
                             class="form-input rounded-md shadow-sm block w-full"
-                            value="{{ $selectedClient->last_name }}" />
+                            value="{{ $allclient->last_name }}" />
                     </div>
 
 
@@ -35,14 +35,14 @@
                     <div class="mx-4 my-5">
                         <label for="phone">Phone #</label>
                         <x-input disabled type="string" name="phone" id="phone"
-                            class="form-input rounded-md shadow-sm block w-full" value="{{ $selectedClient->phone }}" />
+                            class="form-input rounded-md shadow-sm block w-full" value="{{ $allclient->phone }}" />
                     </div>
 
                     <!-- Email -->
                     <div class="mx-4 my-5">
                         <label for="email">Email</label>
                         <x-input disabled type="email" name="email" id="email"
-                            class="form-input rounded-md shadow-sm block w-full" value="{{ $selectedClient->email }}" />
+                            class="form-input rounded-md shadow-sm block w-full" value="{{ $allclient->email }}" />
                     </div>
 
 
@@ -52,7 +52,7 @@
                         <label for="address">Address</label>
                         <x-input disabled type="text" name="address" id="address"
                             class="form-input rounded-md shadow-sm block w-full"
-                            value="{{ $selectedClient->address }}" />
+                            value="{{ $allclient->address }}" />
                     </div>
 
                     <!-- Invoicing Codes -->
@@ -61,7 +61,7 @@
                             Codes</label>
                         <x-input disabled type="text" name="invoicing_codes" id="invoicing_codes"
                             class="form-input rounded-md shadow-sm block w-full"
-                            value="{{ $selectedClient->invoicing_codes }}" />
+                            value="{{ $allclient->invoicing_codes }}" />
                     </div>
                 </div>
 
@@ -70,7 +70,7 @@
                     <div class="mx-4 my-5">
                         <label for="client_id">Client ID</label>
                         <x-input disabled type="text" name="client_id" id="client_id"
-                            class="form-input rounded-md shadow-sm block w-full" value="{{ $selectedClient->id }}" />
+                            class="form-input rounded-md shadow-sm block w-full" value="{{ $allclient->id }}" />
                     </div>
 
                     <!-- Active Status -->
@@ -78,7 +78,7 @@
                         <label for="active">Active Status</label>
                         <x-input disabled type="text" name="active" id="active"
                             class="form-input rounded-md shadow-sm block w-full"
-                            value="{{ $selectedClient->active ? 'Active' : 'Inactive' }}" />
+                            value="{{ $allclient->active ? 'Active' : 'Inactive' }}" />
                     </div>
 
                     <!-- Added -->
@@ -86,7 +86,7 @@
                         <label for="created_at">Added</label>
                         <x-input disabled type="text" name="created_at" id="created_at"
                             class="form-input rounded-md shadow-sm block w-full"
-                            value="{{ $selectedClient->created_at }}" />
+                            value="{{ $allclient->created_at }}" />
                     </div>
 
                     <!-- Last Updated -->
@@ -94,7 +94,7 @@
                         <label for="updated_at">Last Updated</label>
                         <x-input disabled type="text" name="updated_at" id="updated_at"
                             class="form-input rounded-md shadow-sm block w-full"
-                            value="{{ $selectedClient->updated_at }}" />
+                            value="{{ $allclient->updated_at }}" />
                     </div>
 
                 </div>
