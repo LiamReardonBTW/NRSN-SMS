@@ -56,11 +56,11 @@
                             <x-nav-link href="{{ route('allclients.index') }}" :active="request()->routeIs('allclients.index')">
                                 {{ __('ALL CLIENTS') }}
                             </x-nav-link>
-                            <x-nav-link href="{{ route('allusers.index') }}" :active="request()->routeIs('allusers.index')">
-                                {{ __('ALL USERS') }}
-                            </x-nav-link>
                             <x-nav-link href="{{ route('allshifts.index') }}" :active="request()->routeIs('allshifts.index')">
                                 {{ __('ALL SHIFTS') }}
+                            </x-nav-link>
+                            <x-nav-link href="{{ route('allusers.index') }}" :active="request()->routeIs('allusers.index')">
+                                {{ __('ALL USERS') }}
                             </x-nav-link>
                         </x-slot>
                     </x-nav-link-parent>
@@ -148,21 +148,37 @@
     <!-- Responsive Navigation Menu -->
     <div :class="{ 'block': open, 'hidden': !open }" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
+
             <x-responsive-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                 {{ __('Home') }}
             </x-responsive-nav-link>
-            <x-responsive-nav-link href="{{ route('allclients.index') }}" :active="request()->routeIs('allclients.index')">
-                {{ __('All Clients') }}
-            </x-responsive-nav-link>
-            <x-responsive-nav-link href="{{ route('allusers.index') }}" :active="request()->routeIs('allusers.index')">
-                {{ __('All Users') }}
-            </x-responsive-nav-link>
-            <x-responsive-nav-link href="{{ route('allshifts.index') }}" :active="request()->routeIs('allshifts.index')">
-                {{ __('All Shifts') }}
-            </x-responsive-nav-link>
-            <x-responsive-nav-link href="{{ route('myclients.index') }}" :active="request()->routeIs('allshifts.index')">
-                {{ __('My Clients') }}
-            </x-responsive-nav-link>
+
+            <x-responsive-nav-link-parent :href="'#'">
+                <x-slot name="name">Worker</x-slot>
+                <x-slot name="children">
+                    <a href="{{ route('myclients.index') }}">My Clients</a><br>
+                    <a href="{{ route('myshifts.index') }}">My Shifts</a>
+                </x-slot>
+            </x-responsive-nav-link-parent>
+
+            <x-responsive-nav-link-parent :href="'#'">
+                <x-slot name="name">Manager</x-slot>
+                <x-slot name="children">
+                    <a href="{{ route('manageclients.index') }}">Manage Clients</a><br>
+                    <a href="{{ route('manageshifts.index') }}">Manage Shifts</a><br>
+                    <a href="{{ route('manageworkers.index') }}">Manage Workers</a>
+                </x-slot>
+            </x-responsive-nav-link-parent>
+
+            <x-responsive-nav-link-parent :href="'#'">
+                <x-slot name="name">Admin</x-slot>
+                <x-slot name="children">
+                    <a href="{{ route('allclients.index') }}">All Clients</a><br>
+                    <a href="{{ route('allshifts.index') }}">All Shifts</a><br>
+                    <a href="{{ route('allusers.index') }}">All Users</a>
+                </x-slot>
+            </x-responsive-nav-link-parent>
+
         </div>
 
         <!-- Responsive Settings Options -->
