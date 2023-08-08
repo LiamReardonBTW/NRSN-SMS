@@ -41,6 +41,9 @@
                             <x-nav-link href="{{ route('manageshifts.index') }}" :active="request()->routeIs('manageshifts.index')">
                                 {{ __('MANAGE SHIFTS') }}
                             </x-nav-link>
+                            <x-nav-link href="{{ route('manageworkers.index') }}" :active="request()->routeIs('manageworkers.index')">
+                                {{ __('MANAGE WORKERS') }}
+                            </x-nav-link>
                         </x-slot>
                     </x-nav-link-parent>
 

@@ -30,7 +30,7 @@ class UpdateUserRequest extends FormRequest
             ],
             'email' => [
                 'required', 'string',
-            ],       
+            ],
             'phone' => [
                 'nullable', 'string',
             ],
@@ -38,10 +38,10 @@ class UpdateUserRequest extends FormRequest
                 'nullable', 'string',
             ],
             'tfn' => [
-                'nullable', 'integer',
+                'nullable', 'string',
             ],
             'abn' => [
-                'nullable', 'integer',
+                'nullable', 'string',
             ],
             'role' => [
                 'nullable', 'integer',

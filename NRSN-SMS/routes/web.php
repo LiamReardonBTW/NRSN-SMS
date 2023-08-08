@@ -25,6 +25,7 @@ Route::group(['middleware' => 'auth'], function(){
     Route::resource('worker/myclients', App\Http\Controllers\worker\myclients\ClientController::class);
     Route::resource('manager/manageclients', App\Http\Controllers\manager\manageclients\ClientController::class);
     Route::resource('manager/manageshifts', App\Http\Controllers\manager\manageshifts\ShiftController::class);
+    Route::resource('manager/manageworkers', App\Http\Controllers\manager\manageworkers\WorkerController::class);
 });
 
 Route::middleware([
