@@ -13,8 +13,17 @@ return new class extends Migration
     {
         Schema::create('shifts', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->string('invoice');
+            $table->string('notes')->nullable();
             $table->string('submitted_by');
+            $table->string('client_supported');
+            $table->boolean('isflagged')->default(0);
+            $table->boolean('isinvoiced')->default(0);
+            $table->date('date');
+            $table->float('expenses');
+            $table->integer('Km');
+            $table->float('hours');
+            $table->timestamps();
         });
     }
 

@@ -22,8 +22,29 @@ class StoreShiftRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'invoice' => [
+                'required', 'string',
+            ],
+            'notes' => [
+                'required', 'string',
+            ],
             'submitted_by' => [
                 'required', 'string',
+            ],
+            'client_supported' => [
+                'required', 'string',
+            ],
+            'date' => [
+                'required', 'date',
+            ],
+            'expenses' => [
+                'required', 'float',
+            ],
+            'km' => [
+                'required', 'int',
+            ],
+            'hours' => [
+                'required', 'float',
             ],
         ];
     }
