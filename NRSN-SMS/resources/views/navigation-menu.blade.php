@@ -30,6 +30,9 @@
                     <x-nav-link href="{{ route('allshifts.index') }}" :active="request()->routeIs('allshifts.index')">
                         {{ __('ALL SHIFTS') }}
                     </x-nav-link>
+                    <x-nav-link href="{{ route('myclients.index') }}" :active="request()->routeIs('myclients.index')">
+                        {{ __('MY  CLIENTS') }}
+                    </x-nav-link>
                 </div>
 
             </div>
@@ -124,6 +127,9 @@
             </x-responsive-nav-link>
             <x-responsive-nav-link href="{{ route('allshifts.index') }}" :active="request()->routeIs('allshifts.index')">
                 {{ __('All Shifts') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link href="{{ route('myclients.index') }}" :active="request()->routeIs('allshifts.index')">
+                {{ __('My Clients') }}
             </x-responsive-nav-link>
         </div>
 

@@ -22,6 +22,7 @@ Route::group(['middleware' => 'auth'], function(){
     Route::resource('admin/allclients', App\Http\Controllers\admin\allclients\ClientController::class);
     Route::resource('admin/allusers', App\Http\Controllers\admin\allusers\UserController::class);
     Route::resource('admin/allshifts', App\Http\Controllers\admin\allshifts\ShiftController::class);
+    Route::resource('worker/myclients', App\Http\Controllers\worker\myclients\ClientController::class);
 });
 
 Route::middleware([
