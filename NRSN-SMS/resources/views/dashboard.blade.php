@@ -33,7 +33,7 @@
                 worker
             @endslot
             @slot('route')
-                #
+            {{ route('myshifts.index') }}
             @endslot
             @slot('title')
                 <svg class="inline-block mx-auto h-6 w-6 text-black" width="24" height="24" viewBox="0 0 24 24"

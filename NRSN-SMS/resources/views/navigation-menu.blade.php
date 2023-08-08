@@ -23,7 +23,7 @@
                         {{ __('DASHBOARD') }}
                     </x-nav-link>
 
-                    <x-nav-link-parent href="#" :active="request()->routeIs('myclients.index',)">
+                    <x-nav-link-parent href="#" :active="request()->routeIs('myclients.index', 'myshifts.index')">
                         <x-slot name="name">WORKER</x-slot>
                         <x-slot name="children">
                             <x-nav-link href="{{ route('myclients.index') }}" :active="request()->routeIs('myclients.index')">
@@ -35,7 +35,7 @@
                         </x-slot>
                     </x-nav-link-parent>
 
-                    <x-nav-link-parent href="#" :active="request()->routeIs('manageclients.index')">
+                    <x-nav-link-parent href="#" :active="request()->routeIs('manageclients.index', 'manageshifts.index', 'manageworkers.index')">
                         <x-slot name="name">MANAGER</x-slot>
                         <x-slot name="children">
                             <x-nav-link href="{{ route('manageclients.index') }}" :active="request()->routeIs('manageclients.index')">
