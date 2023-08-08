@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('shifts', function (Blueprint $table) {
             $table->id();
-            $table->string('invoice');
+            $table->string('invoice')->nullable();
             $table->string('notes')->nullable();
             $table->string('submitted_by');
             $table->string('client_supported');

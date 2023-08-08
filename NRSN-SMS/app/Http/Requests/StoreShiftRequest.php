@@ -22,12 +22,6 @@ class StoreShiftRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'invoice' => [
-                'required', 'string',
-            ],
-            'notes' => [
-                'required', 'string',
-            ],
             'submitted_by' => [
                 'required', 'string',
             ],
@@ -40,17 +34,11 @@ class StoreShiftRequest extends FormRequest
             'expenses' => [
                 'required', 'integer',
             ],
-            'km' => [
+            'Km' => [
                 'required', 'integer',
             ],
             'hours' => [
                 'required', 'integer',
-            ],
-            'isflagged' => [
-                'required', 'boolean',
-            ],
-            'isinvoiced' => [
-                'required', 'boolean',
             ],
         ];
     }

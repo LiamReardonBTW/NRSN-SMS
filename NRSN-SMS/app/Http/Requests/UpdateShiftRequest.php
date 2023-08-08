@@ -22,12 +22,6 @@ class UpdateShiftRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'invoice' => [
-                'required', 'string',
-            ],
-            'notes' => [
-                'required', 'string',
-            ],
             'submitted_by' => [
                 'required', 'string',
             ],
@@ -45,12 +39,6 @@ class UpdateShiftRequest extends FormRequest
             ],
             'hours' => [
                 'required', 'integer',
-            ],
-            'isflagged' => [
-                'required', 'boolean',
-            ],
-            'isinvoiced' => [
-                'required', 'boolean',
             ],
         ];
     }
