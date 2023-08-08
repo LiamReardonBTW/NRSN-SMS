@@ -18,8 +18,8 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('phone')->nullable();
             $table->string('address')->nullable();
-            $table->integer('tfn')->nullable();
-            $table->integer('abn')->nullable();
+            $table->char('tfn')->nullable();
+            $table->char('abn')->nullable();
             $table->integer('role')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');

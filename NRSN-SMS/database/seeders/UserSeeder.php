@@ -15,26 +15,86 @@ class UserSeeder extends Seeder
     {
         DB::table('users')->insert([
         [
-            'first_name' => 'Liam', 'last_name' => 'Terry', 'email' => 'admin@nrsn.com', 'password' => bcrypt('root1234'), 'created_at' => '2022-11-15 09:37:21', 'updated_at' => '2022-12-20 14:56:43'
+            'first_name' => 'Liam',
+            'last_name' => 'Terry',
+            'email' => 'admin@nrsn.com',
+            'password' => bcrypt('root1234'),
+            'created_at' => '2022-11-15 09:37:21',
+            'updated_at' => '2022-12-20 14:56:43',
+            'phone' => '+1 (536) 268-6362',
+            'role' => '0',
+            'address' => '123 Main Street, New York, NY 10001',
+            'tfn' => '123-45-6789',
+            'abn' => '12345678901'
         ],
         [
-            'first_name' => 'Emily', 'last_name' => 'Johnson', 'email' => 'emilyj@gmail.com', 'password' => bcrypt('password123'), 'created_at' => '2022-11-15 09:37:21', 'updated_at' => '2022-12-20 14:56:43'
+            'first_name' => 'Emily',
+            'last_name' => 'Johnson',
+            'email' => 'emilyj@gmail.com',
+            'password' => bcrypt('password123'),
+            'created_at' => '2022-11-15 09:37:21',
+            'updated_at' => '2022-12-20 14:56:43',
+            'phone' => '+1 (634) 892-7631',
+            'role' => '2',
+            'address' => '456 Oak Avenue, Los Angeles, CA 90001',
+            'tfn' => '987-65-4321',
+            'abn' => '98765432109'
         ],
 
         [
-            'first_name' => 'Noah', 'last_name' => 'Smith', 'email' => 'noahs@outlook.com', 'password' => bcrypt('secure567'), 'created_at' => '2022-05-07 18:12:34', 'updated_at' => '2022-06-22 09:28:19'
+            'first_name' => 'Noah',
+            'last_name' => 'Smith',
+            'email' => 'noahs@outlook.com',
+            'password' => bcrypt('secure567'),
+            'created_at' => '2022-05-07 18:12:34',
+            'updated_at' => '2022-06-22 09:28:19',
+            'phone' => '+1 (518) 945-1956',
+            'role' => '2',
+            'address' => '789 Elm Court, Chicago, IL 60601',
+            'tfn' => '246-80-1357',
+            'abn' => '24680245781'
         ],
 
         [
-            'first_name' => 'Olivia', 'last_name' => 'Brown', 'email' => 'oliviab@yahoomail.com', 'password' => bcrypt('pass1234'), 'created_at' => '2022-09-30 11:24:05', 'updated_at' => '2022-12-05 16:17:38'
+            'first_name' => 'Olivia',
+            'last_name' => 'Brown',
+            'email' => 'oliviab@yahoomail.com',
+            'password' => bcrypt('pass1234'),
+            'created_at' => '2022-09-30 11:24:05',
+            'updated_at' => '2022-12-05 16:17:38',
+            'phone' => '+1 (725) 467-2289',
+            'role' => '2',
+            'address' => '321 Maple Lane, Houston, TX 77001',
+            'tfn' => '864-20-7913',
+            'abn' => '13579024683'
         ],
 
         [
-            'first_name' => 'Liam', 'last_name' => 'Wilson', 'email' => 'liamwilson@gmail.com', 'password' => bcrypt('abc12345'), 'created_at' => '2022-07-12 14:51:08', 'updated_at' => '2022-09-02 19:43:55'
+            'first_name' => 'Liam',
+            'last_name' => 'Wilson',
+            'email' => 'liamwilson@gmail.com',
+            'password' => bcrypt('abc12345'),
+            'created_at' => '2022-07-12 14:51:08',
+            'updated_at' => '2022-09-02 19:43:55',
+            'phone' => '+1 (892) 647-5847',
+            'role' => '1',
+            'address' => '987 Pine Street, Denver, CO 80201',
+            'tfn' => '753-09-6248',
+            'abn' => '98765432107'
         ],
 
         [
-            'first_name' => 'Ava', 'last_name' => 'Martinez', 'email' => 'avam@gmail.com', 'password' => bcrypt('password567'), 'created_at' => '2023-01-20 08:33:11', 'updated_at' => '2023-03-07 13:58:29'
+            'first_name' => 'Ava',
+            'last_name' => 'Martinez',
+            'email' => 'avam@gmail.com',
+            'password' => bcrypt('password567'),
+            'created_at' => '2023-01-20 08:33:11',
+            'updated_at' => '2023-03-07 13:58:29',
+            'phone' => '+1 (674) 391-8274',
+            'role' => '1',
+            'address' => '654 Cedar Avenue, Miami, FL 33010',
+            'tfn' => '975-31-4620',
+            'abn' => '97531024684'
         ]
 
     ]);
