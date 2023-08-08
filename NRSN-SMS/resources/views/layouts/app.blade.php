@@ -22,21 +22,22 @@
 <body class="font-sans antialiased">
     <x-banner />
 
-    <div class="bg-gray-100 border-b-2 border-gray-400">
+    <div class="bg-gray-50 border-b-2 border-gray-400">
         @livewire('navigation-menu')
         <!-- Page Content -->
         <main>
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <div class="bg-gray-50 shadow-xl min-h-screen  border-x-2 border-gray-400">
+                                <!-- Page Heading -->
+                                @if (isset($header))
+                                <header class="pt-3 pb-3 bg-blue-300 bg-opacity-20 border-b-2 border-blue-200">
+                                    <div class="max-w-7xl m-auto px-4 lg:px-8 text-2xl font-bold">
+                                        {{ $header }}
+                                    </div>
+                                </header>
+                            @endif
 
-                    <!-- Page Heading -->
-                    @if (isset($header))
-                        <header class="pt-3 pb-3 mb-5 bg-blue-300 bg-opacity-20 border-b-2 border-blue-200">
-                            <div class="px-4 lg:px-8 text-2xl font-bold">
-                                {{ $header }}
-                            </div>
-                        </header>
-                    @endif
+            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 border-gray-200 border-x-2">
+                <div class="min-h-screen pt-5">
+
 
                     <!-- Main Content -->
                     {{ $slot }}
