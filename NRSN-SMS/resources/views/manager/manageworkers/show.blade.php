@@ -72,7 +72,7 @@
                     <!-- ROLE -->
                     <div class="mx-4 my-5">
                         <label for="abn">Role</label>
-                        <x-input  type="text" name="role" id="role"
+                        <x-input disabled type="text" name="role" id="role"
                             class="form-input rounded-md shadow-sm block w-full"
 
                             value="{{ $manageworker->role == 0 ? 'Admin' : ($manageworker->role == 1 ?  'Manager': 'Worker') }}"

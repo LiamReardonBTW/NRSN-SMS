@@ -72,12 +72,11 @@
                     <!-- ROLE -->
                     <div class="mx-4 my-5">
                         <label for="abn">Role</label>
-                        <x-input  type="text" name="role" id="role"
+                        <x-input disabled type="text" name="role" id="role"
                             class="form-input rounded-md shadow-sm block w-full"
-                           
+
                             value="{{ $alluser->role == 0 ? 'Admin' : ($alluser->role == 1 ?  'Manager': 'Worker') }}"
                           />
-                          <!-- value="{{ $alluser->role }}"  -->
                     </div>
 
 
@@ -89,7 +88,7 @@
                     </div>
 
                     <!-- Created_at -->
-                    <div class="mx-4 my-5">                  
+                    <div class="mx-4 my-5">
                         <label for="created_at">Added</label>
                         <x-input disabled type="text" name="created_at" id="created_at"
                             class="form-input rounded-md shadow-sm block w-full" value="{{ $alluser->created_at }}" />
