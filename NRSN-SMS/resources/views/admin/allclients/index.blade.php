@@ -80,8 +80,8 @@
                                     </svg></a>
                             </div>
                         </th>
-                        <th scope="col" class="px-2 py-1 border-r-2 border-blue-500 border-b-2 ">
-                            <span>Actions</span>
+                        <th scope="col" class="w-48 text-right px-2 py-1 border-r-2 border-blue-500 border-b-2 ">
+                            <span class="mr-28">Actions</span>
                         </th>
                     </tr>
                 </thead>
@@ -112,7 +112,7 @@
                             <td scope="row" class="px-1 py-1">
                                 {{ $client->invoicing_codes }}
                             </td>
-                            <td class="whitespace-nowrap text-sm text-white font-bold">
+                            <td class="whitespace-nowrap text-sm text-white font-bold float-right py-3">
                                 <a href="{{ route('allclients.show', $client->id) }}"
                                     class="inline-block px-2 mx-1 py-1 bg-green-600 rounded hover:shadow-xl hover:bg-green-500">View</a>
                                 <a href="{{ route('allclients.edit', $client->id) }}"
@@ -134,8 +134,12 @@
 
         </div>
         <div class="block pb-12 pt-12">
+            <a href="{{  route('dashboard') }}"
+                class="inline-flex items-center mx-4 px-6 py-4 bg-red-700 border border-transparent rounded-md font-semibold text-base text-white uppercase tracking-widest hover:bg-red-500 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">
+                Back
+            </a>
             <a href="{{ route('allclients.create') }}"
-                class="inline-flex items-center mx-4 px-6 py-4 bg-green-700 border border-transparent rounded-md font-semibold text-base text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">
+                class="inline-flex items-center mx-4 px-6 py-4 bg-green-700 border border-transparent rounded-md font-semibold text-base text-white uppercase tracking-widest hover:bg-green-500 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">
                 Add Client </a>
             </a>
         </div>

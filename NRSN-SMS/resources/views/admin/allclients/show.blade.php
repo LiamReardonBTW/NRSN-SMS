@@ -17,16 +17,14 @@
                         <label for="first_name">First
                             Name</label>
                         <x-input disabled type="text" name="first_name" id="first_name"
-                            class="form-input rounded-md shadow-sm block w-full"
-                            value="{{ $allclient->first_name }}" />
+                            class="form-input rounded-md shadow-sm block w-full" value="{{ $allclient->first_name }}" />
                     </div>
 
                     <!-- Last Name -->
                     <div class="mx-4 my-5">
                         <label for="last_name">Last Name</label>
                         <x-input disabled type="text" name="last_name" id="last_name"
-                            class="form-input rounded-md shadow-sm block w-full"
-                            value="{{ $allclient->last_name }}" />
+                            class="form-input rounded-md shadow-sm block w-full" value="{{ $allclient->last_name }}" />
                     </div>
 
 
@@ -51,8 +49,7 @@
                     <div class="mx-4 my-5">
                         <label for="address">Address</label>
                         <x-input disabled type="text" name="address" id="address"
-                            class="form-input rounded-md shadow-sm block w-full"
-                            value="{{ $allclient->address }}" />
+                            class="form-input rounded-md shadow-sm block w-full" value="{{ $allclient->address }}" />
                     </div>
 
                     <!-- Invoicing Codes -->
@@ -103,8 +100,8 @@
             </form>
             <div
                 class="flex items-center justify-start pb-6 py-5 text-right sm:px-6 grid grid-cols-1 md:grid-cols-3 lg:gap-8 px-6 lg:px-8 py-2">
-                <a href="{{ route('allclients.index') }}"
-                    class="inline-flex items-center mx-4 px-6 py-4 bg-red-700 border border-transparent rounded-md font-semibold text-base text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">
+                <a href="{{  route('allclients.index') }}"
+                    class="inline-flex items-center mx-4 px-6 py-4 bg-red-700 border border-transparent rounded-md font-semibold text-base text-white uppercase tracking-widest hover:bg-red-500 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">
                     Back
                 </a>
             </div>

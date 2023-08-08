@@ -66,7 +66,6 @@ class UserController extends Controller
      */
     public function update(UpdateUserRequest $request, User $alluser)
     {
-        
         $alluser->update($request->validated());
         // dd($alluser);
         return redirect()->route('allusers.show', $alluser);
@@ -74,9 +73,9 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(User $user, $id)
+    public function destroy(User $alluser)
     {
-        User::destroy($id);
+        $alluser->delete();
         return redirect()->route('allusers.index');
     }
 }

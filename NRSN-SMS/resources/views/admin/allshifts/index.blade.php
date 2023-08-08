@@ -1,18 +1,15 @@
 <x-app-layout>
     <x-slot name="header">
-        {{ __('All Users') }}
+        {{ __('All Shifts') }}
     </x-slot>
     <div class="px-4 lg:px-8">
         <div class="relative overflow-auto border-2 border-blue-600 rounded">
             <table class="w-full text-left text-gray-800 bg-gray-100">
                 <thead class="text-xs uppercase text-gray-50 bg-blue-800 dark:bg-gray-700 dark:text-gray-400">
                     <tr>
-                        <th scope="col" class="px-2 py-1 border-r-2 border-blue-500 border-b-2">
-                            User ID
-                        </th>
                         <th scope="col" class="px-2 py-1 border-r-2 border-blue-500 border-b-2 ">
                             <div class="flex items-center">
-                                First Name
+                                Shift ID
                                 <a href="#"><svg class="w-3 h-3 ml-1.5" aria-hidden="true"
                                         xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
                                         <path
@@ -22,7 +19,7 @@
                         </th>
                         <th scope="col" class="px-2 py-1 border-r-2 border-blue-500 border-b-2 ">
                             <div class="flex items-center">
-                                Last Name
+                                Submission Date/Time
                                 <a href="#"><svg class="w-3 h-3 ml-1.5" aria-hidden="true"
                                         xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
                                         <path
@@ -32,7 +29,7 @@
                         </th>
                         <th scope="col" class="px-2 py-1 border-r-2 border-blue-500 border-b-2 ">
                             <div class="flex items-center">
-                                Email
+                                Submitted By
                                 <a href="#"><svg class="w-3 h-3 ml-1.5" aria-hidden="true"
                                         xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
                                         <path
@@ -40,32 +37,30 @@
                                     </svg></a>
                             </div>
                         </th>
+
                         <th scope="col" class="w-48 text-right px-2 py-1 border-r-2 border-blue-500 border-b-2 ">
                             <span class="mr-28">Actions</span>
                         </th>
                     </tr>
                 </thead>
                 <tbody class="text-xs font-bold">
-                    @foreach ($users as $user)
+                    @foreach ($shifts as $shift)
                         <tr class="even:bg-gray-50 odd:bg-gray-200 hover:bg-blue-200 h-12">
                             <td scope="row" class="px-1 py-1 text-center">
-                                {{ $user->id }}
+                                {{ $shift->id }}
                             </td>
-                            <td scope="row" class="px-1 py-1">
-                                {{ $user->first_name }}
+                            <td scope="row" class="px-1 py-1 text-center">
+                                {{ $shift->created_at }}
                             </td>
-                            <td scope="row" class="px-1 py-1">
-                                {{ $user->last_name }}
-                            </td>
-                            <td scope="row" class="px-1 py-1">
-                                {{ $user->email }}
+                            <td scope="row" class="px-1 py-1 text-center">
+                                {{ $shift->submitted_by }}
                             </td>
                             <td class="whitespace-nowrap text-sm text-white font-bold float-right py-3">
-                                <a href="{{ route('allusers.show', $user->id) }}"
+                                <a href="{{ route('allshifts.show', $shift->id) }}"
                                     class="inline-block px-2 mx-1 py-1 bg-green-600 rounded hover:shadow-xl hover:bg-green-500">View</a>
-                                <a href="{{ route('allusers.edit', $user->id) }}"
+                                <a href="{{ route('allshifts.edit', $shift->id) }}"
                                     class="inline-block px-2 mx-1 py-1 bg-blue-600 rounded hover:shadow-xl hover:bg-blue-500">Edit</a>
-                                <form class="inline-block" action="{{ route('allusers.destroy', $user->id) }}"
+                                <form class="inline-block" action="{{ route('allshifts.destroy', $shift->id) }}"
                                     method="POST" onsubmit="return confirm('Are you sure?');">
                                     <input type="hidden" name="_method" value="DELETE">
                                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -87,9 +82,9 @@
                 class="inline-flex items-center mx-4 px-6 py-4 bg-red-700 border border-transparent rounded-md font-semibold text-base text-white uppercase tracking-widest hover:bg-red-500 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">
                 Back
             </a>
-            <a href="{{ route('allusers.create') }}"
+            <a href="{{ route('allshifts.create') }}"
                 class="inline-flex items-center mx-4 px-6 py-4 bg-green-700 border border-transparent rounded-md font-semibold text-base text-white uppercase tracking-widest hover:bg-green-500 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">
-                Add User </a>
+                Add Shift </a>
             </a>
         </div>
     </div>
