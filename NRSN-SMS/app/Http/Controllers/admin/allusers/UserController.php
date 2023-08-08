@@ -37,6 +37,7 @@ class UserController extends Controller
      */
     public function store(StoreUserRequest $request)
     {
+        
         User::create($request->validated());
 
         return redirect()->route('allusers.index');
@@ -47,6 +48,7 @@ class UserController extends Controller
      */
     public function show(User $alluser)
     {
+        
         return view('admin/allusers.show', compact('alluser'));
     }
 
@@ -55,6 +57,7 @@ class UserController extends Controller
      */
     public function edit(User $alluser)
     {
+        // dd($alluser);
         return view('admin/allusers.edit', compact('alluser'));
     }
 
@@ -63,8 +66,9 @@ class UserController extends Controller
      */
     public function update(UpdateUserRequest $request, User $alluser)
     {
+        
         $alluser->update($request->validated());
-
+        // dd($alluser);
         return redirect()->route('allusers.show', $alluser);
     }
     /**

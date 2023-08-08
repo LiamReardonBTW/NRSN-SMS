@@ -38,20 +38,50 @@
                 </div>
 
                 <div class="text-2xl font-medium  overflow-hidden grid grid-cols-1 md:grid-cols-3  px-6 lg:px-8">
-                    <!-- alluser ID -->
+                    <!-- ID -->
                     <div class="mx-4 my-5">
                         <label for="client_id">User ID</label>
                         <x-input disabled type="text" name="client_id" id="client_id"
                             class="form-input rounded-md shadow-sm block w-full" value="{{ $alluser->id }}" />
                     </div>
-
-                    <!-- Added -->
+                        <!-- PHONE -->
                     <div class="mx-4 my-5">
-                        <label for="created_at">Added</label>
-                        <x-input disabled type="text" name="created_at" id="created_at"
-                            class="form-input rounded-md shadow-sm block w-full"
-                            value="{{ $alluser->created_at }}" />
+                        <label for="phone">Phone</label>
+                        <x-input disabled type="text" name="phone" id="phone"
+                            class="form-input rounded-md shadow-sm block w-full" value="{{ $alluser->phone }}" />
                     </div>
+                        <!-- ADDRESS -->
+                    <div class="mx-4 my-5">
+                        <label for="address">Address</label>
+                        <x-input disabled type="text" name="address" id="address"
+                            class="form-input rounded-md shadow-sm block w-full" value="{{ $alluser->address }}" />
+                    </div>
+                        <!-- TFN -->
+                    <div class="mx-4 my-5">
+                        <label for="tfn">TFN</label>
+                        <x-input disabled type="text" name="tfn" id="tfn"
+                            class="form-input rounded-md shadow-sm block w-full" value="{{ $alluser->tfn }}" />
+                    </div>
+
+                    <!-- ABN -->
+                    <div class="mx-4 my-5">
+                        <label for="abn">ABN</label>
+                        <x-input disabled type="text" name="abn" id="abn"
+                            class="form-input rounded-md shadow-sm block w-full"
+                            value="{{ $alluser->abn }}" />
+                    </div>
+
+                    <!-- ROLE -->
+                    <div class="mx-4 my-5">
+                        <label for="abn">Role</label>
+                        <x-input  type="text" name="role" id="role"
+                            class="form-input rounded-md shadow-sm block w-full"
+                           
+                            value="{{ $alluser->role == 0 ? 'Admin' : ($alluser->role == 1 ?  'Manager': 'Worker') }}"
+                          />
+                          <!-- value="{{ $alluser->role }}"  -->
+                    </div>
+
 
                     <!-- Last Updated -->
                     <div class="mx-4 my-5">

@@ -94,6 +94,41 @@
                 @endif
             @endif
         </div>
+
+        <!-- Phone Name -->
+        <div class="col-span-6 sm:col-span-4">
+            <x-label for="phone" value="{{ __('Phone') }}" />
+            <x-input id="phone" type="text" class="mt-1 block w-full" wire:model.defer="state.phone" 
+                autocomplete="phone" />
+            <x-input-error for="phone" class="mt-2" />
+        </div>   
+            <!-- Address Name -->
+        <div class="col-span-6 sm:col-span-4">
+            <x-label for="address" value="{{ __('Address') }}" />
+            <x-input id="address" type="text" class="mt-1 block w-full" wire:model.defer="state.address" 
+                autocomplete="address" />
+            <x-input-error for="address" class="mt-2" />
+        </div>      
+
+        <!-- ABN Name -->
+        <div class="col-span-6 sm:col-span-4">
+            <x-label for="abn" value="{{ __('ABN') }}" />
+            <x-input id="abn" type="text" class="mt-1 block w-full" wire:model.defer="state.abn"
+            autocomplete="abn" />
+            <x-input-error for="abn" class="mt-2" />
+        </div>     
+            <!-- TFN Name -->
+            <div class="col-span-6 sm:col-span-4">
+            <x-label for="tfn" value="{{ __('TFN') }}" />
+            <x-input id="tfn" type="text" class="mt-1 block w-full" wire:model.defer="state.tfn" 
+                autocomplete="tfn" />
+            <x-input-error for="tfn" class="mt-2" />
+        </div>   
+                  
+
+
+
+
     </x-slot>
 
     <x-slot name="actions">

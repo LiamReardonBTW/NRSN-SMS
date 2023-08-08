@@ -30,6 +30,21 @@ class UpdateUserRequest extends FormRequest
             ],
             'email' => [
                 'required', 'string',
+            ],       
+            'phone' => [
+                'nullable', 'string',
+            ],
+            'address' => [
+                'nullable', 'string',
+            ],
+            'tfn' => [
+                'nullable', 'integer',
+            ],
+            'abn' => [
+                'nullable', 'integer',
+            ],
+            'role' => [
+                'nullable', 'integer',
             ],
         ];
     }
