@@ -38,6 +38,9 @@
                             <x-nav-link href="{{ route('manageclients.index') }}" :active="request()->routeIs('manageclients.index')">
                                 {{ __('MANAGE CLIENTS') }}
                             </x-nav-link>
+                            <x-nav-link href="{{ route('manageshifts.index') }}" :active="request()->routeIs('manageshifts.index')">
+                                {{ __('MANAGE SHIFTS') }}
+                            </x-nav-link>
                         </x-slot>
                     </x-nav-link-parent>
 
