@@ -17,10 +17,10 @@
                 {{ route('myclients.index') }}
             @endslot
             @slot('title')
-            <svg class="inline-block mx-auto h-6 w-6 text-black" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-            </svg><br>
+                <svg class="inline-block mx-auto h-6 w-6 text-black" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                </svg><br>
                 My Clients
             @endslot
             @slot('description')
@@ -36,7 +36,14 @@
                 #
             @endslot
             @slot('title')
-                <svg class="inline-block mx-auto h-6 w-6 text-black"  width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">  <path stroke="none" d="M0 0h24v24H0z"/>  <circle cx="7" cy="5" r="2" />  <path d="M5 22v-5l-1-1v-4a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v4l-1 1v5" />  <circle cx="17" cy="5" r="2" />  <path d="M15 22v-4h-2l2 -6a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1l2 6h-2v4" /></svg><br>
+                <svg class="inline-block mx-auto h-6 w-6 text-black" width="24" height="24" viewBox="0 0 24 24"
+                    stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <path stroke="none" d="M0 0h24v24H0z" />
+                    <circle cx="7" cy="5" r="2" />
+                    <path d="M5 22v-5l-1-1v-4a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v4l-1 1v5" />
+                    <circle cx="17" cy="5" r="2" />
+                    <path d="M15 22v-4h-2l2 -6a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1l2 6h-2v4" />
+                </svg><br>
                 My Shifts
             @endslot
             @slot('description')
@@ -57,13 +64,17 @@
                 manager
             @endslot
             @slot('route')
-                #
+            {{ route('manageclients.index') }}
             @endslot
             @slot('title')
-                Placeholder Card
+                <svg class="inline-block mx-auto h-6 w-6 text-black" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                </svg><br>
+                CLIENTS
             @endslot
             @slot('description')
-                Tag
+                View All Clients
             @endslot
         @endcomponent
 
@@ -75,10 +86,18 @@
                 #
             @endslot
             @slot('title')
-                Placeholder Card
+                <svg class="inline-block mx-auto h-6 w-6 text-black" width="24" height="24" viewBox="0 0 24 24"
+                    stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <path stroke="none" d="M0 0h24v24H0z" />
+                    <circle cx="7" cy="5" r="2" />
+                    <path d="M5 22v-5l-1-1v-4a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v4l-1 1v5" />
+                    <circle cx="17" cy="5" r="2" />
+                    <path d="M15 22v-4h-2l2 -6a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1l2 6h-2v4" />
+                </svg><br>
+                SHIFTS
             @endslot
             @slot('description')
-                Tag
+                View All Shifts
             @endslot
         @endcomponent
 
@@ -90,10 +109,12 @@
                 #
             @endslot
             @slot('title')
-                Placeholder Card
+            <svg class="inline-block mx-auto h-6 w-6 text-black"  width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">  <path stroke="none" d="M0 0h24v24H0z"/>  <path d="M4 19h5v-1a7.35 7.35 0 1 1 6 0v1h5" /></svg>
+            <br>
+            WORKERS
             @endslot
             @slot('description')
-                Tag
+                View All Workers
             @endslot
         @endcomponent
     </div>
@@ -112,14 +133,14 @@
                 {{ route('allclients.index') }}
             @endslot
             @slot('title')
-            <svg class="inline-block mx-auto h-6 w-6 text-black" width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
-            stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-            <path stroke="none" d="M0 0h24v24H0z" />
-            <rect x="4" y="4" width="16" height="16" rx="2" />
-            <line x1="4.6" y1="19.4" x2="19.4" y2="4.6" />
-            <path d="M7 9h4m-2 -2v4" />
-            <path d="M13 16h4" />
-        </svg><br>
+                <svg class="inline-block mx-auto h-6 w-6 text-black" width="24" height="24" viewBox="0 0 24 24"
+                    stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <path stroke="none" d="M0 0h24v24H0z" />
+                    <rect x="4" y="4" width="16" height="16" rx="2" />
+                    <line x1="4.6" y1="19.4" x2="19.4" y2="4.6" />
+                    <path d="M7 9h4m-2 -2v4" />
+                    <path d="M13 16h4" />
+                </svg><br>
                 All Clients
             @endslot
             @slot('description')
@@ -136,14 +157,14 @@
                 {{ route('allusers.index') }}
             @endslot
             @slot('title')
-            <svg class="inline-block mx-auto h-6 w-6 text-black" width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
-            stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-            <path stroke="none" d="M0 0h24v24H0z" />
-            <rect x="4" y="4" width="16" height="16" rx="2" />
-            <line x1="4.6" y1="19.4" x2="19.4" y2="4.6" />
-            <path d="M7 9h4m-2 -2v4" />
-            <path d="M13 16h4" />
-        </svg><br>
+                <svg class="inline-block mx-auto h-6 w-6 text-black" width="24" height="24" viewBox="0 0 24 24"
+                    stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <path stroke="none" d="M0 0h24v24H0z" />
+                    <rect x="4" y="4" width="16" height="16" rx="2" />
+                    <line x1="4.6" y1="19.4" x2="19.4" y2="4.6" />
+                    <path d="M7 9h4m-2 -2v4" />
+                    <path d="M13 16h4" />
+                </svg><br>
                 All Users
             @endslot
             @slot('description')
@@ -156,17 +177,17 @@
                 admin
             @endslot
             @slot('route')
-            {{ route('allshifts.index') }}
+                {{ route('allshifts.index') }}
             @endslot
             @slot('title')
-            <svg class="inline-block mx-auto h-6 w-6 text-black" width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
-            stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-            <path stroke="none" d="M0 0h24v24H0z" />
-            <rect x="4" y="4" width="16" height="16" rx="2" />
-            <line x1="4.6" y1="19.4" x2="19.4" y2="4.6" />
-            <path d="M7 9h4m-2 -2v4" />
-            <path d="M13 16h4" />
-        </svg><br>
+                <svg class="inline-block mx-auto h-6 w-6 text-black" width="24" height="24" viewBox="0 0 24 24"
+                    stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <path stroke="none" d="M0 0h24v24H0z" />
+                    <rect x="4" y="4" width="16" height="16" rx="2" />
+                    <line x1="4.6" y1="19.4" x2="19.4" y2="4.6" />
+                    <path d="M7 9h4m-2 -2v4" />
+                    <path d="M13 16h4" />
+                </svg><br>
                 All Shifts
             @endslot
             @slot('description')

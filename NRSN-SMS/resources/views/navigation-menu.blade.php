@@ -32,10 +32,12 @@
                         </x-slot>
                     </x-nav-link-parent>
 
-                    <x-nav-link-parent href="#" :active="request()->routeIs('')">
+                    <x-nav-link-parent href="#" :active="request()->routeIs('manageclients.index')">
                         <x-slot name="name">MANAGER</x-slot>
                         <x-slot name="children">
-
+                            <x-nav-link href="{{ route('manageclients.index') }}" :active="request()->routeIs('manageclients.index')">
+                                {{ __('MANAGE CLIENTS') }}
+                            </x-nav-link>
                         </x-slot>
                     </x-nav-link-parent>
 
