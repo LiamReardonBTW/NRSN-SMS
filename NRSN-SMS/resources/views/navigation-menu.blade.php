@@ -29,6 +29,9 @@
                             <x-nav-link href="{{ route('myclients.index') }}" :active="request()->routeIs('myclients.index')">
                                 {{ __('MY  CLIENTS') }}
                             </x-nav-link>
+                            <x-nav-link href="{{ route('myshifts.index') }}" :active="request()->routeIs('myshifts.index')">
+                                {{ __('MY SHIFTS') }}
+                            </x-nav-link>
                         </x-slot>
                     </x-nav-link-parent>
 
