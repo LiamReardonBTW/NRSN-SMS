@@ -84,7 +84,7 @@
 
                     <!-- ROLE -->
                     <div class="mx-4 my-5">
-                        <label for="abn">Role</label>
+                        <label for="role">Role</label>
                         <select name="role" id="role"
                             class="form-select rounded-md shadow-sm block w-full">
                             <option value="" {{ $alluser->role === "" ? 'selected' : '' }}>No role</option>
@@ -108,8 +108,8 @@
                         <x-input disabled type="text" name="updated_at" id="updated_at"
                             class="form-input rounded-md shadow-sm block w-full" value="{{ $alluser->updated_at }}" />
                     </div>
- 
-    
+
+
 
                 </div>
                 <div
@@ -121,7 +121,7 @@
                     <button
                         class="inline-flex items-center mx-4 px-6 py-4 bg-green-800 border border-transparent rounded-md font-semibold text-base text-white uppercase tracking-widest hover:bg-green-500 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">
                         Submit
-                        
+
                     </button>
 
                 </div>

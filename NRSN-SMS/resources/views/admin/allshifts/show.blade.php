@@ -19,19 +19,81 @@
                             class="form-input rounded-md shadow-sm block w-full" value="{{ $allshift->id }}" />
                     </div>
 
-                    <!-- Added -->
                     <div class="mx-4 my-5">
-                        <label for="created_at">Added</label>
-                        <x-input disabled type="text" name="created_at" id="created_at"
-                            class="form-input rounded-md shadow-sm block w-full" value="{{ $allshift->created_at }}" />
+                        <label for="invoice">Invoice</label>
+                        <x-input disabled type="text" name="invoice" id="invoice"
+                            class="form-input rounded-md shadow-sm block w-full" value="{{ $allshift->invoice }}" />
                     </div>
 
-                    <!-- Submitted By -->
                     <div class="mx-4 my-5">
-                        <label for="submitted_by">Submitted by</label>
+                        <label for="submitted_by">Submitted By</label>
                         <x-input disabled type="text" name="submitted_by" id="submitted_by"
                             class="form-input rounded-md shadow-sm block w-full" value="{{ $allshift->submitted_by }}" />
                     </div>
+
+                    <div class="mx-4 my-5">
+                        <label for="client_supported">Client Supported</label>
+                        <x-input disabled type="text" name="client_supported" id="client_supported"
+                            class="form-input rounded-md shadow-sm block w-full" value="{{ $allshift->client_supported }}" />
+                    </div>
+
+                    <div class="mx-4 my-5">
+                        <label for="notes">Notes</label>
+                        <x-input disabled type="string" name="notes" id="notes"
+                            class="form-input rounded-md shadow-sm block w-full"
+                            value="{{ $allshift->notes }}" />
+                    </div>
+
+                    <div class="mx-4 my-5">
+                        <label for="submission_date">Submission Date</label>
+                        <x-input disabled type="text" name="submission_date" id="submission_date"
+                            class="form-input rounded-md shadow-sm block w-full" value="{{ $allshift->date }}" />
+                    </div>
+
+                    <div class="mx-4 my-5">
+                        <label for="expenses">Expenses ($AUD)</label>
+                        <x-input disabled type="text" name="expenses" id="expenses"
+                            class="form-input rounded-md shadow-sm block w-full" value="{{ $allshift->expenses }}" />
+                    </div>
+
+                    <div class="mx-4 my-5">
+                        <label for="Km">Km Travelled</label>
+                        <x-input disabled type="text" name="Km" id="Km"
+                            class="form-input rounded-md shadow-sm block w-full" value="{{ $allshift->Km }}" />
+                    </div>
+
+                    <div class="mx-4 my-5">
+                        <label for="hours">Hours Worked</label>
+                        <x-input disabled type="text" name="hours" id="hours"
+                            class="form-input rounded-md shadow-sm block w-full" value="{{ $allshift->hours }}" />
+                    </div>
+
+                    <div class="mx-4 my-5">
+                        <label for="isflagged">Flagged</label>
+                        @if ($allshift->isflagged)
+                        <x-input disabled type="text" name="isinvoiced" id="isinvoiced"
+                            class="form-input rounded-md shadow-sm block w-full"
+                            value="Yes" />
+                        @else
+                        <x-input disabled type="text" name="isinvoiced" id="isinvoiced"
+                            class="form-input rounded-md shadow-sm block w-full"
+                            value="No" />
+                        @endif
+                     </div>
+
+                    <div class="mx-4 my-5">
+                        <label for="isinvoiced">Invoiced</label>
+                        @if ($allshift->isinvoiced)
+                        <x-input disabled type="text" name="isinvoiced" id="isinvoiced"
+                            class="form-input rounded-md shadow-sm block w-full"
+                            value="Yes" />
+                        @else
+                        <x-input disabled type="text" name="isinvoiced" id="isinvoiced"
+                            class="form-input rounded-md shadow-sm block w-full"
+                            value="No" />
+                        @endif
+                    </div>
+
                 </div>
 
             </form>

@@ -38,13 +38,19 @@ class UpdateShiftRequest extends FormRequest
                 'required', 'date',
             ],
             'expenses' => [
-                'required', 'float',
+                'required', 'integer',
             ],
             'km' => [
-                'required', 'int',
+                'required', 'integer',
             ],
             'hours' => [
-                'required', 'float',
+                'required', 'integer',
+            ],
+            'isflagged' => [
+                'required', 'boolean',
+            ],
+            'isinvoiced' => [
+                'required', 'boolean',
             ],
         ];
     }
