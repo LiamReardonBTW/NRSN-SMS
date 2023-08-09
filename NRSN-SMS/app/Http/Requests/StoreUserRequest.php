@@ -33,7 +33,22 @@ class StoreUserRequest extends FormRequest
             ],
             'password' => [
                 'required', 'string',
-            ]
+            ],
+            'phone' => [
+                'nullable', 'string',
+            ],
+            'address' => [
+                'nullable', 'string',
+            ],
+            'tfn' => [
+                'nullable', 'string',
+            ],
+            'abn' => [
+                'nullable', 'string',
+            ],
+            'role' => [
+                'required', 'string',
+            ],
         ];
     }
 }

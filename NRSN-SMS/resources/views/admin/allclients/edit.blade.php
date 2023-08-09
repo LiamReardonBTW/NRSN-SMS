@@ -26,6 +26,9 @@
                             Name</label>
                         <x-input type="text" name="first_name" id="first_name"
                             class="form-input rounded-md shadow-sm block w-full" value="{{ $allclient->first_name }}" />
+                        @error('first_name')
+                            <p class="text-sm text-red-600">{{ $message }}</p>
+                        @enderror
                     </div>
 
                     <!-- Last Name -->
@@ -33,6 +36,9 @@
                         <label for="last_name">Last Name</label>
                         <x-input type="text" name="last_name" id="last_name"
                             class="form-input rounded-md shadow-sm block w-full" value="{{ $allclient->last_name }}" />
+                        @error('last_name')
+                            <p class="text-sm text-red-600">{{ $message }}</p>
+                        @enderror
                     </div>
 
                     <!-- Phone # -->
@@ -40,6 +46,9 @@
                         <label for="phone">Phone #</label>
                         <x-input type="string" name="phone" id="phone"
                             class="form-input rounded-md shadow-sm block w-full" value="{{ $allclient->phone }}" />
+                        @error('phone')
+                            <p class="text-sm text-red-600">{{ $message }}</p>
+                        @enderror
                     </div>
 
                     <!-- Email -->
@@ -47,6 +56,9 @@
                         <label for="email">Email</label>
                         <x-input type="email" name="email" id="email"
                             class="form-input rounded-md shadow-sm block w-full" value="{{ $allclient->email }}" />
+                        @error('email')
+                            <p class="text-sm text-red-600">{{ $message }}</p>
+                        @enderror
                     </div>
 
                     <!-- Address -->
@@ -54,6 +66,9 @@
                         <label for="address">Address</label>
                         <x-input type="text" name="address" id="address"
                             class="form-input rounded-md shadow-sm block w-full" value="{{ $allclient->address }}" />
+                        @error('address')
+                            <p class="text-sm text-red-600">{{ $message }}</p>
+                        @enderror
                     </div>
 
                     <!-- Invoicing Codes -->
@@ -63,6 +78,9 @@
                         <x-input type="text" name="invoicing_codes" id="invoicing_codes"
                             class="form-input rounded-md shadow-sm block w-full"
                             value="{{ $allclient->invoicing_codes }}" />
+                        @error('invoicing_codes')
+                            <p class="text-sm text-red-600">{{ $message }}</p>
+                        @enderror
                     </div>
 
                     <!-- Active Status -->

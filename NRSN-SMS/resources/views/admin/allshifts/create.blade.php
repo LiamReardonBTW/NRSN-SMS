@@ -20,6 +20,9 @@
                     <label for="invoice">Invoice</label>
                     <x-input type="string" name="invoice" id="invoice"
                         class="form-input rounded-md shadow-sm block w-full" value="{{ old('submitted_by', '') }}" />
+                        @error('invoice')
+                            <p class="text-sm text-red-600">{{ $message }}</p>
+                        @enderror
                 </div>
 
                 <!-- Phone # -->
@@ -27,6 +30,9 @@
                     <label for="submitted_by">Worker</label>
                     <x-input type="string" name="submitted_by" id="submitted_by"
                         class="form-input rounded-md shadow-sm block w-full" value="{{ old('submitted_by', '') }}" />
+                        @error('submitted_by')
+                            <p class="text-sm text-red-600">{{ $message }}</p>
+                        @enderror
                 </div>
 
                 <!-- Client Supported -->
@@ -35,6 +41,9 @@
                     <x-input type="string" name="client_supported" id="client_supported"
                         class="form-input rounded-md shadow-sm block w-full"
                         value="{{ old('client_supported', '') }}" />
+                        @error('client_supported')
+                            <p class="text-sm text-red-600">{{ $message }}</p>
+                        @enderror
                 </div>
 
                 <!-- Date -->
@@ -42,6 +51,9 @@
                     <label for="date">Date</label>
                     <x-input type="date" name="date" id="date"
                         class="form-input rounded-md shadow-sm block w-full" value="{{ old('date', '') }}" />
+                        @error('date')
+                            <p class="text-sm text-red-600">{{ $message }}</p>
+                        @enderror
                 </div>
 
                 <!-- Expenses -->
@@ -49,6 +61,9 @@
                     <label for="expenses">Expenses ($AUD)</label>
                     <x-input type="integer" name="expenses" id="expenses"
                         class="form-input rounded-md shadow-sm block w-full" value="{{ old('expenses', '') }}" />
+                        @error('expenses')
+                            <p class="text-sm text-red-600">{{ $message }}</p>
+                        @enderror
                 </div>
 
                 <!-- km Travelled -->
@@ -56,6 +71,9 @@
                     <label for="km">Km Travelled</label>
                     <x-input type="integer" name="km" id="km"
                         class="form-input rounded-md shadow-sm block w-full" value="{{ old('km', '') }}" />
+                        @error('km')
+                            <p class="text-sm text-red-600">{{ $message }}</p>
+                        @enderror
                 </div>
 
                 <!-- Hours Worked -->
@@ -63,6 +81,9 @@
                     <label for="hours">Hours Worked</label>
                     <x-input type="integer" name="hours" id="hours"
                         class="form-input rounded-md shadow-sm block w-full" value="{{ old('hours', '') }}" />
+                        @error('hours')
+                            <p class="text-sm text-red-600">{{ $message }}</p>
+                        @enderror
                 </div>
 
                 <!-- Notes -->
@@ -70,6 +91,9 @@
                     <label for="notes">Shift Notes</label>
                     <x-input type="string" name="notes" id="notes"
                         class="form-input rounded-md shadow-sm block w-full" value="{{ old('notes', '') }}" />
+                        @error('notes')
+                            <p class="text-sm text-red-600">{{ $message }}</p>
+                        @enderror
                 </div>
 
             </div> <!-- Close shift information container -->
@@ -88,6 +112,7 @@
                     Add Shift
                 </button>
             </div>
+
         </form>
     </div><!-- Close Form Container -->
 
