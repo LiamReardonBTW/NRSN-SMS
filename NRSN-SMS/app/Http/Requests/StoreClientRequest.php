@@ -40,6 +40,9 @@ class StoreClientRequest extends FormRequest
             'address' => [
                 'required', 'string',
             ],
+            'active' => [
+                'required', 'boolean',
+            ],
         ];
     }
 }

@@ -49,6 +49,16 @@
                             value="{{ old('invoicing_codes', '') }}" />
                     </div>
 
+                    <div class="mx-4 my-5">
+                        <label for="active">Active Status</label>
+                        <select name="active" id="active"
+                            class="form-select rounded-md shadow-sm block w-full">
+                            <option value="1">Active</option>
+                            <option value="0">Inactive</option>
+                            <!-- Add more options as needed -->
+                        </select>
+                    </div>
+
                 </div>
                 <div
                     class="flex items-center justify-start pb-6 py-3 text-right sm:px-6 grid grid-cols-1 md:grid-cols-3 lg:gap-8 px-6 lg:px-8 py-2">
