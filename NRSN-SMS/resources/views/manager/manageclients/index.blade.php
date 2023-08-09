@@ -2,7 +2,7 @@
 
     <!-- Page Header Title -->
     <x-slot name="header">
-        {{ __('manage clients') }}
+        {{ __('Manage Clients') }}
     </x-slot>
 
     <!-- Table Container -->

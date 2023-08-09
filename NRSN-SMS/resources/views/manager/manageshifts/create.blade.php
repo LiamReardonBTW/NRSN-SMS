@@ -25,7 +25,7 @@
                         @enderror
                 </div>
 
-                <!-- Phone # -->
+                <!-- Submitted By # -->
                 <div class="mx-4 my-2">
                     <label for="submitted_by">Worker</label>
                     <x-input type="string" name="submitted_by" id="submitted_by"
