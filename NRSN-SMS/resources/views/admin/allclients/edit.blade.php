@@ -1,14 +1,23 @@
 <x-app-layout>
+
+    <!-- Page Header Title -->
     <x-slot name="header">
-        Edit Client: {{ $allclient->first_name }} {{ $allclient->last_name }}
+        <!-- Shows selected clients first and last name -->
+        {{__('Edit Client:') }} {{ $allclient->first_name }} {{ $allclient->last_name }}
     </x-slot>
 
-    <div class="max-w-screen-2xl px-4 lg:px-8">
+    <!-- Form Container -->
+    <div class="relative overflow-x-auto bg-blue-200 shadow-xl rounded-lg">
 
+        <!-- Client Information Container -->
         <div class="relative overflow-x-auto bg-blue-200 shadow-xl rounded-lg ">
+
+            <!-- Update Client Information Form -->
             <form method="post" action="{{ route('allclients.update', $allclient) }}">
                 @csrf
                 @method('PUT')
+
+                <!-- Editable Client Information -->
                 <div class="text-2xl font-medium  overflow-hidden grid grid-cols-1 md:grid-cols-3  px-6 lg:px-8">
 
                     <!-- First Name -->
@@ -25,8 +34,6 @@
                         <x-input type="text" name="last_name" id="last_name"
                             class="form-input rounded-md shadow-sm block w-full" value="{{ $allclient->last_name }}" />
                     </div>
-
-
 
                     <!-- Phone # -->
                     <div class="mx-4 my-5">
@@ -58,7 +65,7 @@
                             value="{{ $allclient->invoicing_codes }}" />
                     </div>
 
-                    <!-- ROLE -->
+                    <!-- Active Status -->
                     <div class="mx-4 my-5">
                         <label for="active">Active Status</label>
                         <select name="active" id="active" class="form-select rounded-md shadow-sm block w-full">
@@ -67,8 +74,9 @@
                         </select>
                     </div>
 
-                </div>
+                </div><!-- Close Editable Information -->
 
+                <!-- Uneditable Client Information -->
                 <div class="text-2xl font-medium  overflow-hidden grid grid-cols-1 md:grid-cols-3  px-6 lg:px-8">
                     <!-- Client ID -->
                     <div class="mx-4 my-5">
@@ -93,13 +101,17 @@
                             value="{{ $allclient->updated_at }}" />
                     </div>
 
-                </div>
+                </div><!-- End Uneditable Client Information -->
+
+                <!-- Page Navigation Buttons  -->
                 <div
                     class="flex items-center justify-start pb-6 py-3 text-right sm:px-6 grid grid-cols-1 md:grid-cols-3 lg:gap-8 px-6 lg:px-8 py-2">
+                    <!-- Back to All Clients index page -->
                     <a href="{{ route('allclients.index') }}"
                         class="inline-flex items-center mx-4 px-6 py-4 bg-red-700 border border-transparent rounded-md font-semibold text-base text-white uppercase tracking-widest hover:bg-red-500 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">
                         Back
                     </a>
+                    <!-- Form Submit changes to client Button -->
                     <button
                         class="inline-flex items-center mx-4 px-6 py-4 bg-green-700 border border-transparent rounded-md font-semibold text-base text-white uppercase tracking-widest hover:bg-green-500 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">
                         Submit
@@ -108,6 +120,6 @@
             </form>
         </div>
 
-    </div>
+    </div><!-- Close Form Container -->
 
 </x-app-layout>
