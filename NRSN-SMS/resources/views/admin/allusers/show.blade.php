@@ -48,7 +48,7 @@
             </div>
             <!-- TFN -->
             <div class="mx-4 my-5">
-                <label for="tfn">TFN</label>
+                <label for="tfn">Tax File Number (TFN)</label>
                 <x-input disabled type="text" name="tfn" id="tfn"
                     class="form-input rounded-md shadow-sm block w-full" value="{{ $alluser->tfn }}" />
             </div>

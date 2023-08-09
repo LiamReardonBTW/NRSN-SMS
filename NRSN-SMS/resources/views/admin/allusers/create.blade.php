@@ -2,7 +2,7 @@
 
     <!-- Page Header Title -->
     <x-slot name="header">
-        {{ __('Add Client') }}
+        {{ __('Add User') }}
     </x-slot>
 
     <!-- Form Container -->
@@ -12,7 +12,44 @@
         <form method="post" action="{{ route('allusers.store') }}">
             @csrf
 
+            <h1 class="mt-6 mx-10 lg:mx-12">Login information</h1>
             <!-- User Information container -->
+            <div class="text-2xl font-medium  overflow-hidden grid grid-cols-1 md:grid-cols-3  px-6 lg:px-8">
+
+                <!-- Email -->
+                <div class="mx-4 my-2">
+                    <label for="email">Email</label>
+                    <x-input type="email" name="email" id="email"
+                        class="form-input rounded-md shadow-sm block w-full" value="{{ old('email', '') }}" />
+                    @error('email')
+                        <p class="text-sm text-red-600">{{ $message }}</p>
+                    @enderror
+                </div>
+
+                <!-- Password -->
+                <div class="mx-4 my-2">
+                    <label for="password">Password</label>
+                    <x-input type="string" name="password" id="password"
+                        class="form-input rounded-md shadow-sm block w-full" value="{{ old('password', '') }}" />
+                    @error('password')
+                        <p class="text-sm text-red-600">{{ $message }}</p>
+                    @enderror
+                </div>
+
+                <!-- Role -->
+                <div class="mx-4 my-2">
+                    <label for="role">Role</label>
+                    <select name="role" id="role" class="form-select rounded-md shadow-sm block w-full">
+                        <option value="0">Admin</option>
+                        <option value="1">Manager</option>
+                        <option value="2" selected>Worker</option>
+                    </select>
+                </div>
+
+            </div><!-- Close User Information container -->
+
+            <h1 class="mt-6 mx-10 lg:mx-12">Personal information</h1>
+            <!-- Personal Information container -->
             <div class="text-2xl font-medium  overflow-hidden grid grid-cols-1 md:grid-cols-3  px-6 lg:px-8">
 
                 <!-- First Name -->
@@ -32,26 +69,6 @@
                     <x-input type="text" name="last_name" id="last_name"
                         class="form-input rounded-md shadow-sm block w-full" value="{{ old('last_name', '') }}" />
                     @error('last_name')
-                        <p class="text-sm text-red-600">{{ $message }}</p>
-                    @enderror
-                </div>
-
-                <!-- Email -->
-                <div class="mx-4 my-2">
-                    <label for="email">Email</label>
-                    <x-input type="email" name="email" id="email"
-                        class="form-input rounded-md shadow-sm block w-full" value="{{ old('email', '') }}" />
-                    @error('email')
-                        <p class="text-sm text-red-600">{{ $message }}</p>
-                    @enderror
-                </div>
-
-                <!-- Password -->
-                <div class="mx-4 my-2">
-                    <label for="password">Password</label>
-                    <x-input type="string" name="password" id="password"
-                        class="form-input rounded-md shadow-sm block w-full" value="{{ old('password', '') }}" />
-                    @error('password')
                         <p class="text-sm text-red-600">{{ $message }}</p>
                     @enderror
                 </div>
@@ -76,6 +93,7 @@
                     @enderror
                 </div>
 
+
                 <!-- TFN -->
                 <div class="mx-4 my-2">
                     <label for="tfn">Tax File Number (TFN)</label>
@@ -96,17 +114,7 @@
                     @enderror
                 </div>
 
-                <!-- Role -->
-                <div class="mx-4 my-2">
-                    <label for="role">Role</label>
-                    <select name="role" id="role" class="form-select rounded-md shadow-sm block w-full">
-                        <option value="0">Admin</option>
-                        <option value="1">Manager</option>
-                        <option value="2" selected>Worker</option>
-                    </select>
-                </div>
-
-            </div><!-- Close user information container -->
+            </div><!-- Close personal information container -->
 
             <!-- Page Navigation Buttons  -->
             <div

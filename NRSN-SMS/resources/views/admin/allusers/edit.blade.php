@@ -3,7 +3,7 @@
     <!-- Page Header Title -->
     <x-slot name="header">
         <!-- Shows selected user first and last name -->
-        {{ __('User:') }} {{ $alluser->first_name }} {{ $alluser->last_name }}
+        {{ __('Edit User:') }} {{ $alluser->first_name }} {{ $alluser->last_name }}
     </x-slot>
 
     <!-- User Information Container -->
@@ -70,7 +70,7 @@
 
                 <!-- TFN -->
                 <div class="mx-4 my-5">
-                    <label for="tfn">TFN</label>
+                    <label for="tfn">Tax File Number (TFN)</label>
                     <x-input type="text" name="tfn" id="tfn"
                         class="form-input rounded-md shadow-sm block w-full" value="{{ $alluser->tfn }}" />
                     @error('tfn')
@@ -128,7 +128,7 @@
             <div
                 class="flex items-center justify-start pb-6 py-3 text-right sm:px-6 grid grid-cols-1 md:grid-cols-3 lg:gap-8 px-6 lg:px-8 py-2">
                 <!-- Back to All Users index page -->
-                <a href="{{ route('allusers.index') }}"
+                <a href="{{ route('allusers.show', $alluser) }}"
                     class="inline-flex items-center mx-4 px-6 py-4 bg-red-700 border border-transparent rounded-md font-semibold text-base text-white uppercase tracking-widest hover:bg-red-500 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">
                     Back
                 </a>
