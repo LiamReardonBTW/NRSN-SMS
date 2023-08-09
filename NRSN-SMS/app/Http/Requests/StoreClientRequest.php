@@ -32,10 +32,10 @@ class StoreClientRequest extends FormRequest
                 'required', 'string',
             ],
             'phone' => [
-                'string',
+                'required', 'string',
             ],
             'invoicing_codes' => [
-                'string',
+                'required', 'string',
             ],
             'address' => [
                 'required', 'string',
