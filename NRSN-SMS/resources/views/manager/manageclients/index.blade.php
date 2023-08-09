@@ -2,13 +2,13 @@
 
     <!-- Page Header Title -->
     <x-slot name="header">
-        {{ __('All Clients') }}
+        {{ __('manage clients') }}
     </x-slot>
 
     <!-- Table Container -->
     <div class="relative overflow-auto border-2 border-blue-600 rounded">
 
-        <!-- All Clients Table -->
+        <!-- manage clients Table -->
         <table class="w-full text-left text-gray-800 bg-gray-100">
 
             <!-- Table Headers -->
