@@ -3,7 +3,7 @@
     <!-- Page Header Title -->
     <x-slot name="header">
         <!-- Shows selected clients first and last name -->
-        {{__('Edit Client:') }} {{ $allclient->first_name }} {{ $allclient->last_name }}
+        {{ __('Edit Client:') }} {{ $allclient->first_name }} {{ $allclient->last_name }}
     </x-slot>
 
     <!-- Form Container -->
@@ -117,9 +117,10 @@
                         Submit
                     </button>
                 </div>
-            </form>
-        </div>
 
-    </div><!-- Close Form Container -->
+            </form> <!-- Close Form -->
+        </div> <!-- Close Client Information Container -->
+
+    </div> <!-- Close Form Container -->
 
 </x-app-layout>
