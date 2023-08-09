@@ -1,6 +1,8 @@
 <x-app-layout>
+
+    <!-- Page Header Title -->
     <x-slot name="header">
-        Add Shift:
+        {{ __('Add Shift') }}
     </x-slot>
 
     <div class="max-w-screen-2xl px-4 lg:px-8">

@@ -1,6 +1,6 @@
 <x-app-layout>
 
-    <!-- Page Header Content -->
+    <!-- Page Header Title -->
     <x-slot name="header">
         {{ __('All Clients') }}
     </x-slot>
