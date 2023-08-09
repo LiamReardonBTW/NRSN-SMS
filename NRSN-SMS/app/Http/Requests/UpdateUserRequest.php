@@ -34,6 +34,18 @@ class UpdateUserRequest extends FormRequest
             'phone' => [
                 'nullable', 'string',
             ],
+            'address' => [
+                'nullable', 'string',
+            ],
+            'tfn' => [
+                'nullable', 'string',
+            ],
+            'abn' => [
+                'nullable', 'string',
+            ],
+            'role' => [
+                'required', 'string',
+            ],
         ];
     }
 }
