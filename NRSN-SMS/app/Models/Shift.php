@@ -18,7 +18,7 @@ class Shift extends Model
         'isinvoiced',
         'date',
         'expenses',
-        'Km',
+        'km',
         'hours',
     ];
 }

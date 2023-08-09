@@ -21,7 +21,7 @@ return new class extends Migration
             $table->boolean('isinvoiced')->default(0);
             $table->date('date');
             $table->integer('expenses');
-            $table->integer('Km');
+            $table->integer('km');
             $table->integer('hours');
             $table->timestamps();
         });

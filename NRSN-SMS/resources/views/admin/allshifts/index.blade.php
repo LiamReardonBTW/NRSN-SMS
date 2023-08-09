@@ -67,10 +67,10 @@
                         </div>
                     </th>
 
-                    <!-- Km Travelled Table Header -->
+                    <!-- km Travelled Table Header -->
                     <th scope="col" class="px-2 py-1 border-r-2 border-blue-500 border-b-2 ">
                         <div class="flex items-center">
-                            Km Travelled
+                            km Travelled
                         </div>
                     </th>
 
@@ -137,7 +137,7 @@
                             {{ $shift->expenses }}
                         </td>
                         <td scope="row" class="px-1 py-1 text-center">
-                            {{ $shift->Km }}
+                            {{ $shift->km }}
                         </td>
                         <td scope="row" class="px-1 py-1 text-center">
                             {{ $shift->hours }}
@@ -151,10 +151,10 @@
                             @endif
                         </td>
                         <td scope="row" class="px-1 py-1 text-center">
-                            @if ($shift->isflagged == '0')
+                            @if ($shift->isinvoiced == '0')
                                 No
                             @endif
-                            @if ($shift->isflagged == '1')
+                            @if ($shift->isinvoiced == '1')
                                 Yes
                             @endif
                         </td>
@@ -169,7 +169,7 @@
                             <!-- Delete Button -->
                             <form class="inline-block" action="{{ route('allshifts.destroy', $shift->id) }}"
                                 method="POST"
-                                onsubmit="return confirm('Are you sure you would like to delete this client? This action cannot be undone');">
+                                onsubmit="return confirm('Are you sure you would like to delete this shift? This action cannot be undone');">
                                 <input type="hidden" name="_method" value="DELETE">
                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                 <input type="submit"
