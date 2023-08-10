@@ -13,13 +13,121 @@
                 </div>
 
                 <!-- Navigation Links -->
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex sm:items-center">
+                   
 
                     <x-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')" class="mt-1">
                         {{ __('DASHBOARD') }}
                     </x-nav-link>
 
-                    <x-nav-link-parent href="#" :active="request()->routeIs('myclients.index', 'myshifts.index')">
+                                        <!-- Worker dropdown -->
+                    <div class="ml-3 relative">
+                        <x-dropdown align="right" width="48">
+                            <x-slot name="trigger">
+                                    <span class="inline-flex rounded-md">
+                                        <button type="button"
+                                            class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none focus:bg-gray-50 active:bg-gray-50 transition ease-in-out duration-150">
+                                            Worker
+
+                                            <svg class="ml-2 -mr-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg"
+                                                fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                    d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                                            </svg>
+                                        </button>
+                                    </span>
+                            </x-slot>
+
+                            <x-slot name="content">
+                                
+                                <x-dropdown-link href="{{ route('manageclients.index') }}">
+                                    {{ __('My Clients') }}
+                                </x-dropdown-link>
+
+                                <x-dropdown-link href="{{ route('myshifts.index') }}">
+                                    {{ __('My Shifts') }}
+                                </x-dropdown-link>
+
+                        
+
+                            </x-slot>
+                        </x-dropdown>
+                    </div>
+
+                  <!-- Manager dropdown-->
+                    <div class="ml-3 relative">
+                        <x-dropdown align="right" width="48">
+                            <x-slot name="trigger">
+                                    <span class="inline-flex rounded-md">
+                                        <button type="button"
+                                            class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none focus:bg-gray-50 active:bg-gray-50 transition ease-in-out duration-150">
+                                            Manager
+
+                                            <svg class="ml-2 -mr-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg"
+                                                fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                    d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                                            </svg>
+                                        </button>
+                                    </span>
+                            </x-slot>
+
+                            <x-slot name="content">
+
+                                <x-dropdown-link href="{{ route('myclients.index') }}">
+                                    {{ __('Manage Clients') }}
+                                </x-dropdown-link>
+
+                                <x-dropdown-link href="{{ route('manageshifts.index') }}">
+                                    {{ __('Manage Shifts') }}
+                                </x-dropdown-link>
+
+                                <x-dropdown-link href="{{ route('manageworkers.index') }}">
+                                    {{ __('Manage Workers') }}
+                                </x-dropdown-link>
+                    
+
+                            </x-slot>
+                        </x-dropdown>
+                    </div>
+
+                <!-- Admin dropdown-->
+                    <div class="ml-3 relative">
+                        <x-dropdown align="right" width="48">
+                            <x-slot name="trigger">
+                                    <span class="inline-flex rounded-md">
+                                        <button type="button"
+                                            class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none focus:bg-gray-50 active:bg-gray-50 transition ease-in-out duration-150">
+                                            Admin
+
+                                            <svg class="ml-2 -mr-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg"
+                                                fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                    d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                                            </svg>
+                                        </button>
+                                    </span>
+                            </x-slot>
+
+                            <x-slot name="content">
+
+                                <x-dropdown-link href="{{ route('allclients.index') }}">
+                                    {{ __('All Clients') }}
+                                </x-dropdown-link>
+
+                                <x-dropdown-link href="{{ route('allshifts.index') }}">
+                                    {{ __('All Shifts') }}
+                                </x-dropdown-link>
+
+                                <x-dropdown-link href="{{ route('allusers.index') }}">
+                                    {{ __('All Users') }}
+                                </x-dropdown-link>
+                    
+                            </x-slot>
+                        </x-dropdown>
+                    </div>
+
+                    <!-- <x-nav-link-parent href="#" :active="request()->routeIs('myclients.index', 'myshifts.index')">
                         <x-slot name="name">WORKER</x-slot>
                         <x-slot name="children">
                             <x-nav-link href="{{ route('myclients.index') }}" :active="request()->routeIs('myclients.index')">
@@ -59,7 +167,7 @@
                                 {{ __('ALL USERS') }}
                             </x-nav-link>
                         </x-slot>
-                    </x-nav-link-parent>
+                    </x-nav-link-parent> -->
 
                 </div>
 
