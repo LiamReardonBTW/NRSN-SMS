@@ -17,6 +17,34 @@
                 @csrf
                 @method('PUT')
 
+                <!-- Uneditable Client Information -->
+                <div class="text-2xl font-medium bg-blue-300 overflow-hidden grid grid-cols-1 md:grid-cols-3  px-6 lg:px-8">
+
+                    <!-- Client ID -->
+                    <div class="mx-4 my-5">
+                        <label for="client_id">Client ID</label>
+                        <x-input disabled type="text" name="client_id" id="client_id"
+                            class="form-input rounded-md shadow-sm block w-full" value="{{ $manageclient->id }}" />
+                    </div>
+
+                    <!-- Added -->
+                    <div class="mx-4 my-5">
+                        <label for="created_at">Added</label>
+                        <x-input disabled type="text" name="created_at" id="created_at"
+                            class="form-input rounded-md shadow-sm block w-full"
+                            value="{{ $manageclient->created_at }}" />
+                    </div>
+
+                    <!-- Last Updated -->
+                    <div class="mx-4 my-5">
+                        <label for="updated_at">Last Updated</label>
+                        <x-input disabled type="text" name="updated_at" id="updated_at"
+                            class="form-input rounded-md shadow-sm block w-full"
+                            value="{{ $manageclient->updated_at }}" />
+                    </div>
+
+                </div><!-- End Uneditable Client Information -->
+
                 <!-- Editable Client Information -->
                 <div class="text-2xl font-medium  overflow-hidden grid grid-cols-1 md:grid-cols-3  px-6 lg:px-8">
 
@@ -25,7 +53,8 @@
                         <label for="first_name">First
                             Name</label>
                         <x-input type="text" name="first_name" id="first_name"
-                            class="form-input rounded-md shadow-sm block w-full" value="{{ $manageclient->first_name }}" />
+                            class="form-input rounded-md shadow-sm block w-full"
+                            value="{{ $manageclient->first_name }}" />
                         @error('first_name')
                             <p class="text-sm text-red-600">{{ $message }}</p>
                         @enderror
@@ -35,7 +64,8 @@
                     <div class="mx-4 my-5">
                         <label for="last_name">Last Name</label>
                         <x-input type="text" name="last_name" id="last_name"
-                            class="form-input rounded-md shadow-sm block w-full" value="{{ $manageclient->last_name }}" />
+                            class="form-input rounded-md shadow-sm block w-full"
+                            value="{{ $manageclient->last_name }}" />
                         @error('last_name')
                             <p class="text-sm text-red-600">{{ $message }}</p>
                         @enderror
@@ -65,7 +95,8 @@
                     <div class="mx-4 my-5">
                         <label for="address">Address</label>
                         <x-input type="text" name="address" id="address"
-                            class="form-input rounded-md shadow-sm block w-full" value="{{ $manageclient->address }}" />
+                            class="form-input rounded-md shadow-sm block w-full"
+                            value="{{ $manageclient->address }}" />
                         @error('address')
                             <p class="text-sm text-red-600">{{ $message }}</p>
                         @enderror
@@ -87,39 +118,14 @@
                     <div class="mx-4 my-5">
                         <label for="active">Active Status</label>
                         <select name="active" id="active" class="form-select rounded-md shadow-sm block w-full">
-                            <option value="1" {{ $manageclient->active === '1' ? 'selected' : '' }}>Active</option>
-                            <option value="0" {{ $manageclient->active === 0 ? 'selected' : '' }}>Inactive</option>
+                            <option value="1" {{ $manageclient->active === '1' ? 'selected' : '' }}>Active
+                            </option>
+                            <option value="0" {{ $manageclient->active === 0 ? 'selected' : '' }}>Inactive
+                            </option>
                         </select>
                     </div>
 
                 </div><!-- Close Editable Information -->
-
-                <!-- Uneditable Client Information -->
-                <div class="text-2xl font-medium  overflow-hidden grid grid-cols-1 md:grid-cols-3  px-6 lg:px-8">
-                    <!-- Client ID -->
-                    <div class="mx-4 my-5">
-                        <label for="client_id">Client ID</label>
-                        <x-input disabled type="text" name="client_id" id="client_id"
-                            class="form-input rounded-md shadow-sm block w-full" value="{{ $manageclient->id }}" />
-                    </div>
-
-                    <!-- Added -->
-                    <div class="mx-4 my-5">
-                        <label for="created_at">Added</label>
-                        <x-input disabled type="text" name="created_at" id="created_at"
-                            class="form-input rounded-md shadow-sm block w-full"
-                            value="{{ $manageclient->created_at }}" />
-                    </div>
-
-                    <!-- Last Updated -->
-                    <div class="mx-4 my-5">
-                        <label for="updated_at">Last Updated</label>
-                        <x-input disabled type="text" name="updated_at" id="updated_at"
-                            class="form-input rounded-md shadow-sm block w-full"
-                            value="{{ $manageclient->updated_at }}" />
-                    </div>
-
-                </div><!-- End Uneditable Client Information -->
 
                 <!-- Page Navigation Buttons  -->
                 <div

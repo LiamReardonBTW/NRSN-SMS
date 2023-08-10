@@ -14,14 +14,14 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex sm:items-center">
-                   
+
 
                     <x-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')" class="mt-1">
                         {{ __('DASHBOARD') }}
                     </x-nav-link>
 
                                         <!-- Worker dropdown -->
-                    <div class="ml-3 relative">
+                    <div class="ml-3 relative mt-1">
                         <x-dropdown align="right" width="48">
                             <x-slot name="trigger">
                                     <span class="inline-flex rounded-md">
@@ -39,8 +39,8 @@
                             </x-slot>
 
                             <x-slot name="content">
-                                
-                                <x-dropdown-link href="{{ route('manageclients.index') }}">
+
+                                <x-dropdown-link href="{{ route('myclients.index') }}">
                                     {{ __('My Clients') }}
                                 </x-dropdown-link>
 
@@ -48,14 +48,14 @@
                                     {{ __('My Shifts') }}
                                 </x-dropdown-link>
 
-                        
+
 
                             </x-slot>
                         </x-dropdown>
                     </div>
 
                   <!-- Manager dropdown-->
-                    <div class="ml-3 relative">
+                    <div class="ml-3 relative mt-1">
                         <x-dropdown align="right" width="48">
                             <x-slot name="trigger">
                                     <span class="inline-flex rounded-md">
@@ -74,7 +74,7 @@
 
                             <x-slot name="content">
 
-                                <x-dropdown-link href="{{ route('myclients.index') }}">
+                                <x-dropdown-link href="{{ route('manageclients.index') }}">
                                     {{ __('Manage Clients') }}
                                 </x-dropdown-link>
 
@@ -85,14 +85,14 @@
                                 <x-dropdown-link href="{{ route('manageworkers.index') }}">
                                     {{ __('Manage Workers') }}
                                 </x-dropdown-link>
-                    
+
 
                             </x-slot>
                         </x-dropdown>
                     </div>
 
                 <!-- Admin dropdown-->
-                    <div class="ml-3 relative">
+                    <div class="ml-3 relative mt-1">
                         <x-dropdown align="right" width="48">
                             <x-slot name="trigger">
                                     <span class="inline-flex rounded-md">
@@ -122,52 +122,10 @@
                                 <x-dropdown-link href="{{ route('allusers.index') }}">
                                     {{ __('All Users') }}
                                 </x-dropdown-link>
-                    
+
                             </x-slot>
                         </x-dropdown>
                     </div>
-
-                    <!-- <x-nav-link-parent href="#" :active="request()->routeIs('myclients.index', 'myshifts.index')">
-                        <x-slot name="name">WORKER</x-slot>
-                        <x-slot name="children">
-                            <x-nav-link href="{{ route('myclients.index') }}" :active="request()->routeIs('myclients.index')">
-                                {{ __('MY  CLIENTS') }}
-                            </x-nav-link>
-                            <x-nav-link href="{{ route('myshifts.index') }}" :active="request()->routeIs('myshifts.index')">
-                                {{ __('MY SHIFTS') }}
-                            </x-nav-link>
-                        </x-slot>
-                    </x-nav-link-parent>
-
-                    <x-nav-link-parent href="#" :active="request()->routeIs('manageclients.index', 'manageshifts.index', 'manageworkers.index')">
-                        <x-slot name="name">MANAGER</x-slot>
-                        <x-slot name="children">
-                            <x-nav-link href="{{ route('manageclients.index') }}" :active="request()->routeIs('manageclients.index')">
-                                {{ __('MANAGE CLIENTS') }}
-                            </x-nav-link>
-                            <x-nav-link href="{{ route('manageshifts.index') }}" :active="request()->routeIs('manageshifts.index')">
-                                {{ __('MANAGE SHIFTS') }}
-                            </x-nav-link>
-                            <x-nav-link href="{{ route('manageworkers.index') }}" :active="request()->routeIs('manageworkers.index')">
-                                {{ __('MANAGE WORKERS') }}
-                            </x-nav-link>
-                        </x-slot>
-                    </x-nav-link-parent>
-
-                    <x-nav-link-parent href="#" :active="request()->routeIs('allclients.index', 'allusers.index', 'allshifts.index')">
-                        <x-slot name="name">ADMIN</x-slot>
-                        <x-slot name="children">
-                            <x-nav-link href="{{ route('allclients.index') }}" :active="request()->routeIs('allclients.index')">
-                                {{ __('ALL CLIENTS') }}
-                            </x-nav-link>
-                            <x-nav-link href="{{ route('allshifts.index') }}" :active="request()->routeIs('allshifts.index')">
-                                {{ __('ALL SHIFTS') }}
-                            </x-nav-link>
-                            <x-nav-link href="{{ route('allusers.index') }}" :active="request()->routeIs('allusers.index')">
-                                {{ __('ALL USERS') }}
-                            </x-nav-link>
-                        </x-slot>
-                    </x-nav-link-parent> -->
 
                 </div>
 

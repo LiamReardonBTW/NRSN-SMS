@@ -9,15 +9,44 @@
     <!-- Container -->
     <div class="relative overflow-x-auto bg-blue-200 shadow-xl rounded-lg ">
 
+            <!-- ID, ISFLAGGED, ISINVOICED -->
+            <div class="text-2xl font-medium bg-blue-300 overflow-hidden grid grid-cols-1 md:grid-cols-3  px-6 lg:px-8">
+
+                <!-- Shift ID (UNEDITABLE) -->
+                <div class="mx-4 my-5">
+                    <label for="id">Shift ID</label>
+                    <x-input disabled type="text" name="id" id="id"
+                        class="form-input rounded-md shadow-sm block w-full" value="{{ $myshift->id }}" />
+                </div>
+
+            <!-- isflagged -->
+            <div class="mx-4 my-5">
+                <label for="isflagged">Flagged</label>
+                @if ($myshift->isflagged)
+                    <x-input disabled type="text" name="isinvoiced" id="isinvoiced"
+                        class="form-input rounded-md shadow-sm block w-full" value="Yes" />
+                @else
+                    <x-input disabled type="text" name="isinvoiced" id="isinvoiced"
+                        class="form-input rounded-md shadow-sm block w-full" value="No" />
+                @endif
+            </div>
+
+            <!-- isinvoiced -->
+            <div class="mx-4 my-5">
+                <label for="isinvoiced">Invoiced</label>
+                @if ($myshift->isinvoiced)
+                    <x-input disabled type="text" name="isinvoiced" id="isinvoiced"
+                        class="form-input rounded-md shadow-sm block w-full" value="Yes" />
+                @else
+                    <x-input disabled type="text" name="isinvoiced" id="isinvoiced"
+                        class="form-input rounded-md shadow-sm block w-full" value="No" />
+                @endif
+            </div>
+
+            </div>
+
         <!-- Shift Information Container -->
         <div class="text-2xl font-medium  overflow-hidden grid grid-cols-1 md:grid-cols-3  px-6 lg:px-8">
-
-            <!-- Shift ID -->
-            <div class="mx-4 my-5">
-                <label for="shift_id">Shift ID</label>
-                <x-input disabled type="text" name="shift_id" id="shift_id"
-                    class="form-input rounded-md shadow-sm block w-full" value="{{ $myshift->id }}" />
-            </div>
 
             <!-- Invoice # -->
             <div class="mx-4 my-5">
@@ -73,30 +102,6 @@
                 <label for="notes">Notes</label>
                 <x-input disabled type="string" name="notes" id="notes"
                     class="form-input rounded-md shadow-sm block w-full" value="{{ $myshift->notes }}" />
-            </div>
-
-            <!-- isflagged -->
-            <div class="mx-4 my-5">
-                <label for="isflagged">Flagged</label>
-                @if ($myshift->isflagged)
-                    <x-input disabled type="text" name="isinvoiced" id="isinvoiced"
-                        class="form-input rounded-md shadow-sm block w-full" value="Yes" />
-                @else
-                    <x-input disabled type="text" name="isinvoiced" id="isinvoiced"
-                        class="form-input rounded-md shadow-sm block w-full" value="No" />
-                @endif
-            </div>
-
-            <!-- isinvoiced -->
-            <div class="mx-4 my-5">
-                <label for="isinvoiced">Invoiced</label>
-                @if ($myshift->isinvoiced)
-                    <x-input disabled type="text" name="isinvoiced" id="isinvoiced"
-                        class="form-input rounded-md shadow-sm block w-full" value="Yes" />
-                @else
-                    <x-input disabled type="text" name="isinvoiced" id="isinvoiced"
-                        class="form-input rounded-md shadow-sm block w-full" value="No" />
-                @endif
             </div>
 
         </div><!-- Close Shift Information Container -->

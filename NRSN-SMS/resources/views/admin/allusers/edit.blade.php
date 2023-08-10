@@ -14,6 +14,30 @@
             @csrf
             @method('PUT')
 
+            <!-- Uneditable User Information -->
+            <div class="text-2xl font-medium bg-blue-300 overflow-hidden grid grid-cols-1 md:grid-cols-3  px-6 lg:px-8">
+                <!-- User ID -->
+                <div class="mx-4 my-5">
+                    <label for="id">User ID</label>
+                    <x-input disabled type="text" name="id" id="id"
+                        class="form-input rounded-md shadow-sm block w-full" value="{{ $alluser->id }}" />
+                </div>
+
+                <!-- Added -->
+                <div class="mx-4 my-5">
+                    <label for="created_at">Added</label>
+                    <x-input disabled type="text" name="created_at" id="created_at"
+                        class="form-input rounded-md shadow-sm block w-full" value="{{ $alluser->created_at }}" />
+                </div>
+
+                <!-- Last Updated -->
+                <div class="mx-4 my-5">
+                    <label for="updated_at">Last Updated</label>
+                    <x-input disabled type="text" name="updated_at" id="updated_at"
+                        class="form-input rounded-md shadow-sm block w-full" value="{{ $alluser->updated_at }}" />
+                </div>
+            </div> <!-- Close uneditable user Information -->
+
             <!-- Editable User Information -->
             <div class="text-2xl font-medium  overflow-hidden grid grid-cols-1 md:grid-cols-3  px-6 lg:px-8">
 
@@ -99,30 +123,6 @@
                 </div>
 
             </div> <!-- Close editable user Information -->
-
-            <!-- Uneditable User Information -->
-            <div class="text-2xl font-medium  overflow-hidden grid grid-cols-1 md:grid-cols-3  px-6 lg:px-8">
-                <!-- User ID -->
-                <div class="mx-4 my-5">
-                    <label for="client_id">User ID</label>
-                    <x-input readonly type="text" name="client_id" id="client_id"
-                        class="form-input rounded-md shadow-sm block w-full" value="{{ $alluser->id }}" />
-                </div>
-
-                <!-- Added -->
-                <div class="mx-4 my-5">
-                    <label for="created_at">Added</label>
-                    <x-input disabled type="text" name="created_at" id="created_at"
-                        class="form-input rounded-md shadow-sm block w-full" value="{{ $alluser->created_at }}" />
-                </div>
-
-                <!-- Last Updated -->
-                <div class="mx-4 my-5">
-                    <label for="updated_at">Last Updated</label>
-                    <x-input disabled type="text" name="updated_at" id="updated_at"
-                        class="form-input rounded-md shadow-sm block w-full" value="{{ $alluser->updated_at }}" />
-                </div>
-            </div> <!-- Close uneditable user Information -->
 
             <!-- Page Navigation Buttons  -->
             <div

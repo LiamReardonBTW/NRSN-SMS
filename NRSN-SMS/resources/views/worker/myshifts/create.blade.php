@@ -19,7 +19,7 @@
                 <div class="mx-4 my-2">
                     <label for="invoice">Invoice</label>
                     <x-input type="string" name="invoice" id="invoice"
-                        class="form-input rounded-md shadow-sm block w-full" value="{{ old('submitted_by', '') }}" />
+                        class="form-input rounded-md shadow-sm block w-full" value="{{ old('invoice', '') }}" />
                         @error('invoice')
                             <p class="text-sm text-red-600">{{ $message }}</p>
                         @enderror

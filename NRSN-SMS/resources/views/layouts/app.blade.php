@@ -22,7 +22,7 @@
 <body class="font-sans antialiased">
     <x-banner />
 
-    <div class="bg-gray-50 border-b-2 border-gray-400">
+    <div class="bg-gray-50 border-b-2 border-gray-400 ">
         @livewire('navigation-menu')
         <!-- Page Content -->
         <main>
@@ -45,11 +45,9 @@
                 </div>
 
             </div>
+            <x-main-footer/>
+    </div>
 
-    </div>
-    <div class="bg-gray-50 h-16 text-center px-5 py-5">
-        Footer
-    </div>
     </main>
 
     @stack('modals')

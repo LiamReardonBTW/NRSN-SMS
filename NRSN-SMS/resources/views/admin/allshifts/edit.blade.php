@@ -14,8 +14,8 @@
             @csrf
             @method('PUT')
 
-            <!-- Shift Information -->
-            <div class="text-2xl font-medium  overflow-hidden grid grid-cols-1 md:grid-cols-3  px-6 lg:px-8">
+            <!-- ID, ISFLAGGED, ISINVOICED -->
+            <div class="text-2xl font-medium bg-blue-300 overflow-hidden grid grid-cols-1 md:grid-cols-3  px-6 lg:px-8">
 
                 <!-- Shift ID (UNEDITABLE) -->
                 <div class="mx-4 my-5">
@@ -23,6 +23,33 @@
                     <x-input disabled type="text" name="id" id="id"
                         class="form-input rounded-md shadow-sm block w-full" value="{{ $allshift->id }}" />
                 </div>
+
+                <!-- isflagged -->
+                <div class="mx-4 my-5">
+                    <label for="isflagged">Flagged</label>
+                    <select type="boolean" name="isflagged" id="isflagged"
+                        class="form-select rounded-md shadow-sm block w-full">
+                        <option value="1" {{ $allshift->isflagged === 1 ? 'selected' : '' }}>Yes</option>
+                        <option value="0" {{ $allshift->isflagged === 0 ? 'selected' : '' }}>No</option>
+                        <!-- Add more options as needed -->
+                    </select>
+                </div>
+
+                <!-- isinvoiced -->
+                <div class="mx-4 my-5">
+                    <label for="isinvoiced">Invoiced</label>
+                    <select type="boolean" name="isinvoiced" id="isinvoiced"
+                        class="form-select rounded-md shadow-sm block w-full">
+                        <option value="1" {{ $allshift->isinvoiced === 1 ? 'selected' : '' }}>Yes</option>
+                        <option value="0" {{ $allshift->isinvoiced === 0 ? 'selected' : '' }}>No</option>
+                        <!-- Add more options as needed -->
+                    </select>
+                </div>
+
+            </div>
+
+            <!-- Shift Information -->
+            <div class="text-2xl font-medium  overflow-hidden grid grid-cols-1 md:grid-cols-3  px-6 lg:px-8">
 
                 <!-- Invoice -->
                 <div class="mx-4 my-5">
@@ -103,28 +130,6 @@
                     @error('notes')
                         <p class="text-sm text-red-600">{{ $message }}</p>
                     @enderror
-                </div>
-
-                <!-- isflagged -->
-                <div class="mx-4 my-5">
-                    <label for="isflagged">Flagged</label>
-                    <select type="boolean" name="isflagged" id="isflagged"
-                        class="form-select rounded-md shadow-sm block w-full">
-                        <option value="1" {{ $allshift->isflagged === 1 ? 'selected' : '' }}>Yes</option>
-                        <option value="0" {{ $allshift->isflagged === 0 ? 'selected' : '' }}>No</option>
-                        <!-- Add more options as needed -->
-                    </select>
-                </div>
-
-                <!-- isinvoiced -->
-                <div class="mx-4 my-5">
-                    <label for="isinvoiced">Invoiced</label>
-                    <select type="boolean" name="isinvoiced" id="isinvoiced"
-                        class="form-select rounded-md shadow-sm block w-full">
-                        <option value="1" {{ $allshift->isinvoiced === 1 ? 'selected' : '' }}>Yes</option>
-                        <option value="0" {{ $allshift->isinvoiced === 0 ? 'selected' : '' }}>No</option>
-                        <!-- Add more options as needed -->
-                    </select>
                 </div>
 
             </div> <!-- Close Shift Information -->
