@@ -5,15 +5,11 @@
             <div class="flex">
 
                 <!-- Logo -->
-                <div class="shrink-0 flex items-center">
+                <div class="flex justify-center items-center w-48">
                     <a href="{{ route('dashboard') }}">
-                        <x-application-mark class="block h-9 w-auto" />
+                        <!-- <x-application-mark class="block h-9 w-auto" /> -->
+                        <img src="{{ asset('images/nrsn-logo-new.png') }}" alt="logo">
                     </a>
-                    <div class="ml-5 sm:flex items-center px-1 font-bold">
-                        <a href="{{ route('dashboard') }}">
-                            <p class="text-5xl">NRSN</p>
-                        </a>
-                    </div>
                 </div>
 
                 <!-- Navigation Links -->

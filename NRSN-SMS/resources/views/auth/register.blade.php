@@ -1,8 +1,11 @@
 <x-guest-layout>
     <x-authentication-card>
-        <x-slot name="logo">
+        <!-- <x-slot name="logo">
             <x-authentication-card-logo />
-        </x-slot>
+        </x-slot> -->
+        <div class="text-center py-5">
+            <img src="{{ asset('images/nrsn-logo-new.png') }}" alt="logo">
+        </div>
 
         <x-validation-errors class="mb-4" />
 

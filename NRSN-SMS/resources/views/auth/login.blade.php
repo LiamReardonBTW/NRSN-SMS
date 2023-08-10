@@ -1,7 +1,7 @@
 <x-guest-layout>
     <x-authentication-card>
         <x-slot name="logo">
-
+        
         </x-slot>
 
         <x-validation-errors class="mb-4" />
@@ -13,8 +13,7 @@
         @endif
 
         <div class="text-center py-5">
-            <span class="text-green-900 min-w-full font-bold text-4xl">NRSN</span><br>
-            <span class="text-green-900 min-w-full font-bold text-xl">SHIFT MANAGEMENT SYSTEM</span>
+            <img src="{{ asset('images/nrsn-logo-new.png') }}" alt="logo">
         </div>
 
         <form method="POST" action="{{ route('login') }}">
