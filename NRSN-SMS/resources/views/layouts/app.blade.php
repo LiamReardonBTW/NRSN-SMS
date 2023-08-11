@@ -26,14 +26,14 @@
         @livewire('navigation-menu')
         <!-- Page Content -->
         <main>
-                                <!-- Page Heading -->
-                                @if (isset($header))
-                                <header class="pt-3 pb-3 bg-blue-300 bg-opacity-20 border-b-2 border-blue-200">
-                                    <div class="max-w-7xl m-auto px-4 lg:px-8 text-2xl font-bold">
-                                        {{ $header }}
-                                    </div>
-                                </header>
-                            @endif
+            <!-- Page Heading -->
+            @if (isset($header))
+                <header class="pt-3 pb-3 bg-blue-300 bg-opacity-20 border-b-2 border-blue-200">
+                    <div class="max-w-7xl m-auto px-4 lg:px-8 text-2xl font-bold">
+                        {{ $header }}
+                    </div>
+                </header>
+            @endif
 
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 border-gray-200 border-x-2">
                 <div class="min-h-screen pt-5">
@@ -45,7 +45,7 @@
                 </div>
 
             </div>
-            <x-main-footer/>
+            <x-main-footer />
     </div>
 
     </main>
