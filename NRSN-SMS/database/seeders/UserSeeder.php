@@ -77,7 +77,7 @@ class UserSeeder extends Seeder
             'created_at' => '2022-07-12 14:51:08',
             'updated_at' => '2022-09-02 19:43:55',
             'phone' => '+1 (892) 647-5847',
-            'role' => '1',
+            'role' => '0',
             'address' => '987 Pine Street, Denver, CO 80201',
             'tfn' => '753-09-6248',
             'abn' => '98765432107'
@@ -95,7 +95,63 @@ class UserSeeder extends Seeder
             'address' => '654 Cedar Avenue, Miami, FL 33010',
             'tfn' => '975-31-4620',
             'abn' => '97531024684'
-        ]
+        ],
+
+        [
+            'first_name' => 'Oliver',
+            'last_name' => 'Smith',
+            'email' => 'oliversmith@gmail.com',
+            'password' => bcrypt('qwerty123'),
+            'created_at' => '2022-08-05 09:15:22',
+            'updated_at' => '2022-09-03 20:30:59',
+            'phone' => '+1 (648) 972-8463',
+            'role' => '1',
+            'address' => '789 Elm Street, San Francisco, CA 94101',
+            'tfn' => '624-09-7538',
+            'abn' => '54321098765'
+        ],
+
+        [
+            'first_name' => 'Ava',
+            'last_name' => 'Brown',
+            'email' => 'avabrown@gmail.com',
+            'password' => bcrypt('password123'),
+            'created_at' => '2022-07-01 16:39:15',
+            'updated_at' => '2022-08-30 10:05:27',
+            'phone' => '+1 (972) 358-7129',
+            'role' => '2',
+            'address' => '123 Maple Avenue, Chicago, IL 60601',
+            'tfn' => '357-90-2468',
+            'abn' => '67890123456'
+        ],
+
+        [
+            'first_name' => 'Emily',
+            'last_name' => 'Johnson',
+            'email' => 'emilyjohnson@gmail.com',
+            'password' => bcrypt('password123'),
+            'created_at' => '2022-06-15 10:22:33',
+            'updated_at' => '2022-08-29 16:12:47',
+            'phone' => '+1 (736) 512-3976',
+            'role' => '2',
+            'address' => '456 Oak Avenue, New York, NY 10001',
+            'tfn' => '246-80-1359',
+            'abn' => '12345678910'
+        ],
+
+        [
+            'first_name' => 'Noah',
+            'last_name' => 'Martinez',
+            'email' => 'noahmartinez@gmail.com',
+            'password' => bcrypt('password123'),
+            'created_at' => '2022-06-22 12:48:52',
+            'updated_at' => '2022-08-31 18:20:14',
+            'phone' => '+1 (514) 279-8602',
+            'role' => '2',
+            'address' => '369 Cedar Street, Miami, FL 33001',
+            'tfn' => '802-43-9157',
+            'abn' => '34567890123'
+        ],
 
     ]);
     }

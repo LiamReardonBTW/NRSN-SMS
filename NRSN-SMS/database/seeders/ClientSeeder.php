@@ -70,6 +70,57 @@ class ClientSeeder extends Seeder
             'email' => 'noahrobinson@mailinator.com',
             'address' => '742 Maple Lane, Willow Creek',
             'invoicing_codes' => '108-3926'],
+
+            [
+                'first_name' => 'Emily',
+                'last_name' => 'Smith',
+                'active' => 1,
+                'phone' => '+1 (234) 567-8910',
+                'email' => 'emilysmith@mailinator.com',
+                'address' => '123 Oak Avenue, Riverside',
+                'invoicing_codes' => '785-9431'
+            ],
+
+            [
+                'first_name' => 'Emily',
+                'last_name' => 'Smith',
+                'active' => 1,
+                'phone' => '+1 (234) 567-8910',
+                'email' => 'emilysmith@mailinator.com',
+                'address' => '123 Oak Avenue, Riverside',
+                'invoicing_codes' => '785-9431'
+            ],
+
+            [
+                'first_name' => 'Jacob',
+                'last_name' => 'Davis',
+                'active' => 0,
+                'phone' => '+1 (987) 654-3210',
+                'email' => 'jacobdavis@mailinator.com',
+                'address' => '456 Elm Street, Hillside',
+                'invoicing_codes' => '234-1098'
+            ],
+
+            [
+                'first_name' => 'Sophia',
+                'last_name' => 'Williams',
+                'active' => 1,
+                'phone' => '+1 (789) 012-3456',
+                'email' => 'sophiawilliams@mailinator.com',
+                'address' => '789 Maple Avenue, Lakeside',
+                'invoicing_codes' => '876-5432'
+            ],
+
+            [
+                'first_name' => 'Benjamin',
+                'last_name' => 'Miller',
+                'active' => 1,
+                'phone' => '+1 (210) 987-6543',
+                'email' => 'benjaminmiller@mailinator.com',
+                'address' => '567 Walnut Street, Hillside',
+                'invoicing_codes' => '432-1098'
+            ],
+
         ]);
     }
 }
