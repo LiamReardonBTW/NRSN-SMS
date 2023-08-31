@@ -18,7 +18,7 @@ Route::get('/', function () {
 });
 
 
-Route::group(['middleware' => 'auth'], function(){
+Route::group(['middleware' => 'isWorker'], function(){
     Route::resource('worker/myclients', App\Http\Controllers\worker\myclients\ClientController::class);
     Route::resource('worker/myshifts', App\Http\Controllers\worker\myshifts\ShiftController::class);
 });
