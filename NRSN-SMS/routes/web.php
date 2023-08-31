@@ -13,10 +13,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
+
 Route::get('/', function () {
     return view('welcome');
 });
 
+Route::fallback(function () {
+    return redirect()->route('dashboard')->with('alert-fail', 'Error: The requested page does not exist.');
+});
 
 Route::group(['middleware' => 'isWorker'], function(){
     Route::resource('worker/myclients', App\Http\Controllers\worker\myclients\ClientController::class);
