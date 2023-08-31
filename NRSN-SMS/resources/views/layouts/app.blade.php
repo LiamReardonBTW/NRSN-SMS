@@ -28,14 +28,22 @@
         <main>
             <!-- Page Heading -->
             @if (isset($header))
-                <header class="pt-3 pb-3 bg-blue-300 bg-opacity-20 border-b-2 border-blue-200">
+                <header class="py-3 bg-blue-300 bg-opacity-20 border-b-2 border-blue-200">
                     <div class="max-w-7xl m-auto px-4 lg:px-8 text-2xl font-bold">
                         {{ $header }}
                     </div>
                 </header>
+                @if(session('alert-fail'))
+                    <div class="py-1 bg-red-500 border-b-2 border-t-2 border-red-900">
+                            <div class="max-w-7xl text-white m-auto px-4 lg:px-8 text-2xl font-bold">
+                                {{ session('alert-fail') }}
+                            </div>
+                        </div>
+                  @endif
             @endif
 
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 border-gray-200 border-x-2">
+
                 <div class="min-h-screen pt-5">
 
 
