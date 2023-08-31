@@ -16,13 +16,39 @@ class UserSeeder extends Seeder
         DB::table('users')->insert([
         [
             'first_name' => 'Liam',
-            'last_name' => 'Terry',
+            'last_name' => 'Admin',
             'email' => 'admin@nrsn.com',
             'password' => bcrypt('root1234'),
             'created_at' => '2022-11-15 09:37:21',
             'updated_at' => '2022-12-20 14:56:43',
             'phone' => '+1 (536) 268-6362',
             'role' => '0',
+            'address' => '123 Main Street, New York, NY 10001',
+            'tfn' => '123-45-6789',
+            'abn' => '12345678901'
+        ],
+        [
+            'first_name' => 'Liam',
+            'last_name' => 'Manager',
+            'email' => 'manager@nrsn.com',
+            'password' => bcrypt('root1234'),
+            'created_at' => '2022-11-15 09:37:21',
+            'updated_at' => '2022-12-20 14:56:43',
+            'phone' => '+1 (536) 268-6362',
+            'role' => '1',
+            'address' => '123 Main Street, New York, NY 10001',
+            'tfn' => '123-45-6789',
+            'abn' => '12345678901'
+        ],
+        [
+            'first_name' => 'Liam',
+            'last_name' => 'Worker',
+            'email' => 'worker@nrsn.com',
+            'password' => bcrypt('root1234'),
+            'created_at' => '2022-11-15 09:37:21',
+            'updated_at' => '2022-12-20 14:56:43',
+            'phone' => '+1 (536) 268-6362',
+            'role' => '2',
             'address' => '123 Main Street, New York, NY 10001',
             'tfn' => '123-45-6789',
             'abn' => '12345678901'
