@@ -19,11 +19,14 @@ Route::get('/', function () {
 
 
 Route::group(['middleware' => 'auth'], function(){
+    Route::resource('worker/myclients', App\Http\Controllers\worker\myclients\ClientController::class);
+    Route::resource('worker/myshifts', App\Http\Controllers\worker\myshifts\ShiftController::class);
+});
+
+Route::group(['middleware' => 'isManager'], function(){
     Route::resource('manager/manageclients', App\Http\Controllers\manager\manageclients\ClientController::class);
     Route::resource('manager/manageshifts', App\Http\Controllers\manager\manageshifts\ShiftController::class);
     Route::resource('manager/manageworkers', App\Http\Controllers\manager\manageworkers\WorkerController::class);
-    Route::resource('worker/myclients', App\Http\Controllers\worker\myclients\ClientController::class);
-    Route::resource('worker/myshifts', App\Http\Controllers\worker\myshifts\ShiftController::class);
 });
 
 Route::group(['middleware' => 'isAdmin'], function(){
