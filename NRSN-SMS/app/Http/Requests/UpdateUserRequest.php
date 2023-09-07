@@ -31,9 +31,6 @@ class UpdateUserRequest extends FormRequest
             'email' => [
                 'required', 'email', 'max:255',
             ],
-            'password' => [
-                'required', 'string', 'max:255',
-            ],
             'phone' => [
                 'required', 'string', 'regex:/^(?:\+?(61))? ?(?:\((?=.*\)))?(0?[2-57-8])\)? ?(\d\d(?:[- ](?=\d{3})|(?!\d\d[- ]?\d[- ]))\d\d[- ]?\d[- ]?\d{3})$/', //https://regex101.com/r/dkFASs/6
             ],
