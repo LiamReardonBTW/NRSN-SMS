@@ -70,27 +70,44 @@ class UserController extends Controller
 
         $validatedData = $request->validated();
 
-    // Handle supported clients
-    if (isset($validatedData['supported_clients'])) {
-        foreach ($validatedData['supported_clients'] as $clientId) {
-            // Check if the client is not already supported, then create the relationship
-            if (!$alluser->supportedClients->contains($clientId)) {
-                $alluser->supportedClients()->attach($clientId, ['relation' => 'supported_by']);
+        // Handle supported clients
+        if (isset($validatedData['supported_clients'])) {
+            foreach ($validatedData['supported_clients'] as $clientId) {
+                // Check if the client is not already supported, then create the relationship
+                if (!$alluser->supportedClients->contains($clientId)) {
+                    $alluser->supportedClients()->attach($clientId, ['relation' => 'supported_by']);
+                }
             }
+
+            // Remove unsupported clients (clients that were supported but now unchecked)
+            $unsupportedClients = $alluser->supportedClients->pluck('id')->diff($validatedData['supported_clients']);
+            $alluser->supportedClients()->detach($unsupportedClients);
+        } else {
+            // If no clients are selected, detach all supported clients
+            $alluser->supportedClients()->detach();
         }
 
-        // Remove unsupported clients (clients that were supported but now unchecked)
-        $unsupportedClients = $alluser->supportedClients->pluck('id')->diff($validatedData['supported_clients']);
-        $alluser->supportedClients()->detach($unsupportedClients);
-    } else {
-        // If no clients are selected, detach all supported clients
-        $alluser->supportedClients()->detach();
-    }
+        // Handle managed clients
+        if (isset($validatedData['managed_clients'])) {
+            foreach ($validatedData['managed_clients'] as $clientId) {
+                // Check if the client is not already supported, then create the relationship
+                if (!$alluser->managedClients->contains($clientId)) {
+                    $alluser->managedClients()->attach($clientId, ['relation' => 'managed_by']);
+                }
+            }
 
-    // Handle other user data updates
-    $alluser->update($validatedData);
+            // Remove unsupported clients (clients that were supported but now unchecked)
+            $unmanagedClients = $alluser->managedClients->pluck('id')->diff($validatedData['managed_clients']);
+            $alluser->managedClients()->detach($unmanagedClients);
+        } else {
+            // If no clients are selected, detach all supported clients
+            $alluser->managedClients()->detach();
+        }
 
-    return redirect()->route('allusers.show', $alluser);
+        // Handle other user data updates
+        $alluser->update($validatedData);
+
+        return redirect()->route('allusers.show', $alluser);
     }
 
 

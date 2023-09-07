@@ -43,6 +43,8 @@ class UpdateClientRequest extends FormRequest
             'active' => [
                 'required', 'boolean',
             ],
+            'supported_by' => 'nullable|array',
+            'managed_by' => 'nullable|array',
         ];
     }
 }

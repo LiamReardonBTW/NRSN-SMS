@@ -97,7 +97,7 @@
 
         <!-- Clients Supported by the User -->
         <div class="text-2xl font-medium overflow-hidden px-6 lg:px-8 mx-4 my-5">
-            <h2 class="text-xl font-semibold mb-2">Clients Supported by {{ $alluser->first_name }}</h2>
+            <h2 class="text-xl font-semibold mb-2">Supports</h2>
             <div class="rounded-md bg-white shadow-md p-4 max-h-40 overflow-y-auto text-sm">
                 <!-- Add text-sm class for smaller text -->
                 <ul>
@@ -112,9 +112,10 @@
             </div>
         </div>
 
+        @if($alluser->role == 0 || $alluser->role == 1 )
         <!-- Clients Managed by the User -->
         <div class="text-2xl font-medium overflow-hidden px-6 lg:px-8 mx-4 my-5">
-            <h2 class="text-xl font-semibold mb-2">Clients Managed by {{ $alluser->first_name }}</h2>
+            <h2 class="text-xl font-semibold mb-2">Manages</h2>
             <div class="rounded-md bg-white shadow-md p-4 max-h-40 overflow-y-auto text-sm">
                 <!-- Add text-sm class for smaller text -->
                 <ul>
@@ -128,6 +129,7 @@
                 </ul>
             </div>
         </div>
+        @endif
 
         <!-- Page Navigation Buttons -->
         <div

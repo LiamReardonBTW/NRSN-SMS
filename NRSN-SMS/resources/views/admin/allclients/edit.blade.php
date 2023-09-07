@@ -120,6 +120,66 @@
 
                 </div><!-- Close Editable Information -->
 
+                <!-- Clients Supported by the User -->
+                <div class="text-2xl font-medium overflow-hidden px-6 lg:px-8 mx-4 my-5">
+                    <h2 class="text-xl font-semibold mb-2">Supported By</h2>
+                    <div class="rounded-md bg-white shadow-md p-4 max-h-40 overflow-y-auto text-sm">
+                        <!-- Add text-sm class for smaller text -->
+                        <ul>
+                            @php
+                                $checkedUsers = $allclient->supportedByUser->sortBy('last_name');
+                                $uncheckedUsers = $allUsers
+                                    ->reject(function ($user) use ($checkedUsers) {
+                                        return $checkedUsers->contains($user);
+                                    })
+                                    ->sortBy('last_name');
+                                $users = $checkedUsers->concat($uncheckedUsers);
+                            @endphp
+                            @foreach ($users as $user)
+                                <li class="flex items-center justify-between mb-2">
+                                    <!-- Use flex to align items horizontally -->
+                                    <label for="supported_by_{{ $user->id }}"
+                                        class="flex-grow">{{ $user->first_name }} {{ $user->last_name }}</label>
+                                    <input type="checkbox" id="supported_by_{{ $user->id }}" name="supported_by[]"
+                                        value="{{ $user->id }}"
+                                        {{ $allclient->supportedByUser->contains($user) ? 'checked' : '' }}>
+                                </li>
+                            @endforeach
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Clients Managed by the User -->
+                <div class="text-2xl font-medium overflow-hidden px-6 lg:px-8 mx-4 my-5">
+                    <h2 class="text-xl font-semibold mb-2">Managed By</h2>
+                    <div class="rounded-md bg-white shadow-md p-4 max-h-40 overflow-y-auto text-sm">
+                        <!-- Add text-sm class for smaller text -->
+                        <ul>
+                            @php
+                                $checkedUsers = $allclient->managedByUser->sortBy('last_name');
+                                $uncheckedUsers = $allUsers
+                                    ->reject(function ($user) use ($checkedUsers) {
+                                        return $checkedUsers->contains($user);
+                                    })
+                                    ->sortBy('last_name');
+                                $users = $checkedUsers->concat($uncheckedUsers);
+                            @endphp
+                            @foreach ($users as $user)
+                                @if ($user->role == 0 || $user->role == 1)
+                                    <li class="flex items-center justify-between mb-2">
+                                        <!-- Use flex to align items horizontally -->
+                                        <label for="managed_by_{{ $user->id }}"
+                                            class="flex-grow">{{ $user->first_name }} {{ $user->last_name }}</label>
+                                        <input type="checkbox" id="managed_by_{{ $user->id }}" name="managed_by[]"
+                                            value="{{ $user->id }}"
+                                            {{ $allclient->managedByUser->contains($user) ? 'checked' : '' }}>
+                                    </li>
+                                @endif
+                            @endforeach
+                        </ul>
+                    </div>
+                </div>
+
                 <!-- Page Navigation Buttons  -->
                 <div
                     class="flex items-center justify-start pb-6 py-3 text-right sm:px-6 grid grid-cols-1 md:grid-cols-3 lg:gap-8 px-6 lg:px-8 py-2">
