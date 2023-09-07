@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Models\User;
+use App\Models\Client;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 
@@ -37,7 +38,7 @@ class UserController extends Controller
      */
     public function store(StoreUserRequest $request)
     {
-        
+
         User::create($request->validated());
 
         return redirect()->route('allusers.index');
@@ -48,7 +49,7 @@ class UserController extends Controller
      */
     public function show(User $alluser)
     {
-        
+
         return view('admin/allusers.show', compact('alluser'));
     }
 
@@ -57,8 +58,8 @@ class UserController extends Controller
      */
     public function edit(User $alluser)
     {
-        // dd($alluser);
-        return view('admin/allusers.edit', compact('alluser'));
+        $allClients = Client::all();
+        return view('admin/allusers.edit', compact('alluser', 'allClients'));
     }
 
     /**
@@ -66,10 +67,33 @@ class UserController extends Controller
      */
     public function update(UpdateUserRequest $request, User $alluser)
     {
-        $alluser->update($request->validated());
-        // dd($alluser);
-        return redirect()->route('allusers.show', $alluser);
+
+        $validatedData = $request->validated();
+
+    // Handle supported clients
+    if (isset($validatedData['supported_clients'])) {
+        foreach ($validatedData['supported_clients'] as $clientId) {
+            // Check if the client is not already supported, then create the relationship
+            if (!$alluser->supportedClients->contains($clientId)) {
+                $alluser->supportedClients()->attach($clientId, ['relation' => 'supported_by']);
+            }
+        }
+
+        // Remove unsupported clients (clients that were supported but now unchecked)
+        $unsupportedClients = $alluser->supportedClients->pluck('id')->diff($validatedData['supported_clients']);
+        $alluser->supportedClients()->detach($unsupportedClients);
+    } else {
+        // If no clients are selected, detach all supported clients
+        $alluser->supportedClients()->detach();
     }
+
+    // Handle other user data updates
+    $alluser->update($validatedData);
+
+    return redirect()->route('allusers.show', $alluser);
+    }
+
+
     /**
      * Remove the specified resource from storage.
      */

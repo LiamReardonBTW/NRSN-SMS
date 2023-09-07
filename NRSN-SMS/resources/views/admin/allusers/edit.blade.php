@@ -124,6 +124,60 @@
 
             </div> <!-- Close editable user Information -->
 
+<!-- Clients Supported by the User -->
+<div class="text-2xl font-medium overflow-hidden px-6 lg:px-8 mx-4 my-5">
+    <h2 class="text-xl font-semibold mb-2">Clients Supported by {{ $alluser->first_name }}</h2>
+    <div class="rounded-md bg-white shadow-md p-4 max-h-40 overflow-y-auto text-sm">
+        <!-- Add text-sm class for smaller text -->
+        <ul>
+            @php
+                $checkedClients = $alluser->supportedClients->sortBy('last_name');
+                $uncheckedClients = $allClients->reject(function ($client) use ($checkedClients) {
+                    return $checkedClients->contains($client);
+                })->sortBy('last_name');
+                $clients = $checkedClients->concat($uncheckedClients);
+            @endphp
+            @foreach ($clients as $client)
+                <li class="flex items-center justify-between mb-2">
+                    <!-- Use flex to align items horizontally -->
+                    <label for="supported_client_{{ $client->id }}"
+                        class="flex-grow">{{ $client->first_name }} {{ $client->last_name }}</label>
+                    <input type="checkbox" id="supported_client_{{ $client->id }}"
+                        name="supported_clients[]" value="{{ $client->id }}"
+                        {{ $alluser->supportedClients->contains($client) ? 'checked' : '' }}>
+                </li>
+            @endforeach
+        </ul>
+    </div>
+</div>
+
+<!-- Clients Managed by the User -->
+<div class="text-2xl font-medium overflow-hidden px-6 lg:px-8 mx-4 my-5">
+    <h2 class="text-xl font-semibold mb-2">Clients Managed by {{ $alluser->first_name }}</h2>
+    <div class="rounded-md bg-white shadow-md p-4 max-h-40 overflow-y-auto text-sm">
+        <!-- Add text-sm class for smaller text -->
+        <ul>
+            @php
+                $checkedClients = $alluser->managedClients->sortBy('first_name');
+                $uncheckedClients = $allClients->reject(function ($client) use ($checkedClients) {
+                    return $checkedClients->contains($client);
+                })->sortBy('first_name');
+                $clients = $checkedClients->concat($uncheckedClients);
+            @endphp
+            @foreach ($clients as $client)
+                <li class="flex items-center justify-between mb-2">
+                    <!-- Use flex to align items horizontally -->
+                    <label for="managed_client_{{ $client->id }}"
+                        class="flex-grow">{{ $client->first_name }} {{ $client->last_name }}</label>
+                    <input type="checkbox" id="managed_client_{{ $client->id }}"
+                        name="managed_clients[]" value="{{ $client->id }}"
+                        {{ $alluser->managedClients->contains($client) ? 'checked' : '' }}>
+                </li>
+            @endforeach
+        </ul>
+    </div>
+</div>
+
             <!-- Page Navigation Buttons  -->
             <div
                 class="flex items-center justify-start pb-6 py-3 text-right sm:px-6 grid grid-cols-1 md:grid-cols-3 lg:gap-8 px-6 lg:px-8 py-2">

@@ -93,39 +93,41 @@
                     value="{{ $alluser->role == 0 ? 'Admin' : ($alluser->role == 1 ? 'Manager' : 'Worker') }}" />
             </div>
 
-<!-- Clients Supported by the User -->
-<div class="text-2xl font-medium  overflow-hidden px-6 lg:px-8">
-    <h2 class="text-xl font-semibold mb-2">Clients Supported by {{ $alluser->first_name }}</h2>
-    <ul>
-        @if ($alluser->clients->isEmpty() || !$alluser->clients->contains('pivot.relation', 'supported_by'))
-            <li>No clients supported.</li>
-        @else
-            @foreach ($alluser->clients as $client)
-                @if ($client->pivot->relation === 'supported_by')
-                    <li>{{ $client->first_name }} {{ $client->last_name }}</li>
-                @endif
-            @endforeach
-        @endif
-    </ul>
-</div>
-
-<!-- Clients Managed by the User -->
-<div class="text-2xl font-medium  overflow-hidden px-6 lg:px-8">
-    <h2 class="text-xl font-semibold mb-2">Clients Managed by {{ $alluser->first_name }}</h2>
-    <ul>
-        @if ($alluser->clients->isEmpty() || !$alluser->clients->contains('pivot.relation', 'managed_by'))
-            <li>No clients managed.</li>
-        @else
-            @foreach ($alluser->clients as $client)
-                @if ($client->pivot->relation === 'managed_by')
-                    <li>{{ $client->first_name }} {{ $client->last_name }}</li>
-                @endif
-            @endforeach
-        @endif
-    </ul>
-</div>
-
         </div> <!-- Close User Information Container -->
+
+        <!-- Clients Supported by the User -->
+        <div class="text-2xl font-medium overflow-hidden px-6 lg:px-8 mx-4 my-5">
+            <h2 class="text-xl font-semibold mb-2">Clients Supported by {{ $alluser->first_name }}</h2>
+            <div class="rounded-md bg-white shadow-md p-4 max-h-40 overflow-y-auto text-sm">
+                <!-- Add text-sm class for smaller text -->
+                <ul>
+                    @if ($alluser->supportedClients->isEmpty())
+                        <li>No clients supported.</li>
+                    @else
+                        @foreach ($alluser->supportedClients->sortBy('last_name') as $client)
+                            <li>{{ $client->first_name }} {{ $client->last_name }}</li>
+                        @endforeach
+                    @endif
+                </ul>
+            </div>
+        </div>
+
+        <!-- Clients Managed by the User -->
+        <div class="text-2xl font-medium overflow-hidden px-6 lg:px-8 mx-4 my-5">
+            <h2 class="text-xl font-semibold mb-2">Clients Managed by {{ $alluser->first_name }}</h2>
+            <div class="rounded-md bg-white shadow-md p-4 max-h-40 overflow-y-auto text-sm">
+                <!-- Add text-sm class for smaller text -->
+                <ul>
+                    @if ($alluser->managedClients->isEmpty())
+                        <li>No clients managed.</li>
+                    @else
+                        @foreach ($alluser->managedClients->sortBy('last_name') as $client)
+                            <li>{{ $client->first_name }} {{ $client->last_name }}</li>
+                        @endforeach
+                    @endif
+                </ul>
+            </div>
+        </div>
 
         <!-- Page Navigation Buttons -->
         <div

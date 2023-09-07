@@ -46,6 +46,8 @@ class UpdateUserRequest extends FormRequest
             'role' => [
                 'required', 'string',
             ],
+            'supported_clients' => 'nullable|array',
+            'managed_clients' => 'nullable|array',
         ];
     }
 }
