@@ -21,10 +21,4 @@ class Client extends Model
         'invoicing_codes',
         'added'
     ];
-
-    public function users()
-    {
-        return $this->belongsToMany(User::class, 'user_clients');
-    }
-
 }
