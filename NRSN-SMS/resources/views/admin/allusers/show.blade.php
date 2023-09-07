@@ -93,6 +93,38 @@
                     value="{{ $alluser->role == 0 ? 'Admin' : ($alluser->role == 1 ? 'Manager' : 'Worker') }}" />
             </div>
 
+<!-- Clients Supported by the User -->
+<div class="text-2xl font-medium  overflow-hidden px-6 lg:px-8">
+    <h2 class="text-xl font-semibold mb-2">Clients Supported by {{ $alluser->first_name }}</h2>
+    <ul>
+        @if ($alluser->clients->isEmpty() || !$alluser->clients->contains('pivot.relation', 'supported_by'))
+            <li>No clients supported.</li>
+        @else
+            @foreach ($alluser->clients as $client)
+                @if ($client->pivot->relation === 'supported_by')
+                    <li>{{ $client->first_name }} {{ $client->last_name }}</li>
+                @endif
+            @endforeach
+        @endif
+    </ul>
+</div>
+
+<!-- Clients Managed by the User -->
+<div class="text-2xl font-medium  overflow-hidden px-6 lg:px-8">
+    <h2 class="text-xl font-semibold mb-2">Clients Managed by {{ $alluser->first_name }}</h2>
+    <ul>
+        @if ($alluser->clients->isEmpty() || !$alluser->clients->contains('pivot.relation', 'managed_by'))
+            <li>No clients managed.</li>
+        @else
+            @foreach ($alluser->clients as $client)
+                @if ($client->pivot->relation === 'managed_by')
+                    <li>{{ $client->first_name }} {{ $client->last_name }}</li>
+                @endif
+            @endforeach
+        @endif
+    </ul>
+</div>
+
         </div> <!-- Close User Information Container -->
 
         <!-- Page Navigation Buttons -->

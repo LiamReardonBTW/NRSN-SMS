@@ -74,7 +74,7 @@ class User extends Authenticatable
 
     public function clients()
     {
-        return $this->belongsToMany(Client::class);
+        return $this->belongsToMany(Client::class)->withPivot('relation');
     }
 
 }

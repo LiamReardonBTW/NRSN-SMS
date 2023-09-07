@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('client_user', function (Blueprint $table) {
             $table->foreignId('client_id')->references('id')->on('clients')->cascadeOnDelete();
             $table->foreignId('user_id')->references('id')->on('users')->cascadeOnDelete();
+            $table->string('relation'); // 'managed_by' or 'supported_by'
         });
     }
 
