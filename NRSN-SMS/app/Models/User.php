@@ -16,13 +16,12 @@ class User extends Authenticatable
 {
     use HasApiTokens;
     use HasFactory;
-    use HasProfilePhoto;
     use Notifiable;
     use TwoFactorAuthenticatable;
 
     public function setPasswordAttribute($value)
     {
-      $this->attributes['password'] = $value ? bcrypt($value) : null;
+        $this->attributes['password'] = $value ? bcrypt($value) : null;
     }
 
     /**
@@ -71,4 +70,21 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+    /**
+     * Define a many-to-many relationship for supported clients.
+     */
+    public function supportedClients()
+    {
+        return $this->belongsToMany(Client::class)->withPivot('relation')->wherePivot('relation', 'supported_by');
+    }
+
+    /**
+     * The clients managed by this user.
+     */
+    public function managedClients()
+    {
+        return $this->belongsToMany(Client::class)->withPivot('relation')->wherePivot('relation', 'managed_by');
+    }
+
 }

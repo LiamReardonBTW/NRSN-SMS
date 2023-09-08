@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\StoreClientRequest;
 use App\Http\Requests\UpdateClientRequest;
 use App\Models\Client;
+use App\Models\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 
@@ -19,9 +20,12 @@ class ClientController extends Controller
 
     public function index()
     {
-        $clients = Client::all();
+        $user = auth()->user();
+        $clients = Client::whereHas('managedByUser', function ($query) use ($user) {
+        $query->where('user_id', $user->id);
+        })->get();
 
-        return view('manager/manageclients.index', compact('clients'));
+    return view('manager/manageclients.index', compact('clients'));
     }
 
     /**
@@ -37,7 +41,15 @@ class ClientController extends Controller
      */
     public function store(StoreClientRequest $request)
     {
-        Client::create($request->validated());
+        // Get the authenticated user's ID
+        $userId = auth()->user();
+
+        // Create the client
+        $clientData = $request->validated();
+        $client = Client::create($clientData);
+
+        // Create the relationship with the 'managed_by' relation
+        $client->managedByUser()->attach($userId, ['relation' => 'managed_by']);
 
         return redirect()->route('manageclients.index');
     }
@@ -47,7 +59,15 @@ class ClientController extends Controller
      */
     public function show(Client $manageclient)
     {
-        return view('manager/manageclients.show', compact('manageclient'));
+        // Get the authenticated user
+        $currentUser = auth()->user();
+
+        // Check if the authenticated user has a relationship with the client
+        if ($currentUser->managedClients->contains($manageclient)) {
+            return view('manager/manageclients.show', compact('manageclient'));
+        } else {
+            return redirect()->route('manageclients.index');
+        }
     }
 
     /**
@@ -55,7 +75,16 @@ class ClientController extends Controller
      */
     public function edit(Client $manageclient)
     {
-        return view('manager/manageclients.edit', compact('manageclient'));
+        // Get the authenticated user
+        $currentUser = auth()->user();
+        $allUsers = User::all();
+        // Check if the authenticated user has a relationship with the client
+        if ($currentUser->managedClients->contains($manageclient)) {
+
+            return view('manager/manageclients.edit', compact('manageclient', 'allUsers'));
+        } else {
+            return redirect()->route('manageclients.index');
+        }
     }
 
     /**
@@ -63,9 +92,29 @@ class ClientController extends Controller
      */
     public function update(UpdateClientRequest $request, Client $manageclient)
     {
-        $manageclient->update($request->validated());
+        $validatedData = $request->validated();
 
-        return redirect()->route('manageclients.show', $manageclient);
+        // Handle supported clients
+        if (isset($validatedData['supported_by'])) {
+            foreach ($validatedData['supported_by'] as $userId) {
+                // Check if the client is not already supported, then create the relationship
+                if (!$manageclient->supportedByUser->contains($userId)) {
+                    $manageclient->supportedByUser()->attach($userId, ['relation' => 'supported_by']);
+                }
+            }
+
+            // Remove unsupported clients (clients that were supported but now unchecked)
+            $unsupportedByUsers = $manageclient->supportedByUser->pluck('id')->diff($validatedData['supported_by']);
+            $manageclient->supportedByUser()->detach($unsupportedByUsers);
+        } else {
+            // If no clients are selected, detach all supported clients
+            $manageclient->supportedByUser()->detach();
+        }
+
+       // Handle other user data updates
+       $manageclient->update($validatedData);
+
+       return redirect()->route('manageclients.show', $manageclient);
     }
 
     /**

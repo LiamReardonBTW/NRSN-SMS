@@ -23,29 +23,31 @@ class UpdateUserRequest extends FormRequest
     {
         return [
             'first_name' => [
-                'required', 'string',
+                'required', 'string', 'max:255',
             ],
             'last_name' => [
-                'required', 'string',
+                'required', 'string', 'max:255',
             ],
             'email' => [
-                'required', 'string',
+                'required', 'email', 'max:255',
             ],
             'phone' => [
-                'nullable', 'string',
+                'required', 'string', 'regex:/^(?:\+?(61))? ?(?:\((?=.*\)))?(0?[2-57-8])\)? ?(\d\d(?:[- ](?=\d{3})|(?!\d\d[- ]?\d[- ]))\d\d[- ]?\d[- ]?\d{3})$/', //https://regex101.com/r/dkFASs/6
             ],
             'address' => [
-                'nullable', 'string',
+                'nullable', 'string', 'max:255',
             ],
             'tfn' => [
-                'nullable', 'string',
+                'nullable', 'min:8', 'max:9', //All individuals receive a nine digit TFN and businesses may have either an eight or nine digit TFN.
             ],
             'abn' => [
-                'nullable', 'string',
+                'nullable', 'string', 'regex:/^(\d *?){11}$/', //Matches 11 digits with zero or more spaces after each digit.
             ],
             'role' => [
                 'required', 'string',
             ],
+            'supported_clients' => 'nullable|array',
+            'managed_clients' => 'nullable|array',
         ];
     }
 }

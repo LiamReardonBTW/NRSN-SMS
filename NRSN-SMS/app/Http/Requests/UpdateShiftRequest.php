@@ -23,16 +23,16 @@ class UpdateShiftRequest extends FormRequest
     {
         return [
             'invoice' => [
-                'nullable', 'string',
+                'nullable', 'string', 'min:3', 'max:3',
             ],
             'notes' => [
-                'nullable', 'string',
+                'nullable', 'string', 'max:255',
             ],
             'submitted_by' => [
-                'required', 'string',
+                'required', 'string', 'max:255',
             ],
             'client_supported' => [
-                'required', 'string',
+                'required', 'string', 'max:255',
             ],
             'date' => [
                 'required', 'date',
@@ -44,13 +44,13 @@ class UpdateShiftRequest extends FormRequest
                 'required', 'integer',
             ],
             'hours' => [
-                'required', 'integer',
+                'required', 'integer', 'min:1', 'max:24',
             ],
             'isflagged' => [
-                'nullable', 'string',
+                'nullable', 'boolean',
             ],
             'isinvoiced' => [
-                'nullable', 'string',
+                'nullable', 'boolean',
             ],
         ];
     }

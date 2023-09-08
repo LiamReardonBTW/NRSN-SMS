@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 
+
 class Client extends Model
 {
     use HasFactory;
@@ -21,4 +22,21 @@ class Client extends Model
         'invoicing_codes',
         'added'
     ];
+
+    /**
+     * Define a many-to-many relationship for supported clients.
+     */
+    public function supportedByUser()
+    {
+        return $this->belongsToMany(User::class)->withPivot('relation')->wherePivot('relation', 'supported_by');
+    }
+
+    /**
+     * The clients managed by this user.
+     */
+    public function managedByUser()
+    {
+        return $this->belongsToMany(User::class)->withPivot('relation')->wherePivot('relation', 'managed_by');
+    }
+
 }
