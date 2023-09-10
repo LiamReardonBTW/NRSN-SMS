@@ -87,17 +87,17 @@ class ClientController extends Controller
         // Handle Managed clients
         if (isset($validatedData['managed_by'])) {
             foreach ($validatedData['managed_by'] as $userId) {
-                // Check if the client is not already supported, then create the relationship
+                // Check if the user is not already managing this client, then create the relationship
                 if (!$allclient->managedByUser->contains($userId)) {
                     $allclient->managedByUser()->attach($userId, ['relation' => 'managed_by']);
                 }
             }
 
-            // Remove unsupported clients (clients that were supported but now unchecked)
+            // Remove users who are no longer managing this client (users that were managing but now unchecked)
             $unmanagedByUsers = $allclient->managedByUser->pluck('id')->diff($validatedData['managed_by']);
             $allclient->managedByUser()->detach($unmanagedByUsers);
         } else {
-            // If no clients are selected, detach all supported clients
+            // If no users are selected, detach all users who were managing this client
             $allclient->managedByUser()->detach();
         }
 

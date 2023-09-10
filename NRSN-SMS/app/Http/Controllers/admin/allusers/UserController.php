@@ -15,9 +15,6 @@ class UserController extends Controller
     /**
      * Display a listing of the resource.
      */
-
-
-
     public function index()
     {
         $users = User::all();
@@ -90,17 +87,17 @@ class UserController extends Controller
         // Handle managed clients
         if (isset($validatedData['managed_clients'])) {
             foreach ($validatedData['managed_clients'] as $clientId) {
-                // Check if the client is not already supported, then create the relationship
+                // Check if the client is not already managed, then create the relationship
                 if (!$alluser->managedClients->contains($clientId)) {
                     $alluser->managedClients()->attach($clientId, ['relation' => 'managed_by']);
                 }
             }
 
-            // Remove unsupported clients (clients that were supported but now unchecked)
+            // Remove unmanaged clients (clients that were managed but now unchecked)
             $unmanagedClients = $alluser->managedClients->pluck('id')->diff($validatedData['managed_clients']);
             $alluser->managedClients()->detach($unmanagedClients);
         } else {
-            // If no clients are selected, detach all supported clients
+            // If no clients are selected, detach all managed clients
             $alluser->managedClients()->detach();
         }
 

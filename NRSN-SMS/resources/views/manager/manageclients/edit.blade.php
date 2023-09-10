@@ -157,7 +157,7 @@
                     </div>
                 </div>
 
-                <!-- Clients Supported by the User -->
+                <!-- Clients Managed by the User -->
                 <div class="text-2xl font-medium overflow-hidden px-6 lg:px-8 mx-4 my-5">
                     <h2 class="text-xl font-semibold mb-2">Managed By</h2>
                     <div class="rounded-md bg-white shadow-md p-4 max-h-40 overflow-y-auto text-sm">

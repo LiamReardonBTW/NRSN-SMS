@@ -22,10 +22,10 @@ class ClientController extends Controller
     {
         $user = auth()->user();
         $clients = Client::whereHas('managedByUser', function ($query) use ($user) {
-        $query->where('user_id', $user->id);
+            $query->where('user_id', $user->id);
         })->get();
 
-    return view('manager/manageclients.index', compact('clients'));
+        return view('manager/manageclients.index', compact('clients'));
     }
 
     /**
@@ -111,10 +111,10 @@ class ClientController extends Controller
             $manageclient->supportedByUser()->detach();
         }
 
-       // Handle other user data updates
-       $manageclient->update($validatedData);
+        // Handle other user data updates
+        $manageclient->update($validatedData);
 
-       return redirect()->route('manageclients.show', $manageclient);
+        return redirect()->route('manageclients.show', $manageclient);
     }
 
     /**
