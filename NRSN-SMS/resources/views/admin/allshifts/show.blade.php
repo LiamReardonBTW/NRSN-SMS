@@ -59,14 +59,16 @@
             <div class="mx-4 my-5">
                 <label for="submitted_by">Submitted By</label>
                 <x-input disabled type="text" name="submitted_by" id="submitted_by"
-                    class="form-input rounded-md shadow-sm block w-full" value="{{ $allshift->submitted_by }}" />
+                    class="form-input rounded-md shadow-sm block w-full"
+                    value="{{ $allshift->submittedByUser->first_name }} {{ $allshift->submittedByUser->last_name }}" />
             </div>
 
             <!-- Client Supported -->
             <div class="mx-4 my-5">
                 <label for="client_supported">Client Supported</label>
                 <x-input disabled type="text" name="client_supported" id="client_supported"
-                    class="form-input rounded-md shadow-sm block w-full" value="{{ $allshift->client_supported }}" />
+                    class="form-input rounded-md shadow-sm block w-full"
+                    value="{{ $allshift->clientSupported->first_name }} {{ $allshift->clientSupported->last_name }}" />
             </div>
 
             <!-- Submission Date -->

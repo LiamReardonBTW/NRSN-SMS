@@ -61,22 +61,37 @@
                     @enderror
                 </div>
 
-                <!-- Submitted by (Worker) -->
+                <!-- Submitted by (Worker) Dropdown -->
                 <div class="mx-4 my-5">
                     <label for="submitted_by">Submitted By</label>
-                    <x-input type="text" name="submitted_by" id="submitted_by"
-                        class="form-input rounded-md shadow-sm block w-full" value="{{ $allshift->submitted_by }}" />
+                    <select name="submitted_by" id="submitted_by" class="form-select rounded-md shadow-sm block w-full">
+                        <option value="">Select a worker</option>
+                        @foreach ($workers as $worker)
+                            <option value="{{ $worker->id }}"
+                                {{ $allshift->submitted_by == $worker->id ? 'selected' : '' }}>
+                                {{ $worker->first_name }} {{ $worker->last_name }}
+                            </option>
+                        @endforeach
+                    </select>
                     @error('submitted_by')
                         <p class="text-sm text-red-600">{{ $message }}</p>
                     @enderror
                 </div>
 
-                <!-- Client Supported -->
+                <!-- Client Supported Dropdown -->
                 <div class="mx-4 my-5">
                     <label for="client_supported">Client Supported</label>
-                    <x-input type="text" name="client_supported" id="client_supported"
-                        class="form-input rounded-md shadow-sm block w-full"
-                        value="{{ $allshift->client_supported }}" />
+                    <select name="client_supported" id="client_supported"
+                        class="form-select rounded-md shadow-sm block w-full">
+                        <option value="">Select a client</option>
+                        @foreach ($clients as $client)
+                            <option value="{{ $client->id }}"
+                                {{ old('client_supported', $allshift->client_supported) == $client->id ? 'selected' : '' }}>
+                                {{ $client->first_name }} {{ $client->last_name }}
+                                <!-- Adjust this to the actual client attribute you want to display -->
+                            </option>
+                        @endforeach
+                    </select>
                     @error('client_supported')
                         <p class="text-sm text-red-600">{{ $message }}</p>
                     @enderror

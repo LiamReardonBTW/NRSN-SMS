@@ -125,10 +125,10 @@
                             {{ $shift->invoice }}
                         </td>
                         <td scope="row" class="px-1 py-1 text-center">
-                            {{ $shift->submitted_by }}
+                            {{ $shift->submittedByUser->first_name }} {{ $shift->submittedByUser->last_name }}
                         </td>
                         <td scope="row" class="px-1 py-1 text-center">
-                            {{ $shift->client_supported }}
+                            {{ $shift->clientSupported->first_name }} {{ $shift->clientSupported->last_name }}
                         </td>
                         <td scope="row" class="px-1 py-1 text-center">
                             {{ $shift->date }}
