@@ -25,25 +25,39 @@
                         @enderror
                 </div>
 
-                <!-- Submitted By -->
+                <!-- Submitted By Dropdown -->
                 <div class="mx-4 my-2">
                     <label for="submitted_by">Worker</label>
-                    <x-input type="string" name="submitted_by" id="submitted_by"
-                        class="form-input rounded-md shadow-sm block w-full" value="{{ old('submitted_by', '') }}" />
-                        @error('submitted_by')
-                            <p class="text-sm text-red-600">{{ $message }}</p>
-                        @enderror
+                    <select name="submitted_by" id="submitted_by" class="form-select rounded-md shadow-sm block w-full">
+                        <option value="">Select a worker</option>
+                        @foreach ($workers as $worker)
+                            <option value="{{ $worker->id }}"
+                                {{ old('submitted_by', '') == $worker->id ? 'selected' : '' }}>
+                                {{ $worker->first_name }} {{ $worker->last_name }}
+                            </option>
+                        @endforeach
+                    </select>
+                    @error('submitted_by')
+                        <p class="text-sm text-red-600">{{ $message }}</p>
+                    @enderror
                 </div>
 
-                <!-- Client Supported -->
+                <!-- Client Supported Dropdown -->
                 <div class="mx-4 my-2">
                     <label for="client_supported">Client Supported</label>
-                    <x-input type="string" name="client_supported" id="client_supported"
-                        class="form-input rounded-md shadow-sm block w-full"
-                        value="{{ old('client_supported', '') }}" />
-                        @error('client_supported')
-                            <p class="text-sm text-red-600">{{ $message }}</p>
-                        @enderror
+                    <select name="client_supported" id="client_supported"
+                        class="form-select rounded-md shadow-sm block w-full">
+                        <option value="">Select a client</option>
+                        @foreach ($clients as $client)
+                            <option value="{{ $client->id }}"
+                                {{ old('client_supported', '') == $client->id ? 'selected' : '' }}>
+                                {{ $client->first_name }} {{ $client->last_name }}
+                            </option>
+                        @endforeach
+                    </select>
+                    @error('client_supported')
+                        <p class="text-sm text-red-600">{{ $message }}</p>
+                    @enderror
                 </div>
 
                 <!-- Date -->

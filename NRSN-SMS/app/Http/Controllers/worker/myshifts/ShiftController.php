@@ -8,6 +8,7 @@ use App\Http\Requests\UpdateShiftRequest;
 use App\Models\Shift;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class ShiftController extends Controller
 {
@@ -19,7 +20,9 @@ class ShiftController extends Controller
 
     public function index()
     {
-        $shifts = Shift::all();
+        // Retrieve shifts associated with the currently logged-in user
+        $user = Auth::user();
+        $shifts = $user->shifts;
 
         return view('worker/myshifts.index', compact('shifts'));
     }
@@ -47,6 +50,13 @@ class ShiftController extends Controller
      */
     public function show(Shift $myshift)
     {
+        // Check if the currently logged-in user is the 'submitted_by' user for this shift
+        $user = Auth::user();
+        if ($myshift->submitted_by !== $user->id) {
+            // Redirect to a different page or show an error message
+            return redirect()->route('myshifts.index'); // Replace with your desired route or action
+        }
+
         return view('worker/myshifts.show', compact('myshift'));
     }
 
@@ -55,8 +65,16 @@ class ShiftController extends Controller
      */
     public function edit(Shift $myshift)
     {
+        // Check if the currently logged-in user is the 'submitted_by' user for this shift
+        $user = Auth::user();
+        if ($myshift->submitted_by !== $user->id) {
+            // Redirect to a different page or show an error message
+            return redirect()->route('myshifts.index'); // Replace with your desired route or action
+        }
+
         return view('worker/myshifts.edit', compact('myshift'));
     }
+
 
     /**
      * Update the specified resource in storage.

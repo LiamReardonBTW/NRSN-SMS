@@ -112,23 +112,25 @@
             </div>
         </div>
 
-        @if($alluser->role == 0 || $alluser->role == 1 )
-        <!-- Clients Managed by the User -->
-        <div class="text-2xl font-medium overflow-hidden px-6 lg:px-8 mx-4 my-5">
-            <h2 class="text-xl font-semibold mb-2">Manages</h2>
-            <div class="rounded-md bg-white shadow-md p-4 max-h-40 overflow-y-auto text-sm">
-                <!-- Add text-sm class for smaller text -->
-                <ul>
-                    @if ($alluser->managedClients->isEmpty())
-                        <li>No clients managed.</li>
-                    @else
-                        @foreach ($alluser->managedClients->sortBy('last_name') as $client)
-                            <li>{{ $client->first_name }} {{ $client->last_name }}</li>
-                        @endforeach
-                    @endif
-                </ul>
+        <!-- Check if user is manager (or admin) before displaying clients managed section -->
+        @if ($alluser->role == 0 || $alluser->role == 1)
+
+            <!-- Clients Managed by the User -->
+            <div class="text-2xl font-medium overflow-hidden px-6 lg:px-8 mx-4 my-5">
+                <h2 class="text-xl font-semibold mb-2">Manages</h2>
+                <div class="rounded-md bg-white shadow-md p-4 max-h-40 overflow-y-auto text-sm">
+                    <!-- Add text-sm class for smaller text -->
+                    <ul>
+                        @if ($alluser->managedClients->isEmpty())
+                            <li>No clients managed.</li>
+                        @else
+                            @foreach ($alluser->managedClients->sortBy('last_name') as $client)
+                                <li>{{ $client->first_name }} {{ $client->last_name }}</li>
+                            @endforeach
+                        @endif
+                    </ul>
+                </div>
             </div>
-        </div>
         @endif
 
         <!-- Page Navigation Buttons -->

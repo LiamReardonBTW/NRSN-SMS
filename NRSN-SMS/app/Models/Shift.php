@@ -21,4 +21,15 @@ class Shift extends Model
         'km',
         'hours',
     ];
+
+    public function submittedByUser()
+    {
+        return $this->belongsTo(User::class, 'submitted_by', 'id');
+    }
+
+    public function clientSupported()
+    {
+        return $this->belongsTo(Client::class, 'client_supported', 'id');
+    }
+
 }

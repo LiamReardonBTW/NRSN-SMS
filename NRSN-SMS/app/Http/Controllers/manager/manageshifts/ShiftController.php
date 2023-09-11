@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Requests\StoreShiftRequest;
 use App\Http\Requests\UpdateShiftRequest;
 use App\Models\Shift;
+use App\Models\User;
+use App\Models\Client;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 
@@ -29,7 +31,9 @@ class ShiftController extends Controller
      */
     public function create()
     {
-        return view('manager/manageshifts.create');
+        $workers = User::where('role', 2)->get();
+        $clients = Client::all();
+        return view('manager/manageshifts.create', compact('workers', 'clients'));
     }
 
     /**
@@ -55,7 +59,9 @@ class ShiftController extends Controller
      */
     public function edit(Shift $manageshift)
     {
-        return view('manager/manageshifts.edit', compact('manageshift'));
+        $workers = User::where('role', 2)->get();
+        $clients = Client::all();
+        return view('manager/manageshifts.edit', compact('manageshift', 'workers', 'clients'));
     }
 
     /**

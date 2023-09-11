@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Client;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class ClientController extends Controller
 {
@@ -17,7 +18,15 @@ class ClientController extends Controller
 
     public function index()
     {
-        $clients = Client::where('active',  '1')->get();
+        // Get the currently logged-in user
+        $user = Auth::user();
+
+        // Retrieve clients where the current user is in the 'supported_by' relationship
+        $clients = Client::where('active', '1')
+            ->whereHas('supportedByUser', function ($query) use ($user) {
+                $query->where('id', $user->id);
+            })
+            ->get();
 
         return view('worker/myclients.index', compact('clients'));
     }
@@ -33,7 +42,7 @@ class ClientController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreClientRequest $request)
+    public function store()
     {
 
     }
@@ -43,13 +52,20 @@ class ClientController extends Controller
      */
     public function show(Client $myclient)
     {
+        // Check if the user supports the client
+        $user = Auth::user();
+        if (!$user->supportedClients->contains($myclient)) {
+            // Redirect to a different page or show an error message
+            return redirect()->route('myclients.index'); // Replace with your desired route or action
+        }
+
         return view('worker/myclients.show', compact('myclient'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Client $myclient)
+    public function edit()
     {
 
     }
@@ -57,7 +73,7 @@ class ClientController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateClientRequest $request, Client $myclient)
+    public function update()
     {
 
     }
@@ -65,7 +81,7 @@ class ClientController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Client $myclient)
+    public function destroy()
     {
 
     }

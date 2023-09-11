@@ -39,4 +39,9 @@ class Client extends Model
         return $this->belongsToMany(User::class)->withPivot('relation')->wherePivot('relation', 'managed_by');
     }
 
+    public function shifts()
+    {
+        return $this->hasMany(Shift::class, 'client_supported', 'id');
+    }
+
 }
