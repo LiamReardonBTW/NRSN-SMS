@@ -63,22 +63,30 @@
                     @enderror
                 </div>
 
-                <!-- Submitted by (Worker) -->
-                <div class="mx-4 my-5">
-                    <label for="submitted_by">Submitted By</label>
-                    <x-input type="text" name="submitted_by" id="submitted_by"
-                        class="form-input rounded-md shadow-sm block w-full" value="{{ $myshift->submitted_by }}" />
-                    @error('submitted_by')
-                        <p class="text-sm text-red-600">{{ $message }}</p>
-                    @enderror
+                <!-- Submitted By # -->
+                <!-- Hidden Input for user_id -->
+                <input type="hidden" name="submitted_by" id="submitted_by" value="{{ Auth::user()->id }}">
+                <!-- Display User's First and Last Name -->
+                <div class="mx-4 my-2">
+                    <label for="submitted_by_display">Submitted By</label>
+                    <input type="text" name="submitted_by_display" id="submitted_by_display"
+                        class="form-input rounded-md shadow-sm block w-full"
+                        value="{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}" readonly>
                 </div>
 
-                <!-- Client Supported -->
-                <div class="mx-4 my-5">
+                <!-- Client Supported Dropdown -->
+                <div class="mx-4 my-2">
                     <label for="client_supported">Client Supported</label>
-                    <x-input type="text" name="client_supported" id="client_supported"
-                        class="form-input rounded-md shadow-sm block w-full"
-                        value="{{ $myshift->client_supported }}" />
+                    <select name="client_supported" id="client_supported"
+                        class="form-select rounded-md shadow-sm block w-full">
+                        <option value="">Select a client</option>
+                        @foreach (Auth::user()->supportedClients as $client)
+                            <option value="{{ $client->id }}"
+                                {{ $myshift->client_supported == $client->id ? 'selected' : '' }}>
+                                {{ $client->first_name }} {{ $client->last_name }}
+                            </option>
+                        @endforeach
+                    </select>
                     @error('client_supported')
                         <p class="text-sm text-red-600">{{ $message }}</p>
                     @enderror

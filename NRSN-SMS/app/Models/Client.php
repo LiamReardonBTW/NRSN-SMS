@@ -41,7 +41,7 @@ class Client extends Model
 
     public function shifts()
     {
-        return $this->hasMany(Shift::class, 'client_id', 'id');
+        return $this->hasMany(Shift::class, 'client_supported', 'id');
     }
 
 }

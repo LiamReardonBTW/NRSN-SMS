@@ -24,12 +24,12 @@ class Shift extends Model
 
     public function submittedByUser()
     {
-        return $this->belongsTo(User::class, 'user_id', 'id');
+        return $this->belongsTo(User::class, 'submitted_by', 'id');
     }
 
     public function clientSupported()
     {
-        return $this->belongsTo(Client::class, 'client_id', 'id');
+        return $this->belongsTo(Client::class, 'client_supported', 'id');
     }
 
 }

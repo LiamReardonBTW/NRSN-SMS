@@ -20,28 +20,39 @@
                     <label for="invoice">Invoice</label>
                     <x-input type="string" name="invoice" id="invoice"
                         class="form-input rounded-md shadow-sm block w-full" value="{{ old('invoice', '') }}" />
-                        @error('invoice')
-                            <p class="text-sm text-red-600">{{ $message }}</p>
-                        @enderror
+                    @error('invoice')
+                        <p class="text-sm text-red-600">{{ $message }}</p>
+                    @enderror
                 </div>
 
                 <!-- Submitted By # -->
+                <!-- Hidden Input for user_id -->
+                <input type="hidden" name="submitted_by" id="submitted_by" value="{{ Auth::user()->id }}">
+                <!-- Display User's First and Last Name -->
                 <div class="mx-4 my-2">
-                    <label for="submitted_by">Submitted By</label>
-                    <select name="submitted_by" id="submitted_by" class="form-select rounded-md shadow-sm block w-full">
-                        <option value="{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}" selected>{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</option>
-                    </select>
+                    <label for="submitted_by_display">Submitted By</label>
+                    <input type="text" name="submitted_by_display" id="submitted_by_display"
+                        class="form-input rounded-md shadow-sm block w-full"
+                        value="{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}" readonly>
                 </div>
 
-                <!-- Client Supported -->
+                <!-- Client Supported Dropdown -->
                 <div class="mx-4 my-2">
                     <label for="client_supported">Client Supported</label>
-                    <x-input type="string" name="client_supported" id="client_supported"
-                        class="form-input rounded-md shadow-sm block w-full"
-                        value="{{ old('client_supported', '') }}" />
-                        @error('client_supported')
-                            <p class="text-sm text-red-600">{{ $message }}</p>
-                        @enderror
+                    <select name="client_supported" id="client_supported"
+                        class="form-select rounded-md shadow-sm block w-full">
+                        <option value="">Select a client</option>
+                        @foreach (Auth::user()->supportedClients as $client)
+                            <option value="{{ $client->id }}"
+                                {{ old('client_supported') == $client->id ? 'selected' : '' }}>
+                                {{ $client->first_name }} {{ $client->last_name }}
+                                <!-- Adjust this to the actual client attribute you want to display -->
+                            </option>
+                        @endforeach
+                    </select>
+                    @error('client_supported')
+                        <p class="text-sm text-red-600">{{ $message }}</p>
+                    @enderror
                 </div>
 
                 <!-- Date -->
@@ -49,9 +60,9 @@
                     <label for="date">Date</label>
                     <x-input type="date" name="date" id="date"
                         class="form-input rounded-md shadow-sm block w-full" value="{{ old('date', '') }}" />
-                        @error('date')
-                            <p class="text-sm text-red-600">{{ $message }}</p>
-                        @enderror
+                    @error('date')
+                        <p class="text-sm text-red-600">{{ $message }}</p>
+                    @enderror
                 </div>
 
                 <!-- Expenses -->
@@ -59,9 +70,9 @@
                     <label for="expenses">Expenses ($AUD)</label>
                     <x-input type="integer" name="expenses" id="expenses"
                         class="form-input rounded-md shadow-sm block w-full" value="{{ old('expenses', '') }}" />
-                        @error('expenses')
-                            <p class="text-sm text-red-600">{{ $message }}</p>
-                        @enderror
+                    @error('expenses')
+                        <p class="text-sm text-red-600">{{ $message }}</p>
+                    @enderror
                 </div>
 
                 <!-- km Travelled -->
@@ -69,9 +80,9 @@
                     <label for="km">Km Travelled</label>
                     <x-input type="integer" name="km" id="km"
                         class="form-input rounded-md shadow-sm block w-full" value="{{ old('km', '') }}" />
-                        @error('km')
-                            <p class="text-sm text-red-600">{{ $message }}</p>
-                        @enderror
+                    @error('km')
+                        <p class="text-sm text-red-600">{{ $message }}</p>
+                    @enderror
                 </div>
 
                 <!-- Hours Worked -->
@@ -79,9 +90,9 @@
                     <label for="hours">Hours Worked</label>
                     <x-input type="integer" name="hours" id="hours"
                         class="form-input rounded-md shadow-sm block w-full" value="{{ old('hours', '') }}" />
-                        @error('hours')
-                            <p class="text-sm text-red-600">{{ $message }}</p>
-                        @enderror
+                    @error('hours')
+                        <p class="text-sm text-red-600">{{ $message }}</p>
+                    @enderror
                 </div>
 
                 <!-- Notes -->
@@ -89,9 +100,9 @@
                     <label for="notes">Shift Notes</label>
                     <x-input type="string" name="notes" id="notes"
                         class="form-input rounded-md shadow-sm block w-full" value="{{ old('notes', '') }}" />
-                        @error('notes')
-                            <p class="text-sm text-red-600">{{ $message }}</p>
-                        @enderror
+                    @error('notes')
+                        <p class="text-sm text-red-600">{{ $message }}</p>
+                    @enderror
                 </div>
 
             </div> <!-- Close shift information container -->

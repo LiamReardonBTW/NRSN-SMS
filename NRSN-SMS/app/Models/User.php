@@ -89,7 +89,7 @@ class User extends Authenticatable
 
     public function shifts()
     {
-        return $this->hasMany(Shift::class, 'user_id', 'id');
+        return $this->hasMany(Shift::class, 'submitted_by', 'id');
     }
 
 }

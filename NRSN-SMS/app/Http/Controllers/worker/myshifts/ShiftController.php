@@ -8,6 +8,7 @@ use App\Http\Requests\UpdateShiftRequest;
 use App\Models\Shift;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class ShiftController extends Controller
 {
@@ -19,7 +20,9 @@ class ShiftController extends Controller
 
     public function index()
     {
-        $shifts = Shift::all();
+        // Retrieve shifts associated with the currently logged-in user
+        $user = Auth::user();
+        $shifts = $user->shifts;
 
         return view('worker/myshifts.index', compact('shifts'));
     }

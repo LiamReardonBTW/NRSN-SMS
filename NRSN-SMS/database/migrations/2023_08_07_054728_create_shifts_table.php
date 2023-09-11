@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('invoice')->nullable();
             $table->string('notes')->nullable();
-            $table->string('submitted_by');
-            $table->string('client_supported');
+            $table->foreignId('submitted_by')->constrained('users'); // Foreign key to users table
+            $table->foreignId('client_supported')->constrained('clients'); // Foreign key to clients table
             $table->boolean('isflagged')->default(0);
             $table->boolean('isinvoiced')->default(0);
             $table->date('date');

@@ -9,15 +9,15 @@
     <!-- Container -->
     <div class="relative overflow-x-auto bg-blue-200 shadow-xl rounded-lg ">
 
-            <!-- ID, ISFLAGGED, ISINVOICED -->
-            <div class="text-2xl font-medium bg-blue-300 overflow-hidden grid grid-cols-1 md:grid-cols-3  px-6 lg:px-8">
+        <!-- ID, ISFLAGGED, ISINVOICED -->
+        <div class="text-2xl font-medium bg-blue-300 overflow-hidden grid grid-cols-1 md:grid-cols-3  px-6 lg:px-8">
 
-                <!-- Shift ID (UNEDITABLE) -->
-                <div class="mx-4 my-5">
-                    <label for="id">Shift ID</label>
-                    <x-input disabled type="text" name="id" id="id"
-                        class="form-input rounded-md shadow-sm block w-full" value="{{ $myshift->id }}" />
-                </div>
+            <!-- Shift ID (UNEDITABLE) -->
+            <div class="mx-4 my-5">
+                <label for="id">Shift ID</label>
+                <x-input disabled type="text" name="id" id="id"
+                    class="form-input rounded-md shadow-sm block w-full" value="{{ $myshift->id }}" />
+            </div>
 
             <!-- isflagged -->
             <div class="mx-4 my-5">
@@ -43,7 +43,7 @@
                 @endif
             </div>
 
-            </div>
+        </div>
 
         <!-- Shift Information Container -->
         <div class="text-2xl font-medium  overflow-hidden grid grid-cols-1 md:grid-cols-3  px-6 lg:px-8">
@@ -59,14 +59,16 @@
             <div class="mx-4 my-5">
                 <label for="submitted_by">Submitted By</label>
                 <x-input disabled type="text" name="submitted_by" id="submitted_by"
-                    class="form-input rounded-md shadow-sm block w-full" value="{{ $myshift->submitted_by }}" />
+                    class="form-input rounded-md shadow-sm block w-full"
+                    value="{{ $myshift->submittedByUser->first_name }} {{ $myshift->submittedByUser->last_name }}" />
             </div>
 
             <!-- Client Supported -->
             <div class="mx-4 my-5">
                 <label for="client_supported">Client Supported</label>
                 <x-input disabled type="text" name="client_supported" id="client_supported"
-                    class="form-input rounded-md shadow-sm block w-full" value="{{ $myshift->client_supported }}" />
+                    class="form-input rounded-md shadow-sm block w-full"
+                    value="{{ $myshift->clientSupported->first_name }} {{ $myshift->clientSupported->last_name }}" />
             </div>
 
             <!-- Submission Date -->
