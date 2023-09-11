@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Models\User;
+use App\Models\Client;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 
@@ -57,8 +58,8 @@ class WorkerController extends Controller
      */
     public function edit(User $manageworker)
     {
-        // dd($manageworker);
-        return view('manager/manageworkers.edit', compact('manageworker'));
+        $allClients = Client::all();
+        return view('manager/manageworkers.edit', compact('manageworker', 'allClients'));
     }
 
     /**
