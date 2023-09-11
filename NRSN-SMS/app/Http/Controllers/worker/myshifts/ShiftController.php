@@ -50,6 +50,13 @@ class ShiftController extends Controller
      */
     public function show(Shift $myshift)
     {
+        // Check if the currently logged-in user is the 'submitted_by' user for this shift
+        $user = Auth::user();
+        if ($myshift->submitted_by !== $user->id) {
+            // Redirect to a different page or show an error message
+            return redirect()->route('myshifts.index'); // Replace with your desired route or action
+        }
+
         return view('worker/myshifts.show', compact('myshift'));
     }
 
@@ -58,8 +65,16 @@ class ShiftController extends Controller
      */
     public function edit(Shift $myshift)
     {
+        // Check if the currently logged-in user is the 'submitted_by' user for this shift
+        $user = Auth::user();
+        if ($myshift->submitted_by !== $user->id) {
+            // Redirect to a different page or show an error message
+            return redirect()->route('myshifts.index'); // Replace with your desired route or action
+        }
+
         return view('worker/myshifts.edit', compact('myshift'));
     }
+
 
     /**
      * Update the specified resource in storage.
