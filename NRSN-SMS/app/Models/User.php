@@ -87,4 +87,9 @@ class User extends Authenticatable
         return $this->belongsToMany(Client::class)->withPivot('relation')->wherePivot('relation', 'managed_by');
     }
 
+    public function shifts()
+    {
+        return $this->hasMany(Shift::class, 'user_id', 'id');
+    }
+
 }
