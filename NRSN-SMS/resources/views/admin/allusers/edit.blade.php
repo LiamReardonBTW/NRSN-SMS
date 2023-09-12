@@ -131,12 +131,14 @@
                     <!-- Add text-sm class for smaller text -->
                     <ul>
                         @php
-                            $checkedClients = $alluser->supportedClients->sortBy('last_name');
-                            $uncheckedClients = $allClients
+                            $activeClients = $allClients->where('active', 1);
+                            $checkedClients = $alluser->supportedClients->whereIn('id', $activeClients->pluck('id'));
+                            $uncheckedClients = $activeClients
                                 ->reject(function ($client) use ($checkedClients) {
-                                    return $checkedClients->contains($client);
+                                    return $checkedClients->contains('id', $client->id);
                                 })
                                 ->sortBy('last_name');
+
                             $clients = $checkedClients->concat($uncheckedClients);
                         @endphp
                         @foreach ($clients as $client)
@@ -163,12 +165,11 @@
                         <!-- Add text-sm class for smaller text -->
                         <ul>
                             @php
-                                $checkedClients = $alluser->managedClients->sortBy('last_name');
-                                $uncheckedClients = $allClients
-                                    ->reject(function ($client) use ($checkedClients) {
-                                        return $checkedClients->contains($client);
-                                    })
-                                    ->sortBy('last_name');
+                                $activeClients = $allClients->where('active', 1)->sortBy('last_name');
+                                $checkedClients = $alluser->managedClients->whereIn('id', $activeClients->pluck('id'));
+                                $uncheckedClients = $activeClients->reject(function ($client) use ($checkedClients) {
+                                    return $checkedClients->contains('id', $client->id);
+                                });
                                 $clients = $checkedClients->concat($uncheckedClients);
                             @endphp
                             @foreach ($clients as $client)

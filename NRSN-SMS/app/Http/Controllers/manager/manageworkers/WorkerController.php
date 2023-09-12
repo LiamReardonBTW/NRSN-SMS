@@ -9,6 +9,7 @@ use App\Models\User;
 use App\Models\Client;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class WorkerController extends Controller
 {
@@ -20,7 +21,7 @@ class WorkerController extends Controller
 
     public function index()
     {
-        $users = User::where('role','2')->get();
+        $users = User::where('role', '2')->get();
 
         return view('manager/manageworkers.index', compact('users'));
     }
@@ -58,7 +59,11 @@ class WorkerController extends Controller
      */
     public function edit(User $manageworker)
     {
-        $allClients = Client::all();
+        $loggedInUserId = Auth::id();
+
+        $allClients = Client::whereHas('managedByUser', function ($query) use ($loggedInUserId) {
+            $query->where('user_id', $loggedInUserId);
+        })->get();
         return view('manager/manageworkers.edit', compact('manageworker', 'allClients'));
     }
 
