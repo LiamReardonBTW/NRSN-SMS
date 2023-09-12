@@ -23,7 +23,7 @@ class StoreShiftRequest extends FormRequest
     {
         return [
             'invoice' => [
-                'nullable', 'string', 'min:3', 'max:3',
+                'nullable', 'string',
             ],
             'notes' => [
                 'nullable', 'string', 'max:255',
@@ -38,13 +38,13 @@ class StoreShiftRequest extends FormRequest
                 'required', 'date',
             ],
             'expenses' => [
-                'required', 'integer',
+                'numeric',
             ],
             'km' => [
-                'required', 'integer',
+                'numeric',
             ],
             'hours' => [
-                'required', 'integer', 'min:1', 'max:24',
+                'required', 'numeric', 'min:0.25', 'max:24',
             ],
             'isflagged' => [
                 'nullable', 'boolean',
