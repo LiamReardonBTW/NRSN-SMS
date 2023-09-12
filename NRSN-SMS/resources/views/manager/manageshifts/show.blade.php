@@ -83,14 +83,14 @@
             <div class="mx-4 my-5">
                 <label for="expenses">Expenses ($AUD)</label>
                 <x-input disabled type="text" name="expenses" id="expenses"
-                    class="form-input rounded-md shadow-sm block w-full" value="${{ $manageshift->expenses }}" />
+                    class="form-input rounded-md shadow-sm block w-full" value="${{ $manageshift->expenses ?? '0' }}" />
             </div>
 
             <!-- km Travelled -->
             <div class="mx-4 my-5">
                 <label for="km">Km Travelled</label>
                 <x-input disabled type="text" name="km" id="km"
-                    class="form-input rounded-md shadow-sm block w-full" value="{{ $manageshift->km }}km" />
+                    class="form-input rounded-md shadow-sm block w-full" value="{{ $manageshift->km ?? '0' }}km" />
             </div>
 
             <!-- Hours  Worked -->

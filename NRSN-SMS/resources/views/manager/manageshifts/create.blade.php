@@ -15,16 +15,6 @@
             <!-- Shift Information container -->
             <div class="text-2xl font-medium  overflow-hidden grid grid-cols-1 md:grid-cols-3  px-6 lg:px-8">
 
-                <!-- Invoice -->
-                <div class="mx-4 my-2">
-                    <label for="invoice">Invoice</label>
-                    <x-input type="string" name="invoice" id="invoice"
-                        class="form-input rounded-md shadow-sm block w-full" value="{{ old('submitted_by', '') }}" />
-                    @error('invoice')
-                        <p class="text-sm text-red-600">{{ $message }}</p>
-                    @enderror
-                </div>
-
                 <!-- Submitted By Dropdown -->
                 <div class="mx-4 my-2">
                     <label for="submitted_by">Worker</label>

@@ -20,8 +20,8 @@ return new class extends Migration
             $table->boolean('isflagged')->default(0);
             $table->boolean('isinvoiced')->default(0);
             $table->date('date');
-            $table->float('expenses');
-            $table->float('km');
+            $table->float('expenses')->nullable();
+            $table->float('km')->nullable();
             $table->float('hours');
             $table->timestamps();
         });
