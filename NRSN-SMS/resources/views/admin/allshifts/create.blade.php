@@ -20,9 +20,9 @@
                     <label for="invoice">Invoice</label>
                     <x-input type="string" name="invoice" id="invoice"
                         class="form-input rounded-md shadow-sm block w-full" value="{{ old('submitted_by', '') }}" />
-                        @error('invoice')
-                            <p class="text-sm text-red-600">{{ $message }}</p>
-                        @enderror
+                    @error('invoice')
+                        <p class="text-sm text-red-600">{{ $message }}</p>
+                    @enderror
                 </div>
 
                 <!-- Submitted By Dropdown -->
@@ -49,10 +49,12 @@
                         class="form-select rounded-md shadow-sm block w-full">
                         <option value="">Select a client</option>
                         @foreach ($clients as $client)
-                            <option value="{{ $client->id }}"
-                                {{ old('client_supported', '') == $client->id ? 'selected' : '' }}>
-                                {{ $client->first_name }} {{ $client->last_name }}
-                            </option>
+                            @if ($client->active)
+                                <option value="{{ $client->id }}"
+                                    {{ old('client_supported') == $client->id ? 'selected' : '' }}>
+                                    {{ $client->first_name }} {{ $client->last_name }}
+                                </option>
+                            @endif
                         @endforeach
                     </select>
                     @error('client_supported')
@@ -65,39 +67,39 @@
                     <label for="date">Date</label>
                     <x-input type="date" name="date" id="date"
                         class="form-input rounded-md shadow-sm block w-full" value="{{ old('date', '') }}" />
-                        @error('date')
-                            <p class="text-sm text-red-600">{{ $message }}</p>
-                        @enderror
+                    @error('date')
+                        <p class="text-sm text-red-600">{{ $message }}</p>
+                    @enderror
                 </div>
 
                 <!-- Expenses -->
                 <div class="mx-4 my-2">
                     <label for="expenses">Expenses ($AUD)</label>
-                    <x-input type="integer" name="expenses" id="expenses"
+                    <x-input type="float" name="expenses" id="expenses"
                         class="form-input rounded-md shadow-sm block w-full" value="{{ old('expenses', '') }}" />
-                        @error('expenses')
-                            <p class="text-sm text-red-600">{{ $message }}</p>
-                        @enderror
+                    @error('expenses')
+                        <p class="text-sm text-red-600">{{ $message }}</p>
+                    @enderror
                 </div>
 
                 <!-- km Travelled -->
                 <div class="mx-4 my-2">
                     <label for="km">Km Travelled</label>
-                    <x-input type="integer" name="km" id="km"
+                    <x-input type="float" name="km" id="km"
                         class="form-input rounded-md shadow-sm block w-full" value="{{ old('km', '') }}" />
-                        @error('km')
-                            <p class="text-sm text-red-600">{{ $message }}</p>
-                        @enderror
+                    @error('km')
+                        <p class="text-sm text-red-600">{{ $message }}</p>
+                    @enderror
                 </div>
 
                 <!-- Hours Worked -->
                 <div class="mx-4 my-2">
                     <label for="hours">Hours Worked</label>
-                    <x-input type="integer" name="hours" id="hours"
+                    <x-input type="float" name="hours" id="hours"
                         class="form-input rounded-md shadow-sm block w-full" value="{{ old('hours', '') }}" />
-                        @error('hours')
-                            <p class="text-sm text-red-600">{{ $message }}</p>
-                        @enderror
+                    @error('hours')
+                        <p class="text-sm text-red-600">{{ $message }}</p>
+                    @enderror
                 </div>
 
                 <!-- Notes -->
@@ -105,9 +107,9 @@
                     <label for="notes">Shift Notes</label>
                     <x-input type="string" name="notes" id="notes"
                         class="form-input rounded-md shadow-sm block w-full" value="{{ old('notes', '') }}" />
-                        @error('notes')
-                            <p class="text-sm text-red-600">{{ $message }}</p>
-                        @enderror
+                    @error('notes')
+                        <p class="text-sm text-red-600">{{ $message }}</p>
+                    @enderror
                 </div>
 
             </div> <!-- Close shift information container -->
