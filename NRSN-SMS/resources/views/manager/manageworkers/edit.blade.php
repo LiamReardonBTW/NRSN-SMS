@@ -130,12 +130,14 @@
                     <!-- Add text-sm class for smaller text -->
                     <ul>
                         @php
-                            $checkedClients = $manageworker->supportedClients->sortBy('last_name');
-                            $uncheckedClients = $allClients
+                            $activeClients = $allClients->where('active', 1);
+                            $checkedClients = $manageworker->supportedClients->whereIn('id', $activeClients->pluck('id'));
+                            $uncheckedClients = $activeClients
                                 ->reject(function ($client) use ($checkedClients) {
-                                    return $checkedClients->contains($client);
+                                    return $checkedClients->contains('id', $client->id);
                                 })
                                 ->sortBy('last_name');
+
                             $clients = $checkedClients->concat($uncheckedClients);
                         @endphp
                         @foreach ($clients as $client)

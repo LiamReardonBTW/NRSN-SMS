@@ -62,40 +62,26 @@
                     @enderror
                 </div>
 
-                <!-- Submitted by (Worker) Dropdown -->
+                <!-- Submitted By -->
                 <div class="mx-4 my-5">
                     <label for="submitted_by">Submitted By</label>
-                    <select name="submitted_by" id="submitted_by" class="form-select rounded-md shadow-sm block w-full">
-                        <option value="">Select a worker</option>
-                        @foreach ($workers as $worker)
-                            <option value="{{ $worker->id }}"
-                                {{ $manageshift->submitted_by == $worker->id ? 'selected' : '' }}>
-                                {{ $worker->first_name }} {{ $worker->last_name }}
-                            </option>
-                        @endforeach
-                    </select>
-                    @error('submitted_by')
-                        <p class="text-sm text-red-600">{{ $message }}</p>
-                    @enderror
+                    <x-input type="text" name="submitted_by" id="submitted_by_display"
+                        class="form-input rounded-md shadow-sm block w-full"
+                        value="{{ $manageshift->submittedByUser->first_name }} {{ $manageshift->submittedByUser->last_name }}"
+                        disabled />
+                    <input type="hidden" name="submitted_by" id="submitted_by"
+                        value="{{ $manageshift->submittedByUser->id }}" />
                 </div>
 
-                <!-- Client Supported Dropdown -->
+                <!-- Client Supported -->
                 <div class="mx-4 my-5">
                     <label for="client_supported">Client Supported</label>
-                    <select name="client_supported" id="client_supported"
-                        class="form-select rounded-md shadow-sm block w-full">
-                        <option value="">Select a client</option>
-                        @foreach ($clients as $client)
-                            <option value="{{ $client->id }}"
-                                {{ old('client_supported', $manageshift->client_supported) == $client->id ? 'selected' : '' }}>
-                                {{ $client->first_name }} {{ $client->last_name }}
-                                <!-- Adjust this to the actual client attribute you want to display -->
-                            </option>
-                        @endforeach
-                    </select>
-                    @error('client_supported')
-                        <p class="text-sm text-red-600">{{ $message }}</p>
-                    @enderror
+                    <x-input type="text" name="client_supported" id="client_supported_display"
+                        class="form-input rounded-md shadow-sm block w-full"
+                        value="{{ $manageshift->clientSupported->first_name }} {{ $manageshift->clientSupported->last_name }}"
+                        disabled />
+                    <input type="hidden" name="client_supported" id="client_supported"
+                        value="{{ $manageshift->clientSupported->id }}" />
                 </div>
 
                 <!-- Submission Date -->
@@ -111,7 +97,7 @@
                 <!-- Expenses -->
                 <div class="mx-4 my-5">
                     <label for="expenses">Expenses ($AUD)</label>
-                    <x-input type="integer" name="expenses" id="expenses"
+                    <x-input type="float" name="expenses" id="expenses"
                         class="form-input rounded-md shadow-sm block w-full" value="{{ $manageshift->expenses }}" />
                     @error('expenses')
                         <p class="text-sm text-red-600">{{ $message }}</p>
@@ -121,7 +107,7 @@
                 <!-- km Travelled -->
                 <div class="mx-4 my-5">
                     <label for="km">Km Travelled</label>
-                    <x-input type="integer" name="km" id="km"
+                    <x-input type="float" name="km" id="km"
                         class="form-input rounded-md shadow-sm block w-full" value="{{ $manageshift->km }}" />
                     @error('km')
                         <p class="text-sm text-red-600">{{ $message }}</p>
@@ -131,7 +117,7 @@
                 <!-- Hours Worked -->
                 <div class="mx-4 my-5">
                     <label for="hours">Hours Worked</label>
-                    <x-input type="integer" name="hours" id="hours"
+                    <x-input type="float" name="hours" id="hours"
                         class="form-input rounded-md shadow-sm block w-full" value="{{ $manageshift->hours }}" />
                     @error('hours')
                         <p class="text-sm text-red-600">{{ $message }}</p>
