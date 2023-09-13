@@ -45,6 +45,7 @@ class UpdateClientRequest extends FormRequest
             ],
             'supported_by' => 'nullable|array',
             'managed_by' => 'nullable|array',
+            'clientContract' => 'nullable|array',
         ];
     }
 }
