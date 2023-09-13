@@ -72,11 +72,11 @@ class ClientSeeder extends Seeder
             'invoicing_codes' => '108-3926'],
 
             [
-                'first_name' => 'Emily',
-                'last_name' => 'Smith',
+                'first_name' => 'Emilia',
+                'last_name' => 'Johns',
                 'active' => 1,
                 'phone' => '04 1457 0776',
-                'email' => 'emilysmith@mailinator.com',
+                'email' => 'emiliajohns@mailinator.com',
                 'address' => '123 Oak Avenue, Riverside',
                 'invoicing_codes' => '785-9431'
             ],

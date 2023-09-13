@@ -16,7 +16,7 @@ class UserSeeder extends Seeder
         DB::table('users')->insert([
         [
             'first_name' => 'Liam',
-            'last_name' => 'Admin',
+            'last_name' => 'Terry',
             'email' => 'admin@nrsn.com',
             'password' => bcrypt('root1234'),
             'created_at' => '2022-11-15 09:37:21',
@@ -29,7 +29,7 @@ class UserSeeder extends Seeder
         ],
         [
             'first_name' => 'Liam',
-            'last_name' => 'Manager',
+            'last_name' => 'Reardon',
             'email' => 'manager@nrsn.com',
             'password' => bcrypt('root1234'),
             'created_at' => '2022-11-15 09:37:21',
@@ -41,8 +41,8 @@ class UserSeeder extends Seeder
             'abn' => '12345678901'
         ],
         [
-            'first_name' => 'Liam',
-            'last_name' => 'Worker',
+            'first_name' => 'Shuran',
+            'last_name' => 'Yang',
             'email' => 'worker@nrsn.com',
             'password' => bcrypt('root1234'),
             'created_at' => '2022-11-15 09:37:21',
@@ -54,8 +54,8 @@ class UserSeeder extends Seeder
             'abn' => '12345678901'
         ],
         [
-            'first_name' => 'Emily',
-            'last_name' => 'Johnson',
+            'first_name' => 'Junji',
+            'last_name' => 'Oshiro',
             'email' => 'emilyj@gmail.com',
             'password' => bcrypt('password123'),
             'created_at' => '2022-11-15 09:37:21',
@@ -96,7 +96,7 @@ class UserSeeder extends Seeder
         ],
 
         [
-            'first_name' => 'Liam',
+            'first_name' => 'Will',
             'last_name' => 'Wilson',
             'email' => 'liamwilson@gmail.com',
             'password' => bcrypt('abc12345'),
