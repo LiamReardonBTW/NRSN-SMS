@@ -33,6 +33,28 @@
                     class="form-input rounded-md shadow-sm block w-full" value="{{ $manageclient->updated_at }}" />
             </div>
 
+            <div class="mx-4 my-5">
+                <h2>Client Contract</h2>
+                <ul class="py-2 font-normal text-base bg-white rounded-md shadow-sm block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
+                    @if ($manageclient->clientContracts->isEmpty() || !$manageclient->clientContracts->contains('active', true))
+                        <li class="mx-2">No active contract</li>
+                    @else
+                        @foreach ($manageclient->clientContracts as $contract)
+                            @if ($contract->active)
+                                @if ($contract->enddate) <!-- Check if enddate is not null -->
+                                    <li class="mx-2">Active until:<br> {{ \Carbon\Carbon::parse($contract->enddate)->format('Y-m-d') }}</li>
+                                    <div class="mx-2">
+                                        <a href="{{ route('client.contracts', ['clientId' => $manageclient->id]) }}" class="rounded p-1 bg-green-300">View Contract</a>
+                                    </div>
+                                @else
+                                    <li class="mx-2">No End Date</li>
+                                @endif
+                            @endif
+                        @endforeach
+                    @endif
+                </ul>
+            </div>
+
         </div><!-- End Uneditable Information Container -->
 
         <!-- Client Information Container -->

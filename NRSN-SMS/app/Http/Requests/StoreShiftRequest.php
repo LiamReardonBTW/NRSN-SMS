@@ -38,10 +38,10 @@ class StoreShiftRequest extends FormRequest
                 'required', 'date',
             ],
             'expenses' => [
-                'numeric',
+                'numeric', 'nullable',
             ],
             'km' => [
-                'numeric',
+                'numeric', 'nullable',
             ],
             'hours' => [
                 'required', 'numeric', 'min:0.25', 'max:24',

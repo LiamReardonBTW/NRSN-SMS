@@ -134,10 +134,10 @@
                             {{ $shift->date }}
                         </td>
                         <td scope="row" class="px-1 py-1 text-center">
-                            ${{ $shift->expenses }}
+                            ${{ $shift->expenses ?? 0 }}
                         </td>
                         <td scope="row" class="px-1 py-1 text-center">
-                            {{ $shift->km }}km
+                            {{ $shift->km ?? 0 }}km
                         </td>
                         <td scope="row" class="px-1 py-1 text-center">
                             {{ $shift->hours }}
