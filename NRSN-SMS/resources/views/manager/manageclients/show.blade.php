@@ -46,6 +46,9 @@
                         @foreach ($activeContracts as $contract)
                             @if ($contract->enddate) <!-- Check if enddate is not null -->
                                 <li class="mx-2">Active until:<br> {{ \Carbon\Carbon::parse($contract->enddate)->format('Y-m-d') }}</li>
+                                <div class="mx-2">
+                                    <a href="{{ route('client.contracts', ['clientId' => $manageclient->id]) }}" class="rounded p-1 bg-green-300">View Contract</a>
+                                </div>
                             @else
                                 <li class="mx-2">No End Date</li>
                             @endif

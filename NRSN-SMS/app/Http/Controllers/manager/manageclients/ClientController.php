@@ -9,6 +9,7 @@ use App\Models\Client;
 use App\Models\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class ClientController extends Controller
 {
@@ -125,4 +126,27 @@ class ClientController extends Controller
         $manageclient->delete();
         return redirect()->route('manageclients.index');
     }
+
+
+    public function showContracts($clientId)
+    {
+        // Find the client by ID and check if it's associated with the current user
+        $client = Client::whereHas('managedByUser', function ($query) {
+            $query->where('users.id', Auth::id());
+        })
+            ->where('id', $clientId)
+            ->first();
+
+        // If the client is not found or not associated with the user, redirect to the index page
+        if (!$client) {
+            return redirect()->route('manageclients.index')->with('alert-fail',"Error: You do not have permission to view the clients contract.");;
+        }
+
+        // Load the client's contracts
+        $contracts = $client->clientContracts; // Assuming you have a relationship defined
+
+        // Pass the client and contracts data to the view
+        return view('manager.manageclients.contract', compact('client', 'contracts'));
+    }
+
 }

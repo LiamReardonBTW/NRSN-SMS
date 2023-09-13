@@ -32,6 +32,8 @@ Route::group(['middleware' => 'isManager'], function(){
     Route::resource('manager/manageclients', App\Http\Controllers\manager\manageclients\ClientController::class);
     Route::resource('manager/manageshifts', App\Http\Controllers\manager\manageshifts\ShiftController::class);
     Route::resource('manager/manageworkers', App\Http\Controllers\manager\manageworkers\WorkerController::class);
+
+    Route::get('manager/manageclients/{clientId}/contract', 'App\Http\Controllers\manager\manageclients\ClientController@showContracts')->name('client.contracts');
 });
 
 Route::group(['middleware' => 'isAdmin'], function(){
