@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
             ClientSeeder::class,
             ShiftSeeder::class,
             ClientUserSeeder::class,
+            ClientContractSeeder::class,
         ]);
     }
 }
