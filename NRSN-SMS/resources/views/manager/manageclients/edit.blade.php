@@ -48,7 +48,7 @@
                         <h2>Client Contract</h2>
                         <ul class="py-2 font-normal text-base bg-white rounded-md shadow-sm block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
                             @if (is_null($manageclient->clientContracts) || $manageclient->clientContracts->isEmpty())
-                                <li class="mx-2">No Contract</li>
+                                <li class="mx-2">No active contract</li>
                             @else
                                 @php
                                     $activeContracts = $manageclient->clientContracts->where('active', true);
