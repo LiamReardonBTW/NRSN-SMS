@@ -33,6 +33,27 @@
                     class="form-input rounded-md shadow-sm block w-full" value="{{ $allclient->updated_at }}" />
             </div>
 
+            <div class="mx-4 my-5">
+                <h2>Client Contract</h2>
+                <ul class="py-2 font-normal text-base bg-white rounded-md shadow-sm block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
+                    @if (is_null($allclient->clientContracts) || $allclient->clientContracts->isEmpty())
+                        <li class="mx-2">No Contract</li>
+                    @else
+                        @php
+                            $activeContracts = $allclient->clientContracts->where('active', true);
+                        @endphp
+
+                        @foreach ($activeContracts as $contract)
+                            @if ($contract->enddate) <!-- Check if enddate is not null -->
+                                <li class="mx-2">Active until:<br> {{ \Carbon\Carbon::parse($contract->enddate)->format('Y-m-d') }}</li>
+                            @else
+                                <li class="mx-2">No End Date</li>
+                            @endif
+                        @endforeach
+                    @endif
+                </ul>
+            </div>
+
         </div><!-- End Uneditable Information Container -->
 
         <!-- Client Information Container -->
