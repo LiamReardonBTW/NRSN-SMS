@@ -16,10 +16,10 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained('users');
             $table->dateTime('startdate');
             $table->dateTime('enddate')->nullable();
-            $table->float('weekdayhourlyrate');
-            $table->float('saturdayhourlyrate');
-            $table->float('sundayhourlyrate');
-            $table->float('publicholidayhourlyrate');
+            $table->double('weekdayhourlyrate');
+            $table->double('saturdayhourlyrate');
+            $table->double('sundayhourlyrate');
+            $table->double('publicholidayhourlyrate');
             $table->boolean('active')->default(true);
             $table->timestamps();
         });

@@ -48,17 +48,21 @@ class UserContractController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(UserContract $usercontract)
     {
-        //
+        $allUsers = User::all();
+        return view('admin/usercontracts.edit', compact('usercontract', 'allUsers'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateUserContractRequest $request, UserContract $usercontract)
     {
-        //
+        $validatedData = $request->validated();
+        $usercontract->update($validatedData);
+
+        return redirect()->route('usercontracts.show', $usercontract);
     }
 
     /**

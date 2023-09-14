@@ -11,7 +11,7 @@ class UpdateUserContractRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,34 @@ class UpdateUserContractRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'startdate' => [
+                'required',
+                'date',
+            ],
+            'enddate' => [
+                'required',
+                'date',
+            ],
+            'weekdayhourlyrate' => [
+                'required',
+                'numeric',
+            ],
+            'saturdayhourlyrate' => [
+                'required',
+                'numeric',
+            ],
+            'sundayhourlyrate' => [
+                'required',
+                'numeric',
+            ],
+            'publicholidayhourlyrate' => [
+                'required',
+                'numeric',
+            ],
+            'active' => [
+                'required',
+                'boolean',
+            ],
         ];
     }
 }
