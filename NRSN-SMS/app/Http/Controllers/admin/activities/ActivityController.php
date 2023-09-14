@@ -48,17 +48,20 @@ class ActivityController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Activity $activity)
     {
-        //
+        return view('admin/activities.edit', compact('activity'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateActivityRequest $request, Activity $activity)
     {
-        //
+        $validatedData = $request->validated();
+        $activity->update($validatedData);
+
+        return redirect()->route('activities.show', $activity);
     }
 
     /**

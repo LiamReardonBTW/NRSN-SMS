@@ -11,7 +11,7 @@ class UpdateActivityRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,24 @@ class UpdateActivityRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'activityname' => [
+                'required', 'string', 'max:255',
+            ],
+            'weekdayhourlycode' => [
+                'required', 'string', 'min:15', 'max:15',
+            ],
+            'saturdayhourlycode' => [
+                'required', 'string', 'min:15', 'max:15',
+            ],
+            'sundayhourlycode' => [
+                'required', 'string', 'min:15', 'max:15',
+            ],
+            'publicholidayhourlycode' => [
+                'required', 'string', 'min:15', 'max:15',
+            ],
+            'active' => [
+                'required', 'boolean',
+            ],
         ];
     }
 }
