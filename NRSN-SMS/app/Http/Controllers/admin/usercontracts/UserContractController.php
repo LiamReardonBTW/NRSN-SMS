@@ -40,9 +40,9 @@ class UserContractController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(UserContract $usercontract)
     {
-        //
+        return view('admin.usercontracts.show', compact('usercontract'));
     }
 
     /**
