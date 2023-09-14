@@ -22,7 +22,46 @@ class StoreClientContractRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'client_id' => [
+                'required',
+                'numeric',
+            ],
+            'startdate' => [
+                'required',
+                'date',
+            ],
+            'enddate' => [
+                'required',
+                'date',
+            ],
+            'totalallocated' => [
+                'required',
+                'numeric',
+            ],
+            'balance' => [
+                'required',
+                'numeric',
+            ],
+            'weekdayhourlyrate' => [
+                'required',
+                'numeric',
+            ],
+            'saturdayhourlyrate' => [
+                'required',
+                'numeric',
+            ],
+            'sundayhourlyrate' => [
+                'required',
+                'numeric',
+            ],
+            'publicholidayhourlyrate' => [
+                'required',
+                'numeric',
+            ],
+            'active' => [
+                'required',
+                'boolean',
+            ],
         ];
     }
 }

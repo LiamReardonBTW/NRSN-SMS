@@ -106,7 +106,7 @@
                     @if (!$contract->active)
                         <tr class="even:bg-red-100 odd:bg-red-200 hover:bg-red-300 h-12 text-center">
                         @else
-                        <tr class="even:bg-gray-50 odd:bg-gray-200 hover:bg-blue-200 h-12 text-center">
+                        <tr class="even:bg-green-50 odd:bg-green-100 hover:bg-green-200 h-12 text-center">
                     @endif
                     <!-- Client Information -->
                     <td scope="row" class="px-1 py-1">
@@ -178,7 +178,7 @@
             Back
         </a>
         <!-- To Add Client Page -->
-        <a href="{{ route('allclients.create') }}"
+        <a href="{{ route('clientcontracts.create') }}"
             class="inline-flex items-center mx-4 px-6 py-4 bg-green-700 border border-transparent rounded-md font-semibold text-base text-white uppercase tracking-widest hover:bg-green-500 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">
             Add Client Contract </a>
         </a>

@@ -3,7 +3,7 @@
     <!-- Page Header Title -->
     <x-slot name="header">
         <!-- Shows selected clients first and last name -->
-        {{ __('Client Contract') }}
+        {{ __('Editing Client Contract:') }} {{ $clientcontract->client->first_name }} {{ $clientcontract->client->last_name }}
     </x-slot>
 
     <!-- Form Container -->
@@ -19,14 +19,14 @@
                 <!-- Client -->
                 <div class="mx-4 my-5 grid grid-rows-2">
                     <label for="client_id">Client</label>
-                    <x-input disabled type="text" name="client_name" id="client_name"
+                    <x-input disabled type="text" name="client_id" id="client_id"
                         class="form-input rounded-md shadow-sm block w-full"
                         value="{{ $clientcontract->client->first_name }} {{ $clientcontract->client->last_name }}" />
                 </div>
                 <!-- Start Date -->
                 <div class="mx-4 my-5 grid grid-rows-2">
                     <label for="startdate">Contract Start Date</label>
-                    <x-input disabled type="date" name="startdate" id="startdate"
+                    <x-input  type="date" name="startdate" id="startdate"
                         class="form-input rounded-md shadow-sm block w-full"
                         value="{{ \Carbon\Carbon::parse($clientcontract->startdate)->format('Y-m-d') }}" />
                     @error('startdate')
@@ -36,7 +36,7 @@
                 <!-- Contract End Date -->
                 <div class="mx-4 my-5 grid grid-rows-2">
                     <label for="enddate">Contract End Date</label>
-                    <x-input disabled type="date" name="enddate" id="enddate"
+                    <x-input  type="date" name="enddate" id="enddate"
                         class="form-input rounded-md shadow-sm block w-full"
                         value="{{ \Carbon\Carbon::parse($clientcontract->enddate)->format('Y-m-d') }}" />
                     @error('enddate')

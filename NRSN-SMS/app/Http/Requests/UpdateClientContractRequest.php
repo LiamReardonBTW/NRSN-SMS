@@ -23,11 +23,11 @@ class UpdateClientContractRequest extends FormRequest
     {
         return [
             'startdate' => [
-                'nullable',
+                'required',
                 'date',
             ],
             'enddate' => [
-                'nullable',
+                'required',
                 'date',
             ],
             'totalallocated' => [

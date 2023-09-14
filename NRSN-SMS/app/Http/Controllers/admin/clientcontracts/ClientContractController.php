@@ -26,15 +26,18 @@ class ClientContractController extends Controller
      */
     public function create()
     {
-        //
+        $clients = Client::all();
+        return view('admin/clientcontracts.create', compact('clients'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreClientContractRequest $request)
     {
-        //
+        ClientContract::create($request->validated());
+
+        return redirect()->route('clientcontracts.index');
     }
 
     /**
@@ -69,8 +72,9 @@ class ClientContractController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(ClientContract $clientcontract)
     {
-        //
+        $clientcontract->delete();
+        return redirect()->route('clientcontracts.index');
     }
 }
