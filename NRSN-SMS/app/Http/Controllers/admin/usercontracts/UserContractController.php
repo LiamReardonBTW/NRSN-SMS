@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers\Admin\usercontracts;
 
+use App\Http\Requests\StoreUserContractRequest;
+use App\Http\Requests\UpdateUserContractRequest;
+use App\Models\User;
+use App\Models\UserContract;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -12,7 +16,9 @@ class UserContractController extends Controller
      */
     public function index()
     {
-        //
+        $usercontracts = UserContract::all();
+
+        return view('admin/usercontracts.index', compact('usercontracts'));
     }
 
     /**
