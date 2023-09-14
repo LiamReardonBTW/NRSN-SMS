@@ -92,4 +92,9 @@ class User extends Authenticatable
         return $this->hasMany(Shift::class, 'submitted_by', 'id');
     }
 
+    public function userContracts()
+    {
+        return $this->hasMany(UserContract::class, 'user_id');
+    }
+
 }
