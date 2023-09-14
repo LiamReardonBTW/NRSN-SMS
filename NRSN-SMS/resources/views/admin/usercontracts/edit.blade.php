@@ -26,7 +26,7 @@
                 <!-- Start Date -->
                 <div class="mx-4 my-5 grid grid-rows-2">
                     <label for="startdate">Contract Start Date</label>
-                    <x-input  type="date" name="startdate" id="startdate"
+                    <x-input type="date" name="startdate" id="startdate"
                         class="form-input rounded-md shadow-sm block w-full"
                         value="{{ \Carbon\Carbon::parse($usercontract->startdate)->format('Y-m-d') }}" />
                     @error('startdate')
@@ -36,7 +36,7 @@
                 <!-- Contract End Date -->
                 <div class="mx-4 my-5 grid grid-rows-2">
                     <label for="enddate">Contract End Date</label>
-                    <x-input  type="date" name="enddate" id="enddate"
+                    <x-input type="date" name="enddate" id="enddate"
                         class="form-input rounded-md shadow-sm block w-full"
                         value="{{ \Carbon\Carbon::parse($usercontract->enddate)->format('Y-m-d') }}" />
                     @error('enddate')
@@ -120,6 +120,6 @@
                     Submit
                 </button>
             </div>
+        </form>
     </div>
-
 </x-app-layout>
