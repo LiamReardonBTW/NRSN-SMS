@@ -26,15 +26,17 @@ class ActivityController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin/activities.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreActivityRequest $request)
     {
-        //
+        Activity::create($request->validated());
+
+        return redirect()->route('activities.index');
     }
 
     /**
@@ -67,8 +69,9 @@ class ActivityController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Activity $activity)
     {
-        //
+        $activity->delete();
+        return redirect()->route('activities.index');
     }
 }
