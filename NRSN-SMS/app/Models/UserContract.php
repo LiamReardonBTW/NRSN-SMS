@@ -5,16 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ClientContract extends Model
+class UserContract extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'client_id',
+        'user_id',
         'startdate',
         'enddate',
-        'totalallocated',
-        'balance',
         'weekdayhourlyrate',
         'saturdayhourlyrate',
         'sundayhourlyrate',
@@ -22,13 +20,9 @@ class ClientContract extends Model
         'active',
     ];
 
-    protected $casts = [
-        'enddate' => 'datetime',
-        'startdate' => 'datetime',
-    ];
-
-    public function client()
+    public function user()
     {
-        return $this->belongsTo(Client::class, 'client_id');
+        return $this->belongsTo(User::class, 'user_id');
     }
+
 }

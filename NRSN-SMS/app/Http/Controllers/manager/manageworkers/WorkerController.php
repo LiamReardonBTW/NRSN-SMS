@@ -84,4 +84,17 @@ class WorkerController extends Controller
         $manageworker->delete();
         return redirect()->route('manageworkers.index');
     }
+
+    public function showContracts($userId)
+    {
+        // Find the client by ID and check if it's associated with the current user
+        $user = User::find($userId);
+
+        // Load the client's contracts
+        $contracts = $user->userContracts; // Assuming you have a relationship defined
+
+        // Pass the client and contracts data to the view
+        return view('manager.manageworkers.contract', compact('user', 'contracts'));
+    }
+
 }

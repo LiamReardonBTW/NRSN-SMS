@@ -48,6 +48,7 @@ class UpdateUserRequest extends FormRequest
             ],
             'supported_clients' => 'nullable|array',
             'managed_clients' => 'nullable|array',
+            'userContract' => 'nullable|array',
         ];
     }
 }
