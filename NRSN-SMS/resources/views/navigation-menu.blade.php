@@ -128,6 +128,10 @@
                                     {{ __('All Users') }}
                                 </x-dropdown-link>
 
+                                <x-dropdown-link href="{{ route('clientcontracts.index') }}">
+                                    {{ __('Client Contracts') }}
+                                </x-dropdown-link>
+
                             </x-slot>
                         </x-dropdown>
                     </div>
@@ -251,6 +255,7 @@
                     <a href="{{ route('allclients.index') }}">All Clients</a><br>
                     <a href="{{ route('allshifts.index') }}">All Shifts</a><br>
                     <a href="{{ route('allusers.index') }}">All Users</a>
+                    <a href="{{ route('clientcontracts.index') }}">Client Contracts</a>
                 </x-slot>
             </x-responsive-nav-link-parent>
             @endif
