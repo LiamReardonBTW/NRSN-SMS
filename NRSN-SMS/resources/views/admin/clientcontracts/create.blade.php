@@ -72,7 +72,7 @@
                 </div>
 
                 <!-- Total Balance Allocated -->
-                <div class="mx-4 my-5 grid grid-rows-2">
+                <div class="hidden mx-4 my-5 grid grid-rows-2">
                     <label for="balance">Total Balance Allocated</label>
                     <x-input hidden type="numeric" name="balance" id="balance"
                         class="form-input rounded-md shadow-sm block w-full"

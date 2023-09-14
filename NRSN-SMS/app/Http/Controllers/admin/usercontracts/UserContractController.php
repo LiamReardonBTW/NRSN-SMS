@@ -26,15 +26,18 @@ class UserContractController extends Controller
      */
     public function create()
     {
-        //
+        $users = User::all();
+        return view('admin/usercontracts.create', compact('users'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreUserContractRequest $request)
     {
-        //
+        UserContract::create($request->validated());
+
+        return redirect()->route('usercontracts.index');
     }
 
     /**
@@ -68,8 +71,9 @@ class UserContractController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(UserContract $usercontract)
     {
-        //
+        $usercontract->delete();
+        return redirect()->route('usercontracts.index');
     }
 }

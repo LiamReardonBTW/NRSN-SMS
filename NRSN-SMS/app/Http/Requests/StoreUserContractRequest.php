@@ -11,7 +11,7 @@ class StoreUserContractRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,38 @@ class StoreUserContractRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'user_id' => [
+                'required',
+                'numeric',
+            ],
+            'startdate' => [
+                'required',
+                'date',
+            ],
+            'enddate' => [
+                'required',
+                'date',
+            ],
+            'weekdayhourlyrate' => [
+                'required',
+                'numeric',
+            ],
+            'saturdayhourlyrate' => [
+                'required',
+                'numeric',
+            ],
+            'sundayhourlyrate' => [
+                'required',
+                'numeric',
+            ],
+            'publicholidayhourlyrate' => [
+                'required',
+                'numeric',
+            ],
+            'active' => [
+                'required',
+                'boolean',
+            ],
         ];
     }
 }
