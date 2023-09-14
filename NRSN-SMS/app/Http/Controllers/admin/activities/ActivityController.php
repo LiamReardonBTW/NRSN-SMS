@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers\admin\activities;
 
+use App\Http\Requests\StoreActivityRequest;
+use App\Http\Requests\UpdateActivityRequest;
+use App\Models\ClientContract;
+use App\Models\Activity;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -12,7 +16,9 @@ class ActivityController extends Controller
      */
     public function index()
     {
-        //
+        $activities = Activity::all();
+
+        return view('admin/activities.index', compact('activities'));
     }
 
     /**
