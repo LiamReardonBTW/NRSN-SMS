@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers\Admin\clientcontracts;
 
+use App\Http\Requests\StoreClientContractRequest;
+use App\Http\Requests\UpdateClientContractRequest;
+use App\Models\Client;
+use App\Models\ClientContract;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -12,7 +16,9 @@ class ClientContractController extends Controller
      */
     public function index()
     {
-        //
+        $clientcontracts = ClientContract::all();
+
+        return view('admin/clientcontracts.index', compact('clientcontracts'));
     }
 
     /**

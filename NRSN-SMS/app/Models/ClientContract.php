@@ -22,6 +22,11 @@ class ClientContract extends Model
         'active',
     ];
 
+    protected $casts = [
+        'enddate' => 'datetime',
+        'startdate' => 'datetime',
+    ];
+
     public function client()
     {
         return $this->belongsTo(Client::class, 'client_id');
