@@ -20,7 +20,7 @@ class ClientContractSeeder extends Seeder
 
         foreach ($clientIds as $clientId) {
             // Determine if the client should have an active contract
-            $hasActiveContract = rand(0, 1);
+            $hasActiveContract = 1;
 
             // Generate one active contract if $hasActiveContract is true
             if ($hasActiveContract) {
@@ -31,11 +31,12 @@ class ClientContractSeeder extends Seeder
                     'client_id' => $clientId,
                     'startdate' => $startDate,
                     'enddate' => $endDate,
+                    'totalallocated' => rand(50000, 100000),
                     'balance' => rand(1000, 100000) / 100,
-                    'weekdayhourlyrate' => rand(10, 50),
-                    'saturdayhourlyrate' => rand(15, 60),
-                    'sundayhourlyrate' => rand(20, 80),
-                    'publicholidayhourlyrate' => rand(25, 100),
+                    'weekdayhourlyrate' => rand(15, 25),
+                    'saturdayhourlyrate' => rand(25, 40),
+                    'sundayhourlyrate' => rand(40, 80),
+                    'publicholidayhourlyrate' => rand(60, 100),
                     'active' => true,
                     'created_at' => now(),
                     'updated_at' => now(),
@@ -46,7 +47,7 @@ class ClientContractSeeder extends Seeder
         }
 
         // Define the total number of inactive contracts you want to generate
-        $totalInactiveContracts = 10;
+        $totalInactiveContracts = 12;
 
         // Generate inactive contracts (may have many)
         for ($i = 0; $i < $totalInactiveContracts; $i++) {
@@ -58,6 +59,7 @@ class ClientContractSeeder extends Seeder
                 'client_id' => $clientId,
                 'startdate' => $startDate,
                 'enddate' => $endDate,
+                'totalallocated' => rand(50000, 100000),
                 'balance' => rand(1000, 100000) / 100,
                 'weekdayhourlyrate' => rand(10, 50),
                 'saturdayhourlyrate' => rand(15, 60),

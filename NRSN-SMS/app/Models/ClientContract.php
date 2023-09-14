@@ -13,6 +13,7 @@ class ClientContract extends Model
         'client_id',
         'startdate',
         'enddate',
+        'totalallocated',
         'balance',
         'weekdayhourlyrate',
         'saturdayhourlyrate',

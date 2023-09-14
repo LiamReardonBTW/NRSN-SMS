@@ -18,6 +18,7 @@ class CreateClientContractsTable extends Migration
             $table->foreignId('client_id')->constrained('clients'); // Assuming 'clients' is the table name for clients
             $table->dateTime('startdate');
             $table->dateTime('enddate')->nullable();
+            $table->float('totalallocated');
             $table->float('balance');
             $table->float('weekdayhourlyrate');
             $table->float('saturdayhourlyrate');
