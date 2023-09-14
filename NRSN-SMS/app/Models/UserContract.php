@@ -20,6 +20,11 @@ class UserContract extends Model
         'active',
     ];
 
+    protected $casts = [
+        'enddate' => 'datetime',
+        'startdate' => 'datetime',
+    ];
+
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id');

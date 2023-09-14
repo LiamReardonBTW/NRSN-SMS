@@ -45,7 +45,6 @@ class ClientContractController extends Controller
      */
     public function show(ClientContract $clientcontract)
     {
-        // Use $clientcontract instead of $contract
         return view('admin.clientcontracts.show', compact('clientcontract'));
     }
 

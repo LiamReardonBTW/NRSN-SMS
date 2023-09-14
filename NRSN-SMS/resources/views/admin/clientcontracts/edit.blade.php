@@ -114,7 +114,7 @@
                 </div>
 
                 <!-- Active Status -->
-                <div class="mx-4 my-5 pb-8 grid grid-rows-2">
+                <div class="mx-4 my-5 grid grid-rows-2">
                     <label for="active">Active Status</label>
                     <select name="active" id="active" class="form-select rounded-md shadow-sm block w-full">
                         <option value="1" {{ $clientcontract->active === '1' ? 'selected' : '' }}>Active</option>
