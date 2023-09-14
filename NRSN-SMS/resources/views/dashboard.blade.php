@@ -228,6 +228,28 @@
                 @endslot
             @endcomponent
 
+            <!-- Admin User Contracts Card -->
+            @component('components.dashboardcard')
+                @slot('requiredrole')
+                    admin
+                @endslot
+                @slot('route')
+                    {{ route('usercontracts.index') }}
+                @endslot
+                @slot('title')
+                    <svg class="inline-block mx-auto h-6 w-6 text-black" width="24" height="24" viewBox="0 0 24 24"
+                        stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2" />
+                    </svg><br>
+                    User Contracts
+                @endslot
+                @slot('description')
+                    View All User Contracts
+                @endslot
+            @endcomponent
+
         </div>
     @endif
 
