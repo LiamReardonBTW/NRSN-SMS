@@ -41,6 +41,8 @@ Route::group(['middleware' => 'isAdmin'], function(){
     Route::resource('admin/allclients', App\Http\Controllers\admin\allclients\ClientController::class);
     Route::resource('admin/allusers', App\Http\Controllers\admin\allusers\UserController::class);
     Route::resource('admin/allshifts', App\Http\Controllers\admin\allshifts\ShiftController::class);
+
+    Route::resource('admin/clientcontracts', App\Http\Controllers\admin\clientcontracts\ClientContractController::class);
 });
 
 Route::middleware([
