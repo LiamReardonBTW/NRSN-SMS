@@ -40,9 +40,10 @@ class ClientContractController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(ClientContract $clientcontract)
     {
-        //
+        // Use $clientcontract instead of $contract
+        return view('admin.clientcontracts.show', compact('clientcontract'));
     }
 
     /**
