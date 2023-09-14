@@ -47,10 +47,13 @@
                                     <div class="grid grid-cols-2">
                                         <li class="mx-2">Active until:<br>
                                             {{ \Carbon\Carbon::parse($contract->enddate)->format('Y-m-d') }}</li>
-                                        <div class="rounded p-2 my-auto mx-2 text-center bg-green-300">
-                                            <a href="{{ route('client.contracts', ['clientId' => $manageclient->id]) }}"
-                                                >View Contract</a>
-                                        </div>
+                                        <a href="{{ route('client.contracts', ['clientId' => $manageclient->id]) }}">
+                                            <div class="rounded p-2 my-auto mx-2 text-center bg-green-300">
+                                                <div style="cursor: pointer;">
+                                                    View Contract
+                                                </div>
+                                            </div>
+                                        </a>
                                     </div>
                                 @else
                                     <li class="mx-2">No End Date</li>

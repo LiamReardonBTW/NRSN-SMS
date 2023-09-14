@@ -32,6 +32,37 @@
                     class="form-input rounded-md shadow-sm block w-full" value="{{ $manageworker->updated_at }}" />
             </div>
 
+            <div class="mx-4 my-5">
+                <h2>Worker Contract</h2>
+                <ul
+                    class="py-2 font-normal text-base bg-white rounded-md shadow-sm block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
+                    @if ($manageworker->userContracts->isEmpty() || !$manageworker->userContracts->contains('active', true))
+                        <li class="mx-2">No active contract</li>
+                    @else
+                        @foreach ($manageworker->userContracts as $contract)
+                            @if ($contract->active)
+                                @if ($contract->enddate)
+                                    <!-- Check if enddate is not null -->
+                                    <div class="grid grid-cols-2">
+                                        <li class="mx-2">Active until:<br>
+                                            {{ \Carbon\Carbon::parse($contract->enddate)->format('Y-m-d') }}</li>
+                                        <a href="{{ route('user.contracts', ['workerId' => $manageworker->id]) }}">
+                                            <div class="rounded p-2 my-auto mx-2 text-center bg-green-300">
+                                                <div style="cursor: pointer;">
+                                                    View Contract
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                @else
+                                    <li class="mx-2">No End Date</li>
+                                @endif
+                            @endif
+                        @endforeach
+                    @endif
+                </ul>
+            </div>
+
         </div><!-- Close id,created,updated Container -->
 
         <!-- Worker Information Container -->

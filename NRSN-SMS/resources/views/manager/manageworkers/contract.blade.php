@@ -3,7 +3,7 @@
     <!-- Page Header Title -->
     <x-slot name="header">
         <!-- Shows selected clients first and last name -->
-        {{ __('User Contract:') }} {{ $user->first_name }} {{ $user->last_name }}
+        {{ __('Worker Contract:') }} {{ $user->first_name }} {{ $user->last_name }}
     </x-slot>
 
     <!-- Form Container -->
