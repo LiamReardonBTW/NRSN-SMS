@@ -127,6 +127,31 @@
 
             </div>
 
+            <!-- Client Activities -->
+            <div class="text-2xl font-medium overflow-hidden px-6 lg:px-8 mx-4 my-5">
+                <h2 class="text-xl font-semibold mb-2">Assign Activities</h2>
+                <div class="rounded-md bg-white shadow-md p-4 max-h-40 overflow-y-auto text-sm">
+                    <ul>
+                        @php
+                            $assignedActivities = $clientcontract->activities->sortBy('activityname');
+                            $unassignedActivities = $allActivities
+                                ->reject(function ($activity) use ($assignedActivities) {
+                                    return $assignedActivities->contains($activity);
+                                })
+                                ->sortBy('activityname');
+                            $activities = $assignedActivities->concat($unassignedActivities);
+                        @endphp
+                        @foreach ($activities as $activity)
+                            <li class="flex items-center justify-between mb-2">
+                                <label for="activity_{{ $activity->id }}" class="flex-grow">{{ $activity->activityname }}</label>
+                                <input type="checkbox" id="activity_{{ $activity->id }}" name="activities[]"
+                                    value="{{ $activity->id }}" {{ $clientcontract->activities->contains($activity) ? 'checked' : '' }}>
+                            </li>
+                        @endforeach
+                    </ul>
+                </div>
+            </div>
+
             <!-- Page Navigation Buttons -->
             <div
                 class="flex items-center justify-start pb-6 py-3 text-right sm:px-6 grid grid-cols-1 md:grid-cols-3 lg:gap-8 px-6 lg:px-8 py-2">

@@ -86,20 +86,38 @@
             </div>
 
         </div>
+
+        <!-- Clients Activities -->
+        <div class="text-2xl font-medium overflow-hidden px-6 lg:px-8 mx-4 my-5">
+            <h2 class="text-xl font-semibold mb-2">Activities</h2>
+            <div class="rounded-md bg-white shadow-md p-4 max-h-40 overflow-y-auto text-sm">
+                <!-- Add text-sm class for smaller text -->
+                <ul>
+                    @if ($clientcontract->activities->isEmpty())
+                        <li>Currently no activities.</li>
+                    @else
+                        @foreach ($clientcontract->activities as $activity)
+                            <li>{{ $activity->activityname }}</li>
+                        @endforeach
+                    @endif
+                </ul>
+            </div>
+        </div>
+
+        <!-- Page Navigation Buttons -->
+        <div
+            class="flex items-center justify-start pb-6 py-3 text-right sm:px-6 grid grid-cols-1 md:grid-cols-3 lg:gap-8 px-6 lg:px-8 py-2">
+            <!-- Back to manage clients index page -->
+            <a href="{{ route('clientcontracts.index') }}"
+                class="inline-flex items-center mx-4 px-6 py-4 bg-red-700 border border-transparent rounded-md font-semibold text-base text-white uppercase tracking-widest hover:bg-red-500 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">
+                Back
+            </a>
+            <!-- To Edit Contract page -->
+            <a href="{{ route('clientcontracts.edit', $clientcontract) }}"
+                class="inline-flex items-center mx-4 px-6 py-4 bg-blue-700 border border-transparent rounded-md font-semibold text-base text-white uppercase tracking-widest hover:bg-blue-500 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">
+                Edit Contract
+            </a>
+        </div>
     </div>
 
-    <!-- Page Navigation Buttons -->
-    <div
-        class="flex items-center justify-start pb-6 py-3 text-right sm:px-6 grid grid-cols-1 md:grid-cols-3 lg:gap-8 px-6 lg:px-8 py-2">
-        <!-- Back to manage clients index page -->
-        <a href="{{ route('clientcontracts.index') }}"
-            class="inline-flex items-center mx-4 px-6 py-4 bg-red-700 border border-transparent rounded-md font-semibold text-base text-white uppercase tracking-widest hover:bg-red-500 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">
-            Back
-        </a>
-        <!-- To Edit Contract page -->
-        <a href="{{ route('clientcontracts.edit', $clientcontract) }}"
-            class="inline-flex items-center mx-4 px-6 py-4 bg-blue-700 border border-transparent rounded-md font-semibold text-base text-white uppercase tracking-widest hover:bg-blue-500 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">
-            Edit Contract
-        </a>
-    </div>
 </x-app-layout>

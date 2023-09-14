@@ -58,6 +58,7 @@ class UpdateClientContractRequest extends FormRequest
                 'required',
                 'boolean',
             ],
+            'activities' => 'nullable|array',
         ];
     }
 }

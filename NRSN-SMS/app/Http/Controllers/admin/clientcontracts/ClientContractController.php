@@ -6,6 +6,7 @@ use App\Http\Requests\StoreClientContractRequest;
 use App\Http\Requests\UpdateClientContractRequest;
 use App\Models\Client;
 use App\Models\ClientContract;
+use App\Models\Activity;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -54,7 +55,8 @@ class ClientContractController extends Controller
     public function edit(ClientContract $clientcontract)
     {
         $allClients = Client::all();
-        return view('admin/clientcontracts.edit', compact('clientcontract', 'allClients'));
+        $allActivities = Activity::all();
+        return view('admin/clientcontracts.edit', compact('clientcontract', 'allClients', 'allActivities'));
     }
 
     /**
@@ -63,6 +65,17 @@ class ClientContractController extends Controller
     public function update(UpdateClientContractRequest $request, ClientContract $clientcontract)
     {
         $validatedData = $request->validated();
+
+        // Handle activities
+        if (isset($validatedData['activities'])) {
+            // Synchronize the selected activity IDs with the contract's activities
+            $clientcontract->activities()->sync($validatedData['activities']);
+        } else {
+            // If no activities are selected, detach all activities from the contract
+            $clientcontract->activities()->detach();
+        }
+
+        // Handle other user data updates
         $clientcontract->update($validatedData);
 
         return redirect()->route('clientcontracts.show', $clientcontract);

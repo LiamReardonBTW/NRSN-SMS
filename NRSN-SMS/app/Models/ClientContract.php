@@ -34,7 +34,7 @@ class ClientContract extends Model
 
     public function activities()
     {
-        return $this->belongsToMany(Activity::class);
+        return $this->belongsToMany(Activity::class, 'client_contract_activity');
     }
 
 }
