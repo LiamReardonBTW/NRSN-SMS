@@ -49,17 +49,21 @@ class ClientContractController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(ClientContract $clientcontract)
     {
-        //
+        $allClients = Client::all();
+        return view('admin/clientcontracts.edit', compact('clientcontract', 'allClients'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateClientContractRequest $request, ClientContract $clientcontract)
     {
-        //
+        $validatedData = $request->validated();
+        $clientcontract->update($validatedData);
+
+        return redirect()->route('clientcontracts.show', $clientcontract);
     }
 
     /**

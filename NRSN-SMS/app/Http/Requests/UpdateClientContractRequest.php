@@ -22,7 +22,42 @@ class UpdateClientContractRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'startdate' => [
+                'nullable',
+                'date',
+            ],
+            'enddate' => [
+                'nullable',
+                'date',
+            ],
+            'totalallocated' => [
+                'required',
+                'numeric',
+            ],
+            'balance' => [
+                'required',
+                'numeric',
+            ],
+            'weekdayhourlyrate' => [
+                'required',
+                'numeric',
+            ],
+            'saturdayhourlyrate' => [
+                'required',
+                'numeric',
+            ],
+            'sundayhourlyrate' => [
+                'required',
+                'numeric',
+            ],
+            'publicholidayhourlyrate' => [
+                'required',
+                'numeric',
+            ],
+            'active' => [
+                'required',
+                'boolean',
+            ],
         ];
     }
 }
