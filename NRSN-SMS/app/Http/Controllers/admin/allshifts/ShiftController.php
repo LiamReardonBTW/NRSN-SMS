@@ -85,4 +85,34 @@ class ShiftController extends Controller
         $allshift->delete();
         return redirect()->route('allshifts.index');
     }
+
+
+    public function approve($id)
+    {
+        $shift = Shift::find($id);
+
+        if (!$shift) {
+            return redirect()->route('allshifts.index');
+        }
+
+        // Update the 'approved' field to true
+        $shift->update(['approved' => true]);
+
+        return redirect()->route('allshifts.index');
+    }
+
+    public function unapprove($id)
+    {
+        $shift = Shift::find($id);
+
+        if (!$shift) {
+            return redirect()->route('allshifts.index');
+        }
+
+        // Update the 'approved' field to true
+        $shift->update(['approved' => false]);
+
+        return redirect()->route('allshifts.index');
+    }
+
 }

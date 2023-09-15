@@ -43,6 +43,8 @@ Route::group(['middleware' => 'isAdmin'], function () {
     Route::resource('admin/allclients', App\Http\Controllers\admin\allclients\ClientController::class);
     Route::resource('admin/allusers', App\Http\Controllers\admin\allusers\UserController::class);
     Route::resource('admin/allshifts', App\Http\Controllers\admin\allshifts\ShiftController::class);
+    Route::get('admin/allshifts/{id}/approve', [App\Http\Controllers\admin\allshifts\ShiftController::class, 'approve'])->name('allshifts.approve');
+    Route::get('admin/allshifts/{id}/unapprove', [App\Http\Controllers\admin\allshifts\ShiftController::class, 'unapprove'])->name('allshifts.unapprove');
     Route::resource('admin/clientcontracts', App\Http\Controllers\admin\clientcontracts\ClientContractController::class);
     Route::resource('admin/usercontracts', App\Http\Controllers\admin\usercontracts\UserContractController::class);
     Route::resource('admin/activities', App\Http\Controllers\admin\activities\ActivityController::class);
