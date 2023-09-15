@@ -56,6 +56,7 @@ class UpdateShiftRequest extends FormRequest
                 'required', 'int',
             ],
             'approved' => 'sometimes|boolean',
+            'paid' => 'sometimes|boolean',
         ];
     }
 }

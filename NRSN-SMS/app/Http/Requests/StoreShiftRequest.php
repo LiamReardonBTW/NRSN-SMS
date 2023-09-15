@@ -56,6 +56,7 @@ class StoreShiftRequest extends FormRequest
                 'required', 'int',
             ],
             'approved' => 'sometimes|boolean',
+            'paid' => 'sometimes|boolean',
         ];
     }
 }

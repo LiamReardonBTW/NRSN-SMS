@@ -46,6 +46,8 @@ Route::group(['middleware' => 'isAdmin'], function () {
     Route::resource('admin/allshifts', App\Http\Controllers\admin\allshifts\ShiftController::class);
     Route::get('admin/allshifts/{id}/approve', [App\Http\Controllers\admin\allshifts\ShiftController::class, 'approve'])->name('allshifts.approve');
     Route::get('admin/allshifts/{id}/unapprove', [App\Http\Controllers\admin\allshifts\ShiftController::class, 'unapprove'])->name('allshifts.unapprove');
+    Route::get('admin/allshifts/{id}/markPaid', [App\Http\Controllers\admin\allshifts\ShiftController::class, 'markPaid'])->name('allshifts.markPaid');
+    Route::get('admin/allshifts/{id}/unmarkPaid', [App\Http\Controllers\admin\allshifts\ShiftController::class, 'unmarkPaid'])->name('allshifts.unmarkPaid');
     Route::match(['post', 'patch'], '/allshifts/update-invoiced/{id}', 'App\Http\Controllers\admin\allshifts\ShiftController@updateInvoiced')->name('allshifts.updateInvoiced');
     Route::resource('admin/clientcontracts', App\Http\Controllers\admin\clientcontracts\ClientContractController::class);
     Route::resource('admin/usercontracts', App\Http\Controllers\admin\usercontracts\UserContractController::class);

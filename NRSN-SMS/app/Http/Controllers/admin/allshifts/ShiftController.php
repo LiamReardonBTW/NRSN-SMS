@@ -125,10 +125,36 @@ class ShiftController extends Controller
             'isinvoiced' => true,
         ]);
 
-        // Optionally, you can add some validation and error handling here.
-
         // Redirect back to the page where you came from, or any other appropriate URL
-        return redirect()->back()->with('success', 'Shift has been marked as invoiced.');
+        return redirect()->route('allshifts.index');
+    }
+
+    public function markPaid($id)
+    {
+        $shift = Shift::find($id);
+
+        if (!$shift) {
+            return redirect()->route('allshifts.index');
+        }
+
+        // Update the 'approved' field to true
+        $shift->update(['paid' => true]);
+
+        return redirect()->route('allshifts.index');
+    }
+
+    public function unmarkPaid($id)
+    {
+        $shift = Shift::find($id);
+
+        if (!$shift) {
+            return redirect()->route('allshifts.index');
+        }
+
+        // Update the 'approved' field to true
+        $shift->update(['paid' => false]);
+
+        return redirect()->route('allshifts.index');
     }
 
 }

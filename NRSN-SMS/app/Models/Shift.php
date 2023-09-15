@@ -22,6 +22,7 @@ class Shift extends Model
         'hours',
         'activity_id',
         'approved',
+        'paid',
     ];
 
     public function submittedByUser()
