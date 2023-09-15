@@ -52,6 +52,23 @@
                     @enderror
                 </div>
 
+                <!-- Activity Dropdown -->
+                <div class="mx-4 my-2">
+                    <label for="activity_id">Activity</label>
+                    <select name="activity_id" id="activity_id" class="form-select rounded-md shadow-sm block w-full">
+                        <option value="">Select an activity</option>
+                        @foreach ($activities as $activity)
+                            <option value="{{ $activity->id }}"
+                                {{ old('activity_id') == $activity->id ? 'selected' : '' }}>
+                                {{ $activity->activityname }}
+                            </option>
+                        @endforeach
+                    </select>
+                    @error('activity_id')
+                        <p class="text-sm text-red-600">{{ $message }}</p>
+                    @enderror
+                </div>
+
                 <!-- Date -->
                 <div class="mx-4 my-2">
                     <label for="date">Date</label>
