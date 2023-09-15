@@ -74,7 +74,6 @@ class ShiftController extends Controller
     public function update(UpdateShiftRequest $request, Shift $allshift)
     {
         $allshift->update($request->validated());
-
         return redirect()->route('allshifts.show', $allshift);
     }
     /**

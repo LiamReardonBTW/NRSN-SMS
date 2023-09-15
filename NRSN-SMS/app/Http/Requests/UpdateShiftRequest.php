@@ -55,6 +55,9 @@ class UpdateShiftRequest extends FormRequest
             'activity_id' => [
                 'required', 'int',
             ],
+            'is_public_holiday' => [
+                'nullable', 'boolean',
+            ],
             'approved' => 'sometimes|boolean',
             'paid' => 'sometimes|boolean',
         ];
