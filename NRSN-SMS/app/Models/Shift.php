@@ -23,6 +23,7 @@ class Shift extends Model
         'activity_id',
         'approved',
         'paid',
+        'is_public_holiday',
     ];
 
     public function submittedByUser()

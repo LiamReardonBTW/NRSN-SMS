@@ -27,6 +27,7 @@ return new class extends Migration
             $table->foreignId('activity_id')->constrained('activities');
             $table->boolean('approved')->default(0);
             $table->boolean('paid')->default(false);
+            $table->boolean('is_public_holiday')->default(false);
         });
     }
 
