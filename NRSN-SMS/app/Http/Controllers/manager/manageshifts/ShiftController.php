@@ -85,4 +85,33 @@ class ShiftController extends Controller
         $manageshift->delete();
         return redirect()->route('manageshifts.index');
     }
+
+    public function approve($id)
+    {
+        $shift = Shift::find($id);
+
+        if (!$shift) {
+            return redirect()->route('manageshifts.index');
+        }
+
+        // Update the 'approved' field to true
+        $shift->update(['approved' => true]);
+
+        return redirect()->route('manageshifts.index');
+    }
+
+    public function unapprove($id)
+    {
+        $shift = Shift::find($id);
+
+        if (!$shift) {
+            return redirect()->route('manageshifts.index');
+        }
+
+        // Update the 'approved' field to true
+        $shift->update(['approved' => false]);
+
+        return redirect()->route('manageshifts.index');
+    }
+
 }
