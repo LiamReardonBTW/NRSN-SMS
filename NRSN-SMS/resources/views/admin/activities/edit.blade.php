@@ -91,21 +91,23 @@
                         <p class="text-sm text-red-600">{{ $message }}</p>
                     @enderror
                 </div>
-                <!-- Page Navigation Buttons -->
-                <div
-                    class="flex items-center justify-start pb-6 py-3 text-right sm:px-6 grid grid-cols-1 md:grid-cols-3 lg:gap-8 px-6 lg:px-8 py-2">
-                    <!-- Back to manage clients index page -->
-                    <a href="{{ route('activities.index') }}"
-                        class="inline-flex items-center mx-4 px-6 py-4 bg-red-700 border border-transparent rounded-md font-semibold text-base text-white uppercase tracking-widest hover:bg-red-500 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">
-                        Back
-                    </a>
-                    <!-- Form Submit changes to activity Button -->
-                    <button
-                        class="inline-flex items-center mx-4 px-6 py-4 bg-green-700 border border-transparent rounded-md font-semibold text-base text-white uppercase tracking-widest hover:bg-green-500 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">
-                        Submit
-                    </button>
-                </div>
             </div>
+
+            <!-- Page Navigation Buttons -->
+            <div
+                class="flex items-center justify-start pb-6 py-3 text-right sm:px-6 grid grid-cols-1 md:grid-cols-3 lg:gap-8 px-6 lg:px-8 py-2">
+                <!-- Back to manage clients index page -->
+                <a href="{{ route('activities.index') }}"
+                    class="inline-flex items-center mx-4 px-6 py-4 bg-red-700 border border-transparent rounded-md font-semibold text-base text-white uppercase tracking-widest hover:bg-red-500 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">
+                    Back
+                </a>
+                <!-- Form Submit changes to activity Button -->
+                <button
+                    class="inline-flex items-center mx-4 px-6 py-4 bg-green-700 border border-transparent rounded-md font-semibold text-base text-white uppercase tracking-widest hover:bg-green-500 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">
+                    Submit
+                </button>
+            </div>
+
     </div>
 
 </x-app-layout>
