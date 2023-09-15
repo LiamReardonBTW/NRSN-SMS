@@ -55,6 +55,7 @@ class StoreShiftRequest extends FormRequest
             'activity_id' => [
                 'required', 'int',
             ],
+            'approved' => 'sometimes|boolean',
         ];
     }
 }
