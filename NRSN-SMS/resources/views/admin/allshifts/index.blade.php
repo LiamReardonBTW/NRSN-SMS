@@ -193,7 +193,7 @@
     </div> <!-- Close table container -->
 
     <!-- Table Container -->
-    <h2 class="text-xl font-semibold my-5">Approved Shifts</h2>
+    <h2 class="text-xl font-semibold my-5">Awaiting Invoice</h2>
     <div class="relative overflow-auto border-2 border-green-600 rounded">
 
         <!-- All Approved Shifts Table -->
@@ -307,7 +307,7 @@
 
                 <!-- For each shift in the shifts table, add a new row including their information -->
                 @foreach ($shifts as $shift)
-                    @if ($shift->approved === 1)
+                    @if ($shift->approved === 1 && $shift->isinvoiced === 0)
                         <tr class="even:bg-gray-50 odd:bg-gray-200 hover:bg-blue-200 h-12">
                             <!-- Shift Information -->
                             <td scope="row" class="px-1 py-1 text-center">
@@ -368,6 +368,14 @@
                                     <input type="submit"
                                         class="px-2 mx-1 py-1 bg-red-600 rounded hover:shadow-xl hover:bg-red-500"
                                         value="Delete">
+                                </form>
+                                <!-- Mark as Invoiced Form -->
+                                <form class="inline-block" action="{{ route('allshifts.updateInvoiced', $shift->id) }}"
+                                    method="POST">
+                                    @csrf
+                                    @method('PATCH') <!-- Change 'PUT' to 'PATCH' here -->
+                                    <button type="submit"
+                                        class="px-2 mx-1 py-1 bg-green-600 rounded hover:shadow-xl hover:bg-green-500">Generate Invoice</button>
                                 </form>
                             </td>
 

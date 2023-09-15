@@ -115,4 +115,20 @@ class ShiftController extends Controller
         return redirect()->route('allshifts.index');
     }
 
+    public function updateInvoiced(Request $request, $id)
+    {
+        // Find the shift by its ID
+        $shift = Shift::findOrFail($id);
+
+        // Update the 'invoiced' field to true
+        $shift->update([
+            'isinvoiced' => true,
+        ]);
+
+        // Optionally, you can add some validation and error handling here.
+
+        // Redirect back to the page where you came from, or any other appropriate URL
+        return redirect()->back()->with('success', 'Shift has been marked as invoiced.');
+    }
+
 }

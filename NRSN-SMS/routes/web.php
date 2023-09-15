@@ -33,6 +33,7 @@ Route::group(['middleware' => 'isManager'], function () {
     Route::resource('manager/manageshifts', App\Http\Controllers\manager\manageshifts\ShiftController::class);
     Route::get('manager/manageshifts/{id}/approve', [App\Http\Controllers\manager\manageshifts\ShiftController::class, 'approve'])->name('manageshifts.approve');
     Route::get('manager/manageshifts/{id}/unapprove', [App\Http\Controllers\manager\manageshifts\ShiftController::class, 'unapprove'])->name('manageshifts.unapprove');
+    Route::match(['post', 'patch'], '/manageshifts/update-invoiced/{id}', 'App\Http\Controllers\manager\manageshifts\ShiftController@updateInvoiced')->name('manageshifts.updateInvoiced');
     Route::resource('manager/manageworkers', App\Http\Controllers\manager\manageworkers\WorkerController::class);
 
     Route::get('manager/manageclients/{clientId}/contract', 'App\Http\Controllers\manager\manageclients\ClientController@showContracts')->name('client.contracts');
@@ -45,6 +46,7 @@ Route::group(['middleware' => 'isAdmin'], function () {
     Route::resource('admin/allshifts', App\Http\Controllers\admin\allshifts\ShiftController::class);
     Route::get('admin/allshifts/{id}/approve', [App\Http\Controllers\admin\allshifts\ShiftController::class, 'approve'])->name('allshifts.approve');
     Route::get('admin/allshifts/{id}/unapprove', [App\Http\Controllers\admin\allshifts\ShiftController::class, 'unapprove'])->name('allshifts.unapprove');
+    Route::match(['post', 'patch'], '/allshifts/update-invoiced/{id}', 'App\Http\Controllers\admin\allshifts\ShiftController@updateInvoiced')->name('allshifts.updateInvoiced');
     Route::resource('admin/clientcontracts', App\Http\Controllers\admin\clientcontracts\ClientContractController::class);
     Route::resource('admin/usercontracts', App\Http\Controllers\admin\usercontracts\UserContractController::class);
     Route::resource('admin/activities', App\Http\Controllers\admin\activities\ActivityController::class);
