@@ -24,11 +24,11 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
             'photo' => ['nullable', 'mimes:jpg,jpeg,png', 'max:1024'],
             'phone' => ['nullable', 'string', 'max:255'],
             'address' => ['nullable', 'string', 'max:255'],
-            'tfn' => ['nullable', 'integer', 'max:255'],
-            'abn' => ['nullable', 'integer', 'max:255'],
+            'tfn' => ['nullable', 'min:8', 'max:9',],
+            'abn' => ['nullable', 'string', 'regex:/^(\d *?){11}$/'],
         ])->validateWithBag('updateProfileInformation');
 
-      
+
         if (isset($input['photo'])) {
             $user->updateProfilePhoto($input['photo']);
         }
