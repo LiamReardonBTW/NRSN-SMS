@@ -72,6 +72,20 @@
                     value="{{ $manageshift->clientSupported->first_name }} {{ $manageshift->clientSupported->last_name }}" />
             </div>
 
+            <!-- Activity Dropdown -->
+            <div class="mx-4 my-5">
+                <label for="activity_id">Activity</label>
+                <select name="activity_id" id="activity_id" class="form-select rounded-md shadow-sm block w-full"
+                    disabled>
+                    @foreach ($activities as $activity)
+                        <option value="{{ $activity->id }}"
+                            {{ $manageshift->activity_id == $activity->id ? 'selected' : '' }}>
+                            {{ $activity->activityname }}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
+
             <!-- Submission Date -->
             <div class="mx-4 my-5">
                 <label for="submission_date">Submission Date</label>
@@ -83,7 +97,8 @@
             <div class="mx-4 my-5">
                 <label for="expenses">Expenses ($AUD)</label>
                 <x-input disabled type="text" name="expenses" id="expenses"
-                    class="form-input rounded-md shadow-sm block w-full" value="${{ $manageshift->expenses ?? '0' }}" />
+                    class="form-input rounded-md shadow-sm block w-full"
+                    value="${{ $manageshift->expenses ?? '0' }}" />
             </div>
 
             <!-- km Travelled -->
