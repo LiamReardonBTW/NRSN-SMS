@@ -15,11 +15,11 @@ class DatabaseSeeder extends Seeder
         $this->call([
             UserSeeder::class,
             ClientSeeder::class,
+            ActivitySeeder::class,
             ShiftSeeder::class,
             ClientUserSeeder::class,
             ClientContractSeeder::class,
             UserContractSeeder::class,
-            ActivitySeeder::class,
         ]);
     }
 }

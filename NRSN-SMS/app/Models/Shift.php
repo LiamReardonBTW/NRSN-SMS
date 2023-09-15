@@ -32,4 +32,9 @@ class Shift extends Model
         return $this->belongsTo(Client::class, 'client_supported', 'id');
     }
 
+    public function activity()
+    {
+        return $this->belongsTo(Activity::class);
+    }
+
 }

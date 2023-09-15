@@ -24,4 +24,9 @@ class Activity extends Model
         return $this->belongsToMany(ClientContract::class, 'client_contract_activity');
     }
 
+    public function shifts()
+    {
+        return $this->hasMany(Shift::class);
+    }
+
 }
