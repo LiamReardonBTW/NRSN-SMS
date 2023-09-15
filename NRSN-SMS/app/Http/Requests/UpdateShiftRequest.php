@@ -52,6 +52,9 @@ class UpdateShiftRequest extends FormRequest
             'isinvoiced' => [
                 'nullable', 'boolean',
             ],
+            'activity_id' => [
+                'required', 'int',
+            ],
         ];
     }
 }

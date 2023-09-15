@@ -52,6 +52,9 @@ class StoreShiftRequest extends FormRequest
             'isinvoiced' => [
                 'nullable', 'boolean',
             ],
+            'activity_id' => [
+                'required', 'int',
+            ],
         ];
     }
 }
