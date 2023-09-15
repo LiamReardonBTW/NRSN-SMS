@@ -8,6 +8,7 @@ use App\Http\Requests\UpdateShiftRequest;
 use App\Models\Shift;
 use App\Models\User;
 use App\Models\Client;
+use App\Models\Activity;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 
@@ -33,7 +34,8 @@ class ShiftController extends Controller
     {
         $workers = User::where('role', 2)->get();
         $clients = Client::all();
-        return view('admin/allshifts.create', compact('workers', 'clients'));
+        $activities = Activity::All();
+        return view('admin/allshifts.create', compact('workers', 'clients', 'activities'));
     }
 
     /**
@@ -42,8 +44,8 @@ class ShiftController extends Controller
     public function store(StoreShiftRequest $request)
     {
         Shift::create($request->validated());
-
-        return redirect()->route('allshifts.index');
+        $activities = Activity::All();
+        return redirect()->route('allshifts.index', compact('activities'));
     }
 
     /**
@@ -51,7 +53,8 @@ class ShiftController extends Controller
      */
     public function show(Shift $allshift)
     {
-        return view('admin/allshifts.show', compact('allshift'));
+        $activities = Activity::All();
+        return view('admin/allshifts.show', compact('allshift', 'activities'));
     }
 
     /**
@@ -61,7 +64,8 @@ class ShiftController extends Controller
     {
         $workers = User::where('role', 2)->get();
         $clients = Client::all();
-        return view('admin/allshifts.edit', compact('allshift', 'workers', 'clients'));
+        $activities = Activity::All();
+        return view('admin/allshifts.edit', compact('allshift', 'workers', 'clients', 'activities'));
     }
 
     /**

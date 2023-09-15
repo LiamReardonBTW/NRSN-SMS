@@ -20,6 +20,7 @@ class Shift extends Model
         'expenses',
         'km',
         'hours',
+        'activity_id',
     ];
 
     public function submittedByUser()
@@ -30,6 +31,11 @@ class Shift extends Model
     public function clientSupported()
     {
         return $this->belongsTo(Client::class, 'client_supported', 'id');
+    }
+
+    public function activity()
+    {
+        return $this->belongsTo(Activity::class);
     }
 
 }

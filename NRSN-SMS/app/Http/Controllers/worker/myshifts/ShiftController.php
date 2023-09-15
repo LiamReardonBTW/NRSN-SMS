@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\StoreShiftRequest;
 use App\Http\Requests\UpdateShiftRequest;
 use App\Models\Shift;
+use App\Models\Activity;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -32,7 +33,8 @@ class ShiftController extends Controller
      */
     public function create()
     {
-        return view('worker/myshifts.create');
+        $activities = Activity::All();
+        return view('worker/myshifts.create', compact('activities'));
     }
 
     /**
@@ -50,6 +52,7 @@ class ShiftController extends Controller
      */
     public function show(Shift $myshift)
     {
+        $activities = Activity::All();
         // Check if the currently logged-in user is the 'submitted_by' user for this shift
         $user = Auth::user();
         if ($myshift->submitted_by !== $user->id) {
@@ -57,7 +60,7 @@ class ShiftController extends Controller
             return redirect()->route('myshifts.index'); // Replace with your desired route or action
         }
 
-        return view('worker/myshifts.show', compact('myshift'));
+        return view('worker/myshifts.show', compact('myshift', 'activities'));
     }
 
     /**
@@ -66,13 +69,14 @@ class ShiftController extends Controller
     public function edit(Shift $myshift)
     {
         // Check if the currently logged-in user is the 'submitted_by' user for this shift
+        $activities = Activity::All();
         $user = Auth::user();
         if ($myshift->submitted_by !== $user->id) {
             // Redirect to a different page or show an error message
             return redirect()->route('myshifts.index'); // Replace with your desired route or action
         }
 
-        return view('worker/myshifts.edit', compact('myshift'));
+        return view('worker/myshifts.edit', compact('myshift', 'activities'));
     }
 
 

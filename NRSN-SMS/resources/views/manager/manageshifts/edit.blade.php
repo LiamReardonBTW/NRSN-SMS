@@ -84,6 +84,19 @@
                         value="{{ $manageshift->clientSupported->id }}" />
                 </div>
 
+                <!-- Activity Dropdown -->
+                <div class="mx-4 my-5">
+                    <label for="activity_id">Activity</label>
+                    <select name="activity_id" id="activity_id" class="form-select rounded-md shadow-sm block w-full">
+                        @foreach ($activities as $activity)
+                            <option value="{{ $activity->id }}"
+                                {{ $manageshift->activity_id == $activity->id ? 'selected' : '' }}>
+                                {{ $activity->activityname }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
+
                 <!-- Submission Date -->
                 <div class="mx-4 my-5">
                     <label for="date">Submission Date</label>

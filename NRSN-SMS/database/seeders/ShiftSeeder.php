@@ -26,6 +26,7 @@ class ShiftSeeder extends Seeder
                 'km' => '16.2',
                 'hours' => '7.5',
                 'created_at' => '2023-08-07 06:12:47',
+                'activity_id' => '1',
             ],
 
             [
@@ -40,6 +41,7 @@ class ShiftSeeder extends Seeder
                 'km' => '5.2',
                 'hours' => '7.75',
                 'created_at' => '2023-08-07 06:12:47',
+                'activity_id' => '2',
             ],
 
             [
@@ -54,6 +56,7 @@ class ShiftSeeder extends Seeder
                 'km' => '8.12',
                 'hours' => '6.25',
                 'created_at' => '2023-08-08 12:34:56',
+                'activity_id' => '3',
             ],
 
             [
@@ -68,6 +71,7 @@ class ShiftSeeder extends Seeder
                 'km' => '10.9',
                 'hours' => '4',
                 'created_at' => '2023-08-09 09:45:00',
+                'activity_id' => '2',
             ],
 
             [
@@ -82,6 +86,7 @@ class ShiftSeeder extends Seeder
                 'km' => '20.9',
                 'hours' => '10.5',
                 'created_at' => '2023-08-10 15:27:13',
+                'activity_id' => '1',
             ],
 
             [
@@ -96,6 +101,7 @@ class ShiftSeeder extends Seeder
                 'km' => '25',
                 'hours' => '8',
                 'created_at' => '2023-08-11 18:59:21',
+                'activity_id' => '3',
             ],
 
         ]);
