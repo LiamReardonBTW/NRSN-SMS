@@ -79,6 +79,19 @@
                     @enderror
                 </div>
 
+                <!-- Is Public Holiday Dropdown -->
+                <div class="mx-4 my-2">
+                    <label for="is_public_holiday">Public Holiday?</label>
+                    <select name="is_public_holiday" id="is_public_holiday"
+                        class="form-select rounded-md shadow-sm block w-full">
+                        <option value="1" {{ old('is_public_holiday') == 1 ? 'selected' : '' }}>Yes</option>
+                        <option value="0" {{ old('is_public_holiday') == 0 ? 'selected' : '' }}>No</option>
+                    </select>
+                    @error('is_public_holiday')
+                        <p class="text-sm text-red-600">{{ $message }}</p>
+                    @enderror
+                </div>
+
                 <!-- Expenses -->
                 <div class="mx-4 my-2">
                     <label for="expenses">Expenses ($AUD)</label>
