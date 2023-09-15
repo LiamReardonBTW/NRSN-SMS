@@ -85,4 +85,76 @@ class ShiftController extends Controller
         $allshift->delete();
         return redirect()->route('allshifts.index');
     }
+
+
+    public function approve($id)
+    {
+        $shift = Shift::find($id);
+
+        if (!$shift) {
+            return redirect()->route('allshifts.index');
+        }
+
+        // Update the 'approved' field to true
+        $shift->update(['approved' => true]);
+
+        return redirect()->route('allshifts.index');
+    }
+
+    public function unapprove($id)
+    {
+        $shift = Shift::find($id);
+
+        if (!$shift) {
+            return redirect()->route('allshifts.index');
+        }
+
+        // Update the 'approved' field to true
+        $shift->update(['approved' => false]);
+
+        return redirect()->route('allshifts.index');
+    }
+
+    public function updateInvoiced(Request $request, $id)
+    {
+        // Find the shift by its ID
+        $shift = Shift::findOrFail($id);
+
+        // Update the 'invoiced' field to true
+        $shift->update([
+            'isinvoiced' => true,
+        ]);
+
+        // Redirect back to the page where you came from, or any other appropriate URL
+        return redirect()->route('allshifts.index');
+    }
+
+    public function markPaid($id)
+    {
+        $shift = Shift::find($id);
+
+        if (!$shift) {
+            return redirect()->route('allshifts.index');
+        }
+
+        // Update the 'approved' field to true
+        $shift->update(['paid' => true]);
+
+        return redirect()->route('allshifts.index');
+    }
+
+    public function unmarkPaid($id)
+    {
+        $shift = Shift::find($id);
+
+        if (!$shift) {
+            return redirect()->route('allshifts.index');
+        }
+
+        // Update the 'approved' field to true
+        $shift->update(['paid' => false]);
+
+        return redirect()->route('allshifts.index');
+    }
+
 }

@@ -55,6 +55,8 @@ class UpdateShiftRequest extends FormRequest
             'activity_id' => [
                 'required', 'int',
             ],
+            'approved' => 'sometimes|boolean',
+            'paid' => 'sometimes|boolean',
         ];
     }
 }

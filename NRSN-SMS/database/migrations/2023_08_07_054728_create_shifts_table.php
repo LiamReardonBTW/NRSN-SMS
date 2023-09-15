@@ -25,6 +25,8 @@ return new class extends Migration
             $table->float('hours');
             $table->timestamps();
             $table->foreignId('activity_id')->constrained('activities');
+            $table->boolean('approved')->default(0);
+            $table->boolean('paid')->default(false);
         });
     }
 
