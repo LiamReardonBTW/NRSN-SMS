@@ -71,6 +71,20 @@
                     value="{{ $myshift->clientSupported->first_name }} {{ $myshift->clientSupported->last_name }}" />
             </div>
 
+            <!-- Activity Dropdown -->
+            <div class="mx-4 my-5">
+                <label for="activity_id">Activity</label>
+                <select name="activity_id" id="activity_id" class="form-select rounded-md shadow-sm block w-full"
+                    disabled>
+                    @foreach ($activities as $activity)
+                        <option value="{{ $activity->id }}"
+                            {{ $myshift->activity_id == $activity->id ? 'selected' : '' }}>
+                            {{ $activity->activityname }}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
+
             <!-- Submission Date -->
             <div class="mx-4 my-5">
                 <label for="submission_date">Submission Date</label>
