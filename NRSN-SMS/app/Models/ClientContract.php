@@ -15,10 +15,6 @@ class ClientContract extends Model
         'enddate',
         'totalallocated',
         'balance',
-        'weekdayhourlyrate',
-        'saturdayhourlyrate',
-        'sundayhourlyrate',
-        'publicholidayhourlyrate',
         'active',
     ];
 

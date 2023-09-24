@@ -20,10 +20,6 @@ class CreateClientContractsTable extends Migration
             $table->dateTime('enddate')->nullable();
             $table->double('totalallocated');
             $table->double('balance');
-            $table->double('weekdayhourlyrate');
-            $table->double('saturdayhourlyrate');
-            $table->double('sundayhourlyrate');
-            $table->double('publicholidayhourlyrate');
             $table->boolean('active')->default(true);
             $table->timestamps();
         });

@@ -54,34 +54,6 @@
                                 class="form-input rounded-md shadow-sm block w-full"
                                 value="${{ $contract->balance }}" />
                         </div>
-                        <!-- Weekday Hourly Rate -->
-                        <div class="mx-4 my-5 grid grid-rows-2">
-                            <label for="weekdayhourlyrate">Weekday Hourly Rate</label>
-                            <x-input disabled type="numeric" name="weekdayhourlyrate" id="weekdayhourlyrate"
-                                class="form-input rounded-md shadow-sm block w-full"
-                                value="${{ $contract->weekdayhourlyrate }}" />
-                        </div>
-                        <!-- Saturday Hourly Rate -->
-                        <div class="mx-4 my-5 grid grid-rows-2">
-                            <label for="saturdayhourlyrate">Saturday Hourly Rate</label>
-                            <x-input disabled type="numeric" name="saturdayhourlyrate" id="saturdayhourlyrate"
-                                class="form-input rounded-md shadow-sm block w-full"
-                                value="${{ $contract->saturdayhourlyrate }}" />
-                        </div>
-                        <!-- Sunday Hourly Rate -->
-                        <div class="mx-4 my-5 grid grid-rows-2">
-                            <label for="sundayhourlyrate">Sunday Hourly Rate</label>
-                            <x-input disabled type="numeric" name="sundayhourlyrate" id="sundayhourlyrate"
-                                class="form-input rounded-md shadow-sm block w-full"
-                                value="${{ $contract->sundayhourlyrate }}" />
-                        </div>
-                        <!-- Public Holiday Hourly Rate -->
-                        <div class="mx-4 my-5 grid grid-rows-2">
-                            <label for="publicholidayhourlyrate">Public Holiday Hourly Rate</label>
-                            <x-input disabled type="numeric" name="publicholidayhourlyrate" id="publicholidayhourlyrate"
-                                class="form-input rounded-md shadow-sm block w-full"
-                                value="${{ $contract->publicholidayhourlyrate }}" />
-                        </div>
                     </div>
                 @endif
             @endforeach
@@ -133,8 +105,7 @@
                                     Balance
                                     <!-- Sort By 'balance' Button -->
                                     <a href="#"><svg class="w-3 h-3 ml-1.5" aria-hidden="true"
-                                            xmlns="http://www.w3.org/2000/svg" fill="currentColor"
-                                            viewBox="0 0 24 24">
+                                            xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
                                             <path
                                                 d="M8.574 11.024h6.852a2.075 2.075 0 0 0 1.847-1.086 1.9 1.9 0 0 0-.11-1.986L13.736 2.9a2.122 2.122 0 0 0-3.472 0L6.837 7.952a1.9 1.9 0 0 0-.11 1.986 2.074 2.074 0 0 0 1.847 1.086Zm6.852 1.952H8.574a2.072 2.072 0 0 0-1.847 1.087 1.9 1.9 0 0 0 .11 1.985l3.426 5.05a2.123 2.123 0 0 0 3.472 0l3.427-5.05a1.9 1.9 0 0 0 .11-1.985 2.074 2.074 0 0 0-1.846-1.087Z" />
                                         </svg></a>
@@ -168,11 +139,11 @@
     </div>
     <!-- Page Navigation Buttons -->
     <div
-    class="flex items-center justify-start pb-6 py-3 text-right sm:px-6 grid grid-cols-1 md:grid-cols-3 lg:gap-8 px-6 lg:px-8 py-2">
-    <!-- Back to manage clients index page -->
-    <a href="{{ route('manageclients.show', ['manageclient' => $client->id]) }}"
-        class="inline-flex items-center mx-4 px-6 py-4 bg-red-700 border border-transparent rounded-md font-semibold text-base text-white uppercase tracking-widest hover:bg-red-500 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">
-        Back
-    </a>
-</div>
+        class="flex items-center justify-start pb-6 py-3 text-right sm:px-6 grid grid-cols-1 md:grid-cols-3 lg:gap-8 px-6 lg:px-8 py-2">
+        <!-- Back to manage clients index page -->
+        <a href="{{ route('manageclients.show', ['manageclient' => $client->id]) }}"
+            class="inline-flex items-center mx-4 px-6 py-4 bg-red-700 border border-transparent rounded-md font-semibold text-base text-white uppercase tracking-widest hover:bg-red-500 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">
+            Back
+        </a>
+    </div>
 </x-app-layout>

@@ -47,34 +47,6 @@
                 <x-input disabled type="numeric" name="balance" id="balance"
                     class="form-input rounded-md shadow-sm block w-full" value="${{ $clientcontract->balance }}" />
             </div>
-            <!-- Weekday Hourly Rate -->
-            <div class="mx-4 my-5 grid grid-rows-2">
-                <label for="weekdayhourlyrate">Weekday Hourly Rate</label>
-                <x-input disabled type="numeric" name="weekdayhourlyrate" id="weekdayhourlyrate"
-                    class="form-input rounded-md shadow-sm block w-full"
-                    value="${{ $clientcontract->weekdayhourlyrate }}" />
-            </div>
-            <!-- Saturday Hourly Rate -->
-            <div class="mx-4 my-5 grid grid-rows-2">
-                <label for="saturdayhourlyrate">Saturday Hourly Rate</label>
-                <x-input disabled type="numeric" name="saturdayhourlyrate" id="saturdayhourlyrate"
-                    class="form-input rounded-md shadow-sm block w-full"
-                    value="${{ $clientcontract->saturdayhourlyrate }}" />
-            </div>
-            <!-- Sunday Hourly Rate -->
-            <div class="mx-4 my-5 grid grid-rows-2">
-                <label for="sundayhourlyrate">Sunday Hourly Rate</label>
-                <x-input disabled type="numeric" name="sundayhourlyrate" id="sundayhourlyrate"
-                    class="form-input rounded-md shadow-sm block w-full"
-                    value="${{ $clientcontract->sundayhourlyrate }}" />
-            </div>
-            <!-- Public Holiday Hourly Rate -->
-            <div class="mx-4 my-5 grid grid-rows-2">
-                <label for="publicholidayhourlyrate">Public Holiday Hourly Rate</label>
-                <x-input disabled type="numeric" name="publicholidayhourlyrate" id="publicholidayhourlyrate"
-                    class="form-input rounded-md shadow-sm block w-full"
-                    value="${{ $clientcontract->publicholidayhourlyrate }}" />
-            </div>
 
             <!-- Active Status -->
             <div class="mx-4 my-5 grid grid-rows-2">

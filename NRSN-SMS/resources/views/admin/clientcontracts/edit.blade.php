@@ -3,7 +3,8 @@
     <!-- Page Header Title -->
     <x-slot name="header">
         <!-- Shows selected clients first and last name -->
-        {{ __('Editing Client Contract:') }} {{ $clientcontract->client->first_name }} {{ $clientcontract->client->last_name }}
+        {{ __('Editing Client Contract:') }} {{ $clientcontract->client->first_name }}
+        {{ $clientcontract->client->last_name }}
     </x-slot>
 
     <!-- Form Container -->
@@ -26,7 +27,7 @@
                 <!-- Start Date -->
                 <div class="mx-4 my-5 grid grid-rows-2">
                     <label for="startdate">Contract Start Date</label>
-                    <x-input  type="date" name="startdate" id="startdate"
+                    <x-input type="date" name="startdate" id="startdate"
                         class="form-input rounded-md shadow-sm block w-full"
                         value="{{ \Carbon\Carbon::parse($clientcontract->startdate)->format('Y-m-d') }}" />
                     @error('startdate')
@@ -36,7 +37,7 @@
                 <!-- Contract End Date -->
                 <div class="mx-4 my-5 grid grid-rows-2">
                     <label for="enddate">Contract End Date</label>
-                    <x-input  type="date" name="enddate" id="enddate"
+                    <x-input type="date" name="enddate" id="enddate"
                         class="form-input rounded-md shadow-sm block w-full"
                         value="{{ \Carbon\Carbon::parse($clientcontract->enddate)->format('Y-m-d') }}" />
                     @error('enddate')
@@ -65,50 +66,6 @@
                     <x-input type="numeric" name="balance" id="balance"
                         class="form-input rounded-md shadow-sm block w-full" value="{{ $clientcontract->balance }}" />
                     @error('balance')
-                        <p class="text-sm text-red-600">{{ $message }}</p>
-                    @enderror
-                </div>
-
-                <!-- Weekday Hourly Rate -->
-                <div class="mx-4 my-5 grid grid-rows-2">
-                    <label for="weekdayhourlyrate">Weekday Hourly Rate</label>
-                    <x-input type="numeric" name="weekdayhourlyrate" id="weekdayhourlyrate"
-                        class="form-input rounded-md shadow-sm block w-full"
-                        value="{{ $clientcontract->weekdayhourlyrate }}" />
-                    @error('weekdayhourlyrate')
-                        <p class="text-sm text-red-600">{{ $message }}</p>
-                    @enderror
-                </div>
-
-                <!-- Saturday Hourly Rate -->
-                <div class="mx-4 my-5 grid grid-rows-2">
-                    <label for="saturdayhourlyrate">Saturday Hourly Rate</label>
-                    <x-input type="numeric" name="saturdayhourlyrate" id="saturdayhourlyrate"
-                        class="form-input rounded-md shadow-sm block w-full"
-                        value="{{ $clientcontract->saturdayhourlyrate }}" />
-                    @error('saturdayhourlyrate')
-                        <p class="text-sm text-red-600">{{ $message }}</p>
-                    @enderror
-                </div>
-
-                <!-- Sunday Hourly Rate -->
-                <div class="mx-4 my-5 grid grid-rows-2">
-                    <label for="sundayhourlyrate">Sunday Hourly Rate</label>
-                    <x-input type="numeric" name="sundayhourlyrate" id="sundayhourlyrate"
-                        class="form-input rounded-md shadow-sm block w-full"
-                        value="{{ $clientcontract->sundayhourlyrate }}" />
-                    @error('sundayhourlyrate')
-                        <p class="text-sm text-red-600">{{ $message }}</p>
-                    @enderror
-                </div>
-
-                <!-- Public Holiday Hourly Rate -->
-                <div class="mx-4 my-5 grid grid-rows-2">
-                    <label for="publicholidayhourlyrate">Public Holiday Hourly Rate</label>
-                    <x-input type="numeric" name="publicholidayhourlyrate" id="publicholidayhourlyrate"
-                        class="form-input rounded-md shadow-sm block w-full"
-                        value="{{ $clientcontract->publicholidayhourlyrate }}" />
-                    @error('publicholidayhourlyrate')
                         <p class="text-sm text-red-600">{{ $message }}</p>
                     @enderror
                 </div>
@@ -143,9 +100,11 @@
                         @endphp
                         @foreach ($activities as $activity)
                             <li class="flex items-center justify-between mb-2">
-                                <label for="activity_{{ $activity->id }}" class="flex-grow">{{ $activity->activityname }}</label>
+                                <label for="activity_{{ $activity->id }}"
+                                    class="flex-grow">{{ $activity->activityname }}</label>
                                 <input type="checkbox" id="activity_{{ $activity->id }}" name="activities[]"
-                                    value="{{ $activity->id }}" {{ $clientcontract->activities->contains($activity) ? 'checked' : '' }}>
+                                    value="{{ $activity->id }}"
+                                    {{ $clientcontract->activities->contains($activity) ? 'checked' : '' }}>
                             </li>
                         @endforeach
                     </ul>

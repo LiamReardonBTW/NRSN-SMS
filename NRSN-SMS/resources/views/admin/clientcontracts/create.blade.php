@@ -79,50 +79,6 @@
                         value="{{ old('totalallocated', '') }}" />
                 </div>
 
-                <!-- Weekday Hourly Rate -->
-                <div class="mx-4 my-5 grid grid-rows-2">
-                    <label for="weekdayhourlyrate">Weekday Hourly Rate</label>
-                    <x-input type="numeric" name="weekdayhourlyrate" id="weekdayhourlyrate"
-                        class="form-input rounded-md shadow-sm block w-full"
-                        value="{{ old('weekdayhourlyrate', '') }}" />
-                    @error('weekdayhourlyrate')
-                        <p class="text-sm text-red-600">{{ $message }}</p>
-                    @enderror
-                </div>
-
-                <!-- Saturday Hourly Rate -->
-                <div class="mx-4 my-5 grid grid-rows-2">
-                    <label for="saturdayhourlyrate">Saturday Hourly Rate</label>
-                    <x-input type="numeric" name="saturdayhourlyrate" id="saturdayhourlyrate"
-                        class="form-input rounded-md shadow-sm block w-full"
-                        value="{{ old('saturdayhourlyrate', '') }}" />
-                    @error('saturdayhourlyrate')
-                        <p class="text-sm text-red-600">{{ $message }}</p>
-                    @enderror
-                </div>
-
-                <!-- Sunday Hourly Rate -->
-                <div class="mx-4 my-5 grid grid-rows-2">
-                    <label for="sundayhourlyrate">Sunday Hourly Rate</label>
-                    <x-input type="numeric" name="sundayhourlyrate" id="sundayhourlyrate"
-                        class="form-input rounded-md shadow-sm block w-full"
-                        value="{{ old('sundayhourlyrate', '') }}" />
-                    @error('sundayhourlyrate')
-                        <p class="text-sm text-red-600">{{ $message }}</p>
-                    @enderror
-                </div>
-
-                <!-- Public Holiday Hourly Rate -->
-                <div class="mx-4 my-5 grid grid-rows-2">
-                    <label for="publicholidayhourlyrate">Public Holiday Hourly Rate</label>
-                    <x-input type="numeric" name="publicholidayhourlyrate" id="publicholidayhourlyrate"
-                        class="form-input rounded-md shadow-sm block w-full"
-                        value="{{ old('publicholidayhourlyrate', '') }}" />
-                    @error('publicholidayhourlyrate')
-                        <p class="text-sm text-red-600">{{ $message }}</p>
-                    @enderror
-                </div>
-
                 <!-- Active Status -->
                 <div class="mx-4 my-5 grid grid-rows-2">
                     <label for="active">Active Status</label>
