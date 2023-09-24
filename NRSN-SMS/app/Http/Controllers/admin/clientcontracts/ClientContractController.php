@@ -54,9 +54,7 @@ class ClientContractController extends Controller
      */
     public function edit(ClientContract $clientcontract)
     {
-        $allClients = Client::all();
-        $allActivities = Activity::all();
-        return view('admin/clientcontracts.edit', compact('clientcontract', 'allClients', 'allActivities'));
+        return view('admin/clientcontracts.edit', compact('clientcontract'));
     }
 
     /**
@@ -65,15 +63,6 @@ class ClientContractController extends Controller
     public function update(UpdateClientContractRequest $request, ClientContract $clientcontract)
     {
         $validatedData = $request->validated();
-
-        // Handle activities
-        if (isset($validatedData['activities'])) {
-            // Synchronize the selected activity IDs with the contract's activities
-            $clientcontract->activities()->sync($validatedData['activities']);
-        } else {
-            // If no activities are selected, detach all activities from the contract
-            $clientcontract->activities()->detach();
-        }
 
         // Handle other user data updates
         $clientcontract->update($validatedData);
