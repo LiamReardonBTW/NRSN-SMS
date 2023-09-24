@@ -15,7 +15,6 @@ class ActivityRate extends Model
         'saturdayhourlyrate',
         'sundayhourlyrate',
         'publicholidayhourlyrate',
-        'effective_date'
     ];
 
     public function activity()

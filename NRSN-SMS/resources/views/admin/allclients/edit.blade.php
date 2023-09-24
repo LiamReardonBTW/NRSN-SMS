@@ -43,7 +43,8 @@
 
                     <div class="mx-4 my-5">
                         <h2>Client Contract</h2>
-                        <ul class="py-2 font-normal text-base bg-white rounded-md shadow-sm block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
+                        <ul
+                            class="py-2 font-normal text-base bg-white rounded-md shadow-sm block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
                             @if (is_null($allclient->clientContracts) || $allclient->clientContracts->isEmpty())
                                 <li class="mx-2">No Contract</li>
                             @else
@@ -52,8 +53,10 @@
                                 @endphp
 
                                 @foreach ($activeContracts as $contract)
-                                    @if ($contract->enddate) <!-- Check if enddate is not null -->
-                                        <li class="mx-2">Active until:<br> {{ \Carbon\Carbon::parse($contract->enddate)->format('Y-m-d') }}</li>
+                                    @if ($contract->enddate)
+                                        <!-- Check if enddate is not null -->
+                                        <li class="mx-2">Active until:<br>
+                                            {{ \Carbon\Carbon::parse($contract->enddate)->format('Y-m-d') }}</li>
                                     @else
                                         <li class="mx-2">No End Date</li>
                                     @endif
@@ -191,8 +194,8 @@
                                         <!-- Use flex to align items horizontally -->
                                         <label for="managed_by_{{ $user->id }}"
                                             class="flex-grow">{{ $user->first_name }} {{ $user->last_name }}</label>
-                                        <input type="checkbox" id="managed_by_{{ $user->id }}" name="managed_by[]"
-                                            value="{{ $user->id }}"
+                                        <input type="checkbox" id="managed_by_{{ $user->id }}"
+                                            name="managed_by[]" value="{{ $user->id }}"
                                             {{ $allclient->managedByUser->contains($user) ? 'checked' : '' }}>
                                     </li>
                                 @endif
@@ -215,8 +218,137 @@
                         Submit
                     </button>
                 </div>
-
             </form> <!-- Close Form -->
+
+            <!-- Activity Section -->
+            <div class="text-2xl font-medium overflow-hidden px-6 lg:px-8 mx-4 my-5">
+                <h2 class="text-xl font-semibold mb-2">Activities</h2>
+                <div class="rounded-md bg-white shadow-md p-4 overflow-y-auto text-sm">
+                    <!-- Add text-sm class for smaller text -->
+                    <form method="post" action="{{ route('admin.allclients.sync-activities', $allclient) }}">
+                        @csrf
+                        @method('PUT')
+
+                        @php
+                            $selectedActivities = $allclient->activityRates->pluck('activity_id')->all();
+                        @endphp
+
+                        <!-- Display existing related activities first -->
+                        @foreach ($allActivities as $activity)
+                            @if (in_array($activity->id, $selectedActivities))
+                                @php
+                                    $activityRate = $allclient
+                                        ->activityRates()
+                                        ->where('activity_id', $activity->id)
+                                        ->first();
+                                @endphp
+                                <div class="mb-4">
+                                    <!-- Existing related activity checkbox -->
+                                    <label for="activity_{{ $activity->id }}">
+                                        <input type="checkbox" id="activity_{{ $activity->id }}" name="activities[]"
+                                            value="{{ $activity->id }}" checked>
+                                        {{ $activity->activityname }}
+                                    </label>
+                                    <!-- Input fields for rates for each activity -->
+                                    <div class="mt-2 grid grid-cols-4 gap-4">
+                                        <div>
+                                            <label for="rates[{{ $activity->id }}][weekdayhourlyrate]"
+                                                class="block">Weekday Rate</label>
+                                            <input type="text" id="rates[{{ $activity->id }}][weekdayhourlyrate]"
+                                                name="rates[{{ $activity->id }}][weekdayhourlyrate]"
+                                                class="form-input rounded-md shadow-sm block w-full"
+                                                value="{{ old('rates.' . $activity->id . '.weekdayhourlyrate', optional($allclient->activityRates->where('activity_id', $activity->id)->first())->weekdayhourlyrate ?? '') }}">
+                                        </div>
+                                        <div>
+                                            <label for="rates[{{ $activity->id }}][saturdayhourlyrate]"
+                                                class="block">Saturday Rate</label>
+                                            <input type="text" id="rates[{{ $activity->id }}][saturdayhourlyrate]"
+                                                name="rates[{{ $activity->id }}][saturdayhourlyrate]"
+                                                class="form-input rounded-md shadow-sm block w-full"
+                                                value="{{ old('rates.' . $activity->id . '.saturdayhourlyrate', optional($allclient->activityRates->where('activity_id', $activity->id)->first())->saturdayhourlyrate ?? '') }}">
+                                        </div>
+                                        <div>
+                                            <label for="rates[{{ $activity->id }}][sundayhourlyrate]"
+                                                class="block">Sunday Rate</label>
+                                            <input type="text" id="rates[{{ $activity->id }}][sundayhourlyrate]"
+                                                name="rates[{{ $activity->id }}][sundayhourlyrate]"
+                                                class="form-input rounded-md shadow-sm block w-full"
+                                                value="{{ old('rates.' . $activity->id . '.sundayhourlyrate', optional($allclient->activityRates->where('activity_id', $activity->id)->first())->sundayhourlyrate ?? '') }}">
+                                        </div>
+                                        <div>
+                                            <label for="rates[{{ $activity->id }}][publicholidayhourlyrate]"
+                                                class="block">Public Holiday Rate</label>
+                                            <input type="text"
+                                                id="rates[{{ $activity->id }}][publicholidayhourlyrate]"
+                                                name="rates[{{ $activity->id }}][publicholidayhourlyrate]"
+                                                class="form-input rounded-md shadow-sm block w-full"
+                                                value="{{ old('rates.' . $activity->id . '.publicholidayhourlyrate', optional($allclient->activityRates->where('activity_id', $activity->id)->first())->publicholidayhourlyrate ?? '') }}">
+                                        </div>
+                                    </div>
+                                </div>
+                            @endif
+                        @endforeach
+
+                        <!-- Display remaining activities (not related yet) -->
+                        @foreach ($allActivities as $activity)
+                            @if (!in_array($activity->id, $selectedActivities))
+                                <div class="mb-4">
+                                    <!-- Remaining activity checkbox -->
+                                    <label for="activity_{{ $activity->id }}">
+                                        <input type="checkbox" id="activity_{{ $activity->id }}" name="activities[]"
+                                            value="{{ $activity->id }}">
+                                        {{ $activity->activityname }}
+                                    </label>
+                                    <!-- Input fields for rates for each activity -->
+                                    <div class="mt-2 grid grid-cols-4 gap-4">
+                                        <div>
+                                            <label for="rates[{{ $activity->id }}][weekdayhourlyrate]"
+                                                class="block">Weekday Rate</label>
+                                            <input type="text" id="rates[{{ $activity->id }}][weekdayhourlyrate]"
+                                                name="rates[{{ $activity->id }}][weekdayhourlyrate]"
+                                                class="form-input rounded-md shadow-sm block w-full"
+                                                value="{{ old('rates.' . $activity->id . '.weekdayhourlyrate', optional($allclient->activityRates->where('activity_id', $activity->id)->first())->weekdayhourlyrate ?? '') }}">
+                                        </div>
+                                        <div>
+                                            <label for="rates[{{ $activity->id }}][saturdayhourlyrate]"
+                                                class="block">Saturday Rate</label>
+                                            <input type="text" id="rates[{{ $activity->id }}][saturdayhourlyrate]"
+                                                name="rates[{{ $activity->id }}][saturdayhourlyrate]"
+                                                class="form-input rounded-md shadow-sm block w-full"
+                                                value="{{ old('rates.' . $activity->id . '.saturdayhourlyrate', optional($allclient->activityRates->where('activity_id', $activity->id)->first())->saturdayhourlyrate ?? '') }}">
+                                        </div>
+                                        <div>
+                                            <label for="rates[{{ $activity->id }}][sundayhourlyrate]"
+                                                class="block">Sunday Rate</label>
+                                            <input type="text" id="rates[{{ $activity->id }}][sundayhourlyrate]"
+                                                name="rates[{{ $activity->id }}][sundayhourlyrate]"
+                                                class="form-input rounded-md shadow-sm block w-full"
+                                                value="{{ old('rates.' . $activity->id . '.sundayhourlyrate', optional($allclient->activityRates->where('activity_id', $activity->id)->first())->sundayhourlyrate ?? '') }}">
+                                        </div>
+                                        <div>
+                                            <label for="rates[{{ $activity->id }}][publicholidayhourlyrate]"
+                                                class="block">Public Holiday Rate</label>
+                                            <input type="text"
+                                                id="rates[{{ $activity->id }}][publicholidayhourlyrate]"
+                                                name="rates[{{ $activity->id }}][publicholidayhourlyrate]"
+                                                class="form-input rounded-md shadow-sm block w-full"
+                                                value="{{ old('rates.' . $activity->id . '.publicholidayhourlyrate', optional($allclient->activityRates->where('activity_id', $activity->id)->first())->publicholidayhourlyrate ?? '') }}">
+                                        </div>
+                                    </div>
+                                </div>
+                            @endif
+                        @endforeach
+
+                        <div class="mt-4">
+                            <button type="submit"
+                                class="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-500">
+                                Update Activities
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
         </div> <!-- Close Client Information Container -->
 
     </div> <!-- Close Form Container -->

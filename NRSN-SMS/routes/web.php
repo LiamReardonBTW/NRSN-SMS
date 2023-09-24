@@ -42,6 +42,7 @@ Route::group(['middleware' => 'isManager'], function () {
 
 Route::group(['middleware' => 'isAdmin'], function () {
     Route::resource('admin/allclients', App\Http\Controllers\admin\allclients\ClientController::class);
+    Route::put('/admin/allclients/{client}/sync-activities', 'App\Http\Controllers\admin\allclients\ClientController@syncActivities')->name('admin.allclients.sync-activities');
     Route::resource('admin/allusers', App\Http\Controllers\admin\allusers\UserController::class);
     Route::resource('admin/allshifts', App\Http\Controllers\admin\allshifts\ShiftController::class);
     Route::get('admin/allshifts/{id}/approve', [App\Http\Controllers\admin\allshifts\ShiftController::class, 'approve'])->name('allshifts.approve');

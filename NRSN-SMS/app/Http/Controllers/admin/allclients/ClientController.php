@@ -7,6 +7,8 @@ use App\Http\Requests\StoreClientRequest;
 use App\Http\Requests\UpdateClientRequest;
 use App\Models\Client;
 use App\Models\User;
+use App\Models\Activity;
+use App\Models\ActivityRate;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 
@@ -57,7 +59,16 @@ class ClientController extends Controller
     public function edit(Client $allclient)
     {
         $allUsers = User::all();
-        return view('admin/allclients.edit', compact('allclient', 'allUsers'));
+        $allActivities = Activity::all();
+        $allclient->load('activityRates');
+
+        // Fetch activity rates for the client and attach them to the activities
+        foreach ($allActivities as $activity) {
+            $activityRate = $allclient->activityRates->where('activity_id', $activity->id)->first();
+            $activity->setAttribute('activityRate', $activityRate);
+        }
+
+        return view('admin/allclients.edit', compact('allclient', 'allUsers', 'allActivities'));
     }
 
     /**
@@ -115,4 +126,48 @@ class ClientController extends Controller
         $allclient->delete();
         return redirect()->route('allclients.index');
     }
+
+    /**
+     * Attach and detach activities for the specified client.
+     */
+    public function syncActivities(Request $request, Client $client)
+    {
+        $selectedActivities = $request->input('activities', []); // Get the selected activity IDs from the form
+        $activityData = $request->input('rates', []); // Get the rates data from the form
+
+        // Get the currently attached activities for this client
+        $attachedActivities = $client->activityRates->pluck('activity_id')->toArray();
+
+        // Iterate through the attached activities and detach if unticked
+        foreach ($attachedActivities as $activityId) {
+            if (!in_array($activityId, $selectedActivities)) {
+                // Detach the activity
+                $client->activityRates()
+                    ->where('activity_id', $activityId)
+                    ->delete();
+            }
+        }
+
+        // Iterate through the selected activities and update/create the rates
+        foreach ($selectedActivities as $activityId) {
+            if (isset($activityData[$activityId])) {
+                // Find the activityRate record for this client and activity (if it exists)
+                $activityRate = $client->activityRates()
+                    ->where('activity_id', $activityId)
+                    ->first();
+
+                // Update or create the activityRate record
+                if ($activityRate) {
+                    $activityRate->update($activityData[$activityId]);
+                } else {
+                    $activity = new ActivityRate($activityData[$activityId]);
+                    $activity->activity_id = $activityId;
+                    $client->activityRates()->save($activity);
+                }
+            }
+        }
+
+        return redirect()->route('allclients.edit', $client);
+    }
+
 }

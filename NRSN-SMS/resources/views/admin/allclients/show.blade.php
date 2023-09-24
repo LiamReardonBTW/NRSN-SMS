@@ -35,7 +35,8 @@
 
             <div class="mx-4 my-5">
                 <h2>Client Contract</h2>
-                <ul class="py-2 font-normal text-base bg-white rounded-md shadow-sm block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
+                <ul
+                    class="py-2 font-normal text-base bg-white rounded-md shadow-sm block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
                     @if (is_null($allclient->clientContracts) || $allclient->clientContracts->isEmpty())
                         <li class="mx-2">No Contract</li>
                     @else
@@ -44,8 +45,10 @@
                         @endphp
 
                         @foreach ($activeContracts as $contract)
-                            @if ($contract->enddate) <!-- Check if enddate is not null -->
-                                <li class="mx-2">Active until:<br> {{ \Carbon\Carbon::parse($contract->enddate)->format('Y-m-d') }}</li>
+                            @if ($contract->enddate)
+                                <!-- Check if enddate is not null -->
+                                <li class="mx-2">Active until:<br>
+                                    {{ \Carbon\Carbon::parse($contract->enddate)->format('Y-m-d') }}</li>
                             @else
                                 <li class="mx-2">No End Date</li>
                             @endif
@@ -114,54 +117,87 @@
 
         </div> <!-- End Client Information Container -->
 
-        <!-- Clients Supported by the User -->
+        <!-- Activities Container -->
         <div class="text-2xl font-medium overflow-hidden px-6 lg:px-8 mx-4 my-5">
-            <h2 class="text-xl font-semibold mb-2">Supported By</h2>
-            <div class="rounded-md bg-white shadow-md p-4 max-h-40 overflow-y-auto text-sm">
-                <!-- Add text-sm class for smaller text -->
-                <ul>
-                    @if ($allclient->supportedByUser->isEmpty())
-                        <li>Currently not supported.</li>
-                    @else
-                        @foreach ($allclient->supportedByUser->sortBy('last_name') as $user)
-                            <li>{{ $user->first_name }} {{ $user->last_name }}</li>
-                        @endforeach
-                    @endif
-                </ul>
+            <h2 class="text-xl font-semibold mb-2">Activities</h2>
+            <div class="rounded-md bg-white shadow-md p-4 max-h-40 overflow-y-auto text-xs">
+                @if (is_null($allclient->activityRates) || $allclient->activityRates->isEmpty())
+                    <p>No activities assigned.</p>
+                @else
+                    <table class="table-auto min-w-full">
+                        <thead>
+                            <tr>
+                                <th class="w-60">Activity</th>
+                                <th>Weekday<br>Rate</th>
+                                <th>Saturday<br>Rate</th>
+                                <th>Sunday<br>Rate</th>
+                                <th>Public<br>Holiday Rate</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($allclient->activityRates as $activityRate)
+                                <tr class="text-center">
+                                    <td>{{ $activityRate->activity->activityname }}</td>
+                                    <td>{{ $activityRate->weekdayhourlyrate }}</td>
+                                    <td>{{ $activityRate->saturdayhourlyrate }}</td>
+                                    <td>{{ $activityRate->sundayhourlyrate }}</td>
+                                    <td>{{ $activityRate->publicholidayhourlyrate }}</td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                @endif
             </div>
         </div>
 
-        <!-- Clients Managed by the User -->
-        <div class="text-2xl font-medium overflow-hidden px-6 lg:px-8 mx-4 my-5">
-            <h2 class="text-xl font-semibold mb-2">Managed By</h2>
-            <div class="rounded-md bg-white shadow-md p-4 max-h-40 overflow-y-auto text-sm">
-                <!-- Add text-sm class for smaller text -->
-                <ul>
-                    @if ($allclient->managedByUser->isEmpty())
-                        <li>Currently not managed.</li>
-                    @else
-                        @foreach ($allclient->managedByUser->sortBy('last_name') as $user)
-                            <li>{{ $user->first_name }} {{ $user->last_name }}</li>
-                        @endforeach
-                    @endif
-                </ul>
-            </div>
+    <!-- Clients Supported by the User -->
+    <div class="text-2xl font-medium overflow-hidden px-6 lg:px-8 mx-4 my-5">
+        <h2 class="text-xl font-semibold mb-2">Supported By</h2>
+        <div class="rounded-md bg-white shadow-md p-4 max-h-40 overflow-y-auto text-sm">
+            <!-- Add text-sm class for smaller text -->
+            <ul>
+                @if ($allclient->supportedByUser->isEmpty())
+                    <li>Currently not supported.</li>
+                @else
+                    @foreach ($allclient->supportedByUser->sortBy('last_name') as $user)
+                        <li>{{ $user->first_name }} {{ $user->last_name }}</li>
+                    @endforeach
+                @endif
+            </ul>
         </div>
+    </div>
 
-        <!-- Page Navigation Buttons -->
-        <div
-            class="flex items-center justify-start pb-6 py-3 text-right sm:px-6 grid grid-cols-1 md:grid-cols-3 lg:gap-8 px-6 lg:px-8 py-2">
-            <!-- Back to All Clients index page -->
-            <a href="{{ route('allclients.index') }}"
-                class="inline-flex items-center mx-4 px-6 py-4 bg-red-700 border border-transparent rounded-md font-semibold text-base text-white uppercase tracking-widest hover:bg-red-500 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">
-                Back
-            </a>
-            <!-- To Edit Client page -->
-            <a href="{{ route('allclients.edit', $allclient) }}"
-                class="inline-flex items-center mx-4 px-6 py-4 bg-blue-700 border border-transparent rounded-md font-semibold text-base text-white uppercase tracking-widest hover:bg-blue-500 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">
-                Edit Client
-            </a>
+    <!-- Clients Managed by the User -->
+    <div class="text-2xl font-medium overflow-hidden px-6 lg:px-8 mx-4 my-5">
+        <h2 class="text-xl font-semibold mb-2">Managed By</h2>
+        <div class="rounded-md bg-white shadow-md p-4 max-h-40 overflow-y-auto text-sm">
+            <!-- Add text-sm class for smaller text -->
+            <ul>
+                @if ($allclient->managedByUser->isEmpty())
+                    <li>Currently not managed.</li>
+                @else
+                    @foreach ($allclient->managedByUser->sortBy('last_name') as $user)
+                        <li>{{ $user->first_name }} {{ $user->last_name }}</li>
+                    @endforeach
+                @endif
+            </ul>
         </div>
+    </div>
+
+    <!-- Page Navigation Buttons -->
+    <div
+        class="flex items-center justify-start pb-6 py-3 text-right sm:px-6 grid grid-cols-1 md:grid-cols-3 lg:gap-8 px-6 lg:px-8 py-2">
+        <!-- Back to All Clients index page -->
+        <a href="{{ route('allclients.index') }}"
+            class="inline-flex items-center mx-4 px-6 py-4 bg-red-700 border border-transparent rounded-md font-semibold text-base text-white uppercase tracking-widest hover:bg-red-500 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">
+            Back
+        </a>
+        <!-- To Edit Client page -->
+        <a href="{{ route('allclients.edit', $allclient) }}"
+            class="inline-flex items-center mx-4 px-6 py-4 bg-blue-700 border border-transparent rounded-md font-semibold text-base text-white uppercase tracking-widest hover:bg-blue-500 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">
+            Edit Client
+        </a>
+    </div>
 
     </div><!-- Close Form Container -->
 

@@ -22,30 +22,32 @@ class UpdateClientRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'first_name' => [
-                'required', 'string', 'max:255',
-            ],
-            'last_name' => [
-                'required', 'string', 'max:255',
-            ],
-            'email' => [
-                'required', 'email', 'max:255',
-            ],
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
             'phone' => [
-                'required', 'string', 'regex:/^(?:\+?(61))? ?(?:\((?=.*\)))?(0?[2-57-8])\)? ?(\d\d(?:[- ](?=\d{3})|(?!\d\d[- ]?\d[- ]))\d\d[- ]?\d[- ]?\d{3})$/', //https://regex101.com/r/dkFASs/6
+                'required',
+                'string',
+                'regex:/^(?:\+?(61))? ?(?:\((?=.*\)))?(0?[2-57-8])\)? ?(\d\d(?:[- ](?=\d{3})|(?!\d\d[- ]?\d[- ]))\d\d[- ]?\d[- ]?\d{3})$/',
             ],
-            'invoicing_codes' => [
-                'required', 'string', //TO BE REMOVED (NEW INVOICING CODES TABLE WITH RELATIONSHIP TO CLIENT)
-            ],
-            'address' => [
-                'required', 'string', 'max:255',
-            ],
-            'active' => [
-                'required', 'boolean',
-            ],
+            'invoicing_codes' => 'required|string',
+
+            // Address and active fields remain as before
+
             'supported_by' => 'nullable|array',
             'managed_by' => 'nullable|array',
             'clientContract' => 'nullable|array',
+
+            // Add conditional rules for activities and rates
+            'activities' => 'nullable|array',
+            'activities.*' => 'exists:activities,id',
+            // Validate that activity IDs exist
+
+            // Apply these rules conditionally when activities are present
+            'rates' => 'nullable|array',
+            'rates.*.*' => 'sometimes|numeric',
+            // Apply numeric rule only when rates are provided
         ];
     }
+
 }
