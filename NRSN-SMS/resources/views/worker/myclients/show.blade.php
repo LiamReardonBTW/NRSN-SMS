@@ -35,7 +35,8 @@
 
             <div class="mx-4 my-5">
                 <h2>Client Contract</h2>
-                <ul class="py-2 font-normal text-base bg-white rounded-md shadow-sm block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
+                <ul
+                    class="py-2 font-normal text-base bg-white rounded-md shadow-sm block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
                     @if (is_null($myclient->clientContracts) || $myclient->clientContracts->isEmpty())
                         <li class="mx-2">No Contract</li>
                     @else
@@ -44,8 +45,10 @@
                         @endphp
 
                         @foreach ($activeContracts as $contract)
-                            @if ($contract->enddate) <!-- Check if enddate is not null -->
-                                <li class="mx-2">Active until:<br> {{ \Carbon\Carbon::parse($contract->enddate)->format('Y-m-d') }}</li>
+                            @if ($contract->enddate)
+                                <!-- Check if enddate is not null -->
+                                <li class="mx-2">Active until:<br>
+                                    {{ \Carbon\Carbon::parse($contract->enddate)->format('Y-m-d') }}</li>
                             @else
                                 <li class="mx-2">No End Date</li>
                             @endif
@@ -111,8 +114,40 @@
                     <option value="0" {{ $myclient->active === 0 ? 'selected' : '' }}>Inactive</option>
                 </select>
             </div>
-
         </div> <!-- End Client Information Container -->
+
+        <!-- Activities Container -->
+        <div class="text-2xl font-medium overflow-hidden px-6 lg:px-8 mx-4 my-5">
+            <h2 class="text-xl font-semibold mb-2">Activities</h2>
+            <div class="rounded-md bg-white shadow-md p-4 max-h-40 overflow-y-auto text-xs">
+                @if (is_null($myclient->activityRates) || $myclient->activityRates->isEmpty())
+                    <p>No activities assigned.</p>
+                @else
+                    <table class="table-auto min-w-full">
+                        <thead>
+                            <tr>
+                                <th class="w-60">Activity</th>
+                                <th>Weekday<br>Rate</th>
+                                <th>Saturday<br>Rate</th>
+                                <th>Sunday<br>Rate</th>
+                                <th>Public<br>Holiday Rate</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($myclient->activityRates as $activityRate)
+                                <tr class="text-center">
+                                    <td>{{ $activityRate->activity->activityname }}</td>
+                                    <td>{{ $activityRate->weekdayhourlyrate }}</td>
+                                    <td>{{ $activityRate->saturdayhourlyrate }}</td>
+                                    <td>{{ $activityRate->sundayhourlyrate }}</td>
+                                    <td>{{ $activityRate->publicholidayhourlyrate }}</td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                @endif
+            </div>
+        </div>
 
         <!-- Page Navigation Buttons -->
         <div

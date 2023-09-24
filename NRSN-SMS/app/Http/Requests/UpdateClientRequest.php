@@ -25,14 +25,14 @@ class UpdateClientRequest extends FormRequest
             'first_name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
             'email' => 'required|email|max:255',
+            'address' => 'required|string|max:255',
+            'active' => 'required|boolean',
             'phone' => [
                 'required',
                 'string',
                 'regex:/^(?:\+?(61))? ?(?:\((?=.*\)))?(0?[2-57-8])\)? ?(\d\d(?:[- ](?=\d{3})|(?!\d\d[- ]?\d[- ]))\d\d[- ]?\d[- ]?\d{3})$/',
             ],
             'invoicing_codes' => 'required|string',
-
-            // Address and active fields remain as before
 
             'supported_by' => 'nullable|array',
             'managed_by' => 'nullable|array',

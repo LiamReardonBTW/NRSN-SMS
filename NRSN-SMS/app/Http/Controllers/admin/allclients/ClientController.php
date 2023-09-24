@@ -167,7 +167,7 @@ class ClientController extends Controller
             }
         }
 
-        return redirect()->route('allclients.edit', $client);
+        return redirect()->route('allclients.show', $client);
     }
 
 }
