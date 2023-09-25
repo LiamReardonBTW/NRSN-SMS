@@ -7,6 +7,7 @@ use App\Http\Requests\StoreShiftRequest;
 use App\Http\Requests\UpdateShiftRequest;
 use App\Models\Shift;
 use App\Models\Activity;
+use App\Models\Client;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -33,8 +34,22 @@ class ShiftController extends Controller
      */
     public function create()
     {
-        $activities = Activity::All();
-        return view('worker/myshifts.create', compact('activities'));
+        // Get the authenticated user
+        $user = Auth::user();
+
+        // Retrieve the clients supported by the user and their related activities
+        $clients = optional($user->supportedClients)->load('activityRates.activity');
+
+        // Apply the 'active' filter after loading the related models
+        $clients = $clients->where('active', true);
+
+        // Prepare the $clientActivities variable in the desired format for JavaScript
+        $clientActivities = [];
+        foreach ($clients as $client) {
+            $clientActivities[$client->id] = $client->activityRates->pluck('activity');
+        }
+
+        return view('worker/myshifts.create', compact('clientActivities', 'clients'));
     }
 
     /**
@@ -69,14 +84,25 @@ class ShiftController extends Controller
     public function edit(Shift $myshift)
     {
         // Check if the currently logged-in user is the 'submitted_by' user for this shift
-        $activities = Activity::All();
         $user = Auth::user();
         if ($myshift->submitted_by !== $user->id) {
             // Redirect to a different page or show an error message
             return redirect()->route('myshifts.index'); // Replace with your desired route or action
         }
 
-        return view('worker/myshifts.edit', compact('myshift', 'activities'));
+        // Retrieve the clients supported by the user and their related activities
+        $clients = optional($user->supportedClients)->where('active', true);
+
+        // Eager load the related activityRates and activities
+        $clients->load('activityRates.activity');
+
+        // Prepare the $clientActivities variable in the desired format for JavaScript
+        $clientActivities = [];
+        foreach ($clients as $client) {
+            $clientActivities[$client->id] = $client->activityRates->pluck('activity');
+        }
+
+        return view('worker/myshifts.edit', compact('myshift', 'clientActivities'));
     }
 
 

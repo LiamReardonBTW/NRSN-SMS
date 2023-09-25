@@ -54,5 +54,9 @@ class Client extends Model
         return $this->hasMany(ActivityRate::class);
     }
 
+    public function activities()
+{
+    return $this->hasManyThrough(Activity::class, ActivityRate::class, 'client_id', 'id', 'id', 'activity_id');
+}
 
 }

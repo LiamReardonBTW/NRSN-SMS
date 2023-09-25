@@ -88,15 +88,18 @@
                 <!-- Activity Dropdown -->
                 <div class="mx-4 my-5">
                     <label for="activity_id">Activity</label>
-                    <select name="activity_id" id="activity_id" class="form-select rounded-md shadow-sm block w-full"
-                        >
-                        @foreach ($activities as $activity)
+                    <select name="activity_id" id="activity_id" class="form-select rounded-md shadow-sm block w-full">
+                        <option value="">Select an activity</option>
+                        @foreach ($clientActivities[$myshift->clientSupported->id] as $activity)
                             <option value="{{ $activity->id }}"
                                 {{ $myshift->activity_id == $activity->id ? 'selected' : '' }}>
                                 {{ $activity->activityname }}
                             </option>
                         @endforeach
                     </select>
+                    @error('activity_id')
+                        <p class="text-sm text-red-600">{{ $message }}</p>
+                    @enderror
                 </div>
 
                 <!-- Submission Date -->
