@@ -57,17 +57,47 @@
                     <label for="activity_id">Activity</label>
                     <select name="activity_id" id="activity_id" class="form-select rounded-md shadow-sm block w-full">
                         <option value="">Select an activity</option>
-                        @foreach ($activities as $activity)
-                            <option value="{{ $activity->id }}"
-                                {{ old('activity_id') == $activity->id ? 'selected' : '' }}>
-                                {{ $activity->activityname }}
-                            </option>
-                        @endforeach
+                        <!-- This part will be populated dynamically with JavaScript based on the selected client -->
                     </select>
                     @error('activity_id')
                         <p class="text-sm text-red-600">{{ $message }}</p>
                     @enderror
                 </div>
+
+                <script>
+                    // Get references to the select fields
+                    const clientSelect = document.getElementById('client_supported');
+                    const activitySelect = document.getElementById('activity_id');
+
+                    // Define a JavaScript object to store the client-activity relationships
+                    const clientActivities = @json($clientActivities);
+
+                    // Function to update the activity dropdown based on the selected client
+                    function updateActivityDropdown() {
+                        // Get the selected client ID
+                        const selectedClientId = clientSelect.value;
+
+                        // Clear existing options in the activity dropdown
+                        activitySelect.innerHTML = '<option value="">Select an activity</option>';
+
+                        // If a client is selected, populate the activity dropdown with related activities
+                        if (selectedClientId) {
+                            const relatedActivities = clientActivities[selectedClientId] || [];
+                            relatedActivities.forEach(activity => {
+                                const option = document.createElement('option');
+                                option.value = activity.id;
+                                option.textContent = activity.activityname;
+                                activitySelect.appendChild(option);
+                            });
+                        }
+                    }
+
+                    // Attach an event listener to the client dropdown to update the activity dropdown
+                    clientSelect.addEventListener('change', updateActivityDropdown);
+
+                    // Initial population of the activity dropdown
+                    updateActivityDropdown();
+                </script>
 
                 <!-- Date -->
                 <div class="mx-4 my-2">

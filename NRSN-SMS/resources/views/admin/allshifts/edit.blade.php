@@ -87,13 +87,17 @@
                 <div class="mx-4 my-5">
                     <label for="activity_id">Activity</label>
                     <select name="activity_id" id="activity_id" class="form-select rounded-md shadow-sm block w-full">
-                        @foreach ($activities as $activity)
+                        <option value="">Select an activity</option>
+                        @foreach ($clientActivities[$allshift->clientSupported->id] as $activity)
                             <option value="{{ $activity->id }}"
                                 {{ $allshift->activity_id == $activity->id ? 'selected' : '' }}>
                                 {{ $activity->activityname }}
                             </option>
                         @endforeach
                     </select>
+                    @error('activity_id')
+                        <p class="text-sm text-red-600">{{ $message }}</p>
+                    @enderror
                 </div>
 
                 <!-- Submission Date -->

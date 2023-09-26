@@ -78,7 +78,7 @@ class ShiftController extends Controller
         $user = Auth::user();
         // Retrieve the clients supported by the user and their related activities
         $clients = optional($user->managedClients)->where('active', true);
-        $workers = User::where('role' , '3')->get();
+        $workers = User::all();
 
         // Eager load the related activityRates and activities
         $clients->load('activityRates.activity');

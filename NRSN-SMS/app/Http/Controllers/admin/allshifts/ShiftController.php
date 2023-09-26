@@ -32,10 +32,21 @@ class ShiftController extends Controller
      */
     public function create()
     {
-        $workers = User::where('role', 2)->get();
-        $clients = Client::all();
-        $activities = Activity::All();
-        return view('admin/allshifts.create', compact('workers', 'clients', 'activities'));
+        // Get the authenticated user
+        $workers = User::all();
+
+        // Retrieve the clients supported by the user and their related activities
+        $clients = Client::whereHas('activityRates.activity')->get();
+
+        // Apply the 'active' filter after loading the related models
+        $clients = $clients->where('active', true);
+
+        // Prepare the $clientActivities variable in the desired format for JavaScript
+        $clientActivities = [];
+        foreach ($clients as $client) {
+            $clientActivities[$client->id] = $client->activityRates->pluck('activity');
+        }
+        return view('admin/allshifts.create', compact('workers', 'clients', 'clientActivities'));
     }
 
     /**
@@ -62,10 +73,20 @@ class ShiftController extends Controller
      */
     public function edit(Shift $allshift)
     {
-        $workers = User::where('role', 2)->get();
+        $workers = User::all();
         $clients = Client::all();
         $activities = Activity::All();
-        return view('admin/allshifts.edit', compact('allshift', 'workers', 'clients', 'activities'));
+
+        // Eager load the related activityRates and activities
+        $clients->load('activityRates.activity');
+
+        // Prepare the $clientActivities variable in the desired format for JavaScript
+        $clientActivities = [];
+        foreach ($clients as $client) {
+            $clientActivities[$client->id] = $client->activityRates->pluck('activity');
+        }
+
+        return view('admin/allshifts.edit', compact('allshift', 'workers', 'clients', 'clientActivities'));
     }
 
     /**
