@@ -6,11 +6,12 @@ use Illuminate\Http\Request;
 use App\Http\Requests\StoreShiftRequest;
 use App\Http\Requests\UpdateShiftRequest;
 use App\Models\Shift;
-use App\Models\User;
-use App\Models\Client;
 use App\Models\Activity;
+use App\Models\Client;
+use App\Models\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class ShiftController extends Controller
 {
@@ -32,10 +33,22 @@ class ShiftController extends Controller
      */
     public function create()
     {
-        $workers = User::where('role', 2)->get();
-        $clients = Client::all();
-        $activities = Activity::All();
-        return view('manager/manageshifts.create', compact('workers', 'clients', 'activities'));
+        // Get the authenticated user
+        $user = Auth::user();
+        $workers = User::where('role' , '2')->get();
+
+        // Retrieve the clients supported by the user and their related activities
+        $clients = optional($user->managedClients)->load('activityRates.activity');
+
+        // Apply the 'active' filter after loading the related models
+        $clients = $clients->where('active', true);
+
+        // Prepare the $clientActivities variable in the desired format for JavaScript
+        $clientActivities = [];
+        foreach ($clients as $client) {
+            $clientActivities[$client->id] = $client->activityRates->pluck('activity');
+        }
+        return view('manager/manageshifts.create', compact('workers', 'clients', 'clientActivities'));
     }
 
     /**
@@ -62,10 +75,21 @@ class ShiftController extends Controller
      */
     public function edit(Shift $manageshift)
     {
-        $workers = User::where('role', 2)->get();
-        $clients = Client::all();
-        $activities = Activity::All();
-        return view('manager/manageshifts.edit', compact('manageshift', 'workers', 'clients', 'activities'));
+        $user = Auth::user();
+        // Retrieve the clients supported by the user and their related activities
+        $clients = optional($user->managedClients)->where('active', true);
+        $workers = User::where('role' , '3')->get();
+
+        // Eager load the related activityRates and activities
+        $clients->load('activityRates.activity');
+
+        // Prepare the $clientActivities variable in the desired format for JavaScript
+        $clientActivities = [];
+        foreach ($clients as $client) {
+            $clientActivities[$client->id] = $client->activityRates->pluck('activity');
+        }
+
+        return view('manager/manageshifts.edit', compact('manageshift', 'workers', 'clients', 'clientActivities'));
     }
 
     /**
