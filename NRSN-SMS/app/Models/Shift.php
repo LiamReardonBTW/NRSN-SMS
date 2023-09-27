@@ -26,6 +26,10 @@ class Shift extends Model
         'is_public_holiday',
     ];
 
+    protected $casts = [
+        'date' => 'datetime'
+    ];
+
     public function submittedByUser()
     {
         return $this->belongsTo(User::class, 'submitted_by', 'id');

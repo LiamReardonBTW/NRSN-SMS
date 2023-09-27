@@ -55,6 +55,7 @@ Route::group(['middleware' => 'isAdmin'], function () {
     Route::resource('admin/activities', App\Http\Controllers\admin\activities\ActivityController::class);
 
     Route::resource('admin/invoices', App\Http\Controllers\admin\invoices\InvoiceController::class);
+    Route::post('/generate-client-invoice', 'App\Http\Controllers\admin\invoices\InvoiceController@generateClientInvoice')->name('generate.client-invoice');
 });
 
 Route::middleware([
