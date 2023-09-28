@@ -254,6 +254,7 @@
             <thead>
                 <tr>
                     <th scope="col" class="border-0 pl-0">{{ __('invoices::invoice.description') }}</th>
+                    <th scope="col" class="text-center border-0">{{ __('invoices::invoice.dateofshift') }}</th>
                     @if($invoice->hasItemUnits)
                         <th scope="col" class="text-center border-0">{{ __('invoices::invoice.units') }}</th>
                     @endif
@@ -279,6 +280,7 @@
                             <p class="cool-gray">{{ $item->description }}</p>
                         @endif
                     </td>
+                    <td class="text-center">{{ $item->dateofshift }}</td>
                     @if($invoice->hasItemUnits)
                         <td class="text-center">{{ $item->units }}</td>
                     @endif

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\admin\invoices;
 
 use App\Http\Controllers\Controller;
+use App\CustomClasses\CustomInvoiceItem;
 use Illuminate\Http\Request;
 use App\Models\Client;
 use App\Models\User;
@@ -145,11 +146,12 @@ class InvoiceController extends Controller
                 }
             }
 
-            $item = (new InvoiceItem())
+            $item = (new CustomInvoiceItem())
                 ->title("$dayofshift $dateofshift $public_holiday_text")
                 ->description("$activity->activityname - $activity_code ")
                 ->pricePerUnit(1)
                 ->quantity($shift->hours)
+                ->setDateOfShift($dateofshift)
                 ->pricePerUnit($hourlyRate);
             $items[] = $item;
         }
