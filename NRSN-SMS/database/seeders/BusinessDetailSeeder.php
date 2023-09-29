@@ -15,11 +15,15 @@ class BusinessDetailSeeder extends Seeder
     {
         // Create a single BusinessDetail entry
         BusinessDetail::create([
-            'businessname' => 'Northern Rivers Support Network',
-            'businessaddress' => '123 Main Street',
-            'businessphone' => '555-123-4567',
-            'businesstfn' => '123456789',
-            'businessabn' => '987654321',
+            'name' => 'Northern Rivers Support Network',
+            'address' => '123 Main Street',
+            'phone' => '555-123-4567',
+            'tfn' => '123456789',
+            'abn' => '987654321',
+            'bankname' => 'Heritage',
+            'bankaddress' => '45 Liam Terrace',
+            'bankaccountnumber' => '9876-5432-1234',
+            'bankbsbnumber' => '123-456',
         ]);
     }
 }

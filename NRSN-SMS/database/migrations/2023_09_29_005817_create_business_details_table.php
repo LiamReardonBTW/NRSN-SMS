@@ -13,11 +13,15 @@ return new class extends Migration
     {
         Schema::create('business_details', function (Blueprint $table) {
             $table->id();
-            $table->string('businessname');
-            $table->string('businessaddress');
-            $table->string('businessphone');
-            $table->string('businesstfn');
-            $table->string('businessabn');
+            $table->string('name');
+            $table->string('address');
+            $table->string('phone');
+            $table->string('tfn');
+            $table->string('abn');
+            $table->string('bankname');
+            $table->string('bankaddress');
+            $table->string('bankaccountnumber');
+            $table->string('bankbsbnumber');
             $table->timestamps();
         });
     }
