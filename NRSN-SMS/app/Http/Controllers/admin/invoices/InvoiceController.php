@@ -14,6 +14,7 @@ use LaravelDaily\Invoices\Invoice;
 use LaravelDaily\Invoices\Classes\Party;
 use LaravelDaily\Invoices\Classes\InvoiceItem;
 use App\Models\Shift;
+use App\Models\Invoice as DatabaseInvoice;
 use Carbon\Carbon;
 
 
@@ -125,6 +126,7 @@ class InvoiceController extends Controller
 
         // Create an array of InvoiceItems based on uninvoiced shifts
         $items = [];
+        $totalAmount = 0;
         foreach ($uninvoicedShifts as $shift) {
             $activity = Activity::find($shift->activity_id);
             $activityrate = ActivityRate::where('client_id', $shift->client_supported)
@@ -160,6 +162,9 @@ class InvoiceController extends Controller
                 ->setDateOfShift($dateofshift)
                 ->pricePerUnit($hourlyRate);
             $items[] = $item;
+
+            // Calculate and accumulate the total amount
+            $totalAmount += $hourlyRate * $shift->hours;
         }
 
         // Create the invoice
@@ -178,8 +183,15 @@ class InvoiceController extends Controller
         // Generate and save the PDF
         $pdf = $invoice->save('public'); // Save to the public directory
 
-        // You can also send the PDF to the client via email
-
+        // Create a new entry in the 'invoices' table
+        $newInvoice = new DatabaseInvoice();
+        $newInvoice->type = 'client';
+        $newInvoice->recipient_id = $clientId;
+        $newInvoice->date = now()->toDateString(); // Current date (only date, not time)
+        $newInvoice->totalamount = $totalAmount; // Set the calculated total amount
+        $newInvoice->status = 'pending'; // Default status
+        $newInvoice->pdf_path = $invoice->url();
+        $newInvoice->save();
 
         // Return the PDF to the browser or have a different view
         return $pdf->stream();
