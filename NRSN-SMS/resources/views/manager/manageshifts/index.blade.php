@@ -370,16 +370,6 @@
                                         class="px-2 mx-1 py-1 bg-red-600 rounded hover:shadow-xl hover:bg-red-500"
                                         value="Delete">
                                 </form>
-                                <!-- Mark as Invoiced Form -->
-                                <form class="inline-block"
-                                    action="{{ route('manageshifts.updateInvoiced', $shift->id) }}" method="POST">
-                                    @csrf
-                                    @method('PATCH') <!-- Change 'PUT' to 'PATCH' here -->
-                                    <button type="submit"
-                                        class="px-2 mx-1 py-1 bg-green-600 rounded hover:shadow-xl hover:bg-green-500">Generate
-                                        Invoice</button>
-                                </form>
-                            </td>
                             </td>
 
                         </tr> <!-- Table Row End  -->

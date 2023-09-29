@@ -53,9 +53,12 @@ Route::group(['middleware' => 'isAdmin'], function () {
     Route::resource('admin/clientcontracts', App\Http\Controllers\admin\clientcontracts\ClientContractController::class);
     Route::resource('admin/usercontracts', App\Http\Controllers\admin\usercontracts\UserContractController::class);
     Route::resource('admin/activities', App\Http\Controllers\admin\activities\ActivityController::class);
+    Route::resource('admin/business-details', App\Http\Controllers\admin\businessdetail\BusinessDetailController::class);
+    Route::get('admin/business-details/{businessDetail}/edit', 'App\Http\Controllers\admin\businessdetail\BusinessDetailController@edit')->name('business-details.edit');
 
     Route::resource('admin/invoices', App\Http\Controllers\admin\invoices\InvoiceController::class);
     Route::post('/generate-client-invoice', 'App\Http\Controllers\admin\invoices\InvoiceController@generateClientInvoice')->name('generate.client-invoice');
+    Route::post('/generate-worker-invoice', 'App\Http\Controllers\admin\invoices\InvoiceController@generateWorkerInvoice')->name('generate.worker-invoice');
 });
 
 Route::middleware([

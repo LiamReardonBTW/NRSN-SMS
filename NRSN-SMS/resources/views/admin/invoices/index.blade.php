@@ -58,14 +58,14 @@
                             {{ $client->first_name }} {{ $client->last_name }}
                         </td>
                         <td scope="row" class="px-1 py-1">
-                            <!-- Calculate and display the total uninvoiced shifts -->
-                            {{ $client->shifts->count() }}
+                            <!-- Calculate and display the total uninvoiced and approved shifts -->
+                            {{ $client->shifts->where('isinvoiced', 0)->where('approved', 1)->count() }}
                         </td>
                         <td class="whitespace-nowrap text-sm text-white font-bold float-right py-3">
                             <!-- Generate Invoice Button -->
-                            <button class="generate-client-invoice-button inline-block px-2 mx-1 py-1 bg-blue-600 rounded hover:shadow-xl hover:bg-blue-500"
-                                    data-client-id="{{ $client->id }}"
-                                    class="inline-block px-2 mx-1 py-1 bg-green-600 rounded hover:shadow-xl hover:bg-green-500">
+                            <button
+                                class="generate-client-invoice-button inline-block px-2 mx-1 py-1 bg-blue-600 rounded hover:shadow-xl hover:bg-blue-500"
+                                data-client-id="{{ $client->id }}">
                                 Generate Client Invoice
                             </button>
                         </td>
@@ -78,7 +78,7 @@
     <!-- Table Container -->
     <h2 class="text-xl font-semibold mb-2 mt-6">Workers:</h2>
     <div class="relative overflow-auto border-2 border-blue-600 rounded">
-        <!-- Client Invoices Table -->
+        <!-- User Invoices Table -->
         <table class="w-full text-left text-gray-800 bg-gray-100">
             <!-- Table Headers -->
             <thead class="text-xs uppercase text-gray-50 bg-blue-800">
@@ -127,14 +127,14 @@
                             {{ $worker->first_name }} {{ $worker->last_name }}
                         </td>
                         <td scope="row" class="px-1 py-1">
-                            <!-- Calculate and display the total uninvoiced shifts -->
-                            {{ $worker->shifts->count() }}
+                            <!-- Calculate and display the total uninvoiced and approved shifts -->
+                            {{ $worker->shifts->where('isinvoiced', 0)->where('approved', 1)->count() }}
                         </td>
                         <td class="whitespace-nowrap text-sm text-white font-bold float-right py-3">
                             <!-- Generate Invoice Button -->
-                            <button class="generate-client-invoice-button inline-block px-2 mx-1 py-1 bg-blue-600 rounded hover:shadow-xl hover:bg-blue-500"
-                                    data-client-id="{{ $client->id }}"
-                                    class="inline-block px-2 mx-1 py-1 bg-green-600 rounded hover:shadow-xl hover:bg-green-500">
+                            <button
+                                class="generate-worker-invoice-button inline-block px-2 mx-1 py-1 bg-green-600 rounded hover:shadow-xl hover:bg-green-500"
+                                data-worker-id="{{ $worker->id }}">
                                 Generate Worker Invoice
                             </button>
                         </td>
@@ -154,36 +154,71 @@
     </div>
 </x-app-layout>
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const generateInvoiceButtons = document.querySelectorAll('.generate-client-invoice-button');
+    document.addEventListener('DOMContentLoaded', function() {
+        const generateClientInvoiceButtons = document.querySelectorAll('.generate-client-invoice-button');
+        const generateWorkerInvoiceButtons = document.querySelectorAll('.generate-worker-invoice-button');
 
-        generateInvoiceButtons.forEach(button => {
-            button.addEventListener('click', function () {
+        generateClientInvoiceButtons.forEach(button => {
+            button.addEventListener('click', function() {
                 const clientId = this.getAttribute('data-client-id');
 
-                // Send an AJAX request to generate the invoice
+                // Send an AJAX request to generate the client invoice
                 fetch('{{ route('generate.client-invoice') }}', {
-                    method: 'POST',
-                    headers: {
-                        'X-CSRF-TOKEN': '{{ csrf_token() }}',
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({ client_id: clientId }),
-                })
-                .then(response => response.blob())
-                .then(blob => {
-                    // Create a temporary URL for the generated PDF
-                    const url = window.URL.createObjectURL(blob);
+                        method: 'POST',
+                        headers: {
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            client_id: clientId
+                        }),
+                    })
+                    .then(response => response.blob())
+                    .then(blob => {
+                        // Create a temporary URL for the generated PDF
+                        const url = window.URL.createObjectURL(blob);
 
-                    // Open the PDF in a new tab
-                    window.open(url, '_blank');
+                        // Open the PDF in a new tab
+                        window.open(url, '_blank');
 
-                    // Release the temporary URL
-                    window.URL.revokeObjectURL(url);
-                })
-                .catch(error => {
-                    console.error('Error generating invoice:', error);
-                });
+                        // Release the temporary URL
+                        window.URL.revokeObjectURL(url);
+                    })
+                    .catch(error => {
+                        console.error('Error generating client invoice:', error);
+                    });
+            });
+        });
+
+        generateWorkerInvoiceButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const workerId = this.getAttribute('data-worker-id');
+
+                // Send an AJAX request to generate the worker invoice
+                fetch('{{ route('generate.worker-invoice') }}', {
+                        method: 'POST',
+                        headers: {
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            worker_id: workerId
+                        }),
+                    })
+                    .then(response => response.blob())
+                    .then(blob => {
+                        // Create a temporary URL for the generated PDF
+                        const url = window.URL.createObjectURL(blob);
+
+                        // Open the PDF in a new tab
+                        window.open(url, '_blank');
+
+                        // Release the temporary URL
+                        window.URL.revokeObjectURL(url);
+                    })
+                    .catch(error => {
+                        console.error('Error generating worker invoice:', error);
+                    });
             });
         });
     });
