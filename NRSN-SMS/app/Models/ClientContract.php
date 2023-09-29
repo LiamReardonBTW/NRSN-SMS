@@ -16,6 +16,7 @@ class ClientContract extends Model
         'totalallocated',
         'balance',
         'active',
+        'km_rate',
     ];
 
     protected $casts = [

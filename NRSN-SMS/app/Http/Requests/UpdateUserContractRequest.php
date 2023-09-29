@@ -50,6 +50,10 @@ class UpdateUserContractRequest extends FormRequest
                 'required',
                 'boolean',
             ],
+            'km_rate' => [
+                'required',
+                'numeric',
+            ],
         ];
     }
 }

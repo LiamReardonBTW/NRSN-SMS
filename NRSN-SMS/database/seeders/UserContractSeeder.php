@@ -34,6 +34,7 @@ class UserContractSeeder extends Seeder
                     'sundayhourlyrate' => rand(40, 80),
                     'publicholidayhourlyrate' => rand(60, 100),
                     'active' => true,
+                    'km_rate' => rand(5, 8) / 100,
                     'created_at' => now(),
                     'updated_at' => now(),
                 ];
@@ -60,6 +61,7 @@ class UserContractSeeder extends Seeder
                 'sundayhourlyrate' => rand(20, 80),
                 'publicholidayhourlyrate' => rand(25, 100),
                 'active' => false,
+                'km_rate' => rand(5, 8) / 100,
                 'created_at' => now(),
                 'updated_at' => now(),
             ];

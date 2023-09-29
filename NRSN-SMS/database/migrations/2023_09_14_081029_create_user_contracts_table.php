@@ -21,6 +21,7 @@ return new class extends Migration
             $table->double('sundayhourlyrate');
             $table->double('publicholidayhourlyrate');
             $table->boolean('active')->default(true);
+            $table->double('km_rate');
             $table->timestamps();
         });
     }

@@ -21,6 +21,7 @@ class CreateClientContractsTable extends Migration
             $table->double('totalallocated');
             $table->double('balance');
             $table->boolean('active')->default(true);
+            $table->double('km_rate');
             $table->timestamps();
         });
     }

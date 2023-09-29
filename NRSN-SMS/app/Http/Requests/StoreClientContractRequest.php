@@ -46,6 +46,10 @@ class StoreClientContractRequest extends FormRequest
                 'required',
                 'boolean',
             ],
+            'km_rate' => [
+                'required',
+                'numeric',
+            ],
         ];
     }
 }

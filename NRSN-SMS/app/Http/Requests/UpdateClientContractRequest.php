@@ -42,6 +42,10 @@ class UpdateClientContractRequest extends FormRequest
                 'required',
                 'boolean',
             ],
+            'km_rate' => [
+                'required',
+                'numeric',
+            ],
             'activities' => 'nullable|array',
         ];
     }

@@ -70,6 +70,16 @@
                     @enderror
                 </div>
 
+                <!-- Km Rate -->
+                <div class="mx-4 my-5 grid grid-rows-2">
+                    <label for="km_rate">Km Rate</label>
+                    <x-input type="numeric" name="km_rate" id="km_rate"
+                        class="form-input rounded-md shadow-sm block w-full" value="{{ $clientcontract->km_rate }}" />
+                    @error('km_rate')
+                        <p class="text-sm text-red-600">{{ $message }}</p>
+                    @enderror
+                </div>
+
                 <!-- Active Status -->
                 <div class="mx-4 my-5 grid grid-rows-2">
                     <label for="active">Active Status</label>

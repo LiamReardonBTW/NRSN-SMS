@@ -62,6 +62,13 @@
                     class="form-input rounded-md shadow-sm block w-full"
                     value="${{ $usercontract->publicholidayhourlyrate }}" />
             </div>
+            <!-- Km Rate -->
+            <div class="mx-4 my-5 grid grid-rows-2">
+                <label for="km_rate">Km Rate</label>
+                <x-input disabled type="numeric" name="km_rate" id="km_rate"
+                    class="form-input rounded-md shadow-sm block w-full"
+                    value="${{ $usercontract->km_rate }}" />
+            </div>
 
             <!-- Active Status -->
             <div class="mx-4 my-5 grid grid-rows-2">

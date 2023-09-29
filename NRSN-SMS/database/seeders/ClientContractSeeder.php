@@ -32,6 +32,7 @@ class ClientContractSeeder extends Seeder
                     'totalallocated' => rand(50000, 100000),
                     'balance' => rand(1000, 100000) / 100,
                     'active' => true,
+                    'km_rate' => rand(5, 8) / 100,
                     'created_at' => now(),
                     'updated_at' => now(),
                 ];
@@ -56,6 +57,7 @@ class ClientContractSeeder extends Seeder
                 'totalallocated' => rand(50000, 100000),
                 'balance' => rand(1000, 100000) / 100,
                 'active' => false,
+                'km_rate' => rand(5, 8) / 100,
                 'created_at' => now(),
                 'updated_at' => now(),
             ];
