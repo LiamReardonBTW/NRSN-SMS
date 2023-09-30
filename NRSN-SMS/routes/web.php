@@ -65,7 +65,7 @@ Route::group(['middleware' => 'isAdmin'], function () {
 Route::get('storage/invoices/clientinvoices/{invoice_path}', 'App\Http\Controllers\admin\invoices\InvoiceController@showClientInvoice')->middleware('clientinvoice.access')->name('client_invoice.show');
 
 // Create a route for serving worker invoices
-Route::get('storage/invoices/workerinvoices/{invoice_path}', 'App\Http\Controllers\admin\invoices\InvoiceController@showWorkerInvoice')->middleware('invoice.access')->name('worker_invoice.show');
+Route::get('storage/invoices/workerinvoices/{invoice_path}', 'App\Http\Controllers\admin\invoices\InvoiceController@showWorkerInvoice')->middleware('workerinvoice.access')->name('worker_invoice.show');
 
 Route::middleware([
     'auth:sanctum',

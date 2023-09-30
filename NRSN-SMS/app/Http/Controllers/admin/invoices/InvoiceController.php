@@ -77,6 +77,21 @@ class InvoiceController extends Controller
         return abort(404, 'File not found');
     }
 
+    public function showWorkerInvoice($invoicePath)
+    {
+        // Generate the full filesystem path for the invoice file
+        $fullFilePath = Storage::disk('worker_invoices')->path($invoicePath);
+
+        // Check if the file exists
+        if (file_exists($fullFilePath)) {
+            // Return the file as a response
+            return response()->file($fullFilePath);
+        }
+
+        // Handle the case where the file does not exist
+        return abort(404, 'File not found');
+    }
+
     /**
      * Show the form for editing the specified resource.
      */
