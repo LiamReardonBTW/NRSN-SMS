@@ -183,15 +183,23 @@ class InvoiceController extends Controller
         // Generate and save the PDF
         $pdf = $invoice->save('public'); // Save to the public directory
 
-        // Create a new entry in the 'invoices' table
-        $newInvoice = new DatabaseInvoice();
-        $newInvoice->type = 'client';
-        $newInvoice->recipient_id = $clientId;
-        $newInvoice->date = now()->toDateString(); // Current date (only date, not time)
-        $newInvoice->totalamount = $totalAmount; // Set the calculated total amount
-        $newInvoice->status = 'pending'; // Default status
-        $newInvoice->pdf_path = $invoice->url();
-        $newInvoice->save();
+        // Create an invoice for a client
+        $clientInvoice = new DatabaseInvoice([
+            'type' => 'client',
+            'date' => now()->toDateString(),
+            'totalamount' => $totalAmount,
+            'status' => 'pending',
+            'pdf_path' => $invoice->url(),
+        ]);
+
+        $clientInvoice->recipient()->associate($client);
+        $clientInvoice->save();
+
+        // Establish the relationship between shifts and the invoice
+        foreach ($uninvoicedShifts as $shift) {
+            $shift->clientinvoice_id = $clientInvoice->id; // Set the clientinvoice_id
+            $shift->save();
+        }
 
         // Return the PDF to the browser or have a different view
         return $pdf->stream();

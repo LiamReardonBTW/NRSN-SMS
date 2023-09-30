@@ -45,4 +45,9 @@ class Shift extends Model
         return $this->belongsTo(Activity::class);
     }
 
+    public function clientInvoice()
+    {
+        return $this->belongsTo(Invoice::class, 'clientinvoice_id');
+    }
+
 }

@@ -98,4 +98,9 @@ class User extends Authenticatable
         return $this->hasMany(UserContract::class, 'user_id');
     }
 
+    public function invoices()
+    {
+        return $this->morphMany(Invoice::class, 'recipient');
+    }
+
 }

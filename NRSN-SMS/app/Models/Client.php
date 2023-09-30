@@ -55,8 +55,13 @@ class Client extends Model
     }
 
     public function activities()
-{
-    return $this->hasManyThrough(Activity::class, ActivityRate::class, 'client_id', 'id', 'id', 'activity_id');
-}
+    {
+        return $this->hasManyThrough(Activity::class, ActivityRate::class, 'client_id', 'id', 'id', 'activity_id');
+    }
+
+    public function invoices()
+    {
+        return $this->morphMany(Invoice::class, 'recipient');
+    }
 
 }

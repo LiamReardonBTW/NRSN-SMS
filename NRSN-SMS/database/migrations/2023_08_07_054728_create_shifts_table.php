@@ -28,6 +28,9 @@ return new class extends Migration
             $table->boolean('approved')->default(0);
             $table->boolean('paid')->default(false);
             $table->boolean('is_public_holiday')->default(false);
+
+            $table->unsignedBigInteger('clientinvoice_id')->nullable();
+            $table->foreign('clientinvoice_id')->references('id')->on('invoices')->onDelete('cascade');
         });
     }
 
