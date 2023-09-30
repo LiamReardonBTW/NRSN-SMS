@@ -58,12 +58,16 @@ return [
 
         'client_invoices' => [
             'driver' => 'local',
-            'root' => public_path('storage/invoices/clientinvoices'), // Specify the full path to the directory
+            'root' => public_path('storage/invoices/clientinvoices'),
+            'url' => env('APP_URL').'/storage/invoices/clientinvoices', // Add the URL here
+            'visibility' => 'public',
         ],
 
         'worker_invoices' => [
             'driver' => 'local',
-            'root' => public_path('storage/invoices/workerinvoices'), // Specify the full path to the directory
+            'root' => public_path('storage/invoices/workerinvoices'),
+            'url' => env('APP_URL').'/storage/invoices/workerinvoices', // Add the URL here
+            'visibility' => 'public',
         ],
 
     ],
