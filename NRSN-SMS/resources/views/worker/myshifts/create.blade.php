@@ -19,7 +19,7 @@
                 <!-- Hidden Input for user_id -->
                 <input type="hidden" name="submitted_by" id="submitted_by" value="{{ Auth::user()->id }}">
                 <!-- Display User's First and Last Name -->
-                <div class="mx-4 my-2">
+                <div class="mx-4 my-5 grid grid-rows-2">
                     <label for="submitted_by_display">Submitted By</label>
                     <input type="text" name="submitted_by_display" id="submitted_by_display"
                         class="form-input rounded-md shadow-sm block w-full"
@@ -27,14 +27,15 @@
                 </div>
 
                 <!-- Client Supported Dropdown -->
-                <div class="mx-4 my-2">
+                <div class="mx-4 my-5 grid grid-rows-2">
                     <label for="client_supported">Client Supported</label>
                     <select name="client_supported" id="client_supported"
                         class="form-select rounded-md shadow-sm block w-full">
                         <option value="">Select a client</option>
                         @foreach ($clients as $client)
                             @if ($clientActivities[$client->id]->count() > 0)
-                                <option value="{{ $client->id }}">{{ $client->first_name }} {{ $client->last_name }}</option>
+                                <option value="{{ $client->id }}">{{ $client->first_name }} {{ $client->last_name }}
+                                </option>
                             @endif
                         @endforeach
                     </select>
@@ -44,7 +45,7 @@
                 </div>
 
                 <!-- Activity Dropdown -->
-                <div class="mx-4 my-2">
+                <div class="mx-4 my-5 grid grid-rows-2">
                     <label for="activity_id">Activity</label>
                     <select name="activity_id" id="activity_id" class="form-select rounded-md shadow-sm block w-full">
                         <option value="">Select an activity</option>
@@ -91,7 +92,7 @@
                 </script>
 
                 <!-- Date -->
-                <div class="mx-4 my-2">
+                <div class="mx-4 my-5 grid grid-rows-2">
                     <label for="date">Date</label>
                     <x-input type="date" name="date" id="date"
                         class="form-input rounded-md shadow-sm block w-full" value="{{ old('date', '') }}" />
@@ -101,7 +102,7 @@
                 </div>
 
                 <!-- Is Public Holiday Dropdown -->
-                <div class="mx-4 my-2">
+                <div class="mx-4 my-5 grid grid-rows-2">
                     <label for="is_public_holiday">Public Holiday?</label>
                     <select name="is_public_holiday" id="is_public_holiday"
                         class="form-select rounded-md shadow-sm block w-full">
@@ -114,7 +115,7 @@
                 </div>
 
                 <!-- Expenses -->
-                <div class="mx-4 my-2">
+                <div class="mx-4 my-5 grid grid-rows-2">
                     <label for="expenses">Expenses ($AUD)</label>
                     <x-input type="float" name="expenses" id="expenses"
                         class="form-input rounded-md shadow-sm block w-full" value="{{ old('expenses', '') }}" />
@@ -124,7 +125,7 @@
                 </div>
 
                 <!-- km Travelled -->
-                <div class="mx-4 my-2">
+                <div class="mx-4 my-5 grid grid-rows-2">
                     <label for="km">Km Travelled</label>
                     <x-input type="float" name="km" id="km"
                         class="form-input rounded-md shadow-sm block w-full" value="{{ old('km', '') }}" />
@@ -134,7 +135,7 @@
                 </div>
 
                 <!-- Hours Worked -->
-                <div class="mx-4 my-2">
+                <div class="mx-4 my-5 grid grid-rows-2">
                     <label for="hours">Hours Worked</label>
                     <x-input type="float" name="hours" id="hours"
                         class="form-input rounded-md shadow-sm block w-full" value="{{ old('hours', '') }}" />
@@ -144,7 +145,7 @@
                 </div>
 
                 <!-- Notes -->
-                <div class="mx-4 my-2">
+                <div class="mx-4 my-5 grid grid-rows-2">
                     <label for="notes">Shift Notes</label>
                     <x-input type="string" name="notes" id="notes"
                         class="form-input rounded-md shadow-sm block w-full" value="{{ old('notes', '') }}" />
