@@ -16,7 +16,7 @@ use LaravelDaily\Invoices\Classes\InvoiceItem;
 use App\Models\Shift;
 use App\Models\Invoice as DatabaseInvoice;
 use Carbon\Carbon;
-
+use Illuminate\Support\Facades\Storage;
 
 class InvoiceController extends Controller
 {
@@ -60,6 +60,21 @@ class InvoiceController extends Controller
     public function show(string $id)
     {
         return view('admin/invoices.show');
+    }
+
+    public function showClientInvoice($invoicePath)
+    {
+        // Generate the full filesystem path for the invoice file
+        $fullFilePath = Storage::disk('client_invoices')->path($invoicePath);
+
+        // Check if the file exists
+        if (file_exists($fullFilePath)) {
+            // Return the file as a response
+            return response()->file($fullFilePath);
+        }
+
+        // Handle the case where the file does not exist
+        return abort(404, 'File not found');
     }
 
     /**
