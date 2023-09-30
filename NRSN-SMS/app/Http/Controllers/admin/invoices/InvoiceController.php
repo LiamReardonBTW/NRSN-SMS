@@ -27,12 +27,12 @@ class InvoiceController extends Controller
     {
         // Get a list of clients and their uninvoiced shifts
         $clients = Client::whereHas('shifts', function ($query) {
-            $query->where('isinvoiced', 0)->where('approved', 1);
+            $query->where('approved', 1)->where('clientinvoice_id', null);
         })->get();
 
         // Get a list of workers and their uninvoiced shifts
         $workers = User::whereHas('shifts', function ($query) {
-            $query->where('isinvoiced', 0)->where('approved', 1);
+            $query->where('approved', 1)->where('workerinvoice_id', null);
         })->get();
 
         return view('admin/invoices.index', compact('clients', 'workers'));
@@ -134,8 +134,8 @@ class InvoiceController extends Controller
 
         // Get uninvoiced shifts for the selected client
         $uninvoicedShifts = Shift::where('client_supported', $clientId)
-            ->where('isinvoiced', 0)
             ->where('approved', 1)
+            ->where('clientinvoice_id', null)
             ->get();
 
         // Check if there are uninvoiced shifts
@@ -256,8 +256,8 @@ class InvoiceController extends Controller
 
         // Get uninvoiced shifts for the selected worker (user)
         $uninvoicedShifts = Shift::where('submitted_by', $workerId)
-            ->where('isinvoiced', 0)
             ->where('approved', 1)
+            ->where('workerinvoice_id', null)
             ->get();
 
         // Check if there are uninvoiced shifts

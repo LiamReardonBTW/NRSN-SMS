@@ -15,7 +15,6 @@ class Shift extends Model
         'submitted_by',
         'client_supported',
         'isflagged',
-        'isinvoiced',
         'date',
         'expenses',
         'km',

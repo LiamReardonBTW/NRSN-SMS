@@ -18,7 +18,6 @@ return new class extends Migration
             $table->foreignId('submitted_by')->constrained('users'); // Foreign key to users table
             $table->foreignId('client_supported')->constrained('clients'); // Foreign key to clients table
             $table->boolean('isflagged')->default(0);
-            $table->boolean('isinvoiced')->default(0);
             $table->date('date');
             $table->float('expenses')->nullable();
             $table->float('km')->nullable();

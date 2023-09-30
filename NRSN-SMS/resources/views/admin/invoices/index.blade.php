@@ -59,7 +59,7 @@
                         </td>
                         <td scope="row" class="px-1 py-1">
                             <!-- Calculate and display the total uninvoiced and approved shifts -->
-                            {{ $client->shifts->where('isinvoiced', 0)->where('approved', 1)->count() }}
+                            {{ $client->shifts->where('approved', 1)->where('clientinvoice_id', null)->count() }}
                         </td>
                         <td class="whitespace-nowrap text-sm text-white font-bold float-right py-3">
                             <!-- Generate Invoice Button -->
@@ -128,7 +128,7 @@
                         </td>
                         <td scope="row" class="px-1 py-1">
                             <!-- Calculate and display the total uninvoiced and approved shifts -->
-                            {{ $worker->shifts->where('isinvoiced', 0)->where('approved', 1)->count() }}
+                            {{ $worker->shifts->where('approved', 1)->where('workerinvoice_id', null)->count() }}
                         </td>
                         <td class="whitespace-nowrap text-sm text-white font-bold float-right py-3">
                             <!-- Generate Invoice Button -->

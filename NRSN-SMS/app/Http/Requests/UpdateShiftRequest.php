@@ -49,9 +49,6 @@ class UpdateShiftRequest extends FormRequest
             'isflagged' => [
                 'nullable', 'boolean',
             ],
-            'isinvoiced' => [
-                'nullable', 'boolean',
-            ],
             'activity_id' => [
                 'required', 'int',
             ],
