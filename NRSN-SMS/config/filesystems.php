@@ -56,6 +56,16 @@ return [
             'throw' => false,
         ],
 
+        'client_invoices' => [
+            'driver' => 'local',
+            'root' => public_path('storage/invoices/clientinvoices'), // Specify the full path to the directory
+        ],
+
+        'worker_invoices' => [
+            'driver' => 'local',
+            'root' => public_path('storage/invoices/workerinvoices'), // Specify the full path to the directory
+        ],
+
     ],
 
     /*

@@ -94,6 +94,9 @@ class InvoiceController extends Controller
         // Find the client based on the client ID
         $client = Client::find($clientId);
 
+        //REPLACE WITH INVOICE INPUT FIELD NEXT TO GENERATE INVOICE BUTTON
+        $invoice_number = 5;
+
         // Check if the client exists
         if (!$client) {
             return redirect()->back()->with('error', 'Client not found.');
@@ -157,7 +160,6 @@ class InvoiceController extends Controller
             $item = (new CustomInvoiceItem())
                 ->title("$activity->activityname")
                 ->description("$activity_code")
-                ->pricePerUnit(1)
                 ->quantity($shift->hours)
                 ->setDateOfShift($dateofshift)
                 ->pricePerUnit($hourlyRate);
@@ -178,10 +180,11 @@ class InvoiceController extends Controller
             ->currencyThousandsSeparator('.')
             ->currencyDecimalPoint(',')
             ->addItems($items)
-            ->logo(public_path('images/nrsn-logo-new.png'));
+            ->logo(public_path('images/nrsn-logo-new.png'))
+            ->filename("{$client->id}{$client->first_name}{$client->last_name}Invoice$invoice_number");
 
-        // Generate and save the PDF
-        $pdf = $invoice->save('public'); // Save to the public directory
+        // Generate and save the PDF to the 'client_invoices' disk
+        $pdf = $invoice->save('client_invoices');
 
         // Create an invoice for a client
         $clientInvoice = new DatabaseInvoice([
@@ -205,21 +208,23 @@ class InvoiceController extends Controller
         return $pdf->stream();
 
     }
-
     public function generateWorkerInvoice(Request $request)
     {
-        // Retrieve the worker ID from the request
+        // Retrieve the worker (user) ID from the request
         $workerId = $request->input('worker_id'); // Replace with your actual input field name
 
-        // Find the worker based on the worker ID (assuming you have a Worker model)
+        // Find the worker (user) based on the worker ID
         $worker = User::find($workerId);
 
-        // Check if the worker exists
+        //REPLACE WITH INVOICE INPUT FIELD NEXT TO GENERATE INVOICE BUTTON
+        $invoice_number = 5;
+
+        // Check if the worker (user) exists
         if (!$worker) {
             return redirect()->back()->with('error', 'Worker not found.');
         }
 
-        // Get uninvoiced shifts for the selected worker
+        // Get uninvoiced shifts for the selected worker (user)
         $uninvoicedShifts = Shift::where('submitted_by', $workerId)
             ->where('isinvoiced', 0)
             ->where('approved', 1)
@@ -228,14 +233,6 @@ class InvoiceController extends Controller
         // Check if there are uninvoiced shifts
         if ($uninvoicedShifts->isEmpty()) {
             return redirect()->back()->with('error', 'No uninvoiced shifts found for this worker.');
-        }
-
-        // Retrieve the worker's contract (assuming you have a UserContract model)
-        $contract = UserContract::where('user_id', $workerId)->first();
-
-        // Check if the contract exists
-        if (!$contract) {
-            return redirect()->back()->with('error', 'Contract not found for this worker.');
         }
 
         // Create a new Party for the worker
@@ -254,38 +251,40 @@ class InvoiceController extends Controller
 
         // Create an array of InvoiceItems based on uninvoiced shifts
         $items = [];
+        $totalAmount = 0;
         foreach ($uninvoicedShifts as $shift) {
-            $activity = Activity::find($shift->activity_id);
+            $workerrates = UserContract::where('user_id', $shift->submitted_by)
+                ->where('active', 1)
+                ->first();
+            $clientsupported = Client::where('id', $shift->client_supported)
+                ->first();
             $dayofshift = $shift->date->format('l');
             $dateofshift = $shift->date->format('d/m/y');
-            $public_holiday_text = ""; // Default no text
-            $activity_code = ""; //
+            $public_holiday_text = ""; //Default no text
 
             if ($shift->is_public_holiday) {
-                $hourlyRate = $contract->publicholidayhourlyrate;
+                $hourlyRate = $workerrates->publicholidayhourlyrate;
                 $public_holiday_text = "- Public Holiday";
-                $activity_code = $activity->publicholidayhourlycode;
             } else {
                 if ($dayofshift === 'Saturday') {
-                    $hourlyRate = $contract->saturdayhourlyrate;
-                    $activity_code = $activity->saturdayhourlycode;
+                    $hourlyRate = $workerrates->saturdayhourlyrate;
                 } elseif ($dayofshift === 'Sunday') {
-                    $hourlyRate = $contract->sundayhourlyrate;
-                    $activity_code = $activity->sundayhourlycode;
+                    $hourlyRate = $workerrates->sundayhourlyrate;
                 } else {
-                    $hourlyRate = $contract->weekdayhourlyrate;
-                    $activity_code = $activity->weekdayhourlycode;
+                    $hourlyRate = $workerrates->weekdayhourlyrate;
                 }
             }
 
             $item = (new CustomInvoiceItem())
-                ->title("$activity->activityname")
-                ->description("$activity_code")
-                ->pricePerUnit(1)
+                ->title("$clientsupported->first_name $clientsupported->last_name")
+                ->description("$dayofshift $public_holiday_text ")
                 ->quantity($shift->hours)
                 ->setDateOfShift($dateofshift)
                 ->pricePerUnit($hourlyRate);
             $items[] = $item;
+
+            // Calculate and accumulate the total amount
+            $totalAmount += $hourlyRate * $shift->hours;
         }
 
         // Create the invoice
@@ -299,15 +298,31 @@ class InvoiceController extends Controller
             ->currencyThousandsSeparator('.')
             ->currencyDecimalPoint(',')
             ->addItems($items)
-            ->logo(public_path('images/nrsn-logo-new.png'));
+            ->logo(public_path('images/nrsn-logo-new.png'))
+            ->filename("{$worker->id}{$worker->first_name}{$worker->last_name}Invoice$invoice_number");
 
-        // Generate and save the PDF
-        $pdf = $invoice->save('public'); // Save to the public directory
+        // Generate and save the PDF to the 'client_invoices' disk
+        $pdf = $invoice->save('worker_invoices');
 
-        // You can also send the PDF to the worker via email
+        // Create an invoice for a worker
+        $workerInvoice = new DatabaseInvoice([
+            'type' => 'worker',
+            'date' => now()->toDateString(),
+            'totalamount' => $totalAmount,
+            'status' => 'pending',
+            'pdf_path' => $invoice->url(),
+        ]);
+
+        $workerInvoice->recipient()->associate($worker);
+        $workerInvoice->save();
+
+        // Establish the relationship between shifts and the invoice
+        foreach ($uninvoicedShifts as $shift) {
+            $shift->workerinvoice_id = $workerInvoice->id; // Set the workerinvoice_id
+            $shift->save();
+        }
 
         // Return the PDF to the browser or have a different view
         return $pdf->stream();
     }
-
 }

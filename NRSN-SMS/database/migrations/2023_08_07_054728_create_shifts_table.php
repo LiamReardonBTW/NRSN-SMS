@@ -31,6 +31,9 @@ return new class extends Migration
 
             $table->unsignedBigInteger('clientinvoice_id')->nullable();
             $table->foreign('clientinvoice_id')->references('id')->on('invoices')->onDelete('cascade');
+
+            $table->unsignedBigInteger('workerinvoice_id')->nullable();
+            $table->foreign('workerinvoice_id')->references('id')->on('invoices')->onDelete('cascade');
         });
     }
 
