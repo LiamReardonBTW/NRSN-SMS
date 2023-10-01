@@ -17,6 +17,7 @@ class Invoice extends Model
         'pdf_path',
         'recipient_id',
         'recipient_type',
+        'invoice_number',
         // Add other fields here as needed
     ];
 

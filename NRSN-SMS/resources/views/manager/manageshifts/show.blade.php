@@ -169,7 +169,7 @@
             </a>
             @if (!$manageshift->approved)
             <!-- To Edit Shift page -->
-            <a href="{{ route('manageshift.edit', $manageshift) }}"
+            <a href="{{ route('manageshifts.edit', $manageshift) }}"
                 class="inline-flex items-center mx-4 px-6 py-4 bg-blue-700 border border-transparent rounded-md font-semibold text-base text-white uppercase tracking-widest hover:bg-blue-500 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">
                 Edit Shift
             </a>

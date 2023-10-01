@@ -20,6 +20,7 @@ return new class extends Migration
             // Add the recipient_type and recipient_id columns for polymorphic relationship
             $table->unsignedBigInteger('recipient_id');
             $table->string('recipient_type');
+            $table->integer('invoice_number');
         });
     }
 

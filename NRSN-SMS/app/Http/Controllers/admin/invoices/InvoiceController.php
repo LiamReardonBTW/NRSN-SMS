@@ -35,7 +35,17 @@ class InvoiceController extends Controller
             $query->where('approved', 1)->where('workerinvoice_id', null);
         })->get();
 
-        return view('admin/invoices.index', compact('clients', 'workers'));
+        // Fetch pending client invoices
+        $pendingClientInvoices = DatabaseInvoice::where('type', 'client')
+            ->where('status', 'pending')
+            ->get();
+
+        // Fetch pending worker invoices
+        $pendingWorkerInvoices = DatabaseInvoice::where('type', 'worker')
+            ->where('status', 'pending')
+            ->get();
+
+        return view('admin/invoices.index', compact('clients', 'workers', 'pendingClientInvoices', 'pendingWorkerInvoices'));
     }
 
     /**
@@ -116,20 +126,47 @@ class InvoiceController extends Controller
         //
     }
 
+    public function markAsPaid($id)
+    {
+        // Find the invoice by ID
+        $invoice = DatabaseInvoice::findOrFail($id);
+
+        // Check if the invoice status is 'pending' before marking as paid
+        if ($invoice->status === 'pending') {
+            // Update the status to 'paid'
+            $invoice->status = 'paid';
+            $invoice->save();
+
+            // Optionally, you can add a success message here
+            // to indicate that the invoice has been marked as paid.
+        }
+
+        // Redirect back to the invoice page or any other appropriate page
+        return redirect()->back();
+    }
+
     public function generateClientInvoice(Request $request)
     {
         // Retrieve the client ID from the request
         $clientId = $request->input('client_id'); // Replace with your actual input field name
-
+        $invoice_number = $request->input('invoice_number');
         // Find the client based on the client ID
         $client = Client::find($clientId);
-
-        //REPLACE WITH INVOICE INPUT FIELD NEXT TO GENERATE INVOICE BUTTON
-        $invoice_number = 5;
 
         // Check if the client exists
         if (!$client) {
             return redirect()->back()->with('error', 'Client not found.');
+        }
+
+        // Determine the invoice number (either manually set or auto-generated)
+        if ($invoice_number !== null) {
+            // Manually set invoice number if provided
+            $nextInvoiceNumber = $invoice_number;
+        } else {
+            // Find the next available invoice number for the client and type 'client'
+            $nextInvoiceNumber = DatabaseInvoice::where('type', 'client')
+                ->where('recipient_id', $client->id)
+                ->max('invoice_number') + 1;
         }
 
         // Get uninvoiced shifts for the selected client
@@ -211,7 +248,7 @@ class InvoiceController extends Controller
             ->currencyDecimalPoint(',')
             ->addItems($items)
             ->logo(public_path('images/nrsn-logo-new.png'))
-            ->filename("{$client->id}{$client->first_name}{$client->last_name}Invoice$invoice_number");
+            ->filename("{$client->id}{$client->first_name}{$client->last_name}Invoice$nextInvoiceNumber");
 
         // Generate and save the PDF to the 'client_invoices' disk
         $pdf = $invoice->save('client_invoices');
@@ -222,6 +259,7 @@ class InvoiceController extends Controller
             'date' => now()->toDateString(),
             'totalamount' => $totalAmount,
             'status' => 'pending',
+            'invoice_number' => $nextInvoiceNumber,
             'pdf_path' => $invoice->url(),
         ]);
 
@@ -242,18 +280,25 @@ class InvoiceController extends Controller
     {
         // Retrieve the worker (user) ID from the request
         $workerId = $request->input('worker_id'); // Replace with your actual input field name
-
+        $invoice_number = $request->input('invoice_number');
         // Find the worker (user) based on the worker ID
         $worker = User::find($workerId);
-
-        //REPLACE WITH INVOICE INPUT FIELD NEXT TO GENERATE INVOICE BUTTON
-        $invoice_number = 5;
 
         // Check if the worker (user) exists
         if (!$worker) {
             return redirect()->back()->with('error', 'Worker not found.');
         }
 
+        // Determine the invoice number (either manually set or auto-generated)
+        if ($invoice_number !== null) {
+            // Manually set invoice number if provided
+            $nextInvoiceNumber = $invoice_number;
+        } else {
+            // Find the next available invoice number for the worker and type 'worker'
+            $nextInvoiceNumber = DatabaseInvoice::where('type', 'worker')
+                ->where('recipient_id', $worker->id)
+                ->max('invoice_number') + 1;
+        }
         // Get uninvoiced shifts for the selected worker (user)
         $uninvoicedShifts = Shift::where('submitted_by', $workerId)
             ->where('approved', 1)
@@ -329,7 +374,7 @@ class InvoiceController extends Controller
             ->currencyDecimalPoint(',')
             ->addItems($items)
             ->logo(public_path('images/nrsn-logo-new.png'))
-            ->filename("{$worker->id}{$worker->first_name}{$worker->last_name}Invoice$invoice_number");
+            ->filename("{$worker->id}{$worker->first_name}{$worker->last_name}Invoice$nextInvoiceNumber");
 
         // Generate and save the PDF to the 'client_invoices' disk
         $pdf = $invoice->save('worker_invoices');
@@ -340,6 +385,7 @@ class InvoiceController extends Controller
             'date' => now()->toDateString(),
             'totalamount' => $totalAmount,
             'status' => 'pending',
+            'invoice_number' => $nextInvoiceNumber,
             'pdf_path' => $invoice->url(),
         ]);
 
