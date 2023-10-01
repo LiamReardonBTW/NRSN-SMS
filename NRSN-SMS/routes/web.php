@@ -55,19 +55,19 @@ Route::group(['middleware' => 'isAdmin'], function () {
     Route::resource('admin/activities', App\Http\Controllers\admin\activities\ActivityController::class);
     Route::resource('admin/business-details', App\Http\Controllers\admin\businessdetail\BusinessDetailController::class);
 
-    Route::resource('admin/invoices', App\Http\Controllers\admin\invoices\InvoiceController::class);
-    Route::post('/generate-client-invoice', 'App\Http\Controllers\admin\invoices\InvoiceController@generateClientInvoice')->name('generate.client-invoice');
-    Route::post('/generate-worker-invoice', 'App\Http\Controllers\admin\invoices\InvoiceController@generateWorkerInvoice')->name('generate.worker-invoice');
-    Route::post('/invoices/mark-as-paid/{id}', [App\Http\Controllers\admin\invoices\InvoiceController::class, 'markAsPaid'])
+    Route::resource('admin/invoicing', App\Http\Controllers\admin\invoicing\InvoicingController::class);
+    Route::post('/generate-client-invoice', 'App\Http\Controllers\admin\invoicing\InvoicingController@generateClientInvoice')->name('generate.client-invoice');
+    Route::post('/generate-worker-invoice', 'App\Http\Controllers\admin\invoicing\InvoicingController@generateWorkerInvoice')->name('generate.worker-invoice');
+    Route::post('/invoicing/mark-as-paid/{id}', [App\Http\Controllers\admin\invoicing\InvoicingController::class, 'markAsPaid'])
     ->name('markInvoiceAsPaid');
 
 });
 
 // Create a route for serving client invoices
-Route::get('storage/invoices/clientinvoices/{invoice_path}', 'App\Http\Controllers\admin\invoices\InvoiceController@showClientInvoice')->middleware('clientinvoice.access')->name('client_invoice.show');
+Route::get('storage/invoices/clientinvoices/{invoice_path}', 'App\Http\Controllers\admin\invoices\InvoicingController@showClientInvoice')->middleware('clientinvoice.access')->name('client_invoice.show');
 
 // Create a route for serving worker invoices
-Route::get('storage/invoices/workerinvoices/{invoice_path}', 'App\Http\Controllers\admin\invoices\InvoiceController@showWorkerInvoice')->middleware('workerinvoice.access')->name('worker_invoice.show');
+Route::get('storage/invoices/workerinvoices/{invoice_path}', 'App\Http\Controllers\admin\invoices\InvoicingController@showWorkerInvoice')->middleware('workerinvoice.access')->name('worker_invoice.show');
 
 Route::middleware([
     'auth:sanctum',

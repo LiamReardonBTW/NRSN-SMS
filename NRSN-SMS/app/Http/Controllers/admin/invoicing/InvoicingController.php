@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\admin\invoices;
+namespace App\Http\Controllers\admin\invoicing;
 
 use App\Http\Controllers\Controller;
 use App\CustomClasses\CustomInvoiceItem;
@@ -20,7 +20,7 @@ use Illuminate\Validation\Rule;
 
 
 
-class InvoiceController extends Controller
+class InvoicingController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -69,7 +69,7 @@ class InvoiceController extends Controller
             $nextInvoiceNumbers['workers'][$worker->id] = $nextInvoiceNumber;
         }
 
-        return view('admin/invoices.index', compact('clients', 'workers', 'pendingClientInvoices', 'pendingWorkerInvoices', 'nextInvoiceNumbers'));
+        return view('admin/invoicing.index', compact('clients', 'workers', 'pendingClientInvoices', 'pendingWorkerInvoices', 'nextInvoiceNumbers'));
     }
 
     /**
@@ -77,7 +77,7 @@ class InvoiceController extends Controller
      */
     public function create()
     {
-        return view('admin/invoices.create');
+        return view('admin/invoicing.create');
     }
 
     /**
@@ -93,7 +93,7 @@ class InvoiceController extends Controller
      */
     public function show(string $id)
     {
-        return view('admin/invoices.show');
+        return view('admin/invoicing.show');
     }
 
     public function showClientInvoice($invoicePath)
@@ -131,7 +131,7 @@ class InvoiceController extends Controller
      */
     public function edit(string $id)
     {
-        return view('admin/invoices.edit');
+        return view('admin/invoicing.edit');
     }
 
     /**

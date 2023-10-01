@@ -1,7 +1,7 @@
 <x-app-layout>
     <!-- Page Header Title -->
     <x-slot name="header">
-        {{ __('Invoices') }}
+        {{ __('Invoicing') }}
     </x-slot>
 
     <!-- Client Invoices Table Container -->
@@ -80,8 +80,12 @@
                                             class="text-white generate-client-invoice-button inline-block px-2 mx-1 py-1 bg-green-600 rounded hover:shadow-xl hover:bg-green-500">
                                             Generate Client Invoice
                                         </button>
+                                        <button type="button"
+                                            class="text-white set-invoice-number-button inline-block px-2 mx-1 py-1 mt-1 bg-blue-600 rounded-t-md hover:shadow-xl hover:bg-blue-500">
+                                            Set Invoice Number <span class="text-xs">&#9660;</span>
+                                        </button>
                                         <input type="text" name="invoice_number"
-                                            class="text-sm py-1 text-center px-2 mx-1 rounded-md"
+                                            class="invoice-number-field hidden text-sm py-1 text-center px-2 mx-1 rounded-b-md"
                                             placeholder="Invoice #: {{ $nextInvoiceNumbers['clients'][$client->id] }}">
                                     </div>
                                 </form>
@@ -241,12 +245,13 @@
                                             class="text-white generate-worker-invoice-button inline-block px-2 mx-1 py-1 bg-green-600 rounded hover:shadow-xl hover:bg-green-500">
                                             Generate Worker Invoice
                                         </button>
+                                        <button type="button"
+                                            class="text-white set-invoice-number-button inline-block px-2 mx-1 py-1 mt-1 bg-blue-600 rounded-t-md hover:shadow-xl hover:bg-blue-500">
+                                            Set Invoice Number <span class="text-xs">&#9660;</span>
+                                        </button>
                                         <input type="text" name="invoice_number"
-                                            class="text-sm py-0 w-19 text-center px-2 mx-1 rounded-md"
+                                            class="invoice-number-field hidden text-sm py-1 text-center px-2 mx-1 rounded-b-md"
                                             placeholder="Invoice #: {{ $nextInvoiceNumbers['workers'][$worker->id] }}">
-                                        @error('invoice_number')
-                                            <div class="text-red-500 text-xs mt-1">{{ $message }}</div>
-                                        @enderror
                                     </div>
                                 </form>
                             </td>
@@ -350,6 +355,18 @@
     document.addEventListener('DOMContentLoaded', function() {
         const generateClientInvoiceButtons = document.querySelectorAll('.generate-client-invoice-button');
         const generateWorkerInvoiceButtons = document.querySelectorAll('.generate-worker-invoice-button');
+        const setInvoiceNumberButtons = document.querySelectorAll('.set-invoice-number-button');
+        const invoiceNumberFields = document.querySelectorAll('.invoice-number-field');
+
+        setInvoiceNumberButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                // Find the corresponding input field
+                const inputField = this.nextElementSibling;
+
+                // Toggle the visibility of the input field
+                inputField.classList.toggle('hidden');
+            });
+        });
 
         generateClientInvoiceButtons.forEach(button => {
             button.addEventListener('click', function() {
