@@ -12,11 +12,13 @@ use App\Models\ActivityRate;
 use App\Models\UserContract;
 use LaravelDaily\Invoices\Invoice;
 use LaravelDaily\Invoices\Classes\Party;
-use LaravelDaily\Invoices\Classes\InvoiceItem;
 use App\Models\Shift;
 use App\Models\Invoice as DatabaseInvoice;
-use Carbon\Carbon;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
+
+
 
 class InvoiceController extends Controller
 {
@@ -45,7 +47,29 @@ class InvoiceController extends Controller
             ->where('status', 'pending')
             ->get();
 
-        return view('admin/invoices.index', compact('clients', 'workers', 'pendingClientInvoices', 'pendingWorkerInvoices'));
+        // Create an array to store the next invoice numbers for clients and workers
+        $nextInvoiceNumbers = [
+            'clients' => [],
+            'workers' => [],
+        ];
+
+        foreach ($clients as $client) {
+            $nextInvoiceNumber = DatabaseInvoice::where('type', 'client')
+                ->where('recipient_id', $client->id)
+                ->max('invoice_number') + 1;
+
+            $nextInvoiceNumbers['clients'][$client->id] = $nextInvoiceNumber;
+        }
+
+        foreach ($workers as $worker) {
+            $nextInvoiceNumber = DatabaseInvoice::where('type', 'worker')
+                ->where('recipient_id', $worker->id)
+                ->max('invoice_number') + 1;
+
+            $nextInvoiceNumbers['workers'][$worker->id] = $nextInvoiceNumber;
+        }
+
+        return view('admin/invoices.index', compact('clients', 'workers', 'pendingClientInvoices', 'pendingWorkerInvoices', 'nextInvoiceNumbers'));
     }
 
     /**
@@ -147,6 +171,25 @@ class InvoiceController extends Controller
 
     public function generateClientInvoice(Request $request)
     {
+        // Manually validate the request data
+        $validator = Validator::make($request->all(), [
+            'client_id' => 'required|exists:clients,id',
+            'invoice_number' => [
+                'nullable',
+                'integer',
+                Rule::unique('invoices')
+                    ->where(function ($query) use ($request) {
+                        return $query->where('type', 'client')
+                            ->where('recipient_id', $request->input('client_id'));
+                    }),
+            ],
+        ]);
+
+        // Check if validation fails
+        if ($validator->fails()) {
+            return redirect()->back()->with('alert-fail', 'Error: The client already has an Invoice of this number.');
+        }
+
         // Retrieve the client ID from the request
         $clientId = $request->input('client_id'); // Replace with your actual input field name
         $invoice_number = $request->input('invoice_number');
@@ -276,8 +319,28 @@ class InvoiceController extends Controller
         return $pdf->stream();
 
     }
+
     public function generateWorkerInvoice(Request $request)
     {
+        // Manually validate the request data
+        $validator = Validator::make($request->all(), [
+            'client_id' => 'required|exists:clients,id',
+            'invoice_number' => [
+                'nullable',
+                'integer',
+                Rule::unique('invoices')
+                    ->where(function ($query) use ($request) {
+                        return $query->where('type', 'client')
+                            ->where('recipient_id', $request->input('client_id'));
+                    }),
+            ],
+        ]);
+
+        // Check if validation fails
+        if ($validator->fails()) {
+            return redirect()->back()->with('alert-fail', 'Error: The worker already has an Invoice of this number.');
+        }
+
         // Retrieve the worker (user) ID from the request
         $workerId = $request->input('worker_id'); // Replace with your actual input field name
         $invoice_number = $request->input('invoice_number');

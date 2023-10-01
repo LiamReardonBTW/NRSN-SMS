@@ -8,6 +8,12 @@
     <h2 class="text-2xl font-semibold bg-green-400 rounded-t-md py-4 px-3">Clients:</h2>
     <div class="bg-green-200 p-3 rounded-b-md">
         <h2 class="text-xl font-semibold mb-2 py-4">Ready to invoice:</h2>
+        <!-- Display error message here -->
+        @error('invoice_number')
+            <div class="text-red-500 text-xs my-2">{{ $message }}</div>
+        @enderror
+
+
         <div class="relative overflow-auto border-2 border-blue-600 rounded mx-5"
             style="max-height: 300px; overflow-y: auto;">
             <!-- Client Invoices Table -->
@@ -69,14 +75,14 @@
                                 <form action="{{ route('generate.client-invoice') }}" method="POST">
                                     @csrf
                                     <input type="hidden" name="client_id" value="{{ $client->id }}">
-                                    <div class="text-black flex items-center">
+                                    <div class="text-black flex items-center grid-rows-2 grid">
                                         <button type="submit"
                                             class="text-white generate-client-invoice-button inline-block px-2 mx-1 py-1 bg-green-600 rounded hover:shadow-xl hover:bg-green-500">
                                             Generate Client Invoice
                                         </button>
                                         <input type="text" name="invoice_number"
                                             class="text-sm py-1 text-center px-2 mx-1 rounded-md"
-                                            placeholder="Set Invoice # (Optional)">
+                                            placeholder="Invoice #: {{ $nextInvoiceNumbers['clients'][$client->id] }}">
                                     </div>
                                 </form>
                             </td>
@@ -161,7 +167,7 @@
             <!-- Back to Dashboard -->
             <a href="#"
                 class="inline-flex items-center m-6 px-6 py-4 bg-blue-700 border border-transparent rounded-md font-semibold text-base text-white uppercase tracking-widest hover:bg-blue-500 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">
-                View Paid Invoices
+                View All Invoices
             </a>
         </div>
 
@@ -230,14 +236,17 @@
                                 <form action="{{ route('generate.worker-invoice') }}" method="POST">
                                     @csrf
                                     <input type="hidden" name="worker_id" value="{{ $worker->id }}">
-                                    <div class="text-black flex items-center">
+                                    <div class="text-black flex items-center grid-rows-2 grid">
                                         <button type="submit"
                                             class="text-white generate-worker-invoice-button inline-block px-2 mx-1 py-1 bg-green-600 rounded hover:shadow-xl hover:bg-green-500">
-                                            Generate Client Invoice
+                                            Generate Worker Invoice
                                         </button>
                                         <input type="text" name="invoice_number"
-                                            class="text-sm py-1 text-center px-2 mx-1 rounded-md"
-                                            placeholder="Set Invoice # (Optional)">
+                                            class="text-sm py-0 w-19 text-center px-2 mx-1 rounded-md"
+                                            placeholder="Invoice #: {{ $nextInvoiceNumbers['workers'][$worker->id] }}">
+                                        @error('invoice_number')
+                                            <div class="text-red-500 text-xs mt-1">{{ $message }}</div>
+                                        @enderror
                                     </div>
                                 </form>
                             </td>
@@ -322,7 +331,7 @@
             <!-- Back to Dashboard -->
             <a href="#"
                 class="inline-flex items-center m-6 px-6 py-4 bg-blue-700 border border-transparent rounded-md font-semibold text-base text-white uppercase tracking-widest hover:bg-blue-500 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">
-                View Paid Invoices
+                View All Invoices
             </a>
         </div>
 
