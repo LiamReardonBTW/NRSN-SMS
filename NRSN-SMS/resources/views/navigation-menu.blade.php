@@ -144,6 +144,14 @@
                                     {{ __('Invoicing') }}
                                 </x-dropdown-link>
 
+                                <x-dropdown-link href="{{ route('business-details.index') }}">
+                                    {{ __('Business Details') }}
+                                </x-dropdown-link>
+
+                                <x-dropdown-link href="{{ route('allinvoices.index') }}">
+                                    {{ __('All Invoices') }}
+                                </x-dropdown-link>
+
                             </x-slot>
                         </x-dropdown>
                     </div>
@@ -269,8 +277,10 @@
                     <a href="{{ route('allusers.index') }}">All Users</a><br>
                     <a href="{{ route('clientcontracts.index') }}">Client Contracts</a><br>
                     <a href="{{ route('usercontracts.index') }}">User Contracts</a><br>
-                    <a href="{{ route('activities.index') }}">Activities</a>
-                    <a href="{{ route('invoicing.index') }}">Invoicing</a>
+                    <a href="{{ route('activities.index') }}">Activities</a><br>
+                    <a href="{{ route('invoicing.index') }}">Invoicing</a><br>
+                    <a href="{{ route('business-details.index') }}">Business Details</a><br>
+                    <a href="{{ route('allinvoices.index') }}">All Invoices</a><br>
                 </x-slot>
             </x-responsive-nav-link-parent>
             @endif

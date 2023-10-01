@@ -169,6 +169,25 @@ class InvoicingController extends Controller
         return redirect()->back();
     }
 
+    public function unmarkAsPaid($id)
+    {
+        // Find the invoice by ID
+        $invoice = DatabaseInvoice::findOrFail($id);
+
+        // Check if the invoice status is 'pending' before marking as paid
+        if ($invoice->status === 'paid') {
+            // Update the status to 'paid'
+            $invoice->status = 'pending';
+            $invoice->save();
+
+            // Optionally, you can add a success message here
+            // to indicate that the invoice has been marked as paid.
+        }
+
+        // Redirect back to the invoice page or any other appropriate page
+        return redirect()->back();
+    }
+
     public function generateClientInvoice(Request $request)
     {
         // Manually validate the request data
