@@ -89,6 +89,10 @@
                                     {{ __('Manage Workers') }}
                                 </x-dropdown-link>
 
+                                <x-dropdown-link href="{{ route('clientinvoices.index') }}">
+                                    {{ __('Client Invoices') }}
+                                </x-dropdown-link>
+
 
                             </x-slot>
                         </x-dropdown>
@@ -262,7 +266,8 @@
                 <x-slot name="children">
                     <a href="{{ route('manageclients.index') }}">Manage Clients</a><br>
                     <a href="{{ route('manageshifts.index') }}">Manage Shifts</a><br>
-                    <a href="{{ route('manageworkers.index') }}">Manage Workers</a>
+                    <a href="{{ route('manageworkers.index') }}">Manage Workers</a><br>
+                    <a href="{{ route('clientinvoices.index') }}">Client Invoices</a>
                 </x-slot>
             </x-responsive-nav-link-parent>
             @endif

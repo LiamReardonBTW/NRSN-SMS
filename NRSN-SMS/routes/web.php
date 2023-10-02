@@ -38,6 +38,8 @@ Route::group(['middleware' => 'isManager'], function () {
 
     Route::get('manager/manageclients/{clientId}/contract', 'App\Http\Controllers\manager\manageclients\ClientController@showContracts')->name('client.contracts');
     Route::get('manager/manageworkers/{workerId}/contract', 'App\Http\Controllers\manager\manageworkers\WorkerController@showContracts')->name('user.contracts');
+
+    Route::resource('manager/clientinvoices', App\Http\Controllers\manager\clientinvoices\InvoiceController::class);
 });
 
 Route::group(['middleware' => 'isAdmin'], function () {

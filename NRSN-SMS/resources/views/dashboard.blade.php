@@ -124,6 +124,29 @@
                     View All Workers
                 @endslot
             @endcomponent
+
+            @component('components.dashboardcard')
+                @slot('requiredrole')
+                    manager
+                @endslot
+                @slot('route')
+                    {{ route('clientinvoices.index') }}
+                @endslot
+                @slot('title')
+                    <svg class="inline-block mx-auto h-6 w-6 text-black" width="24" height="24" viewBox="0 0 24 24"
+                        stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" />
+                        <path d="M4 19h5v-1a7.35 7.35 0 1 1 6 0v1h5" />
+                    </svg>
+                    <br>
+                    Client Invoices
+                @endslot
+                @slot('description')
+                    View Client Invoices
+                @endslot
+            @endcomponent
+
+
         </div>
     @endif
 
