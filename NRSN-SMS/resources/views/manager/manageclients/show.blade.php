@@ -105,15 +105,6 @@
                     class="form-input rounded-md shadow-sm block w-full" value="{{ $manageclient->address }}" />
             </div>
 
-            <!-- Invoicing Codes -->
-            <div class="mx-4 my-5">
-                <label for="invoicing_codes">Invoicing
-                    Codes</label>
-                <x-input disabled type="text" name="invoicing_codes" id="invoicing_codes"
-                    class="form-input rounded-md shadow-sm block w-full"
-                    value="{{ $manageclient->invoicing_codes }}" />
-            </div>
-
             <!-- Active Status -->
             <div class="mx-4 my-5">
                 <label for="active">Active Status</label>

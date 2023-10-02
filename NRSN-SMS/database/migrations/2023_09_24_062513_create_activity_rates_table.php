@@ -21,8 +21,8 @@ return new class extends Migration
             $table->double('publicholidayhourlyrate');
             $table->timestamps();
 
-            $table->foreign('activity_id')->references('id')->on('activities');
-            $table->foreign('client_id')->references('id')->on('clients');
+            $table->foreign('activity_id')->references('id')->on('activities')->onDelete('cascade');
+            $table->foreign('client_id')->references('id')->on('clients')->onDelete('cascade');
         });
     }
 

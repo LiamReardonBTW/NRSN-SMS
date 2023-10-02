@@ -34,9 +34,6 @@ class StoreClientRequest extends FormRequest
             'phone' => [
                 'required', 'string', 'regex:/^(?:\+?(61))? ?(?:\((?=.*\)))?(0?[2-57-8])\)? ?(\d\d(?:[- ](?=\d{3})|(?!\d\d[- ]?\d[- ]))\d\d[- ]?\d[- ]?\d{3})$/', //https://regex101.com/r/dkFASs/6
             ],
-            'invoicing_codes' => [
-                'required', 'string', //TO BE REMOVED (NEW INVOICING CODES TABLE WITH RELATIONSHIP TO CLIENT)
-            ],
             'address' => [
                 'required', 'string', 'max:255',
             ],

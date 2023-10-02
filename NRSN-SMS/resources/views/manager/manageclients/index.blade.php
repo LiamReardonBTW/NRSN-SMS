@@ -87,13 +87,6 @@
                         </div>
                     </th>
 
-                    <!-- Invoicing Codes Table Header -->
-                    <th scope="col" class="px-2 py-1 border-r-2 border-blue-500 border-b-2 ">
-                        <div class="flex items-center">
-                            Invoicing Codes
-                        </div>
-                    </th>
-
                     <!-- Actions Table Header (For view/edit/delete buttons) -->
                     <th scope="col" class="w-48 text-right px-2 py-1 border-r-2 border-blue-500 border-b-2 ">
                         <span class="mr-28">Actions</span>
@@ -129,9 +122,6 @@
                         </td>
                         <td scope="row" class="px-1 py-1">
                             {{ $client->address }}
-                        </td>
-                        <td scope="row" class="px-1 py-1">
-                            {{ $client->invoicing_codes }}
                         </td>
                         <!-- View/edit/delete buttons for associated client  -->
                         <td class="whitespace-nowrap text-sm text-white font-bold float-right py-3">

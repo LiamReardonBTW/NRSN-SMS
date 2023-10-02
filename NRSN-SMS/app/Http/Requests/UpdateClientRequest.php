@@ -32,7 +32,6 @@ class UpdateClientRequest extends FormRequest
                 'string',
                 'regex:/^(?:\+?(61))? ?(?:\((?=.*\)))?(0?[2-57-8])\)? ?(\d\d(?:[- ](?=\d{3})|(?!\d\d[- ]?\d[- ]))\d\d[- ]?\d[- ]?\d{3})$/',
             ],
-            'invoicing_codes' => 'required|string',
 
             'supported_by' => 'nullable|array',
             'managed_by' => 'nullable|array',

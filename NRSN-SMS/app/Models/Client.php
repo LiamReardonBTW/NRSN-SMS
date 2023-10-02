@@ -19,7 +19,6 @@ class Client extends Model
         'phone',
         'email',
         'address',
-        'invoicing_codes',
         'added'
     ];
 
