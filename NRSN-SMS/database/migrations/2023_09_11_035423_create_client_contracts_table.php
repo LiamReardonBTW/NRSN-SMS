@@ -15,7 +15,7 @@ class CreateClientContractsTable extends Migration
     {
         Schema::create('client_contracts', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('client_id')->constrained('clients'); // Assuming 'clients' is the table name for clients
+            $table->foreignId('client_id')->constrained('clients')->cascadeOnDelete();
             $table->dateTime('startdate');
             $table->dateTime('enddate')->nullable();
             $table->double('totalallocated');
