@@ -14,8 +14,9 @@ class InvoiceController extends Controller
      */
     public function index()
     {
-        // Fetch pending client invoices where the managed_by relation exists with the authenticated user
+        // Fetch pending and paid client invoices where the managed_by relation exists with the authenticated user
         $managedClientInvoices = Invoice::where('type', 'client')
+            ->whereIn('status', ['pending', 'paid'])
             ->whereHasMorph('recipient', [Client::class], function ($query, $type) {
                 $query->whereHas('managedbyuser', function ($subquery) {
                     $subquery->where('user_id', auth()->id());
@@ -24,7 +25,18 @@ class InvoiceController extends Controller
             ->orderBy('updated_at', 'desc')
             ->get();
 
-        return view('manager/clientinvoices.index', compact('managedClientInvoices'));
+        // Fetch archived client invoices where the managed_by relation exists with the authenticated user
+        $managedClientArchivedInvoices = Invoice::where('type', 'client')
+            ->where('status', 'archived')
+            ->whereHasMorph('recipient', [Client::class], function ($query, $type) {
+                $query->whereHas('managedbyuser', function ($subquery) {
+                    $subquery->where('user_id', auth()->id());
+                });
+            })
+            ->orderBy('updated_at', 'desc')
+            ->get();
+
+        return view('manager/clientinvoices.index', compact('managedClientInvoices', 'managedClientArchivedInvoices'));
     }
 
     /**

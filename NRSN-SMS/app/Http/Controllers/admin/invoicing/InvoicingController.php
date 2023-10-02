@@ -146,7 +146,7 @@ class InvoicingController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Invoice $invoice)
     {
         //
     }
@@ -179,6 +179,44 @@ class InvoicingController extends Controller
         if ($invoice->status === 'paid') {
             // Update the status to 'paid'
             $invoice->status = 'pending';
+            $invoice->save();
+
+            // Optionally, you can add a success message here
+            // to indicate that the invoice has been marked as paid.
+        }
+
+        // Redirect back to the invoice page or any other appropriate page
+        return redirect()->back();
+    }
+
+    public function archiveInvoice($id)
+    {
+        // Find the invoice by ID
+        $invoice = DatabaseInvoice::findOrFail($id);
+
+        // Check if the invoice status is 'pending' before marking as paid
+        if ($invoice->status === 'paid') {
+            // Update the status to 'paid'
+            $invoice->status = 'archived';
+            $invoice->save();
+
+            // Optionally, you can add a success message here
+            // to indicate that the invoice has been marked as paid.
+        }
+
+        // Redirect back to the invoice page or any other appropriate page
+        return redirect()->back();
+    }
+
+    public function unarchiveInvoice($id)
+    {
+        // Find the invoice by ID
+        $invoice = DatabaseInvoice::findOrFail($id);
+
+        // Check if the invoice status is 'pending' before marking as paid
+        if ($invoice->status === 'archived') {
+            // Update the status to 'paid'
+            $invoice->status = 'paid';
             $invoice->save();
 
             // Optionally, you can add a success message here
@@ -269,7 +307,7 @@ class InvoicingController extends Controller
             $dateofshift = $shift->date->format('d/m/y');
             $public_holiday_text = ""; //Default no text
             $activity_code = ""; //
-            $clientcontract = ClientContract::where('client_id', $shift->submitted_by)
+            $clientcontract = ClientContract::where('client_id', $shift->client_supported)
                 ->where('active', 1)
                 ->first();
 

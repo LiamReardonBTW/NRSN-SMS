@@ -62,12 +62,16 @@ Route::group(['middleware' => 'isAdmin'], function () {
     Route::post('/generate-client-invoice', 'App\Http\Controllers\admin\invoicing\InvoicingController@generateClientInvoice')->name('generate.client-invoice');
     Route::post('/generate-worker-invoice', 'App\Http\Controllers\admin\invoicing\InvoicingController@generateWorkerInvoice')->name('generate.worker-invoice');
     Route::post('/invoicing/mark-as-paid/{id}', [App\Http\Controllers\admin\invoicing\InvoicingController::class, 'markAsPaid'])
-    ->name('markInvoiceAsPaid');
+        ->name('markInvoiceAsPaid');
     Route::post('/invoicing/unmark-as-paid/{id}', [App\Http\Controllers\admin\invoicing\InvoicingController::class, 'unmarkAsPaid'])
-    ->name('unmarkInvoiceAsPaid');
+        ->name('unmarkInvoiceAsPaid');
+    Route::post('/invoicing/archive-invoice/{id}', [App\Http\Controllers\admin\invoicing\InvoicingController::class, 'archiveInvoice'])
+        ->name('archiveInvoice');
+    Route::post('/invoicing/unarchive-invoice/{id}', [App\Http\Controllers\admin\invoicing\InvoicingController::class, 'unarchiveInvoice'])
+        ->name('unarchiveInvoice');
 
-    Route::resource('admin/allinvoices', App\Http\Controllers\admin\allinvoices\InvoiceController::class);
-
+    Route::resource('admin/allinvoices', App\Http\Controllers\admin\allinvoices\InvoiceController::class)->except(['destroy']);
+    Route::delete('allinvoices/{invoice}', 'App\Http\Controllers\admin\allinvoices\InvoiceController@destroy')->name('allinvoices.destroy');
 });
 
 // Create a route for serving client invoices

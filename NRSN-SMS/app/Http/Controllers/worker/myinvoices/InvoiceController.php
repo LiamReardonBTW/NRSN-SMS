@@ -16,10 +16,17 @@ class InvoiceController extends Controller
         // Fetch worker invoices where type is 'worker' and recipient is the authenticated user's ID
         $myInvoices = Invoice::where('type', 'worker')
             ->where('recipient_id', auth()->id())
+            ->whereIn('status', ['pending', 'paid'])
             ->orderBy('updated_at', 'desc')
             ->get();
 
-        return view('worker/myinvoices.index', compact('myInvoices'));
+        $myArchivedInvoices = Invoice::where('type', 'worker')
+            ->where('recipient_id', auth()->id())
+            ->where('status', 'archived')
+            ->orderBy('updated_at', 'desc')
+            ->get();
+
+        return view('worker/myinvoices.index', compact('myInvoices', 'myArchivedInvoices'));
     }
 
     /**

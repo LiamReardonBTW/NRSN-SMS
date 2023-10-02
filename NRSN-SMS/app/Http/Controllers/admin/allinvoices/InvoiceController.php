@@ -13,10 +13,21 @@ class InvoiceController extends Controller
      */
     public function index()
     {
-        // Fetch pending client invoices
-        $allClientInvoices = Invoice::orderBy('updated_at', 'desc')->get();
+        // Fetch paid or pending client invoices and order them as desired
+        $allInvoices = Invoice::orderByRaw("CASE WHEN status = 'pending' THEN 1 ELSE 2 END")
+            ->orderBy('updated_at', 'desc')
+            ->where(function ($query) {
+                $query->where('status', 'paid')
+                    ->orWhere('status', 'pending');
+            })
+            ->get();
 
-        return view('admin/allinvoices.index', compact('allClientInvoices'));
+        // Fetch archived client invoices
+        $archivedInvoices = Invoice::orderBy('updated_at', 'desc')
+            ->where('status', 'archived')
+            ->get();
+
+        return view('admin/allinvoices.index', compact('allInvoices', 'archivedInvoices'));
     }
 
     /**
@@ -62,8 +73,9 @@ class InvoiceController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Invoice $invoice)
     {
-        //
+        $invoice->delete();
+        return redirect()->route('allinvoices.index');
     }
 }
