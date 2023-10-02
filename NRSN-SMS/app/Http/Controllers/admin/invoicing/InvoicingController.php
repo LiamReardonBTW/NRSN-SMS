@@ -306,8 +306,8 @@ class InvoicingController extends Controller
             $totalQuantity = $shift->hours + $kmHours + $expensesHours;
 
             $item = (new CustomInvoiceItem())
-                ->title("$activity->activityname")
-                ->description("$activity_code")
+                ->title("$activity->activityname: $activity_code")
+                ->description("$dayofshift $public_holiday_text - Km: " . ($shift->km ?? 0) . "- Expenses: " . ($shift->expenses ?? 0))
                 ->quantity($totalQuantity)
                 ->setDateOfShift($dateofshift)
                 ->pricePerUnit($hourlyRate);
@@ -468,7 +468,7 @@ class InvoicingController extends Controller
 
             $item = (new CustomInvoiceItem())
                 ->title("$clientsupported->first_name $clientsupported->last_name")
-                ->description("$dayofshift $public_holiday_text ")
+                ->description("$dayofshift $public_holiday_text - Km: " . ($shift->km ?? 0) . "- Expenses: " . ($shift->expenses ?? 0))
                 ->quantity($totalQuantity)
                 ->setDateOfShift($dateofshift)
                 ->pricePerUnit($hourlyRate);
