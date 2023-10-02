@@ -49,6 +49,10 @@
                                     {{ __('My Shifts') }}
                                 </x-dropdown-link>
 
+                                <x-dropdown-link href="{{ route('myinvoices.index') }}">
+                                    {{ __('My Invoices') }}
+                                </x-dropdown-link>
+
 
 
                             </x-slot>
@@ -254,7 +258,8 @@
                 <x-slot name="name">Worker</x-slot>
                 <x-slot name="children">
                     <a href="{{ route('myclients.index') }}">My Clients</a><br>
-                    <a href="{{ route('myshifts.index') }}">My Shifts</a>
+                    <a href="{{ route('myshifts.index') }}">My Shifts</a><br>
+                    <a href="{{ route('myinvoices.index') }}">My Shifts</a>
                 </x-slot>
             </x-responsive-nav-link-parent>
             @endif
