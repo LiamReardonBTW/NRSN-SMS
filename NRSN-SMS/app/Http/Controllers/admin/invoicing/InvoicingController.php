@@ -10,6 +10,7 @@ use App\Models\User;
 use App\Models\Activity;
 use App\Models\ActivityRate;
 use App\Models\UserContract;
+use App\Models\ClientContract;
 use LaravelDaily\Invoices\Invoice;
 use LaravelDaily\Invoices\Classes\Party;
 use App\Models\Shift;
@@ -268,6 +269,9 @@ class InvoicingController extends Controller
             $dateofshift = $shift->date->format('d/m/y');
             $public_holiday_text = ""; //Default no text
             $activity_code = ""; //
+            $clientcontract = ClientContract::where('client_id', $shift->submitted_by)
+                ->where('active', 1)
+                ->first();
 
             if ($shift->is_public_holiday) {
                 $hourlyRate = $activityrate->publicholidayhourlyrate;
@@ -286,10 +290,25 @@ class InvoicingController extends Controller
                 }
             }
 
+
+            // Calculate total amount for kilometers
+            $kmRate = $clientcontract->km_rate;
+            $kmAmount = $shift->km * $kmRate;
+
+            // Calculate kmHours (rounded up to the nearest 15 minutes)
+            $kmHours = ceil(($kmAmount / $hourlyRate) / 0.25) * 0.25;
+
+            // Calculate total amount for expenses
+            $expensesAmount = $shift->expenses;
+            $expensesHours = ceil(($expensesAmount / $hourlyRate) / 0.25) * 0.25;
+
+            // Calculate the total quantity (hours + kilometers + expenses)
+            $totalQuantity = $shift->hours + $kmHours + $expensesHours;
+
             $item = (new CustomInvoiceItem())
                 ->title("$activity->activityname")
                 ->description("$activity_code")
-                ->quantity($shift->hours)
+                ->quantity($totalQuantity)
                 ->setDateOfShift($dateofshift)
                 ->pricePerUnit($hourlyRate);
             $items[] = $item;
@@ -343,21 +362,21 @@ class InvoicingController extends Controller
     {
         // Manually validate the request data
         $validator = Validator::make($request->all(), [
-            'client_id' => 'required|exists:clients,id',
+            'worker_id' => 'required|exists:users,id',
             'invoice_number' => [
                 'nullable',
                 'integer',
                 Rule::unique('invoices')
                     ->where(function ($query) use ($request) {
-                        return $query->where('type', 'client')
-                            ->where('recipient_id', $request->input('client_id'));
+                        return $query->where('type', 'worker')
+                            ->where('recipient_id', $request->input('worker_id'));
                     }),
             ],
         ]);
 
         // Check if validation fails
         if ($validator->fails()) {
-            return redirect()->back()->with('alert-fail', 'Error: The worker already has an Invoice of this number.');
+            return redirect()->back()->with('alert-fail', 'Error: The client already has an Invoice of this number.');
         }
 
         // Retrieve the worker (user) ID from the request
@@ -432,10 +451,25 @@ class InvoicingController extends Controller
                 }
             }
 
+            // Calculate total amount for kilometers
+            $kmRate = $workerrates->km_rate;
+            $kmAmount = $shift->km * $kmRate;
+
+            // Calculate kmHours (rounded up to the nearest 15 minutes)
+            $kmHours = ceil(($kmAmount / $hourlyRate) / 0.25) * 0.25;
+
+            // Calculate total amount for expenses
+            $expensesAmount = $shift->expenses;
+            $expensesHours = ceil(($expensesAmount / $hourlyRate) / 0.25) * 0.25;
+
+
+            // Calculate the total quantity (hours + kilometers + expenses)
+            $totalQuantity = $shift->hours + $kmHours + $expensesHours;
+
             $item = (new CustomInvoiceItem())
                 ->title("$clientsupported->first_name $clientsupported->last_name")
                 ->description("$dayofshift $public_holiday_text ")
-                ->quantity($shift->hours)
+                ->quantity($totalQuantity)
                 ->setDateOfShift($dateofshift)
                 ->pricePerUnit($hourlyRate);
             $items[] = $item;
