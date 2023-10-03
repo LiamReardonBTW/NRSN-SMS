@@ -18,6 +18,7 @@ class BusinessDetailSeeder extends Seeder
             'name' => 'Northern Rivers Support Network',
             'address' => '123 Main Street',
             'phone' => '555-123-4567',
+            'email' => 'NRSupportNetwork@gmail.com',
             'tfn' => '123456789',
             'abn' => '987654321',
             'bankname' => 'Heritage',

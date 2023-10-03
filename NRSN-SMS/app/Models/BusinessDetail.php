@@ -12,6 +12,7 @@ class BusinessDetail extends Model
     protected $fillable = [
         'name',
         'address',
+        'email',
         'phone',
         'tfn',
         'abn',

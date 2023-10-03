@@ -71,6 +71,7 @@ class BusinessDetailController extends Controller
         // Validate the incoming request data
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
+            'email' => 'required|string|max:255',
             'address' => 'required|string|max:255',
             'phone' => 'required|string|max:20',
             'tfn' => 'required|string|max:20',

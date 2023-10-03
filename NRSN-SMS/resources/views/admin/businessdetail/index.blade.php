@@ -31,6 +31,13 @@
                     class="form-input rounded-md shadow-sm block w-full" value="{{ $businessDetails->phone }}" />
             </div>
 
+            <!-- Business Phone -->
+            <div class="mx-4 my-5">
+                <label for="email">Business Email</label>
+                <x-input disabled type="text" name="phone" id="phone"
+                    class="form-input rounded-md shadow-sm block w-full" value="{{ $businessDetails->email }}" />
+            </div>
+
             <!-- Business TFN -->
             <div class="mx-4 my-5">
                 <label for="tfn">Business TFN</label>
