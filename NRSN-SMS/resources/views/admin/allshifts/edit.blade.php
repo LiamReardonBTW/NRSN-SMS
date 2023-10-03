@@ -71,6 +71,22 @@
                     </div>
 
                 </div>
+                <div
+                    class="text-2xl font-medium bg-blue-300 overflow-hidden grid grid-cols-1 md:grid-cols-2 px-6 lg:px-8">
+                    <!-- Client Total Pay -->
+                    <div class="mx-4 my-5 grid grid-rows-2">
+                        <label for="shift_id">Client Pay</label>
+                        <span
+                            class="px-4 my-1 rounded-md block w-full bg-white text-black">${{ $clientPays[$allshift->id] }}</span>
+                    </div>
+
+                    <!-- Worker Total Pay -->
+                    <div class="mx-4 my-5 grid grid-rows-2">
+                        <label for="shift_id">Worker Pay</label>
+                        <span
+                            class="px-4 my-1 rounded-md block w-full bg-white text-black">${{ $workerPays[$allshift->id] }}</span>
+                    </div>
+                </div>
 
                 <!-- Shift Information -->
                 <div class="text-2xl font-medium  overflow-hidden grid grid-cols-1 md:grid-cols-3  px-6 lg:px-8">

@@ -76,6 +76,20 @@
                         </div>
                     </th>
 
+                    <!-- Client Total Pay Table Header -->
+                    <th scope="col" class="px-2 py-1 border-r-2 border-blue-500 border-b-2 ">
+                        <div class="flex items-center">
+                            Client Total Pay
+                        </div>
+                    </th>
+
+                    <!-- Worker Total Pay Header -->
+                    <th scope="col" class="px-2 py-1 border-r-2 border-blue-500 border-b-2 ">
+                        <div class="flex items-center">
+                            Worker Total Pay
+                        </div>
+                    </th>
+
                     <!-- Flagged Table Header -->
                     <th scope="col" class="px-2 py-1 border-r-2 border-blue-500 border-b-2 ">
                         <div class="flex items-center">
@@ -148,6 +162,14 @@
                             </td>
                             <td scope="row" class="px-1 py-1 text-center">
                                 {{ $shift->hours }}
+                            </td>
+                            <td scope="row" class="px-1 py-1 text-center">
+                                {{-- Client Total Pay --}}
+                                ${{ $clientPays[$shift->id] }}
+                            </td>
+                            <td scope="row" class="px-1 py-1 text-center">
+                                {{-- Worker Total Pay --}}
+                                ${{ $workerPays[$shift->id] }}
                             </td>
                             <td scope="row" class="px-1 py-1 text-center">
                                 @if ($shift->isflagged == '0')
@@ -273,6 +295,20 @@
                         </div>
                     </th>
 
+                    <!-- Client Total Pay Table Header -->
+                    <th scope="col" class="px-2 py-1 border-r-2 border-green-500 border-b-2 ">
+                        <div class="flex items-center">
+                            Client Total Pay
+                        </div>
+                    </th>
+
+                    <!-- Worker Total Pay Header -->
+                    <th scope="col" class="px-2 py-1 border-r-2 border-green-500 border-b-2 ">
+                        <div class="flex items-center">
+                            Worker Total Pay
+                        </div>
+                    </th>
+
                     <!-- Flagged Table Header -->
                     <th scope="col" class="px-2 py-1 border-r-2 border-green-500 border-b-2 ">
                         <div class="flex items-center">
@@ -349,6 +385,14 @@
                                 {{ $shift->hours }}
                             </td>
                             <td scope="row" class="px-1 py-1 text-center">
+                                {{-- Client Total Pay --}}
+                                ${{ $clientPays[$shift->id] }}
+                            </td>
+                            <td scope="row" class="px-1 py-1 text-center">
+                                {{-- Worker Total Pay --}}
+                                ${{ $workerPays[$shift->id] }}
+                            </td>
+                            <td scope="row" class="px-1 py-1 text-center">
                                 @if ($shift->isflagged == '0')
                                     No
                                 @endif
@@ -363,7 +407,8 @@
                                 {{ $shift->workerinvoice_id ? 'Yes' : 'No' }}
                             </td>
                             <!-- View/edit/delete buttons for associated client  -->
-                            <td class="whitespace-nowrap text-center text-sm text-white font-bold float-left py-3 min-w-full">
+                            <td
+                                class="whitespace-nowrap text-center text-sm text-white font-bold float-left py-3 min-w-full">
                                 <!-- View Button -->
                                 <div class="grid grid-cols-1 gap-1">
                                     <a href="{{ route('allshifts.show', $shift->id) }}"
