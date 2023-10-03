@@ -76,6 +76,20 @@
                         </div>
                     </th>
 
+                    <!-- Client Total Pay Table Header -->
+                    <th scope="col" class="px-2 py-1 border-r-2 border-blue-500 border-b-2 ">
+                        <div class="flex items-center">
+                            Client Total Pay
+                        </div>
+                    </th>
+
+                    <!-- Worker Total Pay Header -->
+                    <th scope="col" class="px-2 py-1 border-r-2 border-blue-500 border-b-2 ">
+                        <div class="flex items-center">
+                            Worker Total Pay
+                        </div>
+                    </th>
+
                     <!-- Flagged Table Header -->
                     <th scope="col" class="px-2 py-1 border-r-2 border-blue-500 border-b-2 ">
                         <div class="flex items-center">
@@ -150,6 +164,14 @@
                                 {{ $shift->hours }}
                             </td>
                             <td scope="row" class="px-1 py-1 text-center">
+                                {{-- Client Total Pay --}}
+                                ${{ $clientPays[$shift->id] }}
+                            </td>
+                            <td scope="row" class="px-1 py-1 text-center">
+                                {{-- Worker Total Pay --}}
+                                ${{ $workerPays[$shift->id] }}
+                            </td>
+                            <td scope="row" class="px-1 py-1 text-center">
                                 @if ($shift->isflagged == '0')
                                     No
                                 @endif
@@ -173,8 +195,8 @@
                                     <a href="{{ route('manageshifts.edit', $shift->id) }}"
                                         class="inline-block px-2  py-1 bg-blue-600 rounded hover:shadow-xl hover:bg-blue-500">Edit</a>
                                     <!-- Delete Button -->
-                                    <form class="inline-block" action="{{ route('manageshifts.destroy', $shift->id) }}"
-                                        method="POST"
+                                    <form class="inline-block"
+                                        action="{{ route('manageshifts.destroy', $shift->id) }}" method="POST"
                                         onsubmit="return confirm('Are you sure you would like to delete this shift? This action cannot be undone');">
                                         <input type="hidden" name="_method" value="DELETE">
                                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -273,6 +295,20 @@
                         </div>
                     </th>
 
+                    <!-- Client Total Pay Table Header -->
+                    <th scope="col" class="px-2 py-1 border-r-2 border-green-500 border-b-2 ">
+                        <div class="flex items-center">
+                            Client Total Pay
+                        </div>
+                    </th>
+
+                    <!-- Worker Total Pay Header -->
+                    <th scope="col" class="px-2 py-1 border-r-2 border-green-500 border-b-2 ">
+                        <div class="flex items-center">
+                            Worker Total Pay
+                        </div>
+                    </th>
+
                     <!-- Flagged Table Header -->
                     <th scope="col" class="px-2 py-1 border-r-2 border-green-500 border-b-2 ">
                         <div class="flex items-center">
@@ -347,6 +383,14 @@
                             </td>
                             <td scope="row" class="px-1 py-1 text-center">
                                 {{ $shift->hours }}
+                            </td>
+                            <td scope="row" class="px-1 py-1 text-center">
+                                {{-- Client Total Pay --}}
+                                ${{ $clientPays[$shift->id] }}
+                            </td>
+                            <td scope="row" class="px-1 py-1 text-center">
+                                {{-- Worker Total Pay --}}
+                                ${{ $workerPays[$shift->id] }}
                             </td>
                             <td scope="row" class="px-1 py-1 text-center">
                                 @if ($shift->isflagged == '0')

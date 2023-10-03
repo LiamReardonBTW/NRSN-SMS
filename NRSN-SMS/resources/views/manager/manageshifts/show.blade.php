@@ -31,42 +31,54 @@
                 @endif
             </div>
 
-                <!-- Client Invoice -->
-                <div class="mx-4 my-5 grid grid-rows-2">
-                    <label for="client_invoice">Client Invoice</label>
-                    @if ($manageshift->clientinvoice_id)
-                        <div
-                            class="flex flex-col-1 justify-center py-1 text-center bg-white border-gray-300 rounded-md shadow-sm">
-                            <a href="{{ $manageshift->clientinvoice->pdf_path }}" target="_blank"
-                                class="bg-green-500 px-2 text-white rounded-md">View</a>
-                        </div>
-                    @else
-                        <div
-                            class="flex flex-col-1 justify-center py-1 text-center bg-white border-gray-300 rounded-md shadow-sm">
-                            <span class="bg-red-500 px-2 text-white justify-center rounded-md">Not Invoiced</span>
-                        </div>
-                    @endif
-                </div>
+            <!-- Client Invoice -->
+            <div class="mx-4 my-5 grid grid-rows-2">
+                <label for="client_invoice">Client Invoice</label>
+                @if ($manageshift->clientinvoice_id)
+                    <div
+                        class="flex flex-col-1 justify-center py-1 text-center bg-white border-gray-300 rounded-md shadow-sm">
+                        <a href="{{ $manageshift->clientinvoice->pdf_path }}" target="_blank"
+                            class="bg-green-500 px-2 text-white rounded-md">View</a>
+                    </div>
+                @else
+                    <div
+                        class="flex flex-col-1 justify-center py-1 text-center bg-white border-gray-300 rounded-md shadow-sm">
+                        <span class="bg-red-500 px-2 text-white justify-center rounded-md">Not Invoiced</span>
+                    </div>
+                @endif
+            </div>
 
-                <!-- Worker Invoice -->
-                <div class="mx-4 my-5 grid grid-rows-2">
-                    <label for="worker_invoice">Worker Invoice</label>
-                    @if ($manageshift->workerinvoice_id)
-                        <div
-                            class="flex flex-col-1 justify-center py-1 text-center bg-white border-gray-300 rounded-md shadow-sm">
-                            <a href="{{ $manageshift->workerinvoice->pdf_path }}" target="_blank"
-                                class="bg-green-500 px-2 text-white rounded-md">View</a>
-                        </div>
-                    @else
-                        <div
-                            class="flex flex-col-1 justify-center py-1 text-center bg-white border-gray-300 rounded-md shadow-sm">
-                            <span class="bg-red-500 px-2 text-white justify-center rounded-sm">Not Invoiced</span>
-                        </div>
-                    @endif
-                </div>
+            <!-- Worker Invoice -->
+            <div class="mx-4 my-5 grid grid-rows-2">
+                <label for="worker_invoice">Worker Invoice</label>
+                @if ($manageshift->workerinvoice_id)
+                    <div
+                        class="flex flex-col-1 justify-center py-1 text-center bg-white border-gray-300 rounded-md shadow-sm">
+                        <a href="{{ $manageshift->workerinvoice->pdf_path }}" target="_blank"
+                            class="bg-green-500 px-2 text-white rounded-md">View</a>
+                    </div>
+                @else
+                    <div
+                        class="flex flex-col-1 justify-center py-1 text-center bg-white border-gray-300 rounded-md shadow-sm">
+                        <span class="bg-red-500 px-2 text-white justify-center rounded-sm">Not Invoiced</span>
+                    </div>
+                @endif
+            </div>
+        </div>
+        <div class="text-2xl font-medium bg-blue-300 overflow-hidden grid grid-cols-1 md:grid-cols-2 px-6 lg:px-8">
+            <!-- Client Total Pay -->
+            <div class="mx-4 my-5 grid grid-rows-2">
+                <label for="shift_id">Client Pay</label>
+                <span class="px-4 my-1 rounded-md block w-full bg-white text-black">${{ $clientPays[$manageshift->id] }}</span>
+            </div>
+
+            <!-- Worker Total Pay -->
+            <div class="mx-4 my-5 grid grid-rows-2">
+                <label for="shift_id">Worker Pay</label>
+                <span class="px-4 my-1 rounded-md block w-full bg-white text-black">${{ $workerPays[$manageshift->id] }}</span>
+            </div>
 
         </div>
-
 
         <!-- Shift Information Container -->
         <div class="text-2xl font-medium  overflow-hidden grid grid-cols-1 md:grid-cols-3  px-6 lg:px-8">
@@ -132,8 +144,7 @@
             <div class="mx-4 my-5 grid grid-rows-2">
                 <label for="expenses">Expenses ($AUD)</label>
                 <x-input disabled type="text" name="expenses" id="expenses"
-                    class="form-input rounded-md shadow-sm block w-full"
-                    value="${{ $manageshift->expenses ?? '0' }}" />
+                    class="form-input rounded-md shadow-sm block w-full" value="${{ $manageshift->expenses ?? '0' }}" />
             </div>
 
             <!-- km Travelled -->
@@ -162,17 +173,17 @@
         <!-- Page Navigation Buttons -->
         <div
             class="flex items-center justify-start pb-6 py-5 text-right sm:px-6 grid grid-cols-1 md:grid-cols-3 lg:gap-8 px-6 lg:px-8 py-2">
-            <!-- Back to Manage Shifts index page -->
+            <!-- Back to All Shifts index page -->
             <a href="{{ route('manageshifts.index') }}"
                 class="inline-flex items-center mx-4 px-6 py-4 bg-red-700 border border-transparent rounded-md font-semibold text-base text-white uppercase tracking-widest hover:bg-red-500 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">
                 Back
             </a>
             @if (!$manageshift->approved)
-            <!-- To Edit Shift page -->
-            <a href="{{ route('manageshifts.edit', $manageshift) }}"
-                class="inline-flex items-center mx-4 px-6 py-4 bg-blue-700 border border-transparent rounded-md font-semibold text-base text-white uppercase tracking-widest hover:bg-blue-500 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">
-                Edit Shift
-            </a>
+                <!-- To Edit Shift page -->
+                <a href="{{ route('manageshifts.edit', $manageshift) }}"
+                    class="inline-flex items-center mx-4 px-6 py-4 bg-blue-700 border border-transparent rounded-md font-semibold text-base text-white uppercase tracking-widest hover:bg-blue-500 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">
+                    Edit Shift
+                </a>
             @endif
         </div>
 
