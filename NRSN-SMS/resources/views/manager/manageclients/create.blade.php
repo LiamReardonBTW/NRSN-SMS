@@ -16,7 +16,7 @@
             <div class="text-2xl font-medium  overflow-hidden grid grid-cols-1 md:grid-cols-3  px-6 lg:px-8">
 
                 <!-- First Name -->
-                <div class="mx-4 my-2">
+                <div class="mx-4 mt-5 grid grid-rows-3">
                     <label for="first_name">First
                         Name</label>
                     <x-input type="text" name="first_name" id="first_name"
@@ -27,7 +27,7 @@
                 </div>
 
                 <!-- Last Name -->
-                <div class="mx-4 my-2">
+                <div class="mx-4 mt-5 grid grid-rows-3">
                     <label for="last_name">Last Name</label>
                     <x-input type="text" name="last_name" id="last_name"
                         class="form-input rounded-md shadow-sm block w-full" value="{{ old('last_name', '') }}" />
@@ -37,7 +37,7 @@
                 </div>
 
                 <!-- Phone # -->
-                <div class="mx-4 my-2">
+                <div class="mx-4 mt-5 grid grid-rows-3">
                     <label for="phone">Phone #</label>
                     <x-input type="string" name="phone" id="phone"
                         class="form-input rounded-md shadow-sm block w-full" value="{{ old('phone', '') }}" />
@@ -47,7 +47,7 @@
                 </div>
 
                 <!-- Email -->
-                <div class="mx-4 my-2">
+                <div class="mx-4 mt-5 grid grid-rows-3">
                     <label for="email">Email</label>
                     <x-input type="email" name="email" id="email"
                         class="form-input rounded-md shadow-sm block w-full" value="{{ old('email', '') }}" />
@@ -57,7 +57,7 @@
                 </div>
 
                 <!-- Address -->
-                <div class="mx-4 my-2">
+                <div class="mx-4 mt-5 grid grid-rows-3">
                     <label for="address">Address</label>
                     <x-input type="text" name="address" id="address"
                         class="form-input rounded-md shadow-sm block w-full" value="{{ old('address', '') }}" />

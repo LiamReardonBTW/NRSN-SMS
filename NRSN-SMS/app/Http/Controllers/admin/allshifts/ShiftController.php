@@ -52,7 +52,7 @@ class ShiftController extends Controller
     public function create()
     {
         $workers = User::all();
-        $clients = Client::where('active', true);
+        $clients = Client::where('active', true)->get();
 
         // Retrieve the clients supported by the user and their related activities
         $clients = Client::whereHas('activityRates.activity')->get();
@@ -102,7 +102,7 @@ class ShiftController extends Controller
     public function edit(Shift $allshift)
     {
         $workers = User::all();
-        $clients = Client::where('active', true);
+        $clients = Client::where('active', true)->get();
         $activities = Activity::All();
 
         // Eager load the related activityRates and activities

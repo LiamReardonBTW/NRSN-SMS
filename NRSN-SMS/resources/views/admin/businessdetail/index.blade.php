@@ -11,42 +11,42 @@
         <div class="text-2xl font-medium overflow-hidden grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 px-6 lg:px-8">
 
             <!-- Business Name -->
-            <div class="mx-4 my-5">
+                <div class="mx-4 mt-5 grid grid-rows-3">
                 <label for="name">Business Name</label>
                 <x-input disabled type="text" name="name" id="name"
                     class="form-input rounded-md shadow-sm block w-full" value="{{ $businessDetails->name }}" />
             </div>
 
             <!-- Business Address -->
-            <div class="mx-4 my-5">
+                <div class="mx-4 mt-5 grid grid-rows-3">
                 <label for="address">Business Address</label>
                 <x-input disabled type="text" name="address" id="address"
                     class="form-input rounded-md shadow-sm block w-full" value="{{ $businessDetails->address }}" />
             </div>
 
             <!-- Business Phone -->
-            <div class="mx-4 my-5">
+                <div class="mx-4 mt-5 grid grid-rows-3">
                 <label for="phone">Business Phone</label>
                 <x-input disabled type="text" name="phone" id="phone"
                     class="form-input rounded-md shadow-sm block w-full" value="{{ $businessDetails->phone }}" />
             </div>
 
             <!-- Business Phone -->
-            <div class="mx-4 my-5">
+                <div class="mx-4 mt-5 grid grid-rows-3">
                 <label for="email">Business Email</label>
                 <x-input disabled type="text" name="phone" id="phone"
                     class="form-input rounded-md shadow-sm block w-full" value="{{ $businessDetails->email }}" />
             </div>
 
             <!-- Business TFN -->
-            <div class="mx-4 my-5">
+                <div class="mx-4 mt-5 grid grid-rows-3">
                 <label for="tfn">Business TFN</label>
                 <x-input disabled type="text" name="tfn" id="tfn"
                     class="form-input rounded-md shadow-sm block w-full" value="{{ $businessDetails->tfn }}" />
             </div>
 
             <!-- Business ABN -->
-            <div class="mx-4 my-5">
+                <div class="mx-4 mt-5 grid grid-rows-3">
                 <label for="abn">Business ABN</label>
                 <x-input disabled type="text" name="abn" id="abn"
                     class="form-input rounded-md shadow-sm block w-full" value="{{ $businessDetails->abn }}" />
@@ -57,21 +57,21 @@
         <div class="text-2xl font-medium overflow-hidden grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 px-6 lg:px-8">
 
             <!-- Bank Name -->
-            <div class="mx-4 my-5">
+                <div class="mx-4 mt-5 grid grid-rows-3">
                 <label for="bankname">Bank Name</label>
                 <x-input disabled type="text" name="bankname" id="bankname"
                     class="form-input rounded-md shadow-sm block w-full" value="{{ $businessDetails->bankname }}" />
             </div>
 
             <!-- Bank Address -->
-            <div class="mx-4 my-5">
+                <div class="mx-4 mt-5 grid grid-rows-3">
                 <label for="bankaddress">Bank Address</label>
                 <x-input disabled type="text" name="bankaddress" id="bankaddress"
                     class="form-input rounded-md shadow-sm block w-full" value="{{ $businessDetails->bankaddress }}" />
             </div>
 
             <!-- Bank Account Number -->
-            <div class="mx-4 my-5">
+                <div class="mx-4 mt-5 grid grid-rows-3">
                 <label for="bankaccountnumber">Bank Account Number</label>
                 <x-input disabled type="text" name="bankaccountnumber" id="bankaccountnumber"
                     class="form-input rounded-md shadow-sm block w-full"
@@ -79,7 +79,7 @@
             </div>
 
             <!-- Bank BSB Number -->
-            <div class="mx-4 my-5">
+                <div class="mx-4 mt-5 grid grid-rows-3">
                 <label for="bankbsbnumber">Bank BSB Number</label>
                 <x-input disabled type="text" name="bankbsbnumber" id="bankbsbnumber"
                     class="form-input rounded-md shadow-sm block w-full"
@@ -91,7 +91,7 @@
         <div
             class="items-center grid grid-cols-1 gap-4 justify-start pb-6 py-3 text-right sm:px-6 grid grid-cols-1 md:grid-cols-3 lg:gap-8 px-6 lg:px-8 py-2">
             <!-- Back to All Shifts index page -->
-            <a href="{{ 'dashboard' }}"
+            <a href="{{ route('dashboard') }}"
                 class="inline-flex items-center mx-4 px-6 py-4 bg-red-700 border border-transparent rounded-md font-semibold text-base text-white uppercase tracking-widest hover:bg-red-500 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">
                 Back
             </a>
