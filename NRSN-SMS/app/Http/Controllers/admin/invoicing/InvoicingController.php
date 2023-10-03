@@ -463,7 +463,7 @@ class InvoicingController extends Controller
 
         // Check if validation fails
         if ($validator->fails()) {
-            return redirect()->back()->with('alert-fail', 'Error: The client already has an Invoice of this number.');
+            return redirect()->back()->with('alert-fail', 'Error: The worker already has an Invoice of this number.');
         }
 
         // Retrieve the worker (user) ID from the request
