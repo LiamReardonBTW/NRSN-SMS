@@ -507,6 +507,7 @@ class InvoicingController extends Controller
                 ->first();
             $dayofshift = $shift->date->format('l');
             $dateofshift = $shift->date->format('d/m/y');
+            $public_holiday_text = "";
 
             if ($shift->is_public_holiday) {
                 $hourlyRate = $workerrates->publicholidayhourlyrate;
@@ -542,7 +543,7 @@ class InvoicingController extends Controller
             $items[] = $item;
 
             // Calculate and accumulate the total amount
-            $totalAmount += $hourlyRate * $shift->hours;
+            $totalAmount += ($hourlyRate * $shift->hours) + $expensesAmount + $kmAmount;
         }
 
         // Create the invoice
