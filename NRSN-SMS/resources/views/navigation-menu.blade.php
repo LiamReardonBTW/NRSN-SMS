@@ -259,7 +259,7 @@
                 <x-slot name="children">
                     <a href="{{ route('myclients.index') }}">My Clients</a><br>
                     <a href="{{ route('myshifts.index') }}">My Shifts</a><br>
-                    <a href="{{ route('myinvoices.index') }}">My Shifts</a>
+                    <a href="{{ route('myinvoices.index') }}">My Invoices</a>
                 </x-slot>
             </x-responsive-nav-link-parent>
             @endif

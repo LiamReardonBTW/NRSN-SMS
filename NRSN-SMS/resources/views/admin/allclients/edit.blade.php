@@ -21,6 +21,9 @@
                     <label for="client_id">Client ID</label>
                     <x-input disabled type="text" name="client_id" id="client_id"
                         class="form-input rounded-md shadow-sm block w-full" value="{{ $allclient->id }}" />
+                    @error('client_id')
+                        <p class="text-sm text-red-600">{{ $message }}</p>
+                    @enderror
                 </div>
 
                 <!-- Added -->
@@ -28,6 +31,9 @@
                     <label for="created_at">Added</label>
                     <x-input disabled type="text" name="created_at" id="created_at"
                         class="form-input rounded-md shadow-sm block w-full" value="{{ $allclient->created_at }}" />
+                    @error('created_at')
+                        <p class="text-sm text-red-600">{{ $message }}</p>
+                    @enderror
                 </div>
 
                 <!-- Last Updated -->
@@ -35,6 +41,9 @@
                     <label for="updated_at">Last Updated</label>
                     <x-input disabled type="text" name="updated_at" id="updated_at"
                         class="form-input rounded-md shadow-sm block w-full" value="{{ $allclient->updated_at }}" />
+                    @error('updated_at')
+                        <p class="text-sm text-red-600">{{ $message }}</p>
+                    @enderror
                 </div>
 
                 <div class="mx-4 my-5">

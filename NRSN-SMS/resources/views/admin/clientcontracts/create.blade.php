@@ -18,8 +18,7 @@
                 <!-- Client Dropdown -->
                 <div class="mx-4 my-5 grid grid-rows-2">
                     <label for="client_id">Client</label>
-                    <select name="client_id" id="client_id"
-                        class="form-select rounded-md shadow-sm block w-full">
+                    <select name="client_id" id="client_id" class="form-select rounded-md shadow-sm block w-full">
                         <option value="{{ old('client_id', '') }}">Select a client</option>
                         @foreach ($clients as $client)
                             @if ($client->active)
@@ -38,9 +37,8 @@
                 <!-- Start Date -->
                 <div class="mx-4 my-5 grid grid-rows-2">
                     <label for="startdate">Contract Start Date</label>
-                    <x-input  type="date" name="startdate" id="startdate"
-                        class="form-input rounded-md shadow-sm block w-full"
-                        value="{{ old('startdate', '') }}" />
+                    <x-input type="date" name="startdate" id="startdate"
+                        class="form-input rounded-md shadow-sm block w-full" value="{{ old('startdate', '') }}" />
                     @error('startdate')
                         <p class="text-sm text-red-600">{{ $message }}</p>
                     @enderror
@@ -48,9 +46,8 @@
                 <!-- Contract End Date -->
                 <div class="mx-4 my-5 grid grid-rows-2">
                     <label for="enddate">Contract End Date</label>
-                    <x-input  type="date" name="enddate" id="enddate"
-                        class="form-input rounded-md shadow-sm block w-full"
-                        value="{{ old('enddate', '') }}" />
+                    <x-input type="date" name="enddate" id="enddate"
+                        class="form-input rounded-md shadow-sm block w-full" value="{{ old('enddate', '') }}" />
                     @error('enddate')
                         <p class="text-sm text-red-600">{{ $message }}</p>
                     @enderror
@@ -64,8 +61,7 @@
                 <div class="mx-4 my-5 grid grid-rows-2">
                     <label for="totalallocated">Total Balance Allocated</label>
                     <x-input type="numeric" name="totalallocated" id="totalallocated"
-                        class="form-input rounded-md shadow-sm block w-full"
-                        value="{{ old('totalallocated', '') }}" />
+                        class="form-input rounded-md shadow-sm block w-full" value="{{ old('totalallocated', '') }}" />
                     @error('totalallocated')
                         <p class="text-sm text-red-600">{{ $message }}</p>
                     @enderror
@@ -75,8 +71,10 @@
                 <div class="hidden mx-4 my-5 grid grid-rows-2">
                     <label for="balance">Total Balance Allocated</label>
                     <x-input hidden type="numeric" name="balance" id="balance"
-                        class="form-input rounded-md shadow-sm block w-full"
-                        value="{{ old('totalallocated', '') }}" />
+                        class="form-input rounded-md shadow-sm block w-full" value="{{ old('totalallocated', '') }}" />
+                    @error('balance')
+                        <p class="text-sm text-red-600">{{ $message }}</p>
+                    @enderror
                 </div>
 
                 <!-- Active Status -->
@@ -95,7 +93,7 @@
 
             <!-- Page Navigation Buttons -->
             <div
-                class="flex items-center justify-start pb-6 py-3 text-right sm:px-6 grid grid-cols-1 md:grid-cols-3 lg:gap-8 px-6 lg:px-8 py-2">
+                class="items-center grid grid-cols-1 gap-4 justify-start pb-6 py-3 text-right sm:px-6 grid grid-cols-1 md:grid-cols-3 lg:gap-8 px-6 lg:px-8 py-2">
                 <!-- Back to manage clients index page -->
                 <a href="{{ route('clientcontracts.index') }}"
                     class="inline-flex items-center mx-4 px-6 py-4 bg-red-700 border border-transparent rounded-md font-semibold text-base text-white uppercase tracking-widest hover:bg-red-500 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">

@@ -21,16 +21,14 @@
             <div class="mx-4 my-5">
                 <label for="address">Business Address</label>
                 <x-input disabled type="text" name="address" id="address"
-                    class="form-input rounded-md shadow-sm block w-full"
-                    value="{{ $businessDetails->address }}" />
+                    class="form-input rounded-md shadow-sm block w-full" value="{{ $businessDetails->address }}" />
             </div>
 
             <!-- Business Phone -->
             <div class="mx-4 my-5">
                 <label for="phone">Business Phone</label>
                 <x-input disabled type="text" name="phone" id="phone"
-                    class="form-input rounded-md shadow-sm block w-full"
-                    value="{{ $businessDetails->phone }}" />
+                    class="form-input rounded-md shadow-sm block w-full" value="{{ $businessDetails->phone }}" />
             </div>
 
             <!-- Business TFN -->
@@ -82,19 +80,19 @@
             </div>
         </div>
 
-        <!-- Page Navigation Button -->
-        <div class="flex items-center justify-start pb-6 py-5 text-right sm:px-6 px-6 lg:px-8 py-2">
-            <!-- Back to Dashboard -->
-            <div>
-                <a href="{{ route('dashboard') }}"
-                    class="inline-flex items-center mx-4 px-6 py-4 bg-red-700 border border-transparent rounded-md font-semibold text-base text-white uppercase tracking-widest hover:bg-red-500 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">
-                    Back
-                </a>
-                <a href="{{ route('business-details.edit', $businessDetails) }}"
-                    class="inline-flex items-center mx-4 px-6 py-4 bg-blue-700 border border-transparent rounded-md font-semibold text-base text-white uppercase tracking-widest hover:bg-blue-500 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">
-                    Edit
-                </a>
-            </div>
-        </div><!-- Close Container -->
+        <!-- Page Navigation Buttons -->
+        <div
+            class="items-center grid grid-cols-1 gap-4 justify-start pb-6 py-3 text-right sm:px-6 grid grid-cols-1 md:grid-cols-3 lg:gap-8 px-6 lg:px-8 py-2">
+            <!-- Back to All Shifts index page -->
+            <a href="{{ 'dashboard' }}"
+                class="inline-flex items-center mx-4 px-6 py-4 bg-red-700 border border-transparent rounded-md font-semibold text-base text-white uppercase tracking-widest hover:bg-red-500 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">
+                Back
+            </a>
+            <!-- To Edit User page -->
+            <a href="{{ route('business-details.edit', $businessDetails) }}"
+                class="inline-flex items-center mx-4 px-6 py-4 bg-blue-700 border border-transparent rounded-md font-semibold text-base text-white uppercase tracking-widest hover:bg-blue-500 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">
+                Edit Details
+            </a>
+        </div>
     </div>
 </x-app-layout>

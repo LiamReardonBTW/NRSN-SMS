@@ -256,7 +256,7 @@
     </div>
 
     <!-- Page Navigation Buttons -->
-    <div class="block py-6">
+    <div class="block my-12">
         <!-- Back to Dashboard -->
         <a href="{{ route('dashboard') }}"
             class="inline-flex items-center mx-4 px-6 py-4 bg-red-700 border border-transparent rounded-md font-semibold text-base text-white uppercase tracking-widest hover:bg-red-500 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">

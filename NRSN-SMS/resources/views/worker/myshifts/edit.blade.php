@@ -14,9 +14,9 @@
                 @csrf
                 @method('PUT')
 
-                <!-- ID, ISFLAGGED, ISINVOICED -->
+                <!-- ID, ISFLAGGED, Client Invoice, Worker Invoice -->
                 <div
-                    class="text-2xl font-medium bg-blue-300 overflow-hidden grid grid-cols-1 md:grid-cols-3  px-6 lg:px-8">
+                    class="text-2xl font-medium bg-blue-300 overflow-hidden grid grid-cols-1 md:grid-cols-3 px-6 lg:px-8">
 
                     <!-- Shift ID (UNEDITABLE) -->
                     <div class="mx-4 my-5 grid grid-rows-2">
@@ -28,13 +28,12 @@
                     <!-- isflagged -->
                     <div class="mx-4 my-5 grid grid-rows-2">
                         <label for="isflagged">Flagged</label>
-                        @if ($myshift->isflagged)
-                            <x-input disabled type="text" name="isinvoiced" id="isinvoiced"
-                                class="form-input rounded-md shadow-sm block w-full" value="Yes" />
-                        @else
-                            <x-input disabled type="text" name="isinvoiced" id="isinvoiced"
-                                class="form-input rounded-md shadow-sm block w-full" value="No" />
-                        @endif
+                        <select type="boolean" name="isflagged" id="isflagged"
+                            class="form-select rounded-md shadow-sm block w-full">
+                            <option value="1" {{ $myshift->isflagged === 1 ? 'selected' : '' }}>Yes</option>
+                            <option value="0" {{ $myshift->isflagged === 0 ? 'selected' : '' }}>No</option>
+                            <!-- Add more options as needed -->
+                        </select>
                     </div>
 
                     <!-- Worker Invoice -->
@@ -53,9 +52,11 @@
                             </div>
                         @endif
                     </div>
+
                 </div>
                 <div
                     class="text-2xl font-medium bg-blue-300 overflow-hidden grid grid-cols-1 md:grid-cols-2 px-6 lg:px-8">
+
                     <!-- Worker Total Pay -->
                     <div class="mx-4 my-5 grid grid-rows-2">
                         <label for="shift_id">My Pay</label>
@@ -66,8 +67,6 @@
 
                 <!-- Shift Information -->
                 <div class="text-2xl font-medium  overflow-hidden grid grid-cols-1 md:grid-cols-3  px-6 lg:px-8">
-
-
 
                     <!-- Invoice -->
                     <div class="mx-4 my-5 grid grid-rows-2">
@@ -136,7 +135,8 @@
                             class="form-select rounded-md shadow-sm block w-full">
                             <option value="1" {{ $myshift->is_public_holiday == 1 ? 'selected' : '' }}>Yes
                             </option>
-                            <option value="0" {{ $myshift->is_public_holiday == 0 ? 'selected' : '' }}>No</option>
+                            <option value="0" {{ $myshift->is_public_holiday == 0 ? 'selected' : '' }}>No
+                            </option>
                         </select>
                         @error('is_public_holiday')
                             <p class="text-sm text-red-600">{{ $message }}</p>
@@ -185,17 +185,17 @@
 
                 </div> <!-- Close Shift Information -->
 
-                <!-- Page Navigation Buttons  -->
+                <!-- Page Navigation Buttons -->
                 <div
-                    class="flex items-center justify-start pb-6 py-3 text-right sm:px-6 grid grid-cols-1 md:grid-cols-3 lg:gap-8 px-6 lg:px-8 py-2">
-                    <!-- Back to My Shifts index page -->
-                    <a href="{{ route('myshifts.show', $myshift) }}"
+                    class="items-center grid grid-cols-1 gap-4 justify-start pb-6 py-3 text-right sm:px-6 grid grid-cols-1 md:grid-cols-3 lg:gap-8 px-6 lg:px-8 py-2">
+                    <!-- Back to My Shifts page -->
+                    <a href="{{ route('myshifts.index') }}"
                         class="inline-flex items-center mx-4 px-6 py-4 bg-red-700 border border-transparent rounded-md font-semibold text-base text-white uppercase tracking-widest hover:bg-red-500 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">
                         Back
                     </a>
                     <!-- Form Submit changes to shift Button -->
                     <button
-                        class="inline-flex items-center mx-4 px-6 py-4 bg-green-800 border border-transparent rounded-md font-semibold text-base text-white uppercase tracking-widest hover:bg-green-500 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">
+                        class="inline-flex items-center mx-4 px-6 py-4 bg-green-700 border border-transparent rounded-md font-semibold text-base text-white uppercase tracking-widest hover:bg-green-500 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">
                         Submit
                     </button>
                 </div>

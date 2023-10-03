@@ -30,6 +30,9 @@
                     <x-input disabled type="date" name="created_at" id="created_at"
                         class="form-input rounded-md shadow-sm block w-full"
                         value="{{ \Carbon\Carbon::parse($activity->created_at)->format('Y-m-d') }}" />
+                    @error('created_at')
+                        <p class="text-sm text-red-600">{{ $message }}</p>
+                    @enderror
                 </div>
                 <!-- Updated Date -->
                 <div class="mx-4 my-5 grid grid-rows-2">
@@ -37,6 +40,9 @@
                     <x-input disabled type="date" name="updated_at" id="updated_at"
                         class="form-input rounded-md shadow-sm block w-full"
                         value="{{ \Carbon\Carbon::parse($activity->updated_at)->format('Y-m-d') }}" />
+                    @error('updated_at')
+                        <p class="text-sm text-red-600">{{ $message }}</p>
+                    @enderror
                 </div>
             </div>
             <div class="text-2xl font-medium bg-blue-200 overflow-hidden grid grid-cols-1 md:grid-cols-3  px-6 lg:px-8">
@@ -95,7 +101,7 @@
 
             <!-- Page Navigation Buttons -->
             <div
-                class="flex items-center justify-start pb-6 py-3 text-right sm:px-6 grid grid-cols-1 md:grid-cols-3 lg:gap-8 px-6 lg:px-8 py-2">
+                class="items-center grid grid-cols-1 gap-4 justify-start pb-6 py-3 text-right sm:px-6 grid grid-cols-1 md:grid-cols-3 lg:gap-8 px-6 lg:px-8 py-2">
                 <!-- Back to manage clients index page -->
                 <a href="{{ route('activities.index') }}"
                     class="inline-flex items-center mx-4 px-6 py-4 bg-red-700 border border-transparent rounded-md font-semibold text-base text-white uppercase tracking-widest hover:bg-red-500 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">

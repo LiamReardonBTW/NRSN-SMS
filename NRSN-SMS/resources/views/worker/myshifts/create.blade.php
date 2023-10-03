@@ -31,7 +31,7 @@
                     <label for="client_supported">Client Supported</label>
                     <select name="client_supported" id="client_supported"
                         class="form-select rounded-md shadow-sm block w-full">
-                        <option value="">Select a client</option>
+                        <option value="{{ old('client_supported', '') }}">Select a client</option>
                         @foreach ($clients as $client)
                             @if ($clientActivities[$client->id]->count() > 0)
                                 <option value="{{ $client->id }}">{{ $client->first_name }} {{ $client->last_name }}
@@ -48,7 +48,7 @@
                 <div class="mx-4 my-5 grid grid-rows-2">
                     <label for="activity_id">Activity</label>
                     <select name="activity_id" id="activity_id" class="form-select rounded-md shadow-sm block w-full">
-                        <option value="">Select an activity</option>
+                        <option value="{{ old('activity_id', '') }}">Select an activity</option>
                         <!-- This part will be populated dynamically with JavaScript based on the selected client -->
                     </select>
                     @error('activity_id')
@@ -158,7 +158,7 @@
 
             <!-- Page Navigation Buttons  -->
             <div
-                class="flex items-center justify-start pb-6 py-3 text-right sm:px-6 grid grid-cols-1 md:grid-cols-3 lg:gap-8 px-6 lg:px-8 py-2">
+                class="items-center grid grid-cols-1 gap-4 justify-start pb-6 py-3 text-right sm:px-6 grid grid-cols-1 md:grid-cols-3 lg:gap-8 px-6 lg:px-8 py-2">
                 <!-- Back to My Shifts page -->
                 <a href="{{ route('myshifts.index') }}"
                     class="inline-flex items-center mx-4 px-6 py-4 bg-red-700 border border-transparent rounded-md font-semibold text-base text-white uppercase tracking-widest hover:bg-red-500 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">

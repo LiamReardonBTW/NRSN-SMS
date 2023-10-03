@@ -6,7 +6,7 @@
 
     <!-- Client Invoices Table Container -->
     <h2 class="text-2xl font-semibold bg-green-400 rounded-t-md py-4 px-3">Clients:</h2>
-    <div class="bg-green-200 p-3 rounded-b-md">
+    <div class="bg-green-200 p-3 pb-12 rounded-b-md">
         <h2 class="text-xl font-semibold mb-2 py-4">Ready to invoice:</h2>
         <!-- Display error message here -->
         @error('invoice_number')
@@ -184,21 +184,12 @@
             </table>
         </div>
 
-        <!-- Link to Paid Client Invoices -->
-        <div class="block pt-3">
-            <!-- Back to Dashboard -->
-            <a href="#"
-                class="inline-flex items-center m-6 px-6 py-4 bg-blue-700 border border-transparent rounded-md font-semibold text-base text-white uppercase tracking-widest hover:bg-blue-500 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">
-                View All Invoices
-            </a>
-        </div>
-
     </div>
 
 
     <!-- Worker Invoices Table Container -->
     <h2 class="text-2xl font-semibold bg-blue-400 rounded-t-md py-4 mt-12 px-3">Workers:</h2>
-    <div class="bg-blue-200 p-3 rounded-b-md">
+    <div class="bg-blue-200 p-3 pb-12 rounded-b-md">
         <h2 class="text-xl font-semibold mb-2 py-4">Ready to invoice:</h2>
         <div class="relative overflow-auto border-2 border-blue-600 rounded mx-5"
             style="max-height: 300px; overflow-y: auto;"> <!-- User Invoices Table -->
@@ -367,15 +358,6 @@
             </table>
         </div>
 
-        <!-- Link to Paid Client Invoices -->
-        <div class="block pt-3">
-            <!-- Back to Dashboard -->
-            <a href="#"
-                class="inline-flex items-center m-6 px-6 py-4 bg-blue-700 border border-transparent rounded-md font-semibold text-base text-white uppercase tracking-widest hover:bg-blue-500 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">
-                View All Invoices
-            </a>
-        </div>
-
     </div>
 
     <!-- Page Navigation Buttons -->
@@ -385,6 +367,10 @@
             class="inline-flex items-center mx-4 px-6 py-4 bg-red-700 border border-transparent rounded-md font-semibold text-base text-white uppercase tracking-widest hover:bg-red-500 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">
             Back
         </a>
+        <a href="{{ route('allinvoices.index') }}"
+                class="inline-flex items-center m-6 px-6 py-4 bg-blue-700 border border-transparent rounded-md font-semibold text-base text-white uppercase tracking-widest hover:bg-blue-500 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">
+                View All Invoices
+            </a>
     </div>
 </x-app-layout>
 <script>
