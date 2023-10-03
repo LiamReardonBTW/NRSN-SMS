@@ -47,7 +47,14 @@
                     </div>
                 @endif
             </div>
-
+        </div>
+        <div class="text-2xl font-medium bg-blue-300 overflow-hidden grid grid-cols-1 md:grid-cols-2 px-6 lg:px-8">
+            <!-- Worker Total Pay -->
+            <div class="mx-4 my-5 grid grid-rows-2">
+                <label for="shift_id">My Pay</label>
+                <span
+                    class="px-4 my-1 rounded-md block w-full bg-white text-black">${{ $workerPays[$myshift->id] }}</span>
+            </div>
         </div>
 
         <!-- Shift Information Container -->
@@ -149,11 +156,11 @@
                 Back
             </a>
             @if (!$myshift->approved)
-            <!-- To Edit Shift page -->
-            <a href="{{ route('myshifts.edit', $myshift) }}"
-                class="inline-flex items-center mx-4 px-6 py-4 bg-blue-700 border border-transparent rounded-md font-semibold text-base text-white uppercase tracking-widest hover:bg-blue-500 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">
-                Edit Shift
-            </a>
+                <!-- To Edit Shift page -->
+                <a href="{{ route('myshifts.edit', $myshift) }}"
+                    class="inline-flex items-center mx-4 px-6 py-4 bg-blue-700 border border-transparent rounded-md font-semibold text-base text-white uppercase tracking-widest hover:bg-blue-500 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">
+                    Edit Shift
+                </a>
             @endif
         </div>
 

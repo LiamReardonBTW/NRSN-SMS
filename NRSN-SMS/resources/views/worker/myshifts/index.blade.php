@@ -76,6 +76,13 @@
                         </div>
                     </th>
 
+                    <!-- Worker Total Pay Header -->
+                    <th scope="col" class="px-2 py-1 border-r-2 border-blue-500 border-b-2 ">
+                        <div class="flex items-center">
+                            Total Pay
+                        </div>
+                    </th>
+
                     <!-- Actions Table Header (For view/edit/delete buttons) -->
                     <th scope="col" class="w-48 text-right px-2 py-1 border-r-2 border-blue-500 border-b-2 ">
                         <span class="mr-28">Actions</span>
@@ -114,6 +121,10 @@
                                 @if ($shift->isflagged == '1')
                                     Yes
                                 @endif
+                            </td>
+                            <td scope="row" class="px-1 py-1 text-center">
+                                {{-- Worker Total Pay --}}
+                                ${{ $workerPays[$shift->id] }}
                             </td>
                             <!-- View/edit/delete buttons for associated client  -->
                             <td class="whitespace-nowrap text-sm text-white font-bold float-right py-3">
@@ -202,6 +213,13 @@
                         </div>
                     </th>
 
+                    <!-- Worker Total Pay Header -->
+                    <th scope="col" class="px-2 py-1 border-r-2 border-green-500 border-b-2 ">
+                        <div class="flex items-center">
+                            Total Pay
+                        </div>
+                    </th>
+
                     <!-- Actions Table Header (For view/edit/delete buttons) -->
                     <th scope="col" class="w-48 text-right px-2 py-1 border-r-2 border-green-500 border-b-2 ">
                         <span class="mr-28">Actions</span>
@@ -215,10 +233,7 @@
 
                 <!-- For each shift in the shifts table, add a new row including their information -->
                 @foreach ($shifts as $shift)
-                    @if (
-                    $shift->approved === 1 &&
-                    $shift->paid === 0 &&
-                    is_null($shift->workerinvoice_id))
+                    @if ($shift->approved === 1 && $shift->paid === 0 && is_null($shift->workerinvoice_id))
                         <tr class="even:bg-gray-50 odd:bg-gray-200 hover:bg-blue-200 h-12">
                             <!-- Shift Information -->
                             <td scope="row" class="px-1 py-1 text-center">
@@ -235,6 +250,10 @@
                             </td>
                             <td scope="row" class="px-1 py-1 text-center">
                                 {{ $shift->hours }}
+                            </td>
+                            <td scope="row" class="px-1 py-1 text-center">
+                                {{-- Worker Total Pay --}}
+                                ${{ $workerPays[$shift->id] }}
                             </td>
                             <!-- View/edit/delete buttons for associated client  -->
                             <td class="whitespace-nowrap text-sm text-white font-bold float-right py-3">

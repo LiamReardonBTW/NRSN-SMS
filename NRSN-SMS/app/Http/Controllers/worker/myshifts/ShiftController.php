@@ -8,6 +8,7 @@ use App\Http\Requests\UpdateShiftRequest;
 use App\Models\Shift;
 use App\Models\Activity;
 use App\Models\Client;
+use App\Models\UserContract;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -26,7 +27,18 @@ class ShiftController extends Controller
         $user = Auth::user();
         $shifts = $user->shifts;
 
-        return view('worker/myshifts.index', compact('shifts'));
+        $workerPays = [];
+
+        foreach ($shifts as $shift) {
+
+            // Calculate worker pay
+            $workerPay = $this->calculateWorkerTotalPay($shift);
+
+            // Store calculated values in arrays
+            $workerPays[$shift->id] = $workerPay;
+        }
+
+        return view('worker/myshifts.index', compact('shifts', 'workerPays'));
     }
 
     /**
@@ -75,7 +87,13 @@ class ShiftController extends Controller
             return redirect()->route('myshifts.index'); // Replace with your desired route or action
         }
 
-        return view('worker/myshifts.show', compact('myshift', 'activities'));
+        // Calculate worker pay
+        $workerPay = $this->calculateWorkerTotalPay($myshift);
+
+        // Store calculated values in arrays
+        $workerPays[$myshift->id] = $workerPay;
+
+        return view('worker/myshifts.show', compact('myshift', 'activities', 'workerPays'));
     }
 
     /**
@@ -102,7 +120,13 @@ class ShiftController extends Controller
             $clientActivities[$client->id] = $client->activityRates->pluck('activity');
         }
 
-        return view('worker/myshifts.edit', compact('myshift', 'clientActivities'));
+        // Calculate worker pay
+        $workerPay = $this->calculateWorkerTotalPay($myshift);
+
+        // Store calculated values in arrays
+        $workerPays[$myshift->id] = $workerPay;
+
+        return view('worker/myshifts.edit', compact('myshift', 'clientActivities', 'workerPays'));
     }
 
 
@@ -123,4 +147,39 @@ class ShiftController extends Controller
         $myshift->delete();
         return redirect()->route('myshifts.index');
     }
+
+    private function calculateWorkerTotalPay($shift)
+    {
+        $workerrates = UserContract::where('user_id', $shift->submitted_by)
+            ->where('active', 1)
+            ->first();
+        $dayofshift = $shift->date->format('l');
+
+        if ($shift->is_public_holiday) {
+            $hourlyRate = $workerrates->publicholidayhourlyrate;
+        } else {
+            if ($dayofshift === 'Saturday') {
+                $hourlyRate = $workerrates->saturdayhourlyrate;
+            } elseif ($dayofshift === 'Sunday') {
+                $hourlyRate = $workerrates->sundayhourlyrate;
+            } else {
+                $hourlyRate = $workerrates->weekdayhourlyrate;
+            }
+        }
+
+        // Calculate total amount for kilometers
+        $kmRate = $workerrates->km_rate;
+        $kmAmount = $shift->km * $kmRate;
+
+        // Calculate total amount for expenses
+        $expensesAmount = $shift->expenses;
+
+        $totalQuantity = $shift->hours;
+
+        // Calculate the total pay for this shift
+        $workerPays = $totalQuantity * $hourlyRate + $kmAmount + $expensesAmount;
+
+        return number_format($workerPays, 2);
+    }
+
 }
