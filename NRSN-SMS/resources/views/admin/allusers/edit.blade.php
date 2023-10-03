@@ -17,7 +17,7 @@
             <!-- Uneditable User Information -->
             <div class="text-2xl font-medium bg-blue-300 overflow-hidden grid grid-cols-1 md:grid-cols-3  px-6 lg:px-8">
                 <!-- User ID -->
-                <div class="mx-4 my-5">
+ <div class="mx-4 mt-5 grid grid-rows-3">
                     <label for="id">User ID</label>
                     <x-input disabled type="text" name="id" id="id"
                         class="form-input rounded-md shadow-sm block w-full" value="{{ $alluser->id }}" />
@@ -27,7 +27,7 @@
                 </div>
 
                 <!-- Added -->
-                <div class="mx-4 my-5">
+ <div class="mx-4 mt-5 grid grid-rows-3">
                     <label for="created_at">Added</label>
                     <x-input disabled type="text" name="created_at" id="created_at"
                         class="form-input rounded-md shadow-sm block w-full" value="{{ $alluser->created_at }}" />
@@ -37,7 +37,7 @@
                 </div>
 
                 <!-- Last Updated -->
-                <div class="mx-4 my-5">
+ <div class="mx-4 mt-5 grid grid-rows-3">
                     <label for="updated_at">Last Updated</label>
                     <x-input disabled type="text" name="updated_at" id="updated_at"
                         class="form-input rounded-md shadow-sm block w-full" value="{{ $alluser->updated_at }}" />
@@ -51,7 +51,7 @@
             <div class="text-2xl font-medium  overflow-hidden grid grid-cols-1 md:grid-cols-3  px-6 lg:px-8">
 
                 <!-- First Name -->
-                <div class="mx-4 my-5">
+ <div class="mx-4 mt-5 grid grid-rows-3">
                     <label for="first_name">First
                         Name</label>
                     <x-input type="text" name="first_name" id="first_name"
@@ -62,7 +62,7 @@
                 </div>
 
                 <!-- Last Name -->
-                <div class="mx-4 my-5">
+ <div class="mx-4 mt-5 grid grid-rows-3">
                     <label for="last_name">Last Name</label>
                     <x-input type="text" name="last_name" id="last_name"
                         class="form-input rounded-md shadow-sm block w-full" value="{{ $alluser->last_name }}" />
@@ -72,7 +72,7 @@
                 </div>
 
                 <!-- Email -->
-                <div class="mx-4 my-5">
+ <div class="mx-4 mt-5 grid grid-rows-3">
                     <label for="email">Email</label>
                     <x-input type="email" name="email" id="email"
                         class="form-input rounded-md shadow-sm block w-full" value="{{ $alluser->email }}" />
@@ -82,7 +82,7 @@
                 </div>
 
                 <!-- Phone -->
-                <div class="mx-4 my-5">
+ <div class="mx-4 mt-5 grid grid-rows-3">
                     <label for="phone">Phone</label>
                     <x-input type="text" name="phone" id="phone"
                         class="form-input rounded-md shadow-sm block w-full" value="{{ $alluser->phone }}" />
@@ -92,7 +92,7 @@
                 </div>
 
                 <!-- Address -->
-                <div class="mx-4 my-5">
+ <div class="mx-4 mt-5 grid grid-rows-3">
                     <label for="address">Address</label>
                     <x-input type="text" name="address" id="address"
                         class="form-input rounded-md shadow-sm block w-full" value="{{ $alluser->address }}" />
@@ -102,7 +102,7 @@
                 </div>
 
                 <!-- TFN -->
-                <div class="mx-4 my-5">
+ <div class="mx-4 mt-5 grid grid-rows-3">
                     <label for="tfn">Tax File Number (TFN)</label>
                     <x-input type="text" name="tfn" id="tfn"
                         class="form-input rounded-md shadow-sm block w-full" value="{{ $alluser->tfn }}" />
@@ -112,7 +112,7 @@
                 </div>
 
                 <!-- ABN -->
-                <div class="mx-4 my-5">
+ <div class="mx-4 mt-5 grid grid-rows-3">
                     <label for="abn">ABN</label>
                     <x-input type="text" name="abn" id="abn"
                         class="form-input rounded-md shadow-sm block w-full" value="{{ $alluser->abn }}" />
@@ -122,7 +122,7 @@
                 </div>
 
                 <!-- Role -->
-                <div class="mx-4 my-5">
+ <div class="mx-4 mt-5 grid grid-rows-3">
                     <label for="role">Role</label>
                     <select name="role" id="role" class="form-select rounded-md shadow-sm block w-full">
                         <option value="0" {{ $alluser->role === 0 ? 'selected' : '' }}>Admin</option>

@@ -16,7 +16,7 @@
             <div class="text-2xl font-medium  overflow-hidden grid grid-cols-1 md:grid-cols-3  px-6 lg:px-8">
 
                 <!-- Submitted By Dropdown -->
-                <div class="mx-4 my-5 grid grid-rows-2">
+                <div class="mx-4 mt-5 grid grid-rows-3">
                     <label for="submitted_by">Worker</label>
                     <select name="submitted_by" id="submitted_by" class="form-select rounded-md shadow-sm block w-full">
                         <option value="">Select a worker</option>
@@ -33,7 +33,7 @@
                 </div>
 
                 <!-- Client Supported Dropdown -->
-                <div class="mx-4 my-5 grid grid-rows-2">
+                <div class="mx-4 mt-5 grid grid-rows-3">
                     <label for="client_supported">Client Supported</label>
                     <select name="client_supported" id="client_supported"
                         class="form-select rounded-md shadow-sm block w-full">
@@ -53,7 +53,7 @@
                 </div>
 
                 <!-- Activity Dropdown -->
-                <div class="mx-4 my-5 grid grid-rows-2">
+                <div class="mx-4 mt-5 grid grid-rows-3">
                     <label for="activity_id">Activity</label>
                     <select name="activity_id" id="activity_id" class="form-select rounded-md shadow-sm block w-full">
                         <option value="">Select an activity</option>
@@ -100,7 +100,7 @@
                 </script>
 
                 <!-- Date -->
-                <div class="mx-4 my-5 grid grid-rows-2">
+                <div class="mx-4 mt-5 grid grid-rows-3">
                     <label for="date">Date</label>
                     <x-input type="date" name="date" id="date"
                         class="form-input rounded-md shadow-sm block w-full" value="{{ old('date', '') }}" />
@@ -110,7 +110,7 @@
                 </div>
 
                 <!-- Is Public Holiday Dropdown -->
-                <div class="mx-4 my-5 grid grid-rows-2">
+                <div class="mx-4 mt-5 grid grid-rows-3">
                     <label for="is_public_holiday">Public Holiday?</label>
                     <select name="is_public_holiday" id="is_public_holiday"
                         class="form-select rounded-md shadow-sm block w-full">
@@ -123,7 +123,7 @@
                 </div>
 
                 <!-- Expenses -->
-                <div class="mx-4 my-5 grid grid-rows-2">
+                <div class="mx-4 mt-5 grid grid-rows-3">
                     <label for="expenses">Expenses ($AUD)</label>
                     <x-input type="float" name="expenses" id="expenses"
                         class="form-input rounded-md shadow-sm block w-full" value="{{ old('expenses', '') }}" />
@@ -133,7 +133,7 @@
                 </div>
 
                 <!-- km Travelled -->
-                <div class="mx-4 my-5 grid grid-rows-2">
+                <div class="mx-4 mt-5 grid grid-rows-3">
                     <label for="km">Km Travelled</label>
                     <x-input type="float" name="km" id="km"
                         class="form-input rounded-md shadow-sm block w-full" value="{{ old('km', '') }}" />
@@ -143,7 +143,7 @@
                 </div>
 
                 <!-- Hours Worked -->
-                <div class="mx-4 my-5 grid grid-rows-2">
+                <div class="mx-4 mt-5 grid grid-rows-3">
                     <label for="hours">Hours Worked</label>
                     <x-input type="float" name="hours" id="hours"
                         class="form-input rounded-md shadow-sm block w-full" value="{{ old('hours', '') }}" />
@@ -153,7 +153,7 @@
                 </div>
 
                 <!-- Notes -->
-                <div class="mx-4 my-5 grid grid-rows-2">
+                <div class="mx-4 mt-5 grid grid-rows-3">
                     <label for="notes">Shift Notes</label>
                     <x-input type="string" name="notes" id="notes"
                         class="form-input rounded-md shadow-sm block w-full" value="{{ old('notes', '') }}" />

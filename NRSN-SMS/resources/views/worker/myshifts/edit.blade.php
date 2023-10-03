@@ -19,14 +19,14 @@
                     class="text-2xl font-medium bg-blue-300 overflow-hidden grid grid-cols-1 md:grid-cols-3 px-6 lg:px-8">
 
                     <!-- Shift ID (UNEDITABLE) -->
-                    <div class="mx-4 my-5 grid grid-rows-2">
+                    <div class="mx-4 mt-5 grid grid-rows-3">
                         <label for="id">Shift ID</label>
                         <x-input disabled type="text" name="id" id="id"
                             class="form-input rounded-md shadow-sm block w-full" value="{{ $myshift->id }}" />
                     </div>
 
                     <!-- isflagged -->
-                    <div class="mx-4 my-5 grid grid-rows-2">
+                    <div class="mx-4 mt-5 grid grid-rows-3">
                         <label for="isflagged">Flagged</label>
                         <select disabled type="boolean" name="isflagged" id="isflagged"
                             class="form-select rounded-md shadow-sm block w-full">
@@ -37,7 +37,7 @@
                     </div>
 
                     <!-- Worker Invoice -->
-                    <div class="mx-4 my-5 grid grid-rows-2">
+                    <div class="mx-4 mt-5 grid grid-rows-3">
                         <label for="worker_invoice">Worker Invoice</label>
                         @if ($myshift->workerinvoice_id)
                             <div
@@ -58,7 +58,7 @@
                     class="text-2xl font-medium bg-blue-300 overflow-hidden grid grid-cols-1 md:grid-cols-2 px-6 lg:px-8">
 
                     <!-- Worker Total Pay -->
-                    <div class="mx-4 my-5 grid grid-rows-2">
+                    <div class="mx-4 mt-5 grid grid-rows-3">
                         <label for="shift_id">My Pay</label>
                         <span
                             class="px-4 my-1 rounded-md block w-full bg-white text-black">${{ $workerPays[$myshift->id] }}</span>
@@ -69,7 +69,7 @@
                 <div class="text-2xl font-medium  overflow-hidden grid grid-cols-1 md:grid-cols-3  px-6 lg:px-8">
 
                     <!-- Submitted By -->
-                    <div class="mx-4 my-5 grid grid-rows-2">
+                    <div class="mx-4 mt-5 grid grid-rows-3">
                         <label for="submitted_by">Submitted By</label>
                         <x-input type="text" name="submitted_by" id="submitted_by_display"
                             class="form-input rounded-md shadow-sm block w-full"
@@ -80,7 +80,7 @@
                     </div>
 
                     <!-- Client Supported -->
-                    <div class="mx-4 my-5 grid grid-rows-2">
+                    <div class="mx-4 mt-5 grid grid-rows-3">
                         <label for="client_supported">Client Supported</label>
                         <x-input type="text" name="client_supported" id="client_supported_display"
                             class="form-input rounded-md shadow-sm block w-full"
@@ -91,7 +91,7 @@
                     </div>
 
                     <!-- Activity Dropdown -->
-                    <div class="mx-4 my-5 grid grid-rows-2">
+                    <div class="mx-4 mt-5 grid grid-rows-3">
                         <label for="activity_id">Activity</label>
                         <select name="activity_id" id="activity_id"
                             class="form-select rounded-md shadow-sm block w-full">
@@ -109,7 +109,7 @@
                     </div>
 
                     <!-- Date of Shift -->
-                    <div class="mx-4 my-5 grid grid-rows-2">
+                    <div class="mx-4 mt-5 grid grid-rows-3">
                         <label for="date">Date of Shift</label>
                         <x-input type="date" name="date" id="date"
                             class="form-input rounded-md shadow-sm block w-full" value="{{ $myshift->date }}" />
@@ -119,7 +119,7 @@
                     </div>
 
                     <!-- Is Public Holiday Dropdown -->
-                    <div class="mx-4 my-5 grid grid-rows-2">
+                    <div class="mx-4 mt-5 grid grid-rows-3">
                         <label for="is_public_holiday">Public Holiday?</label>
                         <select name="is_public_holiday" id="is_public_holiday"
                             class="form-select rounded-md shadow-sm block w-full">
@@ -134,7 +134,7 @@
                     </div>
 
                     <!-- Expenses -->
-                    <div class="mx-4 my-5 grid grid-rows-2">
+                    <div class="mx-4 mt-5 grid grid-rows-3">
                         <label for="expenses">Expenses ($AUD)</label>
                         <x-input type="float" name="expenses" id="expenses"
                             class="form-input rounded-md shadow-sm block w-full" value="{{ $myshift->expenses }}" />
@@ -144,7 +144,7 @@
                     </div>
 
                     <!-- km Travelled -->
-                    <div class="mx-4 my-5 grid grid-rows-2">
+                    <div class="mx-4 mt-5 grid grid-rows-3">
                         <label for="km">Km Travelled</label>
                         <x-input type="float" name="km" id="km"
                             class="form-input rounded-md shadow-sm block w-full" value="{{ $myshift->km }}" />
@@ -154,7 +154,7 @@
                     </div>
 
                     <!-- Hours Worked -->
-                    <div class="mx-4 my-5 grid grid-rows-2">
+                    <div class="mx-4 mt-5 grid grid-rows-3">
                         <label for="hours">Hours Worked</label>
                         <x-input type="float" name="hours" id="hours"
                             class="form-input rounded-md shadow-sm block w-full" value="{{ $myshift->hours }}" />
@@ -164,7 +164,7 @@
                     </div>
 
                     <!-- Shift Notes -->
-                    <div class="mx-4 my-5 grid grid-rows-2">
+                    <div class="mx-4 mt-5 grid grid-rows-3">
                         <label for="notes">Notes</label>
                         <x-input type="text" name="notes" id="notes"
                             class="form-input rounded-md shadow-sm block w-full" value="{{ $myshift->notes }}" />

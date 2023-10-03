@@ -18,20 +18,20 @@
                     <div
                         class="text-2xl font-medium bg-blue-300 overflow-hidden grid grid-cols-1 md:grid-cols-3  px-6 lg:px-8">
                         <!-- Client ID -->
-                        <div class="mx-4 my-5 grid grid-rows-2">
+                        <div class="mx-4 mt-5 grid grid-rows-3">
                             <label for="client_id">Client ID</label>
                             <x-input disabled type="int" name="client_id" id="client_id"
                                 class="form-input rounded-md shadow-sm block w-full" value="{{ $contract->client_id }}" />
                         </div>
                         <!-- Start Date -->
-                        <div class="mx-4 my-5 grid grid-rows-2">
+                        <div class="mx-4 mt-5 grid grid-rows-3">
                             <label for="startdate">Contract Start Date</label>
                             <x-input disabled type="date" name="startdate" id="startdate"
                                 class="form-input rounded-md shadow-sm block w-full"
                                 value="{{ \Carbon\Carbon::parse($contract->startdate)->format('Y-m-d') }}" />
                         </div>
                         <!-- Contract End Date -->
-                        <div class="mx-4 my-5 grid grid-rows-2">
+                        <div class="mx-4 mt-5 grid grid-rows-3">
                             <label for="enddate">Contract End Date</label>
                             <x-input disabled type="date" name="enddate" id="enddate"
                                 class="form-input rounded-md shadow-sm block w-full"
@@ -41,21 +41,21 @@
                     <div
                         class="text-2xl font-medium bg-blue-200 overflow-hidden grid grid-cols-1 md:grid-cols-3  px-6 lg:px-8">
                         <!-- Total Balance Allocated -->
-                        <div class="mx-4 my-5 grid grid-rows-2">
+                        <div class="mx-4 mt-5 grid grid-rows-3">
                             <label for="totalallocated">Total Balance Allocated</label>
                             <x-input disabled type="numeric" name="totalallocated" id="totalallocated"
                                 class="form-input rounded-md shadow-sm block w-full"
                                 value="${{ $contract->totalallocated }}" />
                         </div>
                         <!-- Contract Balance -->
-                        <div class="mx-4 my-5 grid grid-rows-2">
+                        <div class="mx-4 mt-5 grid grid-rows-3">
                             <label for="startdate">Balance</label>
                             <x-input disabled type="numeric" name="balance" id="balance"
                                 class="form-input rounded-md shadow-sm block w-full"
                                 value="${{ $contract->balance }}" />
                         </div>
                         <!-- Km Rate -->
-                        <div class="mx-4 my-5 grid grid-rows-2">
+                        <div class="mx-4 mt-5 grid grid-rows-3">
                             <label for="km_rate">Km Rate</label>
                             <x-input disabled type="numeric" name="km_rate" id="km_rate"
                                 class="form-input rounded-md shadow-sm block w-full"

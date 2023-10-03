@@ -67,7 +67,7 @@
                 </div>
 
                 <!-- Active Status -->
-                <div class="mx-4 my-5">
+ <div class="mx-4 mt-5 grid grid-rows-3">
                     <label for="active">Active Status</label>
                     <select name="active" id="active" class="form-select rounded-md shadow-sm block w-full">
                         <option value="1" selected>Active</option>

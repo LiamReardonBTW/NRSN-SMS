@@ -16,7 +16,7 @@
             <div class="text-2xl font-medium bg-blue-300 overflow-hidden grid grid-cols-1 md:grid-cols-3  px-6 lg:px-8">
 
                 <!-- Client Dropdown -->
-                <div class="mx-4 my-5 grid grid-rows-2">
+                <div class="mx-4 mt-5 grid grid-rows-3">
                     <label for="client_id">Client</label>
                     <select name="client_id" id="client_id" class="form-select rounded-md shadow-sm block w-full">
                         <option value="{{ old('client_id', '') }}">Select a client</option>
@@ -35,7 +35,7 @@
                 </div>
 
                 <!-- Start Date -->
-                <div class="mx-4 my-5 grid grid-rows-2">
+                <div class="mx-4 mt-5 grid grid-rows-3">
                     <label for="startdate">Contract Start Date</label>
                     <x-input type="date" name="startdate" id="startdate"
                         class="form-input rounded-md shadow-sm block w-full" value="{{ old('startdate', '') }}" />
@@ -44,7 +44,7 @@
                     @enderror
                 </div>
                 <!-- Contract End Date -->
-                <div class="mx-4 my-5 grid grid-rows-2">
+                <div class="mx-4 mt-5 grid grid-rows-3">
                     <label for="enddate">Contract End Date</label>
                     <x-input type="date" name="enddate" id="enddate"
                         class="form-input rounded-md shadow-sm block w-full" value="{{ old('enddate', '') }}" />
@@ -58,7 +58,7 @@
             <div class="text-2xl font-medium bg-blue-200 overflow-hidden grid grid-cols-1 md:grid-cols-3  px-6 lg:px-8">
 
                 <!-- Total Balance Allocated -->
-                <div class="mx-4 my-5 grid grid-rows-2">
+                <div class="mx-4 mt-5 grid grid-rows-3">
                     <label for="totalallocated">Total Balance Allocated</label>
                     <x-input type="numeric" name="totalallocated" id="totalallocated"
                         class="form-input rounded-md shadow-sm block w-full" value="{{ old('totalallocated', '') }}" />
@@ -78,7 +78,7 @@
                 </div>
 
                 <!-- Active Status -->
-                <div class="mx-4 my-5 grid grid-rows-2">
+                <div class="mx-4 mt-5 grid grid-rows-3">
                     <label for="active">Active Status</label>
                     <select name="active" id="active" class="form-select rounded-md shadow-sm block w-full">
                         <option value="1" selected>Active</option>

@@ -16,7 +16,7 @@
             <!-- Contract Information Container -->
             <div class="text-2xl font-medium bg-blue-300 overflow-hidden grid grid-cols-1 md:grid-cols-3  px-6 lg:px-8">
                 <!-- Activity Name -->
-                <div class="mx-4 my-5 grid grid-rows-2">
+                <div class="mx-4 mt-5 grid grid-rows-3">
                     <label for="activityname">Activity</label>
                     <x-input type="text" name="activityname" id="activityname"
                         class="form-input rounded-md shadow-sm block w-full" value="{{ $activity->activityname }}" />
@@ -25,7 +25,7 @@
                     @enderror
                 </div>
                 <!-- Added Date -->
-                <div class="mx-4 my-5 grid grid-rows-2">
+                <div class="mx-4 mt-5 grid grid-rows-3">
                     <label for="created_at">Created</label>
                     <x-input disabled type="date" name="created_at" id="created_at"
                         class="form-input rounded-md shadow-sm block w-full"
@@ -35,7 +35,7 @@
                     @enderror
                 </div>
                 <!-- Updated Date -->
-                <div class="mx-4 my-5 grid grid-rows-2">
+                <div class="mx-4 mt-5 grid grid-rows-3">
                     <label for="updated_at">Last Updated</label>
                     <x-input disabled type="date" name="updated_at" id="updated_at"
                         class="form-input rounded-md shadow-sm block w-full"
@@ -47,7 +47,7 @@
             </div>
             <div class="text-2xl font-medium bg-blue-200 overflow-hidden grid grid-cols-1 md:grid-cols-3  px-6 lg:px-8">
                 <!-- Weekday Code -->
-                <div class="mx-4 my-5 grid grid-rows-2">
+                <div class="mx-4 mt-5 grid grid-rows-3">
                     <label for="weekdayhourlycode">Weekday Code</label>
                     <x-input type="text" name="weekdayhourlycode" id="weekdayhourlycode"
                         class="form-input rounded-md shadow-sm block w-full"
@@ -57,7 +57,7 @@
                     @enderror
                 </div>
                 <!-- Saturday Code -->
-                <div class="mx-4 my-5 grid grid-rows-2">
+                <div class="mx-4 mt-5 grid grid-rows-3">
                     <label for="saturdayhourlycode">Saturday Code</label>
                     <x-input type="text" name="saturdayhourlycode" id="saturdayhourlycode"
                         class="form-input rounded-md shadow-sm block w-full"
@@ -67,7 +67,7 @@
                     @enderror
                 </div>
                 <!-- Sunday Code -->
-                <div class="mx-4 my-5 grid grid-rows-2">
+                <div class="mx-4 mt-5 grid grid-rows-3">
                     <label for="sundayhourlycode">Sunday Code</label>
                     <x-input type="text" name="sundayhourlycode" id="sundayhourlycode"
                         class="form-input rounded-md shadow-sm block w-full"
@@ -77,7 +77,7 @@
                     @enderror
                 </div>
                 <!-- Public Holiday Code -->
-                <div class="mx-4 my-5 grid grid-rows-2">
+                <div class="mx-4 mt-5 grid grid-rows-3">
                     <label for="publicholidayhourlycode">Public Holiday Code</label>
                     <x-input type="text" name="publicholidayhourlycode" id="publicholidayhourlycode"
                         class="form-input rounded-md shadow-sm block w-full"
@@ -87,7 +87,7 @@
                     @enderror
                 </div>
                 <!-- Active Status -->
-                <div class="mx-4 my-5 grid grid-rows-2">
+                <div class="mx-4 mt-5 grid grid-rows-3">
                     <label for="active">Active Status</label>
                     <select name="active" id="active" class="form-select rounded-md shadow-sm block w-full">
                         <option value="1" {{ $activity->active === '1' ? 'selected' : '' }}>Active</option>
