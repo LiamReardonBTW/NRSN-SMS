@@ -87,7 +87,7 @@
                         <td class="text-xs text-white font-bold float-right py-2">
                             <div class="grid grid-cols-2">
                                 <!-- View Invoice Button -->
-                                <a href="{{ $invoice->pdf_path }}"
+                                <a href="{{ $invoice->pdf_path }}" target="_blank"
                                     class="inline-block px-2 m-1 py-1 bg-green-600 text-white rounded hover:bg-green-500">
                                     View Invoice
                                 </a>
@@ -224,7 +224,7 @@
                         <td class="text-xs text-white font-bold float-right py-2">
                             <div class="grid grid-cols-2">
                                 <!-- View Invoice Button -->
-                                <a href="{{ $invoice->pdf_path }}"
+                                <a href="{{ $invoice->pdf_path }}" target="_blank"
                                     class="inline-block px-2 m-1 py-1 bg-green-600 text-white rounded hover:bg-green-500">
                                     View Invoice
                                 </a>

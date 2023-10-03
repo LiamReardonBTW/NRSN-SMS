@@ -72,7 +72,7 @@
                             </td>
                             <td class="whitespace-nowrap text-sm text-white font-bold float-right py-3">
                                 <!-- Generate Invoice Button with Form -->
-                                <form action="{{ route('generate.client-invoice') }}" method="POST">
+                                <form action="{{ route('generate.client-invoice') }}" method="POST" target="_blank">
                                     @csrf
                                     <input type="hidden" name="client_id" value="{{ $client->id }}">
                                     <div class="text-black flex items-center grid-rows-2 grid">
@@ -140,8 +140,8 @@
                             </td>
                             <td class="whitespace-nowrap text-sm text-white font-bold float-right py-2">
                                 <div class="flex">
-                                    <!-- Download Invoice Button -->
-                                    <a href="{{ $invoice->pdf_path }}"
+                                    <!-- View Invoice Button -->
+                                    <a href="{{ $invoice->pdf_path }}" target="_blank"
                                         class="inline-block px-2 m-1 py-1 bg-green-600 text-white rounded hover:bg-green-500">
                                         View Invoice
                                     </a>
@@ -150,13 +150,31 @@
                                             action="{{ route('markInvoiceAsPaid', ['id' => $invoice->id]) }}">
                                             @csrf
                                             <button type="submit"
-                                                class="inline-block px-2 m-1 py-1 bg-red-600 text-white rounded hover:bg-red-500">
+                                                class="inline-block px-2 m-1 py-1 bg-blue-600 text-white rounded hover:bg-blue-500">
                                                 Mark as Paid
                                             </button>
                                         </form>
-                                    @else
-                                        <!-- Display 'Paid' if the invoice status is 'paid' -->
-                                        Paid
+                                    @elseif ($invoice->status === 'paid')
+                                        <form method="POST"
+                                            action="{{ route('unmarkInvoiceAsPaid', ['id' => $invoice->id]) }}">
+                                            @csrf
+                                            <button type="submit"
+                                                class="inline-block px-2 m-1 py-1 bg-orange-400 text-white rounded hover:bg-orange-300">
+                                                Unmark Paid
+                                            </button>
+                                        </form>
+                                    @endif
+                                </div>
+                                <div class="">
+                                    @if ($invoice->status === 'pending')
+                                        <form method="POST" action="{{ route('allinvoices.destroy', $invoice) }}">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit"
+                                                class="inline-block px-2 m-1 py-1 bg-red-600 text-white rounded hover:bg-red-500">Undo
+                                                Invoice
+                                            </button>
+                                        </form>
                                     @endif
                                 </div>
                             </td>
@@ -237,7 +255,7 @@
                             </td>
                             <td class="whitespace-nowrap text-sm text-white font-bold float-right py-3">
                                 <!-- Generate Invoice Button with Form -->
-                                <form action="{{ route('generate.worker-invoice') }}" method="POST">
+                                <form action="{{ route('generate.worker-invoice') }}" target="_blank" method="POST">
                                     @csrf
                                     <input type="hidden" name="worker_id" value="{{ $worker->id }}">
                                     <div class="text-black flex items-center grid-rows-2 grid">
@@ -305,8 +323,8 @@
                             </td>
                             <td class="whitespace-nowrap text-sm text-white font-bold float-right py-2">
                                 <div class="flex">
-                                    <!-- Download Invoice Button -->
-                                    <a href="{{ $invoice->pdf_path }}"
+                                    <!-- View Invoice Button -->
+                                    <a href="{{ $invoice->pdf_path }}" target="_blank"
                                         class="inline-block px-2 m-1 py-1 bg-green-600 text-white rounded hover:bg-green-500">
                                         View Invoice
                                     </a>
@@ -315,13 +333,31 @@
                                             action="{{ route('markInvoiceAsPaid', ['id' => $invoice->id]) }}">
                                             @csrf
                                             <button type="submit"
-                                                class="inline-block px-2 m-1 py-1 bg-red-600 text-white rounded hover:bg-red-500">
+                                                class="inline-block px-2 m-1 py-1 bg-blue-600 text-white rounded hover:bg-blue-500">
                                                 Mark as Paid
                                             </button>
                                         </form>
-                                    @else
-                                        <!-- Display 'Paid' if the invoice status is 'paid' -->
-                                        Paid
+                                    @elseif ($invoice->status === 'paid')
+                                        <form method="POST"
+                                            action="{{ route('unmarkInvoiceAsPaid', ['id' => $invoice->id]) }}">
+                                            @csrf
+                                            <button type="submit"
+                                                class="inline-block px-2 m-1 py-1 bg-orange-400 text-white rounded hover:bg-orange-300">
+                                                Unmark Paid
+                                            </button>
+                                        </form>
+                                    @endif
+                                </div>
+                                <div class="">
+                                    @if ($invoice->status === 'pending')
+                                        <form method="POST" action="{{ route('allinvoices.destroy', $invoice) }}">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit"
+                                                class="inline-block px-2 m-1 py-1 bg-red-600 text-white rounded hover:bg-red-500">Undo
+                                                Invoice
+                                            </button>
+                                        </form>
                                     @endif
                                 </div>
                             </td>
@@ -383,7 +419,6 @@
                             client_id: clientId
                         }),
                     })
-                    .then(response => response.blob())
                     .then(blob => {
                         // Create a temporary URL for the generated PDF
                         const url = window.URL.createObjectURL(blob);
@@ -415,7 +450,6 @@
                             worker_id: workerId
                         }),
                     })
-                    .then(response => response.blob())
                     .then(blob => {
                         // Create a temporary URL for the generated PDF
                         const url = window.URL.createObjectURL(blob);
