@@ -28,7 +28,7 @@
                     <!-- isflagged -->
                     <div class="mx-4 my-5 grid grid-rows-2">
                         <label for="isflagged">Flagged</label>
-                        <select type="boolean" name="isflagged" id="isflagged"
+                        <select disabled type="boolean" name="isflagged" id="isflagged"
                             class="form-select rounded-md shadow-sm block w-full">
                             <option value="1" {{ $myshift->isflagged === 1 ? 'selected' : '' }}>Yes</option>
                             <option value="0" {{ $myshift->isflagged === 0 ? 'selected' : '' }}>No</option>
