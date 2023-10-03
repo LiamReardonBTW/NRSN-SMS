@@ -33,12 +33,12 @@ class StoreShiftRequest extends FormRequest
             ],
             'submitted_by' => [
                 'required',
-                'string',
+                'int',
                 'max:255',
             ],
             'client_supported' => [
                 'required',
-                'string',
+                'int',
                 'max:255',
             ],
             'date' => [

@@ -22,15 +22,39 @@ class UpdateClientRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'first_name' => 'required|string|max:255',
-            'last_name' => 'required|string|max:255',
-            'email' => 'required|email|max:255',
-            'address' => 'required|string|max:255',
-            'active' => 'required|boolean',
+            'first_name' => [
+                'required',
+                'string',
+                'min:1',
+                'max:255',
+            ],
+            'last_name' => [
+                'required',
+                'string',
+                'min:1',
+                'max:255',
+            ],
+            'email' => [
+                'required',
+                'email',
+                'min:3',
+                'max:255',
+            ],
             'phone' => [
                 'required',
                 'string',
                 'regex:/^(?:\+?(61))? ?(?:\((?=.*\)))?(0?[2-57-8])\)? ?(\d\d(?:[- ](?=\d{3})|(?!\d\d[- ]?\d[- ]))\d\d[- ]?\d[- ]?\d{3})$/',
+                //https://regex101.com/r/dkFASs/6
+            ],
+            'address' => [
+                'required',
+                'string',
+                'min:5',
+                'max:255',
+            ],
+            'active' => [
+                'required',
+                'boolean',
             ],
 
             'supported_by' => 'nullable|array',
