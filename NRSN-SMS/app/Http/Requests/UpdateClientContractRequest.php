@@ -38,25 +38,13 @@ class UpdateClientContractRequest extends FormRequest
                 'required',
                 'numeric',
             ],
-            'weekdayhourlyrate' => [
-                'required',
-                'numeric',
-            ],
-            'saturdayhourlyrate' => [
-                'required',
-                'numeric',
-            ],
-            'sundayhourlyrate' => [
-                'required',
-                'numeric',
-            ],
-            'publicholidayhourlyrate' => [
-                'required',
-                'numeric',
-            ],
             'active' => [
                 'required',
                 'boolean',
+            ],
+            'km_rate' => [
+                'required',
+                'numeric',
             ],
             'activities' => 'nullable|array',
         ];

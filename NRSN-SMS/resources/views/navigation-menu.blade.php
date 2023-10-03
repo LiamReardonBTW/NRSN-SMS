@@ -49,6 +49,10 @@
                                     {{ __('My Shifts') }}
                                 </x-dropdown-link>
 
+                                <x-dropdown-link href="{{ route('myinvoices.index') }}">
+                                    {{ __('My Invoices') }}
+                                </x-dropdown-link>
+
 
 
                             </x-slot>
@@ -87,6 +91,10 @@
 
                                 <x-dropdown-link href="{{ route('manageworkers.index') }}">
                                     {{ __('Manage Workers') }}
+                                </x-dropdown-link>
+
+                                <x-dropdown-link href="{{ route('clientinvoices.index') }}">
+                                    {{ __('Client Invoices') }}
                                 </x-dropdown-link>
 
 
@@ -138,6 +146,18 @@
 
                                 <x-dropdown-link href="{{ route('activities.index') }}">
                                     {{ __('Activities') }}
+                                </x-dropdown-link>
+
+                                <x-dropdown-link href="{{ route('invoicing.index') }}">
+                                    {{ __('Invoicing') }}
+                                </x-dropdown-link>
+
+                                <x-dropdown-link href="{{ route('business-details.index') }}">
+                                    {{ __('Business Details') }}
+                                </x-dropdown-link>
+
+                                <x-dropdown-link href="{{ route('allinvoices.index') }}">
+                                    {{ __('All Invoices') }}
                                 </x-dropdown-link>
 
                             </x-slot>
@@ -238,7 +258,8 @@
                 <x-slot name="name">Worker</x-slot>
                 <x-slot name="children">
                     <a href="{{ route('myclients.index') }}">My Clients</a><br>
-                    <a href="{{ route('myshifts.index') }}">My Shifts</a>
+                    <a href="{{ route('myshifts.index') }}">My Shifts</a><br>
+                    <a href="{{ route('myinvoices.index') }}">My Invoices</a>
                 </x-slot>
             </x-responsive-nav-link-parent>
             @endif
@@ -250,7 +271,8 @@
                 <x-slot name="children">
                     <a href="{{ route('manageclients.index') }}">Manage Clients</a><br>
                     <a href="{{ route('manageshifts.index') }}">Manage Shifts</a><br>
-                    <a href="{{ route('manageworkers.index') }}">Manage Workers</a>
+                    <a href="{{ route('manageworkers.index') }}">Manage Workers</a><br>
+                    <a href="{{ route('clientinvoices.index') }}">Client Invoices</a>
                 </x-slot>
             </x-responsive-nav-link-parent>
             @endif
@@ -265,7 +287,10 @@
                     <a href="{{ route('allusers.index') }}">All Users</a><br>
                     <a href="{{ route('clientcontracts.index') }}">Client Contracts</a><br>
                     <a href="{{ route('usercontracts.index') }}">User Contracts</a><br>
-                    <a href="{{ route('activities.index') }}">Acttivities</a>
+                    <a href="{{ route('activities.index') }}">Activities</a><br>
+                    <a href="{{ route('invoicing.index') }}">Invoicing</a><br>
+                    <a href="{{ route('business-details.index') }}">Business Details</a><br>
+                    <a href="{{ route('allinvoices.index') }}">All Invoices</a><br>
                 </x-slot>
             </x-responsive-nav-link-parent>
             @endif

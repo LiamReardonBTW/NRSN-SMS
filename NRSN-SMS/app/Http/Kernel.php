@@ -67,5 +67,7 @@ class Kernel extends HttpKernel
         'isAdmin' => \App\Http\Middleware\AdminMiddleware::class,
         'isManager' => \App\Http\Middleware\ManagerMiddleware::class,
         'isWorker' => \App\Http\Middleware\WorkerMiddleware::class,
+        'clientinvoice.access' => \App\Http\Middleware\ClientInvoiceAccessControl::class,
+        'workerinvoice.access' => \App\Http\Middleware\WorkerInvoiceAccessControl::class,
     ];
 }

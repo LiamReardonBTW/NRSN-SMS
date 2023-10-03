@@ -23,19 +23,19 @@ class UpdateActivityRequest extends FormRequest
     {
         return [
             'activityname' => [
-                'required', 'string', 'max:255',
+                'required', 'string', 'min:5', 'max:255',
             ],
             'weekdayhourlycode' => [
-                'required', 'string', 'min:15', 'max:15',
+                'required', 'string', 'min:5', 'max:25',
             ],
             'saturdayhourlycode' => [
-                'required', 'string', 'min:15', 'max:15',
+                'required', 'string', 'min:5', 'max:25',
             ],
             'sundayhourlycode' => [
-                'required', 'string', 'min:15', 'max:15',
+                'required', 'string', 'min:5', 'max:25',
             ],
             'publicholidayhourlycode' => [
-                'required', 'string', 'min:15', 'max:15',
+                'required', 'string', 'min:5', 'max:25',
             ],
             'active' => [
                 'required', 'boolean',

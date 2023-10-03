@@ -19,7 +19,6 @@ class Client extends Model
         'phone',
         'email',
         'address',
-        'invoicing_codes',
         'added'
     ];
 
@@ -47,6 +46,21 @@ class Client extends Model
     public function clientContracts()
     {
         return $this->hasMany(ClientContract::class, 'client_id');
+    }
+
+    public function activityRates()
+    {
+        return $this->hasMany(ActivityRate::class);
+    }
+
+    public function activities()
+    {
+        return $this->hasManyThrough(Activity::class, ActivityRate::class, 'client_id', 'id', 'id', 'activity_id');
+    }
+
+    public function invoices()
+    {
+        return $this->morphMany(Invoice::class, 'recipient');
     }
 
 }

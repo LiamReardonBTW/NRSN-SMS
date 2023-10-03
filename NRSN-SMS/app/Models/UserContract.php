@@ -18,6 +18,7 @@ class UserContract extends Model
         'sundayhourlyrate',
         'publicholidayhourlyrate',
         'active',
+        'km_rate',
     ];
 
     protected $casts = [

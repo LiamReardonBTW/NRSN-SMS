@@ -15,16 +15,13 @@ class CreateClientContractsTable extends Migration
     {
         Schema::create('client_contracts', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('client_id')->constrained('clients'); // Assuming 'clients' is the table name for clients
+            $table->foreignId('client_id')->constrained('clients')->cascadeOnDelete();
             $table->dateTime('startdate');
             $table->dateTime('enddate')->nullable();
             $table->double('totalallocated');
             $table->double('balance');
-            $table->double('weekdayhourlyrate');
-            $table->double('saturdayhourlyrate');
-            $table->double('sundayhourlyrate');
-            $table->double('publicholidayhourlyrate');
             $table->boolean('active')->default(true);
+            $table->double('km_rate');
             $table->timestamps();
         });
     }

@@ -41,34 +41,6 @@
                         </div>
                     </th>
 
-                    <!-- Weekday Hourly Rate Table Header -->
-                    <th scope="col" class="px-2 py-1 border-r-2 border-blue-500 border-b-2 ">
-                        <div class="flex items-center">
-                            Weekday Hourly Rate
-                        </div>
-                    </th>
-
-                    <!-- Saturday Hourly Rate Header -->
-                    <th scope="col" class="px-2 py-1 border-r-2 border-blue-500 border-b-2 ">
-                        <div class="flex items-center">
-                            Saturday Hourly Rate
-                        </div>
-                    </th>
-
-                    <!-- Sunday Hourly Rate Table Header -->
-                    <th scope="col" class="px-2 py-1 border-r-2 border-blue-500 border-b-2 ">
-                        <div class="flex items-center">
-                            Sunday Hourly Rate
-                        </div>
-                    </th>
-
-                    <!-- Public Holiday Hourly Rate Codes Table Header -->
-                    <th scope="col" class="px-2 py-1 border-r-2 border-blue-500 border-b-2 ">
-                        <div class="flex items-center">
-                            Public Holiday Hourly Rate
-                        </div>
-                    </th>
-
                     <!-- Active Table Header -->
                     <th scope="col" class="px-2 py-1 border-r-2 border-blue-500 border-b-2 ">
                         <div class="flex items-center">
@@ -121,18 +93,6 @@
                     </td>
                     <td scope="row" class="px-1 py-1">
                         ${{ $contract->balance }}
-                    </td>
-                    <td scope="row" class="px-1 py-1">
-                        ${{ $contract->weekdayhourlyrate }}
-                    </td>
-                    <td scope="row" class="px-1 py-1">
-                        ${{ $contract->saturdayhourlyrate }}
-                    </td>
-                    <td scope="row" class="px-1 py-1">
-                        ${{ $contract->sundayhourlyrate }}
-                    </td>
-                    <td scope="row" class="px-1 py-1">
-                        ${{ $contract->publicholidayhourlyrate }}
                     </td>
                     <td scope="row" class="px-1 py-1 text-center">
                         {{ $contract->active ? 'Active' : 'Inactive' }}

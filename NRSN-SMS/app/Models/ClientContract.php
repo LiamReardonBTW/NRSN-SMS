@@ -15,11 +15,8 @@ class ClientContract extends Model
         'enddate',
         'totalallocated',
         'balance',
-        'weekdayhourlyrate',
-        'saturdayhourlyrate',
-        'sundayhourlyrate',
-        'publicholidayhourlyrate',
         'active',
+        'km_rate',
     ];
 
     protected $casts = [
@@ -30,11 +27,6 @@ class ClientContract extends Model
     public function client()
     {
         return $this->belongsTo(Client::class, 'client_id');
-    }
-
-    public function activities()
-    {
-        return $this->belongsToMany(Activity::class, 'client_contract_activity');
     }
 
 }

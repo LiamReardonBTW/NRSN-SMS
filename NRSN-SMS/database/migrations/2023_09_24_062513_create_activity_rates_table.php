@@ -4,20 +4,25 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration {
+return new class extends Migration
+{
     /**
      * Run the migrations.
      */
     public function up(): void
     {
-        Schema::create('client_contract_activity', function (Blueprint $table) {
+        Schema::create('activity_rates', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('client_contract_id');
             $table->unsignedBigInteger('activity_id');
+            $table->unsignedBigInteger('client_id');
+            $table->double('weekdayhourlyrate');
+            $table->double('saturdayhourlyrate');
+            $table->double('sundayhourlyrate');
+            $table->double('publicholidayhourlyrate');
             $table->timestamps();
 
-            $table->foreign('client_contract_id')->references('id')->on('client_contracts')->onDelete('cascade');
             $table->foreign('activity_id')->references('id')->on('activities')->onDelete('cascade');
+            $table->foreign('client_id')->references('id')->on('clients')->onDelete('cascade');
         });
     }
 
@@ -26,6 +31,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('client_contract_activity');
+        Schema::dropIfExists('activity_rates');
     }
 };

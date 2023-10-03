@@ -98,4 +98,24 @@ class User extends Authenticatable
         return $this->hasMany(UserContract::class, 'user_id');
     }
 
+    public function invoices()
+    {
+        return $this->morphMany(Invoice::class, 'recipient');
+    }
+
+    public function isAdmin()
+    {
+        return $this->role === 0;
+    }
+
+    public function isManager()
+    {
+        return $this->role === 1;
+    }
+
+    public function isWorker()
+    {
+        return $this->role === 2;
+    }
+
 }

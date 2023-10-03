@@ -22,41 +22,50 @@ class UpdateShiftRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'invoice' => [
-                'nullable', 'string',
-            ],
             'notes' => [
-                'nullable', 'string', 'max:255',
+                'nullable',
+                'string',
+                'max:255',
             ],
             'submitted_by' => [
-                'required', 'string', 'max:255',
+                'required',
+                'int',
+                'max:255',
             ],
             'client_supported' => [
-                'required', 'string', 'max:255',
+                'required',
+                'int',
+                'max:255',
             ],
             'date' => [
-                'required', 'date',
+                'required',
+                'date',
             ],
             'expenses' => [
                 'numeric',
+                'nullable',
             ],
             'km' => [
                 'numeric',
+                'nullable',
             ],
             'hours' => [
-                'required', 'numeric', 'min:0.25', 'max:24',
+                'required',
+                'numeric',
+                'min:0.25',
+                'max:24',
             ],
             'isflagged' => [
-                'nullable', 'boolean',
-            ],
-            'isinvoiced' => [
-                'nullable', 'boolean',
+                'nullable',
+                'boolean',
             ],
             'activity_id' => [
-                'required', 'int',
+                'required',
+                'int',
             ],
             'is_public_holiday' => [
-                'nullable', 'boolean',
+                'nullable',
+                'boolean',
             ],
             'approved' => 'sometimes|boolean',
             'paid' => 'sometimes|boolean',

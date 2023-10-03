@@ -15,7 +15,6 @@ class Shift extends Model
         'submitted_by',
         'client_supported',
         'isflagged',
-        'isinvoiced',
         'date',
         'expenses',
         'km',
@@ -24,6 +23,10 @@ class Shift extends Model
         'approved',
         'paid',
         'is_public_holiday',
+    ];
+
+    protected $casts = [
+        'date' => 'datetime'
     ];
 
     public function submittedByUser()
@@ -39,6 +42,16 @@ class Shift extends Model
     public function activity()
     {
         return $this->belongsTo(Activity::class);
+    }
+
+    public function clientInvoice()
+    {
+        return $this->belongsTo(Invoice::class, 'clientinvoice_id');
+    }
+
+    public function workerInvoice()
+    {
+        return $this->belongsTo(Invoice::class, 'workerinvoice_id');
     }
 
 }

@@ -56,6 +56,20 @@ return [
             'throw' => false,
         ],
 
+        'client_invoices' => [
+            'driver' => 'local',
+            'root' => storage_path('invoices/clientinvoices'),
+            'url' => env('APP_URL').'/storage/invoices/clientinvoices', // Add the URL here
+            'visibility' => 'public',
+        ],
+
+        'worker_invoices' => [
+            'driver' => 'local',
+            'root' => storage_path('invoices/workerinvoices'),
+            'url' => env('APP_URL').'/storage/invoices/workerinvoices', // Add the URL here
+            'visibility' => 'public',
+        ],
+
     ],
 
     /*

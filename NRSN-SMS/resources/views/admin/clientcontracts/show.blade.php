@@ -47,33 +47,12 @@
                 <x-input disabled type="numeric" name="balance" id="balance"
                     class="form-input rounded-md shadow-sm block w-full" value="${{ $clientcontract->balance }}" />
             </div>
-            <!-- Weekday Hourly Rate -->
+
+            <!-- K/m Rate -->
             <div class="mx-4 my-5 grid grid-rows-2">
-                <label for="weekdayhourlyrate">Weekday Hourly Rate</label>
-                <x-input disabled type="numeric" name="weekdayhourlyrate" id="weekdayhourlyrate"
-                    class="form-input rounded-md shadow-sm block w-full"
-                    value="${{ $clientcontract->weekdayhourlyrate }}" />
-            </div>
-            <!-- Saturday Hourly Rate -->
-            <div class="mx-4 my-5 grid grid-rows-2">
-                <label for="saturdayhourlyrate">Saturday Hourly Rate</label>
-                <x-input disabled type="numeric" name="saturdayhourlyrate" id="saturdayhourlyrate"
-                    class="form-input rounded-md shadow-sm block w-full"
-                    value="${{ $clientcontract->saturdayhourlyrate }}" />
-            </div>
-            <!-- Sunday Hourly Rate -->
-            <div class="mx-4 my-5 grid grid-rows-2">
-                <label for="sundayhourlyrate">Sunday Hourly Rate</label>
-                <x-input disabled type="numeric" name="sundayhourlyrate" id="sundayhourlyrate"
-                    class="form-input rounded-md shadow-sm block w-full"
-                    value="${{ $clientcontract->sundayhourlyrate }}" />
-            </div>
-            <!-- Public Holiday Hourly Rate -->
-            <div class="mx-4 my-5 grid grid-rows-2">
-                <label for="publicholidayhourlyrate">Public Holiday Hourly Rate</label>
-                <x-input disabled type="numeric" name="publicholidayhourlyrate" id="publicholidayhourlyrate"
-                    class="form-input rounded-md shadow-sm block w-full"
-                    value="${{ $clientcontract->publicholidayhourlyrate }}" />
+                <label for="km_rate">Km Rate</label>
+                <x-input disabled type="numeric" name="km_rate" id="km_rate"
+                    class="form-input rounded-md shadow-sm block w-full" value="${{ $clientcontract->km_rate }}" />
             </div>
 
             <!-- Active Status -->
@@ -87,26 +66,9 @@
 
         </div>
 
-        <!-- Clients Activities -->
-        <div class="text-2xl font-medium overflow-hidden px-6 lg:px-8 mx-4 my-5">
-            <h2 class="text-xl font-semibold mb-2">Activities</h2>
-            <div class="rounded-md bg-white shadow-md p-4 max-h-40 overflow-y-auto text-sm">
-                <!-- Add text-sm class for smaller text -->
-                <ul>
-                    @if ($clientcontract->activities->isEmpty())
-                        <li>Currently no activities.</li>
-                    @else
-                        @foreach ($clientcontract->activities as $activity)
-                            <li>{{ $activity->activityname }}</li>
-                        @endforeach
-                    @endif
-                </ul>
-            </div>
-        </div>
-
         <!-- Page Navigation Buttons -->
         <div
-            class="flex items-center justify-start pb-6 py-3 text-right sm:px-6 grid grid-cols-1 md:grid-cols-3 lg:gap-8 px-6 lg:px-8 py-2">
+            class="items-center grid grid-cols-1 gap-4 justify-start pb-6 py-3 text-right sm:px-6 grid grid-cols-1 md:grid-cols-3 lg:gap-8 px-6 lg:px-8 py-2">
             <!-- Back to manage clients index page -->
             <a href="{{ route('clientcontracts.index') }}"
                 class="inline-flex items-center mx-4 px-6 py-4 bg-red-700 border border-transparent rounded-md font-semibold text-base text-white uppercase tracking-widest hover:bg-red-500 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">

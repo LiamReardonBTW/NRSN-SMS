@@ -51,6 +51,30 @@
                     View My Shifts
                 @endslot
             @endcomponent
+
+            @component('components.dashboardcard')
+            @slot('requiredrole')
+                worker
+            @endslot
+            @slot('route')
+                {{ route('myinvoices.index') }}
+            @endslot
+            @slot('title')
+                <svg class="inline-block mx-auto h-6 w-6 text-black" width="24" height="24" viewBox="0 0 24 24"
+                    stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <path stroke="none" d="M0 0h24v24H0z" />
+                    <circle cx="7" cy="5" r="2" />
+                    <path d="M5 22v-5l-1-1v-4a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v4l-1 1v5" />
+                    <circle cx="17" cy="5" r="2" />
+                    <path d="M15 22v-4h-2l2 -6a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1l2 6h-2v4" />
+                </svg><br>
+                My Invoices
+            @endslot
+            @slot('description')
+                View My Invoices
+            @endslot
+        @endcomponent
+
         </div>
     @endif
 
@@ -124,6 +148,29 @@
                     View All Workers
                 @endslot
             @endcomponent
+
+            @component('components.dashboardcard')
+                @slot('requiredrole')
+                    manager
+                @endslot
+                @slot('route')
+                    {{ route('clientinvoices.index') }}
+                @endslot
+                @slot('title')
+                    <svg class="inline-block mx-auto h-6 w-6 text-black" width="24" height="24" viewBox="0 0 24 24"
+                        stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" />
+                        <path d="M4 19h5v-1a7.35 7.35 0 1 1 6 0v1h5" />
+                    </svg>
+                    <br>
+                    Client Invoices
+                @endslot
+                @slot('description')
+                    View Client Invoices
+                @endslot
+            @endcomponent
+
+
         </div>
     @endif
 
@@ -269,6 +316,72 @@
                 @endslot
                 @slot('description')
                     View All Activities
+                @endslot
+            @endcomponent
+
+            <!-- Admin Invoices Card -->
+            @component('components.dashboardcard')
+                @slot('requiredrole')
+                    admin
+                @endslot
+                @slot('route')
+                    {{ route('invoicing.index') }}
+                @endslot
+                @slot('title')
+                    <svg class="inline-block mx-auto h-6 w-6 text-black" width="24" height="24" viewBox="0 0 24 24"
+                        stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2" />
+                    </svg><br>
+                    Invoicing
+                @endslot
+                @slot('description')
+                    Generate & Manage Invoices
+                @endslot
+            @endcomponent
+
+            <!-- Admin Invoices Card -->
+            @component('components.dashboardcard')
+                @slot('requiredrole')
+                    admin
+                @endslot
+                @slot('route')
+                    {{ route('business-details.index') }}
+                @endslot
+                @slot('title')
+                    <svg class="inline-block mx-auto h-6 w-6 text-black" width="24" height="24" viewBox="0 0 24 24"
+                        stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2" />
+                    </svg><br>
+                    Business Details
+                @endslot
+                @slot('description')
+                    View Business Details
+                @endslot
+            @endcomponent
+
+            <!-- Admin All Invoices Card -->
+            @component('components.dashboardcard')
+                @slot('requiredrole')
+                    admin
+                @endslot
+                @slot('route')
+                    {{ route('allinvoices.index') }}
+                @endslot
+                @slot('title')
+                    <svg class="inline-block mx-auto h-6 w-6 text-black" width="24" height="24" viewBox="0 0 24 24"
+                        stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2" />
+                    </svg><br>
+                    All Invoices
+                @endslot
+                @slot('description')
+                    View All Invoices
                 @endslot
             @endcomponent
 

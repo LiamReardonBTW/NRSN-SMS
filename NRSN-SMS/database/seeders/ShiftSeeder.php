@@ -15,12 +15,10 @@ class ShiftSeeder extends Seeder
     {
         DB::table('shifts')->insert([
             [
-                'invoice' => '',
                 'notes' => 'It was a good day',
                 'submitted_by' => '1',
                 'client_supported' => '1',
                 'isflagged' => '0',
-                'isinvoiced' => '0',
                 'date' => '2023-08-07',
                 'expenses' => '32.56',
                 'km' => '16.2',
@@ -32,12 +30,10 @@ class ShiftSeeder extends Seeder
             ],
 
             [
-                'invoice' => '',
                 'notes' => 'It was a good day',
                 'submitted_by' => '2',
                 'client_supported' => '2',
                 'isflagged' => '0',
-                'isinvoiced' => '0',
                 'date' => '2023-08-07',
                 'expenses' => '0',
                 'km' => '5.2',
@@ -49,12 +45,10 @@ class ShiftSeeder extends Seeder
             ],
 
             [
-                'invoice' => '',
                 'notes' => 'Another busy day',
                 'submitted_by' => '1',
                 'client_supported' => '3',
                 'isflagged' => '1',
-                'isinvoiced' => '0',
                 'date' => '2023-08-08',
                 'expenses' => '12.22',
                 'km' => '8.12',
@@ -66,12 +60,10 @@ class ShiftSeeder extends Seeder
             ],
 
             [
-                'invoice' => '',
                 'notes' => 'Meeting with client',
                 'submitted_by' => '5',
                 'client_supported' => '2',
                 'isflagged' => '0',
-                'isinvoiced' => '0',
                 'date' => '2023-08-09',
                 'expenses' => '20.2',
                 'km' => '10.9',
@@ -83,12 +75,10 @@ class ShiftSeeder extends Seeder
             ],
 
             [
-                'invoice' => '',
                 'notes' => 'Long shift',
                 'submitted_by' => '2',
                 'client_supported' => '6',
                 'isflagged' => '0',
-                'isinvoiced' => '1',
                 'date' => '2023-08-10',
                 'expenses' => '50',
                 'km' => '20.9',
@@ -100,12 +90,10 @@ class ShiftSeeder extends Seeder
             ],
 
             [
-                'invoice' => '',
                 'notes' => 'Visiting multiple locations',
                 'submitted_by' => '5',
                 'client_supported' => '4',
                 'isflagged' => '0',
-                'isinvoiced' => '0',
                 'date' => '2023-08-11',
                 'expenses' => '45.25',
                 'km' => '25',
@@ -117,12 +105,10 @@ class ShiftSeeder extends Seeder
             ],
 
             [
-                'invoice' => '',
                 'notes' => 'It was a good day',
                 'submitted_by' => '1',
                 'client_supported' => '1',
                 'isflagged' => '0',
-                'isinvoiced' => '0',
                 'date' => '2023-08-07',
                 'expenses' => '32.56',
                 'km' => '16.2',
@@ -134,12 +120,10 @@ class ShiftSeeder extends Seeder
             ],
 
             [
-                'invoice' => '',
                 'notes' => 'It was a good day',
                 'submitted_by' => '2',
                 'client_supported' => '2',
                 'isflagged' => '0',
-                'isinvoiced' => '0',
                 'date' => '2023-08-07',
                 'expenses' => '0',
                 'km' => '5.2',
@@ -151,12 +135,10 @@ class ShiftSeeder extends Seeder
             ],
 
             [
-                'invoice' => '',
                 'notes' => 'Another busy day',
                 'submitted_by' => '1',
                 'client_supported' => '3',
                 'isflagged' => '1',
-                'isinvoiced' => '0',
                 'date' => '2023-08-08',
                 'expenses' => '12.22',
                 'km' => '8.12',
@@ -168,12 +150,10 @@ class ShiftSeeder extends Seeder
             ],
 
             [
-                'invoice' => '',
                 'notes' => 'Meeting with client',
                 'submitted_by' => '5',
                 'client_supported' => '2',
                 'isflagged' => '0',
-                'isinvoiced' => '0',
                 'date' => '2023-08-09',
                 'expenses' => '20.2',
                 'km' => '10.9',
@@ -185,12 +165,10 @@ class ShiftSeeder extends Seeder
             ],
 
             [
-                'invoice' => '',
                 'notes' => 'Long shift',
                 'submitted_by' => '2',
                 'client_supported' => '6',
                 'isflagged' => '0',
-                'isinvoiced' => '1',
                 'date' => '2023-08-10',
                 'expenses' => '50',
                 'km' => '20.9',
@@ -202,12 +180,10 @@ class ShiftSeeder extends Seeder
             ],
 
             [
-                'invoice' => '',
                 'notes' => 'Visiting multiple locations',
                 'submitted_by' => '5',
                 'client_supported' => '4',
                 'isflagged' => '0',
-                'isinvoiced' => '0',
                 'date' => '2023-08-11',
                 'expenses' => '45.25',
                 'km' => '25',
@@ -219,12 +195,10 @@ class ShiftSeeder extends Seeder
             ],
 
             [
-                'invoice' => '',
                 'notes' => 'It was a good day',
                 'submitted_by' => '1',
                 'client_supported' => '1',
                 'isflagged' => '0',
-                'isinvoiced' => '0',
                 'date' => '2023-08-07',
                 'expenses' => '32.56',
                 'km' => '16.2',
@@ -236,12 +210,10 @@ class ShiftSeeder extends Seeder
             ],
 
             [
-                'invoice' => '',
                 'notes' => 'It was a good day',
                 'submitted_by' => '2',
                 'client_supported' => '2',
                 'isflagged' => '0',
-                'isinvoiced' => '0',
                 'date' => '2023-08-07',
                 'expenses' => '0',
                 'km' => '5.2',
@@ -253,12 +225,10 @@ class ShiftSeeder extends Seeder
             ],
 
             [
-                'invoice' => '',
                 'notes' => 'Another busy day',
                 'submitted_by' => '1',
                 'client_supported' => '3',
                 'isflagged' => '1',
-                'isinvoiced' => '0',
                 'date' => '2023-08-08',
                 'expenses' => '12.22',
                 'km' => '8.12',
@@ -270,12 +240,10 @@ class ShiftSeeder extends Seeder
             ],
 
             [
-                'invoice' => '',
                 'notes' => 'Meeting with client',
                 'submitted_by' => '5',
                 'client_supported' => '2',
                 'isflagged' => '0',
-                'isinvoiced' => '0',
                 'date' => '2023-08-09',
                 'expenses' => '20.2',
                 'km' => '10.9',
@@ -287,12 +255,10 @@ class ShiftSeeder extends Seeder
             ],
 
             [
-                'invoice' => '',
                 'notes' => 'Long shift',
                 'submitted_by' => '2',
                 'client_supported' => '6',
                 'isflagged' => '0',
-                'isinvoiced' => '1',
                 'date' => '2023-08-10',
                 'expenses' => '50',
                 'km' => '20.9',
@@ -304,12 +270,10 @@ class ShiftSeeder extends Seeder
             ],
 
             [
-                'invoice' => '',
                 'notes' => 'Visiting multiple locations',
                 'submitted_by' => '5',
                 'client_supported' => '4',
                 'isflagged' => '0',
-                'isinvoiced' => '0',
                 'date' => '2023-08-11',
                 'expenses' => '45.25',
                 'km' => '25',

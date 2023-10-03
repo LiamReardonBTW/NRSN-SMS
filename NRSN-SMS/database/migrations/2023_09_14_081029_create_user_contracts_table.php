@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('user_contracts', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained('users');
+            $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
             $table->dateTime('startdate');
             $table->dateTime('enddate')->nullable();
             $table->double('weekdayhourlyrate');
@@ -21,6 +21,7 @@ return new class extends Migration
             $table->double('sundayhourlyrate');
             $table->double('publicholidayhourlyrate');
             $table->boolean('active')->default(true);
+            $table->double('km_rate');
             $table->timestamps();
         });
     }

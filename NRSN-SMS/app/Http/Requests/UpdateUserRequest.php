@@ -23,28 +23,56 @@ class UpdateUserRequest extends FormRequest
     {
         return [
             'first_name' => [
-                'required', 'string', 'max:255',
+                'required',
+                'string',
+                'min:1',
+                'max:255',
             ],
             'last_name' => [
-                'required', 'string', 'max:255',
+                'required',
+                'string',
+                'min:1',
+                'max:255',
             ],
             'email' => [
-                'required', 'email', 'max:255',
+                'required',
+                'email',
+                'min:1',
+                'max:255',
+            ],
+            'password' => [
+                'required',
+                'string',
+                'min:8',
+                'max:255',
             ],
             'phone' => [
-                'required', 'string', 'regex:/^(?:\+?(61))? ?(?:\((?=.*\)))?(0?[2-57-8])\)? ?(\d\d(?:[- ](?=\d{3})|(?!\d\d[- ]?\d[- ]))\d\d[- ]?\d[- ]?\d{3})$/', //https://regex101.com/r/dkFASs/6
+                'required',
+                'string',
+                'regex:/^(?:\+?(61))? ?(?:\((?=.*\)))?(0?[2-57-8])\)? ?(\d\d(?:[- ](?=\d{3})|(?!\d\d[- ]?\d[- ]))\d\d[- ]?\d[- ]?\d{3})$/',
+                //https://regex101.com/r/dkFASs/6
             ],
             'address' => [
-                'nullable', 'string', 'max:255',
+                'nullable',
+                'string',
+                'min:5',
+                'max:255',
             ],
             'tfn' => [
-                'nullable', 'min:8', 'max:9', //All individuals receive a nine digit TFN and businesses may have either an eight or nine digit TFN.
+                'nullable',
+                'min:8',
+                'max:9',
+                //All individuals receive a nine digit TFN and businesses may have either an eight or nine digit TFN.
             ],
             'abn' => [
-                'nullable', 'string', 'regex:/^(\d *?){11}$/', //Matches 11 digits with zero or more spaces after each digit.
+                'nullable',
+                'string',
+                'regex:/^(\d *?){11}$/',
+                //Matches 11 digits with zero or more spaces after each digit.
             ],
             'role' => [
-                'required', 'string',
+                'required',
+                'string',
             ],
             'supported_clients' => 'nullable|array',
             'managed_clients' => 'nullable|array',

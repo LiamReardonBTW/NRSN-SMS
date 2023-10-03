@@ -18,20 +18,20 @@
                     <div
                         class="text-2xl font-medium bg-blue-300 overflow-hidden grid grid-cols-1 md:grid-cols-3  px-6 lg:px-8">
                         <!-- User ID -->
-                        <div class="mx-4 my-5 grid grid-rows-2">
+                        <div class="mx-4 mt-5 grid grid-rows-3">
                             <label for="user_id">User ID</label>
                             <x-input disabled type="int" name="user_id" id="user_id"
                                 class="form-input rounded-md shadow-sm block w-full" value="{{ $user->id }}" />
                         </div>
                         <!-- Start Date -->
-                        <div class="mx-4 my-5 grid grid-rows-2">
+                        <div class="mx-4 mt-5 grid grid-rows-3">
                             <label for="startdate">Contract Start Date</label>
                             <x-input disabled type="date" name="startdate" id="startdate"
                                 class="form-input rounded-md shadow-sm block w-full"
                                 value="{{ \Carbon\Carbon::parse($contract->startdate)->format('Y-m-d') }}" />
                         </div>
                         <!-- Contract End Date -->
-                        <div class="mx-4 my-5 grid grid-rows-2">
+                        <div class="mx-4 mt-5 grid grid-rows-3">
                             <label for="enddate">Contract End Date</label>
                             <x-input disabled type="date" name="enddate" id="enddate"
                                 class="form-input rounded-md shadow-sm block w-full"
@@ -41,28 +41,28 @@
                     <div
                         class="text-2xl font-medium bg-blue-200 overflow-hidden grid grid-cols-1 md:grid-cols-3  px-6 lg:px-8">
                         <!-- Weekday Hourly Rate -->
-                        <div class="mx-4 my-5 grid grid-rows-2">
+                        <div class="mx-4 mt-5 grid grid-rows-3">
                             <label for="weekdayhourlyrate">Weekday Hourly Rate</label>
                             <x-input disabled type="numeric" name="weekdayhourlyrate" id="weekdayhourlyrate"
                                 class="form-input rounded-md shadow-sm block w-full"
                                 value="${{ $contract->weekdayhourlyrate }}" />
                         </div>
                         <!-- Saturday Hourly Rate -->
-                        <div class="mx-4 my-5 grid grid-rows-2">
+                        <div class="mx-4 mt-5 grid grid-rows-3">
                             <label for="saturdayhourlyrate">Saturday Hourly Rate</label>
                             <x-input disabled type="numeric" name="saturdayhourlyrate" id="saturdayhourlyrate"
                                 class="form-input rounded-md shadow-sm block w-full"
                                 value="${{ $contract->saturdayhourlyrate }}" />
                         </div>
                         <!-- Sunday Hourly Rate -->
-                        <div class="mx-4 my-5 grid grid-rows-2">
+                        <div class="mx-4 mt-5 grid grid-rows-3">
                             <label for="sundayhourlyrate">Sunday Hourly Rate</label>
                             <x-input disabled type="numeric" name="sundayhourlyrate" id="sundayhourlyrate"
                                 class="form-input rounded-md shadow-sm block w-full"
                                 value="${{ $contract->sundayhourlyrate }}" />
                         </div>
                         <!-- Public Holiday Hourly Rate -->
-                        <div class="mx-4 my-5 grid grid-rows-2">
+                        <div class="mx-4 mt-5 grid grid-rows-3">
                             <label for="publicholidayhourlyrate">Public Holiday Hourly Rate</label>
                             <x-input disabled type="numeric" name="publicholidayhourlyrate" id="publicholidayhourlyrate"
                                 class="form-input rounded-md shadow-sm block w-full"

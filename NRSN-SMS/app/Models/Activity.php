@@ -19,9 +19,9 @@ class Activity extends Model
         'active',
     ];
 
-    public function clientContracts()
+    public function clients()
     {
-        return $this->belongsToMany(ClientContract::class, 'client_contract_activity');
+        return $this->belongsToMany(Client::class, 'activity_rates');
     }
 
     public function shifts()

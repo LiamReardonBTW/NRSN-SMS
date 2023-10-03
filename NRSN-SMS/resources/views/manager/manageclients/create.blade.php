@@ -16,7 +16,7 @@
             <div class="text-2xl font-medium  overflow-hidden grid grid-cols-1 md:grid-cols-3  px-6 lg:px-8">
 
                 <!-- First Name -->
-                <div class="mx-4 my-2">
+                <div class="mx-4 mt-5 grid grid-rows-3">
                     <label for="first_name">First
                         Name</label>
                     <x-input type="text" name="first_name" id="first_name"
@@ -27,7 +27,7 @@
                 </div>
 
                 <!-- Last Name -->
-                <div class="mx-4 my-2">
+                <div class="mx-4 mt-5 grid grid-rows-3">
                     <label for="last_name">Last Name</label>
                     <x-input type="text" name="last_name" id="last_name"
                         class="form-input rounded-md shadow-sm block w-full" value="{{ old('last_name', '') }}" />
@@ -37,7 +37,7 @@
                 </div>
 
                 <!-- Phone # -->
-                <div class="mx-4 my-2">
+                <div class="mx-4 mt-5 grid grid-rows-3">
                     <label for="phone">Phone #</label>
                     <x-input type="string" name="phone" id="phone"
                         class="form-input rounded-md shadow-sm block w-full" value="{{ old('phone', '') }}" />
@@ -47,7 +47,7 @@
                 </div>
 
                 <!-- Email -->
-                <div class="mx-4 my-2">
+                <div class="mx-4 mt-5 grid grid-rows-3">
                     <label for="email">Email</label>
                     <x-input type="email" name="email" id="email"
                         class="form-input rounded-md shadow-sm block w-full" value="{{ old('email', '') }}" />
@@ -57,7 +57,7 @@
                 </div>
 
                 <!-- Address -->
-                <div class="mx-4 my-2">
+                <div class="mx-4 mt-5 grid grid-rows-3">
                     <label for="address">Address</label>
                     <x-input type="text" name="address" id="address"
                         class="form-input rounded-md shadow-sm block w-full" value="{{ old('address', '') }}" />
@@ -66,41 +66,32 @@
                     @enderror
                 </div>
 
-                <!-- Invoicing Codes -->
-                <div class="mx-4 my-2">
-                    <label for="invoicing_codes">Invoicing
-                        Codes</label>
-                    <x-input type="text" name="invoicing_codes" id="invoicing_codes"
-                        class="form-input rounded-md shadow-sm block w-full"
-                        value="{{ old('invoicing_codes', '') }}" />
-                    @error('invoicing_codes')
-                        <p class="text-sm text-red-600">{{ $message }}</p>
-                    @enderror
-                </div>
-
                 <!-- Active Status -->
-                <div class="mx-4 my-5">
+ <div class="mx-4 mt-5 grid grid-rows-3">
                     <label for="active">Active Status</label>
                     <select name="active" id="active" class="form-select rounded-md shadow-sm block w-full">
                         <option value="1" selected>Active</option>
                         <option value="0">Inactive</option>
                     </select>
+                    @error('active')
+                        <p class="text-sm text-red-600">{{ $message }}</p>
+                    @enderror
                 </div>
 
             </div><!-- Close Editable Information -->
 
             <!-- Page Navigation Buttons  -->
             <div
-                class="flex items-center justify-start pb-6 py-3 text-right sm:px-6 grid grid-cols-1 md:grid-cols-3 lg:gap-8 px-6 lg:px-8 py-2">
-                <!-- Back to Manage Clients index page -->
+                class="items-center grid grid-cols-1 gap-4 justify-start pb-6 py-3 text-right sm:px-6 grid grid-cols-1 md:grid-cols-3 lg:gap-8 px-6 lg:px-8 py-2">
+                <!-- Back to My Shifts page -->
                 <a href="{{ route('manageclients.index') }}"
                     class="inline-flex items-center mx-4 px-6 py-4 bg-red-700 border border-transparent rounded-md font-semibold text-base text-white uppercase tracking-widest hover:bg-red-500 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">
                     Back
                 </a>
-                <!-- Form Submit add client -->
+                <!-- Form Submit add shift -->
                 <button
-                    class="inline-flex items-center mx-4 px-6 py-4 bg-green-700 border border-transparent rounded-md font-semibold text-base text-white uppercase tracking-widest hover:bg-green-500 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">
-                    Add Client
+                    class="inline-flex items-center mx-4 px-6 py-4 bg-green-800 border border-transparent rounded-md font-semibold text-base text-white uppercase tracking-widest hover:bg-green-500 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">
+                    Add Shift
                 </button>
             </div>
         </form>
