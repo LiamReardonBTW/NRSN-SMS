@@ -345,7 +345,7 @@ class InvoicingController extends Controller
 
             $item = (new CustomInvoiceItem())
                 ->title("$activity->activityname: $activity_code")
-                ->description("$dayofshift $public_holiday_text - Km: " . ($shift->km ?? 0) . "- Expenses: " . ($shift->expenses ?? 0))
+                ->description("$dayofshift $public_holiday_text - Hours: ".($shift->hours)." - Km: " . ($shift->km ?? 0) . " - Expenses: " . ($shift->expenses ?? 0))
                 ->quantity($totalQuantity)
                 ->setDateOfShift($dateofshift)
                 ->pricePerUnit($hourlyRate);
@@ -474,11 +474,10 @@ class InvoicingController extends Controller
                 ->first();
             $dayofshift = $shift->date->format('l');
             $dateofshift = $shift->date->format('d/m/y');
-            $public_holiday_text = ""; //Default no text
 
             if ($shift->is_public_holiday) {
                 $hourlyRate = $workerrates->publicholidayhourlyrate;
-                $public_holiday_text = "- Public Holiday";
+                $public_holiday_text = " - Public Holiday";
             } else {
                 if ($dayofshift === 'Saturday') {
                     $hourlyRate = $workerrates->saturdayhourlyrate;
@@ -493,23 +492,20 @@ class InvoicingController extends Controller
             $kmRate = $workerrates->km_rate;
             $kmAmount = $shift->km * $kmRate;
 
-            // Calculate kmHours (rounded up to the nearest 15 minutes)
-            $kmHours = ceil(($kmAmount / $hourlyRate) / 0.25) * 0.25;
-
             // Calculate total amount for expenses
             $expensesAmount = $shift->expenses;
-            $expensesHours = ceil(($expensesAmount / $hourlyRate) / 0.25) * 0.25;
 
 
             // Calculate the total quantity (hours + kilometers + expenses)
-            $totalQuantity = $shift->hours + $kmHours + $expensesHours;
+            $totalQuantity = $shift->hours;
 
             $item = (new CustomInvoiceItem())
                 ->title("$clientsupported->first_name $clientsupported->last_name")
-                ->description("$dayofshift $public_holiday_text - Km: " . ($shift->km ?? 0) . "- Expenses: " . ($shift->expenses ?? 0))
-                ->quantity($totalQuantity)
+                ->description("$dayofshift $public_holiday_text - Hours: ".($shift->hours)." - Km: " . ($shift->km ?? 0) . "km - Expenses: $" . ($shift->expenses ?? 0))
+                ->quantity($shift->hours)
                 ->setDateOfShift($dateofshift)
-                ->pricePerUnit($hourlyRate);
+                ->pricePerUnit($hourlyRate)
+                ->subTotalPrice(($hourlyRate * $totalQuantity) + $expensesAmount + $kmAmount);
             $items[] = $item;
 
             // Calculate and accumulate the total amount
