@@ -162,6 +162,22 @@ class InvoicingController extends Controller
             $invoice->status = 'paid';
             $invoice->save();
 
+            if ($invoice->type === "client") {
+                // Find the ClientContract where client_id matches $invoice->recipient
+                $clientContract = ClientContract::where('client_id', $invoice->recipient_id)
+                    ->where('active', true)
+                    ->first();
+
+                // Now you can work with $clientContract as needed.
+                if ($clientContract) {
+                    $currentBalance = $clientContract->balance;
+                    $clientContract->balance = $currentBalance - $invoice->totalamount;
+                    $clientContract->save();
+                } else {
+                    return redirect()->back()->with('alert-fail', 'Error: The client does not have an active contract.');
+                }
+            }
+
             // Optionally, you can add a success message here
             // to indicate that the invoice has been marked as paid.
         }
@@ -180,6 +196,22 @@ class InvoicingController extends Controller
             // Update the status to 'paid'
             $invoice->status = 'pending';
             $invoice->save();
+
+            if ($invoice->type === "client") {
+                // Find the ClientContract where client_id matches $invoice->recipient
+                $clientContract = ClientContract::where('client_id', $invoice->recipient_id)
+                    ->where('active', true)
+                    ->first();
+
+                // Now you can work with $clientContract as needed.
+                if ($clientContract) {
+                    $currentBalance = $clientContract->balance;
+                    $clientContract->balance = $currentBalance + $invoice->totalamount;
+                    $clientContract->save();
+                } else {
+                    return redirect()->back()->with('alert-fail', 'Error: The client does not have an active contract.');
+                }
+            }
 
             // Optionally, you can add a success message here
             // to indicate that the invoice has been marked as paid.
@@ -345,7 +377,7 @@ class InvoicingController extends Controller
 
             $item = (new CustomInvoiceItem())
                 ->title("$activity->activityname: $activity_code")
-                ->description("$dayofshift $public_holiday_text - Hours: ".($shift->hours)." - Km: " . ($shift->km ?? 0) . " - Expenses: " . ($shift->expenses ?? 0))
+                ->description("$dayofshift $public_holiday_text - Hours: " . ($shift->hours) . " - Km: " . ($shift->km ?? 0) . " - Expenses: " . ($shift->expenses ?? 0))
                 ->quantity($totalQuantity)
                 ->setDateOfShift($dateofshift)
                 ->pricePerUnit($hourlyRate);
@@ -467,6 +499,7 @@ class InvoicingController extends Controller
         $items = [];
         $totalAmount = 0;
         foreach ($uninvoicedShifts as $shift) {
+            $activity = Activity::find($shift->activity_id);
             $workerrates = UserContract::where('user_id', $shift->submitted_by)
                 ->where('active', 1)
                 ->first();
@@ -500,8 +533,8 @@ class InvoicingController extends Controller
             $totalQuantity = $shift->hours;
 
             $item = (new CustomInvoiceItem())
-                ->title("$clientsupported->first_name $clientsupported->last_name")
-                ->description("$dayofshift $public_holiday_text - Hours: ".($shift->hours)." - Km: " . ($shift->km ?? 0) . "km - Expenses: $" . ($shift->expenses ?? 0))
+                ->title("$clientsupported->first_name $clientsupported->last_name - $activity->activityname")
+                ->description("$dayofshift $public_holiday_text - Hours: " . ($shift->hours) . " - Km: " . ($shift->km ?? 0) . "km - Expenses: $" . ($shift->expenses ?? 0))
                 ->quantity($shift->hours)
                 ->setDateOfShift($dateofshift)
                 ->pricePerUnit($hourlyRate)
