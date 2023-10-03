@@ -55,7 +55,7 @@ class UserController extends Controller
      */
     public function edit(User $alluser)
     {
-        $allClients = Client::all();
+        $allClients = Client::where('active', true);
         return view('admin/allusers.edit', compact('alluser', 'allClients'));
     }
 

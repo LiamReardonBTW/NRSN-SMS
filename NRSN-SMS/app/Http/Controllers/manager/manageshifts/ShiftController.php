@@ -26,7 +26,13 @@ class ShiftController extends Controller
 
     public function index()
     {
-        $shifts = Shift::all();
+        $user = auth()->user();
+
+        $shifts = Shift::whereHas('clientSupported', function ($query) use ($user) {
+            $query->whereHas('managedByUser', function ($subQuery) use ($user) {
+                $subQuery->where('user_id', $user->id);
+            });
+        })->get();
 
         // Initialize arrays to store calculated values for each shift
         $clientPays = [];
@@ -54,7 +60,7 @@ class ShiftController extends Controller
     {
         // Get the authenticated user
         $user = Auth::user();
-        $workers = User::where('role', '2')->get();
+        $workers = User::all();
 
         // Retrieve the clients supported by the user and their related activities
         $clients = optional($user->managedClients)->load('activityRates.activity');
