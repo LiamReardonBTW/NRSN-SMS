@@ -61,7 +61,6 @@
 
             .table {
                 width: 100%;
-                margin-bottom: 1rem;
                 color: #212529;
             }
 
@@ -92,6 +91,7 @@
             .pl-0,
             .px-0 {
                 padding-left: 0 !important;
+                line-height: 0.1;
             }
 
             .text-right {
@@ -131,10 +131,10 @@
     <body>
         {{-- Header --}}
         @if($invoice->logo)
-            <img src="{{ $invoice->getLogo() }}" alt="logo" height="100">
+            <img src="{{ $invoice->getLogo() }}" alt="logo" height="60">
         @endif
 
-        <table class="table mt-5">
+        <table class="table">
             <tbody>
                 <tr>
                     <td class="border-0 pl-0" width="70%">
@@ -148,8 +148,8 @@
                                 <strong>{{ $invoice->status }}</strong>
                             </h4>
                         @endif
-                        <p>{{ __('invoices::invoice.serial') }} <strong>{{ $invoice->getSerialNumber() }}</strong></p>
-                        <p>{{ __('invoices::invoice.date') }}: <strong>{{ $invoice->getDate() }}</strong></p>
+                        <p>Invoice No. <strong>{{ $invoice->getSerialNumber() }}</strong></p>
+                        <p>{{ __('invoices::invoice.date') }}: <strong>{{ date('d/m/y', strtotime($invoice->getDate())) }}</strong></p>
                     </td>
                 </tr>
             </tbody>
@@ -160,11 +160,11 @@
             <thead>
                 <tr>
                     <th class="border-0 pl-0 party-header" width="48.5%">
-                        {{ __('invoices::invoice.seller') }}
+                        From
                     </th>
                     <th class="border-0" width="3%"></th>
                     <th class="border-0 pl-0 party-header">
-                        {{ __('invoices::invoice.buyer') }}
+                        To
                     </th>
                 </tr>
             </thead>
@@ -202,7 +202,7 @@
                         @endif
 
                         @foreach($invoice->seller->custom_fields as $key => $value)
-                            <p class="seller-custom-field">
+                            <p class="seller-custom-field grid">
                                 {{ ucfirst($key) }}: {{ $value }}
                             </p>
                         @endforeach
@@ -369,7 +369,7 @@
             {{ trans('invoices::invoice.amount_in_words') }}: {{ $invoice->getTotalAmountInWords() }}
         </p>
         <p>
-            {{ trans('invoices::invoice.pay_until') }}: {{ $invoice->getPayUntilDate() }}
+            Please pay by: {{ $invoice->getPayUntilDate() }}
         </p>
 
         <script type="text/php">

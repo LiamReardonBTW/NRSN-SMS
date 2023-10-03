@@ -11,6 +11,7 @@ use App\Models\Activity;
 use App\Models\ActivityRate;
 use App\Models\UserContract;
 use App\Models\ClientContract;
+use App\Models\BusinessDetail;
 use LaravelDaily\Invoices\Invoice;
 use LaravelDaily\Invoices\Classes\Party;
 use App\Models\Shift;
@@ -317,14 +318,28 @@ class InvoicingController extends Controller
         $clientParty = new Party([
             'name' => $client->first_name . ' ' . $client->last_name,
             'phone' => $client->phone,
+            'address' => $client->address,
+            'custom_fields' => [
+                'email' => $client->email,
+            ]
             // Add custom fields if needed
         ]);
 
+
+        $businessdetails = BusinessDetail::first();
         // Create a new Party for the customer (you can customize this)
         $customerParty = new Party([
-            'name' => 'Northern Rivers Support Network',
-            'address' => '12 Olives Rd, Northern Rivers',
-            // Add custom fields if needed
+            'name' => $businessdetails->name,
+            'address' => $businessdetails->address,
+            'phone' => $businessdetails->phone,
+            'custom_fields' => [
+                'email' => "$businessdetails->email",
+                'ABN' => $businessdetails->abn,
+                'bank' => $businessdetails->bankname,
+                'bank Address' => $businessdetails->bankaddress,
+                'bank Account Number' => $businessdetails->bankaccountnumber,
+                'bank BSB' => $businessdetails->bankbsbnumber,
+            ]
         ]);
 
         // Create an array of InvoiceItems based on uninvoiced shifts
@@ -399,6 +414,8 @@ class InvoicingController extends Controller
             ->currencyDecimalPoint(',')
             ->addItems($items)
             ->logo(public_path('images/nrsn-logo-new.png'))
+            ->sequence($nextInvoiceNumber)
+            ->serialNumberFormat('{SEQUENCE}')
             ->filename("{$client->id}{$client->first_name}{$client->last_name}Invoice$nextInvoiceNumber");
 
         // Generate and save the PDF to the 'client_invoices' disk
@@ -480,19 +497,27 @@ class InvoicingController extends Controller
         if ($uninvoicedShifts->isEmpty()) {
             return redirect()->back()->with('error', 'No uninvoiced shifts found for this worker.');
         }
-
+        $businessdetails = BusinessDetail::first();
         // Create a new Party for the worker
-        $workerParty = new Party([
-            'name' => $worker->first_name . ' ' . $worker->last_name,
-            'phone' => $worker->phone,
-            // Add custom fields if needed
+        $customerParty = new Party([
+            'name' => $businessdetails->name,
+            'address' => $businessdetails->address,
+            'phone' => $businessdetails->phone,
+            'custom_fields' => [
+                'email' => "$businessdetails->email",
+            ]
+
         ]);
 
         // Create a new Party for the customer (you can customize this)
-        $customerParty = new Party([
-            'name' => 'Northern Rivers Support Network',
-            'address' => '12 Olives Rd, Northern Rivers',
-            // Add custom fields if needed
+        $workerParty = new Party([
+            'name' => $worker->first_name . ' ' . $worker->last_name,
+            'phone' => $worker->phone,
+            'custom_fields' => [
+                'email' => "$worker->email",
+                'ABN' => $worker->abn,
+                'TFN' => $worker->tfn,
+            ]
         ]);
 
         // Create an array of InvoiceItems based on uninvoiced shifts
@@ -548,8 +573,8 @@ class InvoicingController extends Controller
 
         // Create the invoice
         $invoice = Invoice::make('invoice')
-            ->seller($customerParty)
-            ->buyer($workerParty)
+            ->seller($workerParty)
+            ->buyer($customerParty)
             ->dateFormat('d/m/y')
             ->currencySymbol('$')
             ->currencyCode('AUD')
@@ -558,6 +583,8 @@ class InvoicingController extends Controller
             ->currencyDecimalPoint(',')
             ->addItems($items)
             ->logo(public_path('images/nrsn-logo-new.png'))
+            ->sequence($nextInvoiceNumber)
+            ->serialNumberFormat('{SEQUENCE}')
             ->filename("{$worker->id}{$worker->first_name}{$worker->last_name}Invoice$nextInvoiceNumber");
 
         // Generate and save the PDF to the 'client_invoices' disk
