@@ -15,7 +15,6 @@ class ShiftSeeder extends Seeder
     {
         DB::table('shifts')->insert([
             [
-                'invoice' => '',
                 'notes' => 'It was a good day',
                 'submitted_by' => '1',
                 'client_supported' => '1',
@@ -31,7 +30,6 @@ class ShiftSeeder extends Seeder
             ],
 
             [
-                'invoice' => '',
                 'notes' => 'It was a good day',
                 'submitted_by' => '2',
                 'client_supported' => '2',
@@ -47,7 +45,6 @@ class ShiftSeeder extends Seeder
             ],
 
             [
-                'invoice' => '',
                 'notes' => 'Another busy day',
                 'submitted_by' => '1',
                 'client_supported' => '3',
@@ -63,7 +60,6 @@ class ShiftSeeder extends Seeder
             ],
 
             [
-                'invoice' => '',
                 'notes' => 'Meeting with client',
                 'submitted_by' => '5',
                 'client_supported' => '2',
@@ -79,7 +75,6 @@ class ShiftSeeder extends Seeder
             ],
 
             [
-                'invoice' => '',
                 'notes' => 'Long shift',
                 'submitted_by' => '2',
                 'client_supported' => '6',
@@ -95,7 +90,6 @@ class ShiftSeeder extends Seeder
             ],
 
             [
-                'invoice' => '',
                 'notes' => 'Visiting multiple locations',
                 'submitted_by' => '5',
                 'client_supported' => '4',
@@ -111,7 +105,6 @@ class ShiftSeeder extends Seeder
             ],
 
             [
-                'invoice' => '',
                 'notes' => 'It was a good day',
                 'submitted_by' => '1',
                 'client_supported' => '1',
@@ -127,7 +120,6 @@ class ShiftSeeder extends Seeder
             ],
 
             [
-                'invoice' => '',
                 'notes' => 'It was a good day',
                 'submitted_by' => '2',
                 'client_supported' => '2',
@@ -143,7 +135,6 @@ class ShiftSeeder extends Seeder
             ],
 
             [
-                'invoice' => '',
                 'notes' => 'Another busy day',
                 'submitted_by' => '1',
                 'client_supported' => '3',
@@ -159,7 +150,6 @@ class ShiftSeeder extends Seeder
             ],
 
             [
-                'invoice' => '',
                 'notes' => 'Meeting with client',
                 'submitted_by' => '5',
                 'client_supported' => '2',
@@ -175,7 +165,6 @@ class ShiftSeeder extends Seeder
             ],
 
             [
-                'invoice' => '',
                 'notes' => 'Long shift',
                 'submitted_by' => '2',
                 'client_supported' => '6',
@@ -191,7 +180,6 @@ class ShiftSeeder extends Seeder
             ],
 
             [
-                'invoice' => '',
                 'notes' => 'Visiting multiple locations',
                 'submitted_by' => '5',
                 'client_supported' => '4',
@@ -207,7 +195,6 @@ class ShiftSeeder extends Seeder
             ],
 
             [
-                'invoice' => '',
                 'notes' => 'It was a good day',
                 'submitted_by' => '1',
                 'client_supported' => '1',
@@ -223,7 +210,6 @@ class ShiftSeeder extends Seeder
             ],
 
             [
-                'invoice' => '',
                 'notes' => 'It was a good day',
                 'submitted_by' => '2',
                 'client_supported' => '2',
@@ -239,7 +225,6 @@ class ShiftSeeder extends Seeder
             ],
 
             [
-                'invoice' => '',
                 'notes' => 'Another busy day',
                 'submitted_by' => '1',
                 'client_supported' => '3',
@@ -255,7 +240,6 @@ class ShiftSeeder extends Seeder
             ],
 
             [
-                'invoice' => '',
                 'notes' => 'Meeting with client',
                 'submitted_by' => '5',
                 'client_supported' => '2',
@@ -271,7 +255,6 @@ class ShiftSeeder extends Seeder
             ],
 
             [
-                'invoice' => '',
                 'notes' => 'Long shift',
                 'submitted_by' => '2',
                 'client_supported' => '6',
@@ -287,7 +270,6 @@ class ShiftSeeder extends Seeder
             ],
 
             [
-                'invoice' => '',
                 'notes' => 'Visiting multiple locations',
                 'submitted_by' => '5',
                 'client_supported' => '4',

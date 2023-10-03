@@ -22,10 +22,6 @@ class UpdateShiftRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'invoice' => [
-                'nullable',
-                'string',
-            ],
             'notes' => [
                 'nullable',
                 'string',

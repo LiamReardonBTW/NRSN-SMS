@@ -12,7 +12,6 @@ return new class extends Migration {
     {
         Schema::create('shifts', function (Blueprint $table) {
             $table->id();
-            $table->string('invoice')->nullable();
             $table->string('notes')->nullable();
             $table->foreignId('submitted_by')
                 ->nullable()

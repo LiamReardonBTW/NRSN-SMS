@@ -85,13 +85,6 @@
         <!-- Shift Information Container -->
         <div class="text-2xl font-medium  overflow-hidden grid grid-cols-1 md:grid-cols-3  px-6 lg:px-8">
 
-            <!-- Invoice # -->
-            <div class="mx-4 my-5 grid grid-rows-2">
-                <label for="invoice">Invoice #</label>
-                <x-input disabled type="text" name="invoice" id="invoice"
-                    class="form-input rounded-md shadow-sm block w-full" value="{{ $manageshift->invoice }}" />
-            </div>
-
             <!-- Submitted By -->
             <div class="mx-4 my-5 grid grid-rows-2">
                 <label for="submitted_by">Submitted By</label>
@@ -122,9 +115,9 @@
                 </select>
             </div>
 
-            <!-- Submission Date -->
+            <!-- Date of Shift -->
             <div class="mx-4 my-5 grid grid-rows-2">
-                <label for="submission_date">Submission Date</label>
+                <label for="submission_date">Date of Shift</label>
                 <x-input disabled type="text" name="submission_date" id="submission_date"
                     class="form-input rounded-md shadow-sm block w-full" value="{{ $manageshift->date }}" />
             </div>

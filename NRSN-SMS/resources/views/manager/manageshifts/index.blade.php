@@ -42,10 +42,10 @@
                         </div>
                     </th>
 
-                    <!-- Submission Date Table Header -->
+                    <!-- Date of Shift Table Header -->
                     <th scope="col" class="px-2 py-1 border-r-2 border-blue-500 border-b-2 ">
                         <div class="flex items-center">
-                            Submission Date
+                            Date of Shift
                             <!-- Sort By 'submission_date' Button -->
                             <a href="#"><svg class="w-3 h-3 ml-1.5" aria-hidden="true"
                                     xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
@@ -261,10 +261,10 @@
                         </div>
                     </th>
 
-                    <!-- Submission Date Table Header -->
+                    <!-- Date of Shift Table Header -->
                     <th scope="col" class="px-2 py-1 border-r-2 border-green-500 border-b-2 ">
                         <div class="flex items-center">
-                            Submission Date
+                            Date of Shift
                             <!-- Sort By 'submission_date' Button -->
                             <a href="#"><svg class="w-3 h-3 ml-1.5" aria-hidden="true"
                                     xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
