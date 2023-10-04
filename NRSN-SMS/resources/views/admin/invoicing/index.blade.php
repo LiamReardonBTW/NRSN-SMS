@@ -17,83 +17,102 @@
         <div class="relative overflow-auto border-2 border-blue-600 rounded mx-5"
             style="max-height: 300px; overflow-y: auto;">
             <!-- Client Invoices Table -->
-            <table class="w-full text-left text-gray-800 bg-gray-100">
-                <!-- Table Headers -->
-                <thead class="text-xs uppercase text-gray-50 bg-blue-800">
-                    <tr>
-                        <!-- Client Name Table Header -->
-                        <th scope="col" class="px-2 py-1 border-r-2 border-blue-500 border-b-2 ">
-                            <div class="flex items-center">
-                                Name
-                                <!-- Sort By Name Button -->
-                                <a href="#">
-                                    <svg class="w-3 h-3 ml-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                        fill="currentColor" viewBox="0 0 24 24">
-                                        <!-- Sort icon -->
-                                    </svg>
-                                </a>
-                            </div>
-                        </th>
+            <form id="client-invoices-form" action="{{ route('generate.client-invoice') }}" method="POST" target="_blank">
+                @csrf
+                <table class="w-full text-left text-gray-800 bg-gray-100">
+                    <!-- Table Headers -->
+                    <thead class="text-xs uppercase text-gray-50 bg-blue-800">
+                        <tr>
+                            <!-- Client Name Table Header -->
+                            <th scope="col" class="px-2 py-1 border-r-2 border-blue-500 border-b-2 ">
+                                <div class="flex items-center">
+                                    Name
+                                    <!-- Sort By Name Button -->
+                                    <a href="#">
+                                        <svg class="w-3 h-3 ml-1.5" aria-hidden="true"
+                                            xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+                                            <!-- Sort icon -->
+                                        </svg>
+                                    </a>
+                                </div>
+                            </th>
 
-                        <!-- Total Uninvoiced Shifts Table Header -->
-                        <th scope="col" class="px-2 py-1 border-r-2 border-blue-500 border-b-2 ">
-                            <div class="flex items-center">
-                                Total Uninvoiced Shifts
-                                <!-- Sort By Total Uninvoiced Shifts Button -->
-                                <a href="#">
-                                    <svg class="w-3 h-3 ml-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                        fill="currentColor" viewBox="0 0 24 24">
-                                        <!-- Sort icon -->
-                                    </svg>
-                                </a>
-                            </div>
-                        </th>
+                            <!-- Total Uninvoiced Shifts Table Header -->
+                            <th scope="col" class="px-2 py-1 border-r-2 border-blue-500 border-b-2 ">
+                                <div class="flex items-center">
+                                    Total Uninvoiced Shifts
+                                    <!-- Sort By Total Uninvoiced Shifts Button -->
+                                    <a href="#">
+                                        <svg class="w-3 h-3 ml-1.5" aria-hidden="true"
+                                            xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+                                            <!-- Sort icon -->
+                                        </svg>
+                                    </a>
+                                </div>
+                            </th>
 
-                        <!-- Actions Table Header (For view/edit/delete buttons) -->
-                        <th scope="col" class="w-48 text-right px-2 py-1 border-r-2 border-blue-500 border-b-2 ">
-                            <span class="mr-28">Actions</span>
-                        </th>
+                            <!-- Actions Table Header (For view/edit/delete buttons) -->
+                            <th scope="col" class="w-48 text-right px-2 py-1 border-r-2 border-blue-500 border-b-2 ">
+                                <span class="mr-28">Actions</span>
+                            </th>
 
-                    </tr>
-                </thead>
-
-                <!-- Table Content -->
-                <tbody class="text-xs font-bold">
-                    <!-- Loop through clients/workers and display their information -->
-                    @foreach ($clients as $client)
-                        <tr class="even:bg-gray-100 odd:bg-gray-200 hover:bg-gray-300 h-12 text-center">
-                            <!-- Client/Worker Information -->
-                            <td scope="row" class="px-1 py-1">
-                                {{ $client->first_name }} {{ $client->last_name }}
-                            </td>
-                            <td scope="row" class="px-1 py-1">
-                                <!-- Calculate and display the total uninvoiced and approved shifts -->
-                                {{ $client->shifts->where('approved', 1)->where('clientinvoice_id', null)->count() }}
-                            </td>
-                            <td class="whitespace-nowrap text-sm text-white font-bold float-right py-3">
-                                <!-- Generate Invoice Button with Form -->
-                                <form action="{{ route('generate.client-invoice') }}" method="POST" target="_blank">
-                                    @csrf
-                                    <input type="hidden" name="client_id" value="{{ $client->id }}">
-                                    <div class="text-black flex items-center grid-rows-2 grid">
-                                        <button type="submit"
-                                            class="text-white generate-client-invoice-button inline-block px-2 mx-1 py-1 bg-green-600 rounded hover:shadow-xl hover:bg-green-500">
-                                            Generate Client Invoice
-                                        </button>
-                                        <button type="button"
-                                            class="text-white set-invoice-number-button inline-block px-2 mx-1 py-1 mt-1 bg-blue-600 rounded-t-md hover:shadow-xl hover:bg-blue-500">
-                                            Set Invoice Number <span class="text-xs">&#9660;</span>
-                                        </button>
-                                        <input type="text" name="invoice_number"
-                                            class="invoice-number-field hidden text-sm py-1 text-center px-2 mx-1 rounded-b-md"
-                                            placeholder="Invoice #: {{ $nextInvoiceNumbers['clients'][$client->id] }}">
-                                    </div>
-                                </form>
-                            </td>
                         </tr>
-                    @endforeach
-                </tbody>
-            </table>
+                    </thead>
+
+                    <!-- Table Content -->
+                    <tbody class="text-xs font-bold">
+                        <!-- Loop through clients/workers and display their information -->
+                        @foreach ($clients as $client)
+                            <tr class="even:bg-gray-100 odd:bg-gray-200 hover:bg-gray-300 h-12 text-center">
+                                <!-- Client/Worker Information -->
+                                <td scope="row" class="px-1 py-1">
+                                    {{ $client->first_name }} {{ $client->last_name }}
+                                </td>
+                                <td scope="row" class="px-1 text-left py-1">
+                                    <!-- Create a hidden field to store the client ID -->
+                                    <input type="hidden" name="client_id" value="{{ $client->id }}">
+                                    <!-- Display all uninvoiced shifts with checkboxes and total pay -->
+                                    @foreach ($client->shifts->where('approved', 1)->where('clientinvoice_id', null) as $shift)
+                                        <div class="grid grid-cols-12 py-1">
+                                            <div class="ml-5 col-span-1 flex items-center">
+                                                <!-- Flex container to vertically align -->
+                                                <input type="checkbox" name="shift_ids[]" value="{{ $shift->id }}">
+                                                <!-- Include a hidden field to store the client ID -->
+                                                <input type="hidden" name="client_id" value="{{ $client->id }}">
+                                            </div>
+                                            <div class="col-span-11 text-full  border-gray-400 border-b"> <!-- Adjust the width of this column -->
+                                                {{ $shift->date->format('d/m/Y') }} -
+                                                {{ $shift->activity->activityname }}
+                                                <!-- Calculate and display the total pay for this shift -->
+                                                <br>
+                                                <p class="text-lg">Total Pay: ${{ number_format($shift->totalPay, 2) }}
+                                                </p>
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                </td>
+                                <td class="whitespace-nowrap text-sm text-white font-bold py-3">
+                                    <!-- Generate Invoice Button with Form -->
+                                    <form action="{{ route('generate.client-invoice') }}" method="POST"
+                                        target="_blank">
+                                        @csrf
+                                        <input type="hidden" name="client_id" value="{{ $client->id }}">
+                                        <div class="text-black grid-rows-2 grid">
+                                            <button type="submit"
+                                                class="text-white generate-client-invoice-button inline-block px-2 mx-1 py-1 bg-green-600 rounded-t-md hover:shadow-xl hover:bg-green-500">
+                                                Generate Client Invoice
+                                            </button>
+                                            <input type="text" name="invoice_number"
+                                                class="invoice-number-field text-sm py-1 text-center px-2 mx-1 rounded-b-md"
+                                                placeholder="Set Invoice #: {{ $nextInvoiceNumbers['clients'][$client->id] }}">
+                                        </div>
+                                    </form>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </form>
         </div>
 
         <!-- Add this section for Client Invoices -->
@@ -104,14 +123,24 @@
                 <!-- Table Headers -->
                 <thead class="text-xs uppercase text-gray-50 bg-blue-800">
                     <tr>
+                        <!-- Client Name Header -->
+                        <th scope="col" class="px-2 py-1 border-r-2 border-blue-500 border-b-2">
+                            Client Name
+                        </th>
+
                         <!-- Invoice Number Header -->
                         <th scope="col" class="px-2 py-1 border-r-2 border-blue-500 border-b-2">
                             Invoice Number
                         </th>
 
-                        <!-- Client Name Header -->
+                        <!-- Total Amount Header -->
                         <th scope="col" class="px-2 py-1 border-r-2 border-blue-500 border-b-2">
-                            Client Name
+                            Total Amount
+                        </th>
+
+                        <!-- Invoice Number Header -->
+                        <th scope="col" class="px-2 py-1 border-r-2 border-blue-500 border-b-2">
+                            Last Updated
                         </th>
 
                         <!-- Actions Header (For view/download buttons) -->
@@ -128,15 +157,21 @@
                         <tr class="even:bg-gray-100 odd:bg-gray-200 hover:bg-gray-300 h-12 text-center">
                             <!-- Invoice Information -->
                             <td scope="row" class="px-1 py-1">
-                                {{ $invoice->invoice_number }}
-                            </td>
-                            <td scope="row" class="px-1 py-1">
                                 <!-- Retrieve and display the recipient's first_name and last_name -->
                                 @if ($invoice->recipient)
                                     {{ $invoice->recipient->first_name }} {{ $invoice->recipient->last_name }}
                                 @else
                                     N/A <!-- Handle the case when recipient is not found -->
                                 @endif
+                            </td>
+                            <td scope="row" class="px-1 py-1">
+                                {{ $invoice->invoice_number }}
+                            </td>
+                            <td scope="row" class="px-1 py-1">
+                                {{ $invoice->totalamount }}
+                            </td>
+                            <td scope="row" class="px-1 py-1">
+                                {{ $invoice->updated_at }}
                             </td>
                             <td class="whitespace-nowrap text-sm text-white font-bold float-right py-2">
                                 <div class="flex">
@@ -246,7 +281,8 @@
                             </td>
                             <td class="whitespace-nowrap text-sm text-white font-bold float-right py-3">
                                 <!-- Generate Invoice Button with Form -->
-                                <form action="{{ route('generate.worker-invoice') }}" target="_blank" method="POST">
+                                <form action="{{ route('generate.worker-invoice') }}" target="_blank"
+                                    method="POST">
                                     @csrf
                                     <input type="hidden" name="worker_id" value="{{ $worker->id }}">
                                     <div class="text-black flex items-center grid-rows-2 grid">
@@ -368,33 +404,37 @@
             Back
         </a>
         <a href="{{ route('allinvoices.index') }}"
-                class="inline-flex items-center m-6 px-6 py-4 bg-blue-700 border border-transparent rounded-md font-semibold text-base text-white uppercase tracking-widest hover:bg-blue-500 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">
-                View All Invoices
-            </a>
+            class="inline-flex items-center m-6 px-6 py-4 bg-blue-700 border border-transparent rounded-md font-semibold text-base text-white uppercase tracking-widest hover:bg-blue-500 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">
+            View All Invoices
+        </a>
     </div>
 </x-app-layout>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         const generateClientInvoiceButtons = document.querySelectorAll('.generate-client-invoice-button');
         const generateWorkerInvoiceButtons = document.querySelectorAll('.generate-worker-invoice-button');
-        const setInvoiceNumberButtons = document.querySelectorAll('.set-invoice-number-button');
-        const invoiceNumberFields = document.querySelectorAll('.invoice-number-field');
 
-        setInvoiceNumberButtons.forEach(button => {
-            button.addEventListener('click', function() {
-                // Find the corresponding input field
-                const inputField = this.nextElementSibling;
-
-                // Toggle the visibility of the input field
-                inputField.classList.toggle('hidden');
-            });
-        });
-
+        // Add a click event listener to each button
         generateClientInvoiceButtons.forEach(button => {
             button.addEventListener('click', function() {
                 const clientId = this.getAttribute('data-client-id');
 
-                // Send an AJAX request to generate the client invoice
+                // Find all checkboxes for this client
+                const checkboxes = document.querySelectorAll(
+                    `input[name="selected_shifts[${clientId}][]"]`
+                );
+                // Filter the selected checkboxes
+                const selectedShifts = Array.from(checkboxes).filter(checkbox => checkbox
+                    .checked);
+                console.log(selectedShifts); // Debugging: Check the selectedShifts array
+                // Filter the selected checkboxes
+                const selectedShifts = Array.from(checkboxes).filter(checkbox => checkbox
+                    .checked);
+
+                // Extract the values (shift IDs) from the selected checkboxes
+                const selectedShiftIds = selectedShifts.map(checkbox => checkbox.value);
+
+                // Send an AJAX request to generate the client invoice with the selected shift IDs
                 fetch('{{ route('generate.client-invoice') }}', {
                         method: 'POST',
                         headers: {
@@ -402,7 +442,8 @@
                             'Content-Type': 'application/json',
                         },
                         body: JSON.stringify({
-                            client_id: clientId
+                            client_id: clientId,
+                            selected_shifts: selectedShiftIds
                         }),
                     })
                     .then(blob => {
