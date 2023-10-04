@@ -21,148 +21,154 @@
                     </x-nav-link>
 
                     <!-- Worker dropdown -->
-                    @if (Auth::User()->role == 0 || Auth::User()->role == 1 || Auth::User()->role == 2) {{-- Check if user is worker, manager, or admin, when displaying content --}}
-                    <div class="ml-3 relative mt-1">
-                        <x-dropdown align="right" width="48">
-                            <x-slot name="trigger">
-                                <span class="inline-flex rounded-md">
-                                    <button type="button"
-                                        class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none focus:bg-gray-50 active:bg-gray-50 transition ease-in-out duration-150">
-                                        Worker
+                    @if (Auth::User()->role == 0 || Auth::User()->role == 1 || Auth::User()->role == 2)
+                        {{-- Check if user is worker, manager, or admin, when displaying content --}}
+                        <div class="ml-3 relative mt-1">
+                            <x-dropdown align="right" width="48">
+                                <x-slot name="trigger">
+                                    <span class="inline-flex rounded-md">
+                                        <button type="button"
+                                            class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none focus:bg-gray-50 active:bg-gray-50 transition ease-in-out duration-150">
+                                            Worker
 
-                                        <svg class="ml-2 -mr-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg"
-                                            fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round"
-                                                d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
-                                        </svg>
-                                    </button>
-                                </span>
-                            </x-slot>
+                                            <svg class="ml-2 -mr-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg"
+                                                fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                                stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                    d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                                            </svg>
+                                        </button>
+                                    </span>
+                                </x-slot>
 
-                            <x-slot name="content">
+                                <x-slot name="content">
 
-                                <x-dropdown-link href="{{ route('myclients.index') }}">
-                                    {{ __('My Clients') }}
-                                </x-dropdown-link>
+                                    <x-dropdown-link href="{{ route('myclients.index') }}">
+                                        {{ __('My Clients') }}
+                                    </x-dropdown-link>
 
-                                <x-dropdown-link href="{{ route('myshifts.index') }}">
-                                    {{ __('My Shifts') }}
-                                </x-dropdown-link>
+                                    <x-dropdown-link href="{{ route('myshifts.index') }}">
+                                        {{ __('My Shifts') }}
+                                    </x-dropdown-link>
 
-                                <x-dropdown-link href="{{ route('myinvoices.index') }}">
-                                    {{ __('My Invoices') }}
-                                </x-dropdown-link>
+                                    <x-dropdown-link href="{{ route('myinvoices.index') }}">
+                                        {{ __('My Invoices') }}
+                                    </x-dropdown-link>
 
 
 
-                            </x-slot>
-                        </x-dropdown>
-                    </div>
+                                </x-slot>
+                            </x-dropdown>
+                        </div>
                     @endif
 
                     <!-- Manager dropdown-->
-                    @if (Auth::User()->role == 0 || Auth::User()->role == 1) {{-- Check if user is manager, or admin, when displaying content --}}
-                    <div class="ml-3 relative mt-1">
-                        <x-dropdown align="right" width="48">
-                            <x-slot name="trigger">
-                                <span class="inline-flex rounded-md">
-                                    <button type="button"
-                                        class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none focus:bg-gray-50 active:bg-gray-50 transition ease-in-out duration-150">
-                                        Manager
+                    @if (Auth::User()->role == 0 || Auth::User()->role == 1)
+                        {{-- Check if user is manager, or admin, when displaying content --}}
+                        <div class="ml-3 relative mt-1">
+                            <x-dropdown align="right" width="48">
+                                <x-slot name="trigger">
+                                    <span class="inline-flex rounded-md">
+                                        <button type="button"
+                                            class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none focus:bg-gray-50 active:bg-gray-50 transition ease-in-out duration-150">
+                                            Manager
 
-                                        <svg class="ml-2 -mr-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg"
-                                            fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round"
-                                                d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
-                                        </svg>
-                                    </button>
-                                </span>
-                            </x-slot>
+                                            <svg class="ml-2 -mr-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg"
+                                                fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                                stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                    d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                                            </svg>
+                                        </button>
+                                    </span>
+                                </x-slot>
 
-                            <x-slot name="content">
+                                <x-slot name="content">
 
-                                <x-dropdown-link href="{{ route('manageclients.index') }}">
-                                    {{ __('Manage Clients') }}
-                                </x-dropdown-link>
+                                    <x-dropdown-link href="{{ route('manageclients.index') }}">
+                                        {{ __('Manage Clients') }}
+                                    </x-dropdown-link>
 
-                                <x-dropdown-link href="{{ route('manageshifts.index') }}">
-                                    {{ __('Manage Shifts') }}
-                                </x-dropdown-link>
+                                    <x-dropdown-link href="{{ route('manageshifts.index') }}">
+                                        {{ __('Manage Shifts') }}
+                                    </x-dropdown-link>
 
-                                <x-dropdown-link href="{{ route('manageworkers.index') }}">
-                                    {{ __('Manage Workers') }}
-                                </x-dropdown-link>
+                                    <x-dropdown-link href="{{ route('manageworkers.index') }}">
+                                        {{ __('Manage Workers') }}
+                                    </x-dropdown-link>
 
-                                <x-dropdown-link href="{{ route('clientinvoices.index') }}">
-                                    {{ __('Client Invoices') }}
-                                </x-dropdown-link>
+                                    <x-dropdown-link href="{{ route('clientinvoices.index') }}">
+                                        {{ __('Client Invoices') }}
+                                    </x-dropdown-link>
 
 
-                            </x-slot>
-                        </x-dropdown>
-                    </div>
+                                </x-slot>
+                            </x-dropdown>
+                        </div>
                     @endif
 
                     <!-- Admin dropdown-->
-                    @if (Auth::User()->role == 0) {{-- Check if user is admin, when displaying content --}}
-                    <div class="ml-3 relative mt-1">
-                        <x-dropdown align="right" width="48">
-                            <x-slot name="trigger">
-                                <span class="inline-flex rounded-md">
-                                    <button type="button"
-                                        class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none focus:bg-gray-50 active:bg-gray-50 transition ease-in-out duration-150">
-                                        Admin
+                    @if (Auth::User()->role == 0)
+                        {{-- Check if user is admin, when displaying content --}}
+                        <div class="ml-3 relative mt-1">
+                            <x-dropdown align="right" width="48">
+                                <x-slot name="trigger">
+                                    <span class="inline-flex rounded-md">
+                                        <button type="button"
+                                            class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none focus:bg-gray-50 active:bg-gray-50 transition ease-in-out duration-150">
+                                            Admin
 
-                                        <svg class="ml-2 -mr-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg"
-                                            fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round"
-                                                d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
-                                        </svg>
-                                    </button>
-                                </span>
-                            </x-slot>
+                                            <svg class="ml-2 -mr-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg"
+                                                fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                                stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                    d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                                            </svg>
+                                        </button>
+                                    </span>
+                                </x-slot>
 
-                            <x-slot name="content">
+                                <x-slot name="content">
 
-                                <x-dropdown-link href="{{ route('allclients.index') }}">
-                                    {{ __('All Clients') }}
-                                </x-dropdown-link>
+                                    <x-dropdown-link href="{{ route('allclients.index') }}">
+                                        {{ __('All Clients') }}
+                                    </x-dropdown-link>
 
-                                <x-dropdown-link href="{{ route('allshifts.index') }}">
-                                    {{ __('All Shifts') }}
-                                </x-dropdown-link>
+                                    <x-dropdown-link href="{{ route('allshifts.index') }}">
+                                        {{ __('All Shifts') }}
+                                    </x-dropdown-link>
 
-                                <x-dropdown-link href="{{ route('allusers.index') }}">
-                                    {{ __('All Users') }}
-                                </x-dropdown-link>
+                                    <x-dropdown-link href="{{ route('allusers.index') }}">
+                                        {{ __('All Users') }}
+                                    </x-dropdown-link>
 
-                                <x-dropdown-link href="{{ route('clientcontracts.index') }}">
-                                    {{ __('Client Contracts') }}
-                                </x-dropdown-link>
+                                    <x-dropdown-link href="{{ route('allinvoices.index') }}">
+                                        {{ __('All Invoices') }}
+                                    </x-dropdown-link>
 
-                                <x-dropdown-link href="{{ route('usercontracts.index') }}">
-                                    {{ __('User Contracts') }}
-                                </x-dropdown-link>
+                                    <x-dropdown-link href="{{ route('invoicing.index') }}">
+                                        {{ __('Invoicing') }}
+                                    </x-dropdown-link>
 
-                                <x-dropdown-link href="{{ route('activities.index') }}">
-                                    {{ __('Activities') }}
-                                </x-dropdown-link>
+                                    <x-dropdown-link href="{{ route('clientcontracts.index') }}">
+                                        {{ __('Client Contracts') }}
+                                    </x-dropdown-link>
 
-                                <x-dropdown-link href="{{ route('invoicing.index') }}">
-                                    {{ __('Invoicing') }}
-                                </x-dropdown-link>
+                                    <x-dropdown-link href="{{ route('usercontracts.index') }}">
+                                        {{ __('User Contracts') }}
+                                    </x-dropdown-link>
 
-                                <x-dropdown-link href="{{ route('business-details.index') }}">
-                                    {{ __('Business Details') }}
-                                </x-dropdown-link>
+                                    <x-dropdown-link href="{{ route('activities.index') }}">
+                                        {{ __('Activities') }}
+                                    </x-dropdown-link>
 
-                                <x-dropdown-link href="{{ route('allinvoices.index') }}">
-                                    {{ __('All Invoices') }}
-                                </x-dropdown-link>
+                                    <x-dropdown-link href="{{ route('business-details.index') }}">
+                                        {{ __('Business Details') }}
+                                    </x-dropdown-link>
 
-                            </x-slot>
-                        </x-dropdown>
-                    </div>
+                                </x-slot>
+                            </x-dropdown>
+                        </div>
                     @endif
 
                 </div>
@@ -253,46 +259,49 @@
                 {{ __('Home') }}
             </x-responsive-nav-link>
             {{-- Worker responsive nav content --}}
-            @if (Auth::User()->role == 0 || Auth::User()->role == 1 || Auth::User()->role == 2) {{-- Check if user is worker, manager, or admin, when displaying content --}}
-            <x-responsive-nav-link-parent :href="'#'">
-                <x-slot name="name">Worker</x-slot>
-                <x-slot name="children">
-                    <a href="{{ route('myclients.index') }}">My Clients</a><br>
-                    <a href="{{ route('myshifts.index') }}">My Shifts</a><br>
-                    <a href="{{ route('myinvoices.index') }}">My Invoices</a>
-                </x-slot>
-            </x-responsive-nav-link-parent>
+            @if (Auth::User()->role == 0 || Auth::User()->role == 1 || Auth::User()->role == 2)
+                {{-- Check if user is worker, manager, or admin, when displaying content --}}
+                <x-responsive-nav-link-parent :href="'#'">
+                    <x-slot name="name">Worker</x-slot>
+                    <x-slot name="children">
+                        <a href="{{ route('myclients.index') }}">My Clients</a><br>
+                        <a href="{{ route('myshifts.index') }}">My Shifts</a><br>
+                        <a href="{{ route('myinvoices.index') }}">My Invoices</a>
+                    </x-slot>
+                </x-responsive-nav-link-parent>
             @endif
 
             {{-- Manager responsive nav content --}}
-            @if (Auth::User()->role == 0 || Auth::User()->role == 1) {{-- Check if user is manager, or admin, when displaying content --}}
-            <x-responsive-nav-link-parent :href="'#'">
-                <x-slot name="name">Manager</x-slot>
-                <x-slot name="children">
-                    <a href="{{ route('manageclients.index') }}">Manage Clients</a><br>
-                    <a href="{{ route('manageshifts.index') }}">Manage Shifts</a><br>
-                    <a href="{{ route('manageworkers.index') }}">Manage Workers</a><br>
-                    <a href="{{ route('clientinvoices.index') }}">Client Invoices</a>
-                </x-slot>
-            </x-responsive-nav-link-parent>
+            @if (Auth::User()->role == 0 || Auth::User()->role == 1)
+                {{-- Check if user is manager, or admin, when displaying content --}}
+                <x-responsive-nav-link-parent :href="'#'">
+                    <x-slot name="name">Manager</x-slot>
+                    <x-slot name="children">
+                        <a href="{{ route('manageclients.index') }}">Manage Clients</a><br>
+                        <a href="{{ route('manageshifts.index') }}">Manage Shifts</a><br>
+                        <a href="{{ route('manageworkers.index') }}">Manage Workers</a><br>
+                        <a href="{{ route('clientinvoices.index') }}">Client Invoices</a>
+                    </x-slot>
+                </x-responsive-nav-link-parent>
             @endif
 
             {{-- Admin responsive nav content --}}
-            @if (Auth::User()->role == 0) {{-- Check if user is admin, when displaying content --}}
-            <x-responsive-nav-link-parent :href="'#'">
-                <x-slot name="name">Admin</x-slot>
-                <x-slot name="children">
-                    <a href="{{ route('allclients.index') }}">All Clients</a><br>
-                    <a href="{{ route('allshifts.index') }}">All Shifts</a><br>
-                    <a href="{{ route('allusers.index') }}">All Users</a><br>
-                    <a href="{{ route('clientcontracts.index') }}">Client Contracts</a><br>
-                    <a href="{{ route('usercontracts.index') }}">User Contracts</a><br>
-                    <a href="{{ route('activities.index') }}">Activities</a><br>
-                    <a href="{{ route('invoicing.index') }}">Invoicing</a><br>
-                    <a href="{{ route('business-details.index') }}">Business Details</a><br>
-                    <a href="{{ route('allinvoices.index') }}">All Invoices</a><br>
-                </x-slot>
-            </x-responsive-nav-link-parent>
+            @if (Auth::User()->role == 0)
+                {{-- Check if user is admin, when displaying content --}}
+                <x-responsive-nav-link-parent :href="'#'">
+                    <x-slot name="name">Admin</x-slot>
+                    <x-slot name="children">
+                        <a href="{{ route('allclients.index') }}">All Clients</a><br>
+                        <a href="{{ route('allshifts.index') }}">All Shifts</a><br>
+                        <a href="{{ route('allusers.index') }}">All Users</a><br>
+                        <a href="{{ route('allinvoices.index') }}">All Invoices</a><br>
+                        <a href="{{ route('invoicing.index') }}">Invoicing</a><br>
+                        <a href="{{ route('clientcontracts.index') }}">Client Contracts</a><br>
+                        <a href="{{ route('usercontracts.index') }}">User Contracts</a><br>
+                        <a href="{{ route('activities.index') }}">Activities</a><br>
+                        <a href="{{ route('business-details.index') }}">Business Details</a><br>
+                    </x-slot>
+                </x-responsive-nav-link-parent>
             @endif
 
         </div>
