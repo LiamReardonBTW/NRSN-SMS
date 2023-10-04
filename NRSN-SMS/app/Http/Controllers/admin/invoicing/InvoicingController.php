@@ -55,14 +55,7 @@ class InvoicingController extends Controller
             'workers' => [],
         ];
 
-        // Calculate the total pay for each shift and next invoice number for each client
         foreach ($clients as $client) {
-            // Calculate the total pay for each shift for this client
-            $client->shifts->each(function ($shift) use ($client) {
-                $shift->totalPay = $this->calculateClientTotalPay($shift);
-            });
-
-            // Calculate the next invoice number for this client
             $nextInvoiceNumber = DatabaseInvoice::where('type', 'client')
                 ->where('recipient_id', $client->id)
                 ->max('invoice_number') + 1;
@@ -229,46 +222,6 @@ class InvoicingController extends Controller
         return redirect()->back();
     }
 
-    private function calculateClientTotalPay($shift)
-    {
-        $dayofshift = $shift->date->format('l');
-
-        $activityrate = ActivityRate::where('client_id', $shift->client_supported)
-            ->where('activity_id', $shift->activity_id)
-            ->first();
-
-        $clientcontract = ClientContract::where('client_id', $shift->client_supported)
-            ->where('active', 1)
-            ->first();
-
-        if ($shift->is_public_holiday) {
-            $hourlyRate = $activityrate->publicholidayhourlyrate;
-        } else {
-            if ($dayofshift === 'Saturday') {
-                $hourlyRate = $activityrate->saturdayhourlyrate;
-            } elseif ($dayofshift === 'Sunday') {
-                $hourlyRate = $activityrate->sundayhourlyrate;
-            } else {
-                $hourlyRate = $activityrate->weekdayhourlyrate;
-            }
-        }
-
-        $kmRate = $clientcontract->km_rate;
-        $kmAmount = $shift->km * $kmRate;
-
-        $kmHours = ceil($kmAmount / $hourlyRate / 0.25) * 0.25;
-
-        $expensesAmount = $shift->expenses;
-        $expensesHours = ceil($expensesAmount / $hourlyRate / 0.25) * 0.25;
-
-        $totalQuantity = $shift->hours + $kmHours + $expensesHours;
-
-        // Calculate the total pay for this shift
-        $clientPays = $totalQuantity * $hourlyRate;
-
-        return number_format($clientPays, 2);
-    }
-
     public function archiveInvoice($id)
     {
         // Find the invoice by ID
@@ -325,39 +278,43 @@ class InvoicingController extends Controller
 
         // Check if validation fails
         if ($validator->fails()) {
-            return redirect()->back()->with('alert-fail', 'Error: A client may not have multiple invoices of the same number.');
+            return redirect()->back()->with('alert-fail', 'Error: The client already has an Invoice of this number.');
         }
 
-        // Retrieve the client ID and selected shift IDs from the request
-        $clientId = $request->input('client_id');
-        $selectedShiftIds = $request->input('shift_ids', []);
+        // Retrieve the client ID from the request
+        $clientId = $request->input('client_id'); // Replace with your actual input field name
         $invoice_number = $request->input('invoice_number');
+        // Find the client based on the client ID
+        $client = Client::find($clientId);
 
-        // Check if any shifts were selected
-        if (empty($selectedShiftIds)) {
-            return redirect()->back()->with('alert-fail', 'Error: You must select the clients shifts to invoice before generating.');
+        // Check if the client exists
+        if (!$client) {
+            return redirect()->back()->with('error', 'Client not found.');
         }
 
+        // Determine the invoice number (either manually set or auto-generated)
         if ($invoice_number !== null) {
             // Manually set invoice number if provided
             $nextInvoiceNumber = $invoice_number;
         } else {
-            // Find the next available invoice number for the worker and type 'worker'
+            // Find the next available invoice number for the client and type 'client'
             $nextInvoiceNumber = DatabaseInvoice::where('type', 'client')
-                ->where('recipient_id', $clientId)
+                ->where('recipient_id', $client->id)
                 ->max('invoice_number') + 1;
         }
 
-        // Get the selected shifts from the database
-        $uninvoicedShifts = Shift::whereIn('id', $selectedShiftIds)->get();
+        // Get uninvoiced shifts for the selected client
+        $uninvoicedShifts = Shift::where('client_supported', $clientId)
+            ->where('approved', 1)
+            ->where('clientinvoice_id', null)
+            ->get();
 
-        // Check if there are selected shifts
+        // Check if there are uninvoiced shifts
         if ($uninvoicedShifts->isEmpty()) {
-            return redirect()->back()->with('alert-fail', 'No selected shifts found for invoicing.');
+            return redirect()->back()->with('error', 'No uninvoiced shifts found for this client.');
         }
 
         // Create a new Party for the client
-        $client = Client::find($clientId);
         $clientParty = new Party([
             'name' => $client->first_name . ' ' . $client->last_name,
             'phone' => $client->phone,
@@ -365,18 +322,18 @@ class InvoicingController extends Controller
             'custom_fields' => [
                 'email' => $client->email,
             ]
+            // Add custom fields if needed
         ]);
 
-        // Fetch business details from your model (replace with your actual logic)
-        $businessdetails = BusinessDetail::first();
 
+        $businessdetails = BusinessDetail::first();
         // Create a new Party for the customer (you can customize this)
         $customerParty = new Party([
             'name' => $businessdetails->name,
             'address' => $businessdetails->address,
             'phone' => $businessdetails->phone,
             'custom_fields' => [
-                'email' => $businessdetails->email,
+                'email' => "$businessdetails->email",
                 'ABN' => $businessdetails->abn,
                 'bank' => $businessdetails->bankname,
                 'bank Address' => $businessdetails->bankaddress,
@@ -385,10 +342,9 @@ class InvoicingController extends Controller
             ]
         ]);
 
-        // Create an array of InvoiceItems based on selected shifts
+        // Create an array of InvoiceItems based on uninvoiced shifts
         $items = [];
         $totalAmount = 0;
-
         foreach ($uninvoicedShifts as $shift) {
             $activity = Activity::find($shift->activity_id);
             $activityrate = ActivityRate::where('client_id', $shift->client_supported)
@@ -396,8 +352,8 @@ class InvoicingController extends Controller
                 ->first();
             $dayofshift = $shift->date->format('l');
             $dateofshift = $shift->date->format('d/m/y');
-            $public_holiday_text = "";
-            $activity_code = "";
+            $public_holiday_text = ""; //Default no text
+            $activity_code = ""; //
             $clientcontract = ClientContract::where('client_id', $shift->client_supported)
                 ->where('active', 1)
                 ->first();
@@ -418,6 +374,7 @@ class InvoicingController extends Controller
                     $activity_code = $activity->weekdayhourlycode;
                 }
             }
+
 
             // Calculate total amount for kilometers
             $kmRate = $clientcontract->km_rate;
@@ -477,7 +434,7 @@ class InvoicingController extends Controller
         $clientInvoice->recipient()->associate($client);
         $clientInvoice->save();
 
-        // Establish the relationship between selected shifts and the invoice
+        // Establish the relationship between shifts and the invoice
         foreach ($uninvoicedShifts as $shift) {
             $shift->clientinvoice_id = $clientInvoice->id; // Set the clientinvoice_id
             $shift->save();
@@ -485,6 +442,7 @@ class InvoicingController extends Controller
 
         // Return the PDF to the browser or have a different view
         return $pdf->stream();
+
     }
 
     public function generateWorkerInvoice(Request $request)
