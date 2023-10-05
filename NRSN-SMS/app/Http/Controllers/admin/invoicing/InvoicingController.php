@@ -262,6 +262,8 @@ class InvoicingController extends Controller
 
     public function generateClientInvoice(Request $request)
     {
+        dd($request);
+
         // Manually validate the request data
         $validator = Validator::make($request->all(), [
             'client_id' => 'required|exists:clients,id',

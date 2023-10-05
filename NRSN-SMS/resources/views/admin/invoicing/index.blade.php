@@ -80,7 +80,9 @@
                             </td>
                             <!-- Add the "select for client invoicing" button -->
                             <td scope="row">
-                                <button class="select-for-client-invoicing text-white inline-block text-lg p-2 bg-blue-600 rounded hover:shadow-xl hover:bg-blue-500" data-client-id="{{ $client->id }}">Select
+                                <button
+                                    class="select-for-client-invoicing text-white inline-block text-lg p-2 bg-blue-600 rounded hover:shadow-xl hover:bg-blue-500"
+                                    data-client-id="{{ $client->id }}">Select
                                     for Invoicing</button>
                             </td>
                         </tr>
@@ -97,7 +99,9 @@
 
             <div class="text-black flex items-center grid-rows-2 grid">
                 <!-- Client Invoice Buttons -->
-                <button class="generate-client-invoice-button text-white inline-block px-2 mx-1 py-1 bg-green-600 rounded hover:shadow-xl hover:bg-green-500" data-type="client">Generate Client Invoice</button>
+                <button
+                    class="generate-client-invoice-button text-white inline-block px-2 mx-1 py-1 bg-green-600 rounded hover:shadow-xl hover:bg-green-500"
+                    data-type="client">Generate Client Invoice</button>
                 <button type="button"
                     class="text-white set-invoice-number-button inline-block px-2 mx-1 py-1 mt-1 bg-blue-600 rounded-t-md hover:shadow-xl hover:bg-blue-500">
                     Set Invoice Number <span class="text-xs">&#9660;</span>
@@ -253,35 +257,49 @@
                                 {{ $worker->first_name }} {{ $worker->last_name }}
                             </td>
                             <td scope="row" class="px-1 py-1">
-                                <!-- Calculate and display the total uninvoiced and approved shifts -->
-                                {{ $worker->shifts->where('approved', 1)->where('workerinvoice_id', null)->count() }}
+                                @foreach ($worker->shifts->where('approved', 1)->where('workerinvoice_id', null) as $shift)
+                                    <input type="checkbox" name="selected_shifts[]" value="{{ $shift->id }}"
+                                        class="shift-checkbox">
+                                    Shift ID: {{ $shift->id }}<br>
+                                    Client: {{ $shift->client_supported }}<br>
+                                    Worker: {{ $shift->submitted_by }}<br>
+                                    <!-- Add more details as needed -->
+                                    <br>
+                                @endforeach
                             </td>
-                            <td class="whitespace-nowrap text-sm text-white font-bold float-right py-3">
-                                <!-- Generate Invoice Button with Form -->
-                                <form action="{{ route('generate.worker-invoice') }}" target="_blank"
-                                    method="POST">
-                                    @csrf
-                                    <input type="hidden" name="worker_id" value="{{ $worker->id }}">
-                                    <div class="text-black flex items-center grid-rows-2 grid">
-                                        <button type="submit"
-                                            class="text-white generate-worker-invoice-button inline-block px-2 mx-1 py-1 bg-green-600 rounded hover:shadow-xl hover:bg-green-500">
-                                            Generate Worker Invoice
-                                        </button>
-                                        <button type="button"
-                                            class="text-white set-invoice-number-button inline-block px-2 mx-1 py-1 mt-1 bg-blue-600 rounded-t-md hover:shadow-xl hover:bg-blue-500">
-                                            Set Invoice Number <span class="text-xs">&#9660;</span>
-                                        </button>
-                                        <input type="text" name="invoice_number"
-                                            class="invoice-number-field hidden text-sm py-1 text-center px-2 mx-1 rounded-b-md"
-                                            placeholder="Invoice #: {{ $nextInvoiceNumbers['workers'][$worker->id] }}">
-                                    </div>
-                                </form>
+                            <!-- Add the "select for client invoicing" button -->
+                            <td scope="row">
+                                <button
+                                    class="select-for-worker-invoicing text-white inline-block text-lg p-2 bg-blue-600 rounded hover:shadow-xl hover:bg-blue-500"
+                                    data-worker-id="{{ $worker->id }}">Select
+                                    for Invoicing</button>
                             </td>
                         </tr>
                     @endforeach
                 </tbody>
             </table>
         </div>
+
+        <!-- Generate Invoice Button with Form (outside the loop) -->
+        <form action="{{ route('generate.worker-invoice') }}" method="POST" target="_blank">
+            @csrf
+            <input type="hidden" name="worker_id" id="worker-id-input" value="">
+            <input type="hidden" name="selected_shifts" id="selected-shifts-input" value="[]">
+
+            <div class="text-black flex items-center grid-rows-2 grid">
+                <!-- Client Invoice Buttons -->
+                <button
+                    class="generate-worker-invoice-button text-white inline-block px-2 mx-1 py-1 bg-green-600 rounded hover:shadow-xl hover:bg-green-500"
+                    data-type="worker">Generate Worker Invoice</button>
+                <button type="button"
+                    class="text-white set-invoice-number-button inline-block px-2 mx-1 py-1 mt-1 bg-blue-600 rounded-t-md hover:shadow-xl hover:bg-blue-500">
+                    Set Invoice Number <span class="text-xs">&#9660;</span>
+                </button>
+                <input type="text" name="invoice_number"
+                    class="invoice-number-field hidden text-sm py-1 text-center px-2 mx-1 rounded-b-md"
+                    placeholder="Invoice #:">
+            </div>
+        </form>
 
         <!-- Add this section for Worker Invoices -->
         <h2 class="text-xl font-semibold my-6">Pending Payment:</h2>
@@ -388,12 +406,29 @@
 </x-app-layout>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        const generateInvoiceButtons = document.querySelectorAll('.generate-invoice-button');
+        const generateClientInvoiceButtons = document.querySelectorAll('.generate-client-invoice-button');
+        const generateWorkerInvoiceButtons = document.querySelectorAll('.generate-worker-invoice-button');
         const setInvoiceNumberButtons = document.querySelectorAll('.set-invoice-number-button');
         const invoiceNumberFields = document.querySelectorAll('.invoice-number-field');
         const clientIdInput = document.getElementById('client-id-input'); // Get the client ID input element
+        const workerIdInput = document.getElementById('worker-id-input'); // Get the worker ID input element
         const selectForClientInvoicingButtons = document.querySelectorAll('.select-for-client-invoicing');
+        const selectForWorkerInvoicingButtons = document.querySelectorAll('.select-for-worker-invoicing');
         const selectedShiftsInput = document.getElementById('selected-shifts-input');
+
+        // Event listeners for client invoice generation
+        generateClientInvoiceButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                handleInvoiceGeneration('client');
+            });
+        });
+
+        // Event listeners for worker invoice generation
+        generateWorkerInvoiceButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                handleInvoiceGeneration('worker');
+            });
+        });
 
         setInvoiceNumberButtons.forEach(button => {
             button.addEventListener('click', function() {
@@ -406,20 +441,38 @@
         });
 
         selectForClientInvoicingButtons.forEach(button => {
-        button.addEventListener('click', function() {
-            const clientId = this.getAttribute('data-client-id');
-            const selectedShifts = [];
-            const checkboxes = this.parentNode.previousElementSibling.querySelectorAll('.shift-checkbox:checked');
+            button.addEventListener('click', function() {
+                const clientId = this.getAttribute('data-client-id');
+                const selectedShifts = [];
+                const checkboxes = this.parentNode.previousElementSibling.querySelectorAll(
+                    '.shift-checkbox:checked');
 
-            checkboxes.forEach(checkbox => {
-                selectedShifts.push(checkbox.value);
+                checkboxes.forEach(checkbox => {
+                    selectedShifts.push(checkbox.value);
+                });
+
+                // Convert the array to a JSON string and set it in the hidden input field
+                selectedShiftsInput.value = JSON.stringify(selectedShifts);
+                document.getElementById('client-id-input').value = clientId;
             });
-
-            // Convert the array to a JSON string and set it in the hidden input field
-            selectedShiftsInput.value = JSON.stringify(selectedShifts);
-            document.getElementById('client-id-input').value = clientId;
         });
-    });
+
+        selectForWorkerInvoicingButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const workerId = this.getAttribute('data-worker-id');
+                const selectedShifts = [];
+                const checkboxes = this.parentNode.previousElementSibling.querySelectorAll(
+                    '.shift-checkbox:checked');
+
+                checkboxes.forEach(checkbox => {
+                    selectedShifts.push(checkbox.value);
+                });
+
+                // Convert the array to a JSON string and set it in the hidden input field
+                selectedShiftsInput.value = JSON.stringify(selectedShifts);
+                document.getElementById('worker-id-input').value = workerId;
+            });
+        });
 
         generateInvoiceButtons.forEach(button => {
             button.addEventListener('click', function() {
