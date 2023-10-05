@@ -29,8 +29,8 @@ class InvoicingController extends Controller
      */
     public function index()
     {
-        // Get a list of clients and their uninvoiced shifts
-        $clients = Client::whereHas('shifts', function ($query) {
+        // Get a list of clients and their uninvoiced shifts, eager-loading the shifts
+        $clients = Client::with('shifts')->whereHas('shifts', function ($query) {
             $query->where('approved', 1)->where('clientinvoice_id', null);
         })->get();
 
@@ -59,16 +59,22 @@ class InvoicingController extends Controller
             $nextInvoiceNumber = DatabaseInvoice::where('type', 'client')
                 ->where('recipient_id', $client->id)
                 ->max('invoice_number') + 1;
-
             $nextInvoiceNumbers['clients'][$client->id] = $nextInvoiceNumber;
+
+            $client->shifts->each(function ($shift) {
+                $shift->client_total_pay = $this->calculateClientTotalPay($shift);
+            });
         }
 
         foreach ($workers as $worker) {
             $nextInvoiceNumber = DatabaseInvoice::where('type', 'worker')
                 ->where('recipient_id', $worker->id)
                 ->max('invoice_number') + 1;
-
             $nextInvoiceNumbers['workers'][$worker->id] = $nextInvoiceNumber;
+
+            $worker->shifts->each(function ($shift) {
+                $shift->worker_total_pay = $this->calculateWorkerTotalPay($shift);
+            });
         }
 
         return view('admin/invoicing.index', compact('clients', 'workers', 'pendingClientInvoices', 'pendingWorkerInvoices', 'nextInvoiceNumbers'));
@@ -262,7 +268,6 @@ class InvoicingController extends Controller
 
     public function generateClientInvoice(Request $request)
     {
-
         // Manually validate the request data
         $validator = Validator::make($request->all(), [
             'client_id' => 'required|exists:clients,id',
@@ -275,18 +280,16 @@ class InvoicingController extends Controller
                             ->where('recipient_id', $request->input('client_id'));
                     }),
             ],
-
         ]);
 
         // Check if validation fails
         if ($validator->fails()) {
-            return redirect()->back()->with('alert-fail', 'Error: Please make sure to only select shifts of the one client to invoice. A client may not reuse the same invoice number.');
+            return redirect()->back()->with('alert-fail', 'Error: The client already has an Invoice of this number.');
         }
 
         // Retrieve the client ID from the request
         $clientId = $request->input('client_id'); // Replace with your actual input field name
         $invoice_number = $request->input('invoice_number');
-
         // Find the client based on the client ID
         $client = Client::find($clientId);
 
@@ -306,12 +309,19 @@ class InvoicingController extends Controller
                 ->max('invoice_number') + 1;
         }
 
-        // Get the selected shift IDs from the request
-        $selectedShifts = $request->input('shifts');
+        // Convert the JSON string to an array
+        $selectedShifts = json_decode($request->input('selected_shifts'));
 
-        // Check if there are selected shifts
-        if (empty($selectedShifts)) {
-            return redirect()->back()->with('alert-fail', 'Please select 1+ shifts of the same client to invoice.');
+        // Modify the query to get only the selected shifts
+        $uninvoicedShifts = Shift::whereIn('id', $selectedShifts)
+            ->where('client_supported', $clientId)
+            ->where('approved', 1)
+            ->where('clientinvoice_id', null)
+            ->get();
+
+        // Check if there are selected shifts for invoicing
+        if ($uninvoicedShifts->isEmpty()) {
+            return redirect()->back()->with('error', 'No selected shifts found for invoicing.');
         }
 
         // Create a new Party for the client
@@ -345,89 +355,61 @@ class InvoicingController extends Controller
         // Create an array of InvoiceItems based on uninvoiced shifts
         $items = [];
         $totalAmount = 0;
+        foreach ($uninvoicedShifts as $shift) {
+            $activity = Activity::find($shift->activity_id);
+            $activityrate = ActivityRate::where('client_id', $shift->client_supported)
+                ->where('activity_id', $shift->activity_id)
+                ->first();
+            $dayofshift = $shift->date->format('l');
+            $dateofshift = $shift->date->format('d/m/y');
+            $public_holiday_text = ""; //Default no text
+            $activity_code = ""; //
+            $clientcontract = ClientContract::where('client_id', $shift->client_supported)
+                ->where('active', 1)
+                ->first();
 
-        // Initialize the $firstClientId variable
-        $firstClientId = null;
-
-        foreach ($selectedShifts as $clientId => $shiftIds) {
-            // Ensure that all shifts belong to the same client
-            if ($firstClientId === null) {
-                $firstClientId = $clientId;
-            } elseif ($clientId !== $firstClientId) {
-                return redirect()->back()->with('alert-fail', 'Selected shifts must belong to the same client.');
-            }
-
-            // Find the client based on the $clientId
-            $client = Client::find($clientId);
-
-            if (!$client) {
-                // Handle the case where the client with the given ID is not found.
-                continue; // Skip to the next iteration.
-            }
-
-            foreach ($shiftIds as $shiftId) {
-                // Find the individual shift
-                $shift = Shift::find($shiftId);
-
-                if (!$shift) {
-                    // Handle the case where the shift with the given ID is not found.
-                    continue; // Skip to the next iteration.
-                }
-
-                $activity = Activity::find($shift->activity_id);
-                $activityrate = ActivityRate::where('client_id', $shift->client_supported)
-                    ->where('activity_id', $shift->activity_id)
-                    ->first();
-                $dayofshift = $shift->date->format('l');
-                $dateofshift = $shift->date->format('d/m/y');
-                $public_holiday_text = ""; // Default no text
-                $activity_code = ""; //
-                $clientcontract = ClientContract::where('client_id', $shift->client_supported)
-                    ->where('active', 1)
-                    ->first();
-
-                if ($shift->is_public_holiday) {
-                    $hourlyRate = $activityrate->publicholidayhourlyrate;
-                    $public_holiday_text = "- Public Holiday";
-                    $activity_code = $activity->publicholidayhourlycode;
+            if ($shift->is_public_holiday) {
+                $hourlyRate = $activityrate->publicholidayhourlyrate;
+                $public_holiday_text = "- Public Holiday";
+                $activity_code = $activity->publicholidayhourlycode;
+            } else {
+                if ($dayofshift === 'Saturday') {
+                    $hourlyRate = $activityrate->saturdayhourlyrate;
+                    $activity_code = $activity->saturdayhourlycode;
+                } elseif ($dayofshift === 'Sunday') {
+                    $hourlyRate = $activityrate->sundayhourlyrate;
+                    $activity_code = $activity->sundayhourlycode;
                 } else {
-                    if ($dayofshift === 'Saturday') {
-                        $hourlyRate = $activityrate->saturdayhourlyrate;
-                        $activity_code = $activity->saturdayhourlycode;
-                    } elseif ($dayofshift === 'Sunday') {
-                        $hourlyRate = $activityrate->sundayhourlyrate;
-                        $activity_code = $activity->sundayhourlycode;
-                    } else {
-                        $hourlyRate = $activityrate->weekdayhourlyrate;
-                        $activity_code = $activity->weekdayhourlycode;
-                    }
+                    $hourlyRate = $activityrate->weekdayhourlyrate;
+                    $activity_code = $activity->weekdayhourlycode;
                 }
-
-                // Calculate total amount for kilometers
-                $kmRate = $clientcontract->km_rate;
-                $kmAmount = $shift->km * $kmRate;
-
-                // Calculate kmHours (rounded up to the nearest 15 minutes)
-                $kmHours = ceil(($kmAmount / $hourlyRate) / 0.25) * 0.25;
-
-                // Calculate total amount for expenses
-                $expensesAmount = $shift->expenses;
-                $expensesHours = ceil(($expensesAmount / $hourlyRate) / 0.25) * 0.25;
-
-                // Calculate the total quantity (hours + kilometers + expenses)
-                $totalQuantity = $shift->hours + $kmHours + $expensesHours;
-
-                $item = (new CustomInvoiceItem())
-                    ->title("$activity->activityname: $activity_code")
-                    ->description("$dayofshift $public_holiday_text - Hours: " . ($shift->hours) . " - Km: " . ($shift->km ?? 0) . " - Expenses: " . ($shift->expenses ?? 0))
-                    ->quantity($totalQuantity)
-                    ->setDateOfShift($dateofshift)
-                    ->pricePerUnit($hourlyRate);
-                $items[] = $item;
-
-                // Calculate and accumulate the total amount
-                $totalAmount += $hourlyRate * $shift->hours;
             }
+
+
+            // Calculate total amount for kilometers
+            $kmRate = $clientcontract->km_rate;
+            $kmAmount = $shift->km * $kmRate;
+
+            // Calculate kmHours (rounded up to the nearest 15 minutes)
+            $kmHours = ceil(($kmAmount / $hourlyRate) / 0.25) * 0.25;
+
+            // Calculate total amount for expenses
+            $expensesAmount = $shift->expenses;
+            $expensesHours = ceil(($expensesAmount / $hourlyRate) / 0.25) * 0.25;
+
+            // Calculate the total quantity (hours + kilometers + expenses)
+            $totalQuantity = $shift->hours + $kmHours + $expensesHours;
+
+            $item = (new CustomInvoiceItem())
+                ->title("$activity->activityname: $activity_code")
+                ->description("$dayofshift $public_holiday_text - Hours: " . ($shift->hours) . " - Km: " . ($shift->km ?? 0) . " - Expenses: " . ($shift->expenses ?? 0))
+                ->quantity($totalQuantity)
+                ->setDateOfShift($dateofshift)
+                ->pricePerUnit($hourlyRate);
+            $items[] = $item;
+
+            // Calculate and accumulate the total amount
+            $totalAmount += $hourlyRate * $shift->hours;
         }
 
         // Create the invoice
@@ -462,31 +444,10 @@ class InvoicingController extends Controller
         $clientInvoice->recipient()->associate($client);
         $clientInvoice->save();
 
-        foreach ($selectedShifts as $clientId => $shiftIds) {
-            // Find the client based on the $clientId
-            $client = Client::find($clientId);
-
-            if (!$client) {
-                // Handle the case where the client with the given ID is not found.
-                continue; // Skip to the next iteration.
-            }
-
-            // Loop through the shift IDs for this client
-            foreach ($shiftIds as $shiftId) {
-                // Find the individual shift
-                $shiftToUpdate = Shift::find($shiftId);
-
-                if (!$shiftToUpdate) {
-                    // Handle the case where the shift with the given ID is not found.
-                    continue; // Skip to the next iteration.
-                }
-
-                // Set the clientinvoice_id
-                $shiftToUpdate->clientinvoice_id = $clientInvoice->id;
-
-                // Save the individual shift
-                $shiftToUpdate->save();
-            }
+        // Establish the relationship between shifts and the invoice
+        foreach ($uninvoicedShifts as $shift) {
+            $shift->clientinvoice_id = $clientInvoice->id; // Set the clientinvoice_id
+            $shift->save();
         }
 
         // Return the PDF to the browser or have a different view
@@ -661,4 +622,80 @@ class InvoicingController extends Controller
         // Return the PDF to the browser or have a different view
         return $pdf->stream();
     }
+
+    private function calculateClientTotalPay($shift)
+    {
+        $dayofshift = $shift->date->format('l');
+
+        $activityrate = ActivityRate::where('client_id', $shift->client_supported)
+            ->where('activity_id', $shift->activity_id)
+            ->first();
+
+        $clientcontract = ClientContract::where('client_id', $shift->client_supported)
+            ->where('active', 1)
+            ->first();
+
+        if ($shift->is_public_holiday) {
+            $hourlyRate = $activityrate->publicholidayhourlyrate;
+        } else {
+            if ($dayofshift === 'Saturday') {
+                $hourlyRate = $activityrate->saturdayhourlyrate;
+            } elseif ($dayofshift === 'Sunday') {
+                $hourlyRate = $activityrate->sundayhourlyrate;
+            } else {
+                $hourlyRate = $activityrate->weekdayhourlyrate;
+            }
+        }
+
+        $kmRate = $clientcontract->km_rate;
+        $kmAmount = $shift->km * $kmRate;
+
+        $kmHours = ceil($kmAmount / $hourlyRate / 0.25) * 0.25;
+
+        $expensesAmount = $shift->expenses;
+        $expensesHours = ceil($expensesAmount / $hourlyRate / 0.25) * 0.25;
+
+        $totalQuantity = $shift->hours + $kmHours + $expensesHours;
+
+        // Calculate the total pay for this shift
+        $clientPays = $totalQuantity * $hourlyRate;
+
+        return number_format($clientPays, 2);
+    }
+
+    private function calculateWorkerTotalPay($shift)
+    {
+        $workerrates = UserContract::where('user_id', $shift->submitted_by)
+            ->where('active', 1)
+            ->first();
+        $dayofshift = $shift->date->format('l');
+
+        if ($shift->is_public_holiday) {
+            $hourlyRate = $workerrates->publicholidayhourlyrate;
+        } else {
+            if ($dayofshift === 'Saturday') {
+                $hourlyRate = $workerrates->saturdayhourlyrate;
+            } elseif ($dayofshift === 'Sunday') {
+                $hourlyRate = $workerrates->sundayhourlyrate;
+            } else {
+                $hourlyRate = $workerrates->weekdayhourlyrate;
+            }
+        }
+
+        // Calculate total amount for kilometers
+        $kmRate = $workerrates->km_rate;
+        $kmAmount = $shift->km * $kmRate;
+
+        // Calculate total amount for expenses
+        $expensesAmount = $shift->expenses;
+
+        $totalQuantity = $shift->hours;
+
+        // Calculate the total pay for this shift
+        $workerPays = $totalQuantity * $hourlyRate + $kmAmount + $expensesAmount;
+
+        return number_format($workerPays, 2);
+    }
+
+
 }

@@ -7,7 +7,7 @@
 
     <!-- Table Container -->
     <h2 class="text-xl font-semibold my-5">Awaiting Approval</h2>
-    <div class="relative overflow-auto border-2 border-blue-600 rounded">
+    <div class="relative overflow-auto border-2 border-blue-600 rounded" style="max-height: 600px; overflow-y: auto;">
 
         <!-- All Approved Shifts Table -->
         <table class="w-full text-left text-gray-800 bg-gray-100">
@@ -226,7 +226,7 @@
 
     <!-- Table Container -->
     <h2 class="text-xl font-semibold my-5">Awaiting Invoice</h2>
-    <div class="relative overflow-auto border-2 border-green-600 rounded">
+    <div class="relative overflow-auto border-2 border-green-600 rounded" style="max-height: 600px; overflow-y: auto;">
 
         <!-- All Approved Shifts Table -->
         <table class="w-full text-left text-gray-800 bg-gray-100">

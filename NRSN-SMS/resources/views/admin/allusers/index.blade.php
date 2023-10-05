@@ -6,7 +6,7 @@
     </x-slot>
 
     <!-- Table Container -->
-    <div class="relative overflow-auto border-2 border-blue-600 rounded">
+    <div class="relative overflow-auto border-2 border-blue-600 rounded" style="max-height: 600px; overflow-y: auto;">
 
         <!-- All Users Table -->
         <table class="w-full text-left text-gray-800 bg-gray-100">

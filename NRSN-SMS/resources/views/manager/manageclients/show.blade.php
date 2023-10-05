@@ -153,7 +153,7 @@
         <!-- Activities Container -->
         <div class="text-2xl font-medium overflow-hidden px-6 lg:px-8 mx-4 my-5">
             <h2 class="text-xl font-semibold mb-2">Activities</h2>
-            <div class="rounded-md bg-white shadow-md p-4 max-h-40 overflow-y-auto text-xs">
+            <div class="rounded-md bg-white shadow-md p-4 max-h-40 overflow-y-auto text-xs" style="max-height: 600px; overflow-y: auto;">
                 @if (is_null($manageclient->activityRates) || $manageclient->activityRates->isEmpty())
                     <p>No activities assigned.</p>
                 @else
