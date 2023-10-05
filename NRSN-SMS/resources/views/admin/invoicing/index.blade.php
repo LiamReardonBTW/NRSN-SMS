@@ -8,12 +8,6 @@
     <h2 class="text-2xl font-semibold bg-green-400 rounded-t-md py-4 px-3">Clients:</h2>
     <div class="bg-green-200 p-3 pb-12 rounded-b-md">
         <h2 class="text-xl font-semibold mb-2 py-4">Ready to invoice:</h2>
-        <!-- Display error message here -->
-        @error('invoice_number')
-            <div class="text-red-500 text-xs my-2">{{ $message }}</div>
-        @enderror
-
-
         <div class="relative overflow-auto border-2 border-blue-600 rounded mx-5"
             style="max-height: 300px; overflow-y: auto;">
             <!-- Client Invoices Table -->
@@ -208,7 +202,8 @@
     <div class="bg-blue-200 p-3 pb-12 rounded-b-md">
         <h2 class="text-xl font-semibold mb-2 py-4">Ready to invoice:</h2>
         <div class="relative overflow-auto border-2 border-blue-600 rounded mx-5"
-            style="max-height: 300px; overflow-y: auto;"> <!-- User Invoices Table -->
+            style="max-height: 300px; overflow-y: auto;">
+            <!-- User Invoices Table -->
             <table class="w-full text-left text-gray-800 bg-gray-100">
                 <!-- Table Headers -->
                 <thead class="text-xs uppercase text-gray-50 bg-blue-800">
@@ -258,8 +253,8 @@
                             </td>
                             <td scope="row" class="px-1 py-1">
                                 @foreach ($worker->shifts->where('approved', 1)->where('workerinvoice_id', null) as $shift)
-                                    <input type="checkbox" name="selected_shifts[]" value="{{ $shift->id }}"
-                                        class="shift-checkbox">
+                                    <input type="checkbox" name="selected_worker_shifts[]"
+                                        value="{{ $shift->id }}" class="worker-shift-checkbox">
                                     Shift ID: {{ $shift->id }}<br>
                                     Client: {{ $shift->client_supported }}<br>
                                     Worker: {{ $shift->submitted_by }}<br>
@@ -284,7 +279,7 @@
         <form action="{{ route('generate.worker-invoice') }}" method="POST" target="_blank">
             @csrf
             <input type="hidden" name="worker_id" id="worker-id-input" value="">
-            <input type="hidden" name="selected_shifts" id="selected-shifts-input" value="[]">
+            <input type="hidden" name="selected_worker_shifts" id="selected-worker-shifts-input" value="">
 
             <div class="text-black flex items-center grid-rows-2 grid">
                 <!-- Client Invoice Buttons -->
@@ -415,6 +410,7 @@
         const selectForClientInvoicingButtons = document.querySelectorAll('.select-for-client-invoicing');
         const selectForWorkerInvoicingButtons = document.querySelectorAll('.select-for-worker-invoicing');
         const selectedShiftsInput = document.getElementById('selected-shifts-input');
+        const selectedWorkerShiftsInput = document.getElementById('selected-worker-shifts-input');
 
         // Event listeners for client invoice generation
         generateClientInvoiceButtons.forEach(button => {
@@ -460,17 +456,17 @@
         selectForWorkerInvoicingButtons.forEach(button => {
             button.addEventListener('click', function() {
                 const workerId = this.getAttribute('data-worker-id');
-                const selectedShifts = [];
+                const workerSelectedShifts = [];
                 const checkboxes = this.parentNode.previousElementSibling.querySelectorAll(
-                    '.shift-checkbox:checked');
+                    '.worker-shift-checkbox:checked');
 
                 checkboxes.forEach(checkbox => {
-                    selectedShifts.push(checkbox.value);
+                    workerSelectedShifts.push(checkbox.value);
                 });
 
-                // Convert the array to a JSON string and set it in the hidden input field
-                selectedShiftsInput.value = JSON.stringify(selectedShifts);
-                document.getElementById('worker-id-input').value = workerId;
+                // Convert the array to a JSON string and set it in the hidden input field for worker shifts
+                selectedWorkerShiftsInput.value = JSON.stringify(workerSelectedShifts);
+                workerIdInput.value = workerId;
             });
         });
 
@@ -479,32 +475,30 @@
                 // Set the selected_shifts data in the hidden input field
                 const selectedShifts = [];
                 const checkboxes = document.querySelectorAll('.shift-checkbox:checked');
-                const container = document.querySelector(
-                    '.table-container'); // Replace with your container element
 
                 checkboxes.forEach(checkbox => {
                     selectedShifts.push(checkbox.value);
                 });
 
-                // Convert the array to a JSON string and set it in the hidden input field
-                document.getElementById('selected-shifts-input').value = JSON.stringify(
-                    selectedShifts);
-
-                // Update the client ID input field with the selected client's ID
                 const type = this.getAttribute('data-type');
-                const clientId = this.getAttribute('data-client-id');
-                clientIdInput.value = clientId;
 
                 // Define the appropriate URL based on the type (client or worker)
                 let url;
+                let inputFieldId;
+
                 if (type === 'client') {
                     url = '/generate-client-invoice'; // Update with your client invoice route
+                    inputFieldId = 'selected-shifts-input';
                 } else if (type === 'worker') {
                     url = '/generate-worker-invoice'; // Update with your worker invoice route
+                    inputFieldId = 'selected-worker-shifts-input';
                 } else {
                     console.error('Invalid invoice type.');
                     return;
                 }
+
+                // Convert the array to a JSON string and set it in the hidden input field
+                document.getElementById(inputFieldId).value = JSON.stringify(selectedShifts);
 
                 // Submit the form
                 // Send an AJAX request to generate the invoice
@@ -515,7 +509,7 @@
                             'Content-Type': 'application/json',
                         },
                         body: JSON.stringify({
-                            client_id: clientId, // You can pass other parameters as needed
+                            // Pass other parameters if needed
                         }),
                     })
                     .then(response => response.blob()) // Convert response to blob

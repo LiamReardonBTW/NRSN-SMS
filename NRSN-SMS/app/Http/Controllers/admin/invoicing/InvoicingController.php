@@ -262,8 +262,6 @@ class InvoicingController extends Controller
 
     public function generateClientInvoice(Request $request)
     {
-        dd($request);
-
         // Manually validate the request data
         $validator = Validator::make($request->all(), [
             'client_id' => 'required|exists:clients,id',
@@ -453,7 +451,6 @@ class InvoicingController extends Controller
 
     public function generateWorkerInvoice(Request $request)
     {
-        dd($request);
         // Manually validate the request data
         $validator = Validator::make($request->all(), [
             'worker_id' => 'required|exists:users,id',
