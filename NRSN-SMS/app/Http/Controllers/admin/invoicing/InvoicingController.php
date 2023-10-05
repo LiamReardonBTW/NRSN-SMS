@@ -29,8 +29,8 @@ class InvoicingController extends Controller
      */
     public function index()
     {
-        // Get a list of clients and their uninvoiced shifts
-        $clients = Client::whereHas('shifts', function ($query) {
+        // Get a list of clients and their uninvoiced shifts, eager-loading the shifts
+        $clients = Client::with('shifts')->whereHas('shifts', function ($query) {
             $query->where('approved', 1)->where('clientinvoice_id', null);
         })->get();
 
@@ -59,16 +59,22 @@ class InvoicingController extends Controller
             $nextInvoiceNumber = DatabaseInvoice::where('type', 'client')
                 ->where('recipient_id', $client->id)
                 ->max('invoice_number') + 1;
-
             $nextInvoiceNumbers['clients'][$client->id] = $nextInvoiceNumber;
+
+            $client->shifts->each(function ($shift) {
+                $shift->client_total_pay = $this->calculateClientTotalPay($shift);
+            });
         }
 
         foreach ($workers as $worker) {
             $nextInvoiceNumber = DatabaseInvoice::where('type', 'worker')
                 ->where('recipient_id', $worker->id)
                 ->max('invoice_number') + 1;
-
             $nextInvoiceNumbers['workers'][$worker->id] = $nextInvoiceNumber;
+
+            $worker->shifts->each(function ($shift) {
+                $shift->worker_total_pay = $this->calculateWorkerTotalPay($shift);
+            });
         }
 
         return view('admin/invoicing.index', compact('clients', 'workers', 'pendingClientInvoices', 'pendingWorkerInvoices', 'nextInvoiceNumbers'));
@@ -616,4 +622,80 @@ class InvoicingController extends Controller
         // Return the PDF to the browser or have a different view
         return $pdf->stream();
     }
+
+    private function calculateClientTotalPay($shift)
+    {
+        $dayofshift = $shift->date->format('l');
+
+        $activityrate = ActivityRate::where('client_id', $shift->client_supported)
+            ->where('activity_id', $shift->activity_id)
+            ->first();
+
+        $clientcontract = ClientContract::where('client_id', $shift->client_supported)
+            ->where('active', 1)
+            ->first();
+
+        if ($shift->is_public_holiday) {
+            $hourlyRate = $activityrate->publicholidayhourlyrate;
+        } else {
+            if ($dayofshift === 'Saturday') {
+                $hourlyRate = $activityrate->saturdayhourlyrate;
+            } elseif ($dayofshift === 'Sunday') {
+                $hourlyRate = $activityrate->sundayhourlyrate;
+            } else {
+                $hourlyRate = $activityrate->weekdayhourlyrate;
+            }
+        }
+
+        $kmRate = $clientcontract->km_rate;
+        $kmAmount = $shift->km * $kmRate;
+
+        $kmHours = ceil($kmAmount / $hourlyRate / 0.25) * 0.25;
+
+        $expensesAmount = $shift->expenses;
+        $expensesHours = ceil($expensesAmount / $hourlyRate / 0.25) * 0.25;
+
+        $totalQuantity = $shift->hours + $kmHours + $expensesHours;
+
+        // Calculate the total pay for this shift
+        $clientPays = $totalQuantity * $hourlyRate;
+
+        return number_format($clientPays, 2);
+    }
+
+    private function calculateWorkerTotalPay($shift)
+    {
+        $workerrates = UserContract::where('user_id', $shift->submitted_by)
+            ->where('active', 1)
+            ->first();
+        $dayofshift = $shift->date->format('l');
+
+        if ($shift->is_public_holiday) {
+            $hourlyRate = $workerrates->publicholidayhourlyrate;
+        } else {
+            if ($dayofshift === 'Saturday') {
+                $hourlyRate = $workerrates->saturdayhourlyrate;
+            } elseif ($dayofshift === 'Sunday') {
+                $hourlyRate = $workerrates->sundayhourlyrate;
+            } else {
+                $hourlyRate = $workerrates->weekdayhourlyrate;
+            }
+        }
+
+        // Calculate total amount for kilometers
+        $kmRate = $workerrates->km_rate;
+        $kmAmount = $shift->km * $kmRate;
+
+        // Calculate total amount for expenses
+        $expensesAmount = $shift->expenses;
+
+        $totalQuantity = $shift->hours;
+
+        // Calculate the total pay for this shift
+        $workerPays = $totalQuantity * $hourlyRate + $kmAmount + $expensesAmount;
+
+        return number_format($workerPays, 2);
+    }
+
+
 }

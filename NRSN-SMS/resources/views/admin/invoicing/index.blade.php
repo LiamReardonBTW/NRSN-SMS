@@ -44,7 +44,7 @@
                         </th>
 
                         <!-- Actions Table Header (For view/edit/delete buttons) -->
-                        <th scope="col" class="w-48 text-right px-2 py-1 border-r-2 border-blue-500 border-b-2 ">
+                        <th scope="col" class="text-right px-2 py-1 border-r-2 border-blue-500 border-b-2 ">
                             <span class="mr-28">Actions</span>
                         </th>
 
@@ -57,19 +57,42 @@
                     @foreach ($clients as $client)
                         <tr class="even:bg-gray-100 odd:bg-gray-200 hover:bg-gray-300 h-12 text-center">
                             <!-- Client/Worker Information -->
-                            <td scope="row" class="px-1 py-1">
+                            <td scope="row" class="px-1 py-1 w-32">
                                 {{ $client->first_name }} {{ $client->last_name }}
-                            </td>
-                            <!-- Display the client's shift details -->
-                            <td scope="row" class="px-1 py-1">
+                            <td scope="row" class="px-1">
                                 @foreach ($client->shifts->where('approved', 1)->where('clientinvoice_id', null) as $shift)
-                                    <input type="checkbox" name="selected_shifts[]" value="{{ $shift->id }}"
-                                        class="shift-checkbox">
-                                    Shift ID: {{ $shift->id }}<br>
-                                    Client: {{ $shift->client_supported }}<br>
-                                    Worker: {{ $shift->submitted_by }}<br>
-                                    <!-- Add more details as needed -->
-                                    <br>
+                                    <div class="grid grid-cols-6 gap-2 w-full text-xs mb-2 items-center border-t border-gray-400  "
+                                        style="grid-template-columns: 1fr 2fr 1fr 1fr 1fr 1fr;">
+                                        <div class="px-2">
+                                            <strong>Select</strong><br>
+                                            <input type="checkbox" name="selected_shifts[]" value="{{ $shift->id }}"
+                                                class="shift-checkbox">
+                                        </div>
+                                        <div class="px-2">
+                                            <strong>Activity</strong><br>
+                                            <span class="text-xs">{{ $shift->activity->activityname }}</span>
+                                        </div>
+
+                                        <div class="px-2">
+                                            <strong>Hours</strong><br>
+                                            {{ $shift->hours }}
+                                        </div>
+
+                                        <div class="px-2">
+                                            <strong>Km</strong><br>
+                                            {{ $shift->km ?? 0 }}
+                                        </div>
+
+                                        <div class="px-2">
+                                            <strong>Expenses</strong><br>
+                                            {{ $shift->expenses ?? 0 }}
+                                        </div>
+
+                                        <div class="px-2 ">
+                                            <strong>Total</strong><br>
+                                            {{ $shift->client_total_pay }}
+                                        </div>
+                                    </div>
                                 @endforeach
                             </td>
                             <!-- Add the "select for client invoicing" button -->
@@ -91,18 +114,18 @@
             <input type="hidden" name="client_id" id="client-id-input" value="">
             <input type="hidden" name="selected_shifts" id="selected-shifts-input" value="[]">
 
-            <div class="text-black flex items-center grid-rows-2 grid">
+            <div class="text-black flex items-center grid-cols-1 w-1/2 mt-6 grid  mx-4">
                 <!-- Client Invoice Buttons -->
-                <button
-                    class="generate-client-invoice-button text-white inline-block px-2 mx-1 py-1 bg-green-600 rounded hover:shadow-xl hover:bg-green-500"
-                    data-type="client">Generate Client Invoice</button>
                 <button type="button"
-                    class="text-white set-invoice-number-button inline-block px-2 mx-1 py-1 mt-1 bg-blue-600 rounded-t-md hover:shadow-xl hover:bg-blue-500">
+                    class="text-white set-invoice-number-button inline-block p-2 mx-1 bg-blue-600 rounded-t-md hover:shadow-xl hover:bg-blue-500">
                     Set Invoice Number <span class="text-xs">&#9660;</span>
                 </button>
                 <input type="text" name="invoice_number"
-                    class="invoice-number-field hidden text-sm py-1 text-center px-2 mx-1 rounded-b-md"
+                    class="invoice-number-field hidden text-sm text-center px-2 mx-1 border-gray-50"
                     placeholder="Invoice #:">
+                <button
+                    class="generate-client-invoice-button text-white inline-block p-5 mx-1 bg-green-600 rounded-b-md hover:shadow-xl hover:bg-green-500"
+                    data-type="client">Generate Client Invoice</button>
             </div>
         </form>
 
@@ -236,7 +259,7 @@
                             </div>
                         </th>
                         <!-- Actions Table Header (For view/edit/delete buttons) -->
-                        <th scope="col" class="w-48 text-right px-2 py-1 border-r-2 border-blue-500 border-b-2 ">
+                        <th scope="col" class="text-right px-2 py-1 border-r-2 border-blue-500 border-b-2 ">
                             <span class="mr-28">Actions</span>
                         </th>
                     </tr>
@@ -281,18 +304,19 @@
             <input type="hidden" name="worker_id" id="worker-id-input" value="">
             <input type="hidden" name="selected_worker_shifts" id="selected-worker-shifts-input" value="">
 
-            <div class="text-black flex items-center grid-rows-2 grid">
+            <div class="text-black flex items-center grid-cols-1 w-1/2 mt-6 grid  mx-4">
                 <!-- Client Invoice Buttons -->
-                <button
-                    class="generate-worker-invoice-button text-white inline-block px-2 mx-1 py-1 bg-green-600 rounded hover:shadow-xl hover:bg-green-500"
-                    data-type="worker">Generate Worker Invoice</button>
                 <button type="button"
-                    class="text-white set-invoice-number-button inline-block px-2 mx-1 py-1 mt-1 bg-blue-600 rounded-t-md hover:shadow-xl hover:bg-blue-500">
+                    class="text-white set-invoice-number-button inline-block p-2 mx-1 bg-blue-600 rounded-t-md hover:shadow-xl hover:bg-blue-500">
                     Set Invoice Number <span class="text-xs">&#9660;</span>
                 </button>
                 <input type="text" name="invoice_number"
-                    class="invoice-number-field hidden text-sm py-1 text-center px-2 mx-1 rounded-b-md"
+                    class="invoice-number-field hidden text-sm text-center px-2 mx-1 border-gray-50"
                     placeholder="Invoice #:">
+                <button
+                    class="generate-worker-invoice-button text-white inline-block p-5 mx-1 bg-green-600 rounded-b-md hover:shadow-xl hover:bg-green-500"
+                    data-type="worker">Generate Worker Invoice</button>
+
             </div>
         </form>
 
