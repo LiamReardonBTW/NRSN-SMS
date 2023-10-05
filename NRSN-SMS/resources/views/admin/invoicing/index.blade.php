@@ -9,7 +9,7 @@
     <div class="bg-green-200 p-3 pb-12 rounded-b-md">
         <h2 class="text-xl font-semibold mb-2 py-4">Ready to invoice:</h2>
         <div class="relative overflow-auto border-2 border-blue-600 rounded mx-5"
-            style="max-height: 300px; overflow-y: auto;">
+            style="max-height: 600px; overflow-y: auto;">
             <!-- Client Invoices Table -->
             <table class="w-full text-left text-gray-800 bg-gray-100">
                 <!-- Table Headers -->
@@ -55,54 +55,56 @@
                 <tbody class="text-xs font-bold">
                     <!-- Loop through clients/workers and display their information -->
                     @foreach ($clients as $client)
-                        <tr class="even:bg-gray-100 odd:bg-gray-200 hover:bg-gray-300 h-12 text-center">
-                            <!-- Client/Worker Information -->
-                            <td scope="row" class="px-1 py-1 w-32">
-                                {{ $client->first_name }} {{ $client->last_name }}
-                            <td scope="row" class="px-1">
-                                @foreach ($client->shifts->where('approved', 1)->where('clientinvoice_id', null) as $shift)
-                                    <div class="grid grid-cols-6 gap-2 w-full text-xs mb-2 items-center border-t border-gray-400  "
-                                        style="grid-template-columns: 1fr 2fr 1fr 1fr 1fr 1fr;">
-                                        <div class="px-2">
-                                            <strong>Select</strong><br>
-                                            <input type="checkbox" name="selected_shifts[]" value="{{ $shift->id }}"
-                                                class="shift-checkbox">
-                                        </div>
-                                        <div class="px-2">
-                                            <strong>Activity</strong><br>
-                                            <span class="text-xs">{{ $shift->activity->activityname }}</span>
-                                        </div>
+                        <div>
+                            <tr
+                                class="even:bg-gray-100 odd:bg-gray-200 hover:bg-blue-300 border-y-8 border-opacity-0  h-12 text-center">
+                                <!-- Client/Worker Information -->
+                                <td scope="row" class="px-1 py-1 w-32">
+                                    {{ $client->first_name }} {{ $client->last_name }}
+                                <td scope="row" class="px-1">
+                                    @foreach ($client->shifts->where('approved', 1)->where('clientinvoice_id', null) as $shift)
+                                        <div class="rounded-md hover:bg-blue-400 grid grid-cols-6 gap-2 w-full text-sm mb-2 items-center border-y border-x border-gray-400  "
+                                            style="grid-template-columns: 1fr 2fr 1fr 1fr 1fr 1fr;">
+                                            <div class="px-2">
+                                                <strong>Select</strong><br>
+                                                <input type="checkbox" name="selected_shifts[]"
+                                                    value="{{ $shift->id }}" class="shift-checkbox">
+                                            </div>
+                                            <div class="px-2">
+                                                <strong>Activity</strong><br>
+                                                <span class="text-xs">{{ $shift->activity->activityname }}</span>
+                                            </div>
 
-                                        <div class="px-2">
-                                            <strong>Hours</strong><br>
-                                            {{ $shift->hours }}
-                                        </div>
+                                            <div class="px-2">
+                                                <strong>Hours</strong><br>
+                                                {{ $shift->hours }}
+                                            </div>
 
-                                        <div class="px-2">
-                                            <strong>Km</strong><br>
-                                            {{ $shift->km ?? 0 }}
-                                        </div>
+                                            <div class="px-2">
+                                                <strong>Km</strong><br>
+                                                {{ $shift->km ?? 0 }}
+                                            </div>
 
-                                        <div class="px-2">
-                                            <strong>Expenses</strong><br>
-                                            {{ $shift->expenses ?? 0 }}
-                                        </div>
+                                            <div class="px-2">
+                                                <strong>Expenses</strong><br>
+                                                {{ $shift->expenses ?? 0 }}
+                                            </div>
 
-                                        <div class="px-2 ">
-                                            <strong>Total</strong><br>
-                                            {{ $shift->client_total_pay }}
+                                            <div class="px-2 ">
+                                                <strong>Total</strong><br>
+                                                <span class="text-lg">{{ $shift->client_total_pay }}</span>
+                                            </div>
                                         </div>
-                                    </div>
-                                @endforeach
-                            </td>
-                            <!-- Add the "select for client invoicing" button -->
-                            <td scope="row">
-                                <button
-                                    class="select-for-client-invoicing text-white inline-block text-lg p-2 bg-blue-600 rounded hover:shadow-xl hover:bg-blue-500"
-                                    data-client-id="{{ $client->id }}">Select
-                                    for Invoicing</button>
-                            </td>
-                        </tr>
+                                    @endforeach
+                                </td>
+                                <!-- Add the "select for client invoicing" button -->
+                                <td scope="row">
+                                    <button
+                                        class="select-for-client-invoicing text-white inline-block text-lg p-2 bg-blue-600 rounded hover:shadow-xl hover:bg-blue-500"
+                                        data-client-id="{{ $client->id }}">Select
+                                        for Invoicing</button>
+                                </td>
+                            </tr>
                     @endforeach
                 </tbody>
             </table>
@@ -219,19 +221,18 @@
 
     </div>
 
-
     <!-- Worker Invoices Table Container -->
     <h2 class="text-2xl font-semibold bg-blue-400 rounded-t-md py-4 mt-12 px-3">Workers:</h2>
     <div class="bg-blue-200 p-3 pb-12 rounded-b-md">
         <h2 class="text-xl font-semibold mb-2 py-4">Ready to invoice:</h2>
         <div class="relative overflow-auto border-2 border-blue-600 rounded mx-5"
-            style="max-height: 300px; overflow-y: auto;">
-            <!-- User Invoices Table -->
+            style="max-height: 600px; overflow-y: auto;">
+            <!-- Worker Invoices Table -->
             <table class="w-full text-left text-gray-800 bg-gray-100">
                 <!-- Table Headers -->
                 <thead class="text-xs uppercase text-gray-50 bg-blue-800">
                     <tr>
-                        <!-- Client Name Table Header -->
+                        <!-- Worker Name Table Header -->
                         <th scope="col" class="px-2 py-1 border-r-2 border-blue-500 border-b-2 ">
                             <div class="flex items-center">
                                 Name
@@ -266,31 +267,53 @@
                 </thead>
 
                 <!-- Table Content -->
-                <tbody class="text-xs font-bold">
-                    <!-- Loop through clients/workers and display their information -->
+                <tbody class="text-sm font-bold">
+                    <!-- Loop through workers and display their information -->
                     @foreach ($workers as $worker)
-                        <tr class="even:bg-gray-100 odd:bg-gray-200 hover:bg-gray-300 h-12 text-center">
-                            <!-- Client/Worker Information -->
-                            <td scope="row" class="px-1 py-1">
+                        <tr
+                            class="even:bg-gray-100 odd:bg-gray-200 hover:bg-blue-300 border-y-8 border-opacity-0  h-12 text-center">
+                            <!-- Worker Information -->
+                            <td scope="row" class="px-1 py-1 w-32">
                                 {{ $worker->first_name }} {{ $worker->last_name }}
                             </td>
                             <td scope="row" class="px-1 py-1">
                                 @foreach ($worker->shifts->where('approved', 1)->where('workerinvoice_id', null) as $shift)
-                                    <input type="checkbox" name="selected_worker_shifts[]"
-                                        value="{{ $shift->id }}" class="worker-shift-checkbox">
-                                    Shift ID: {{ $shift->id }}<br>
-                                    Client: {{ $shift->client_supported }}<br>
-                                    Worker: {{ $shift->submitted_by }}<br>
-                                    <!-- Add more details as needed -->
-                                    <br>
+                                    <div class="rounded-md hover:bg-blue-400 grid grid-cols-6 gap-2 w-full text-sm mb-2 items-center border-y border-x border-gray-400  "
+                                        style="grid-template-columns: 1fr 2fr 1fr 1fr 1fr 1fr;">
+                                        <div class="px-2">
+                                            <strong>Select</strong><br>
+                                            <input type="checkbox" name="selected_worker_shifts[]"
+                                                value="{{ $shift->id }}" class="worker-shift-checkbox">
+                                        </div>
+                                        <div class="px-2">
+                                            <strong>Client Supported</strong><br>
+                                            {{ $shift->clientSupported->first_name }}
+                                            {{ $shift->clientSupported->last_name }}
+                                        </div>
+                                        <div class="px-2">
+                                            <strong>Hours</strong><br>
+                                            {{ $shift->hours }}
+                                        </div>
+                                        <div class="px-2">
+                                            <strong>Km</strong><br>
+                                            {{ $shift->km ?? 0 }}
+                                        </div>
+                                        <div class="px-2">
+                                            <strong>Expenses</strong><br>
+                                            {{ $shift->expenses ?? 0 }}
+                                        </div>
+                                        <div class="px-2">
+                                            <strong>Total Pay</strong><br>
+                                            <span class="text-lg">{{ $shift->worker_total_pay }}</span>
+                                        </div>
+                                    </div>
                                 @endforeach
                             </td>
-                            <!-- Add the "select for client invoicing" button -->
+                            <!-- Add the "select for worker invoicing" button -->
                             <td scope="row">
                                 <button
                                     class="select-for-worker-invoicing text-white inline-block text-lg p-2 bg-blue-600 rounded hover:shadow-xl hover:bg-blue-500"
-                                    data-worker-id="{{ $worker->id }}">Select
-                                    for Invoicing</button>
+                                    data-worker-id="{{ $worker->id }}">Select for Invoicing</button>
                             </td>
                         </tr>
                     @endforeach
