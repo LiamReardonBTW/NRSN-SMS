@@ -74,7 +74,7 @@
             <p class="text-lg bg-white rounded-md p-2 m-4">No previous contracts available for this client.</p>
         @else
             <!-- Table Container -->
-            <div class="relative overflow-auto border-2 border-blue-600 rounded m-4">
+            <div class="relative overflow-auto border-2 border-blue-600 rounded m-4" style="max-height: 600px; overflow-y: auto;">
                 <!-- manage clients Table -->
                 <table class="w-full text-left text-gray-800 bg-gray-100">
                     <!-- Table Headers -->
