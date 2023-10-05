@@ -303,15 +303,19 @@ class InvoicingController extends Controller
                 ->max('invoice_number') + 1;
         }
 
-        // Get uninvoiced shifts for the selected client
-        $uninvoicedShifts = Shift::where('client_supported', $clientId)
+        // Convert the JSON string to an array
+        $selectedShifts = json_decode($request->input('selected_shifts'));
+
+        // Modify the query to get only the selected shifts
+        $uninvoicedShifts = Shift::whereIn('id', $selectedShifts)
+            ->where('client_supported', $clientId)
             ->where('approved', 1)
             ->where('clientinvoice_id', null)
             ->get();
 
-        // Check if there are uninvoiced shifts
+        // Check if there are selected shifts for invoicing
         if ($uninvoicedShifts->isEmpty()) {
-            return redirect()->back()->with('error', 'No uninvoiced shifts found for this client.');
+            return redirect()->back()->with('error', 'No selected shifts found for invoicing.');
         }
 
         // Create a new Party for the client
@@ -447,6 +451,7 @@ class InvoicingController extends Controller
 
     public function generateWorkerInvoice(Request $request)
     {
+        dd($request);
         // Manually validate the request data
         $validator = Validator::make($request->all(), [
             'worker_id' => 'required|exists:users,id',

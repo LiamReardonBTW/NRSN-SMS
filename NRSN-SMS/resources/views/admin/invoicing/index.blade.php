@@ -66,35 +66,47 @@
                             <td scope="row" class="px-1 py-1">
                                 {{ $client->first_name }} {{ $client->last_name }}
                             </td>
+                            <!-- Display the client's shift details -->
                             <td scope="row" class="px-1 py-1">
-                                <!-- Calculate and display the total uninvoiced and approved shifts -->
-                                {{ $client->shifts->where('approved', 1)->where('clientinvoice_id', null)->count() }}
+                                @foreach ($client->shifts->where('approved', 1)->where('clientinvoice_id', null) as $shift)
+                                    <input type="checkbox" name="selected_shifts[]" value="{{ $shift->id }}"
+                                        class="shift-checkbox">
+                                    Shift ID: {{ $shift->id }}<br>
+                                    Client: {{ $shift->client_supported }}<br>
+                                    Worker: {{ $shift->submitted_by }}<br>
+                                    <!-- Add more details as needed -->
+                                    <br>
+                                @endforeach
                             </td>
-                            <td class="whitespace-nowrap text-sm text-white font-bold float-right py-3">
-                                <!-- Generate Invoice Button with Form -->
-                                <form action="{{ route('generate.client-invoice') }}" method="POST" target="_blank">
-                                    @csrf
-                                    <input type="hidden" name="client_id" value="{{ $client->id }}">
-                                    <div class="text-black flex items-center grid-rows-2 grid">
-                                        <button type="submit"
-                                            class="text-white generate-client-invoice-button inline-block px-2 mx-1 py-1 bg-green-600 rounded hover:shadow-xl hover:bg-green-500">
-                                            Generate Client Invoice
-                                        </button>
-                                        <button type="button"
-                                            class="text-white set-invoice-number-button inline-block px-2 mx-1 py-1 mt-1 bg-blue-600 rounded-t-md hover:shadow-xl hover:bg-blue-500">
-                                            Set Invoice Number <span class="text-xs">&#9660;</span>
-                                        </button>
-                                        <input type="text" name="invoice_number"
-                                            class="invoice-number-field hidden text-sm py-1 text-center px-2 mx-1 rounded-b-md"
-                                            placeholder="Invoice #: {{ $nextInvoiceNumbers['clients'][$client->id] }}">
-                                    </div>
-                                </form>
+                            <!-- Add the "select for client invoicing" button -->
+                            <td scope="row">
+                                <button class="select-for-client-invoicing text-white inline-block text-lg p-2 bg-blue-600 rounded hover:shadow-xl hover:bg-blue-500" data-client-id="{{ $client->id }}">Select
+                                    for Invoicing</button>
                             </td>
                         </tr>
                     @endforeach
                 </tbody>
             </table>
         </div>
+
+        <!-- Generate Invoice Button with Form (outside the loop) -->
+        <form action="{{ route('generate.client-invoice') }}" method="POST" target="_blank">
+            @csrf
+            <input type="hidden" name="client_id" id="client-id-input" value="">
+            <input type="hidden" name="selected_shifts" id="selected-shifts-input" value="[]">
+
+            <div class="text-black flex items-center grid-rows-2 grid">
+                <!-- Client Invoice Buttons -->
+                <button class="generate-client-invoice-button text-white inline-block px-2 mx-1 py-1 bg-green-600 rounded hover:shadow-xl hover:bg-green-500" data-type="client">Generate Client Invoice</button>
+                <button type="button"
+                    class="text-white set-invoice-number-button inline-block px-2 mx-1 py-1 mt-1 bg-blue-600 rounded-t-md hover:shadow-xl hover:bg-blue-500">
+                    Set Invoice Number <span class="text-xs">&#9660;</span>
+                </button>
+                <input type="text" name="invoice_number"
+                    class="invoice-number-field hidden text-sm py-1 text-center px-2 mx-1 rounded-b-md"
+                    placeholder="Invoice #:">
+            </div>
+        </form>
 
         <!-- Add this section for Client Invoices -->
         <h2 class="text-xl font-semibold my-6">Pending Payment:</h2>
@@ -246,7 +258,8 @@
                             </td>
                             <td class="whitespace-nowrap text-sm text-white font-bold float-right py-3">
                                 <!-- Generate Invoice Button with Form -->
-                                <form action="{{ route('generate.worker-invoice') }}" target="_blank" method="POST">
+                                <form action="{{ route('generate.worker-invoice') }}" target="_blank"
+                                    method="POST">
                                     @csrf
                                     <input type="hidden" name="worker_id" value="{{ $worker->id }}">
                                     <div class="text-black flex items-center grid-rows-2 grid">
@@ -368,17 +381,19 @@
             Back
         </a>
         <a href="{{ route('allinvoices.index') }}"
-                class="inline-flex items-center m-6 px-6 py-4 bg-blue-700 border border-transparent rounded-md font-semibold text-base text-white uppercase tracking-widest hover:bg-blue-500 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">
-                View All Invoices
-            </a>
+            class="inline-flex items-center m-6 px-6 py-4 bg-blue-700 border border-transparent rounded-md font-semibold text-base text-white uppercase tracking-widest hover:bg-blue-500 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">
+            View All Invoices
+        </a>
     </div>
 </x-app-layout>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        const generateClientInvoiceButtons = document.querySelectorAll('.generate-client-invoice-button');
-        const generateWorkerInvoiceButtons = document.querySelectorAll('.generate-worker-invoice-button');
+        const generateInvoiceButtons = document.querySelectorAll('.generate-invoice-button');
         const setInvoiceNumberButtons = document.querySelectorAll('.set-invoice-number-button');
         const invoiceNumberFields = document.querySelectorAll('.invoice-number-field');
+        const clientIdInput = document.getElementById('client-id-input'); // Get the client ID input element
+        const selectForClientInvoicingButtons = document.querySelectorAll('.select-for-client-invoicing');
+        const selectedShiftsInput = document.getElementById('selected-shifts-input');
 
         setInvoiceNumberButtons.forEach(button => {
             button.addEventListener('click', function() {
@@ -390,54 +405,69 @@
             });
         });
 
-        generateClientInvoiceButtons.forEach(button => {
-            button.addEventListener('click', function() {
-                const clientId = this.getAttribute('data-client-id');
+        selectForClientInvoicingButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const clientId = this.getAttribute('data-client-id');
+            const selectedShifts = [];
+            const checkboxes = this.parentNode.previousElementSibling.querySelectorAll('.shift-checkbox:checked');
 
-                // Send an AJAX request to generate the client invoice
-                fetch('{{ route('generate.client-invoice') }}', {
-                        method: 'POST',
-                        headers: {
-                            'X-CSRF-TOKEN': '{{ csrf_token() }}',
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify({
-                            client_id: clientId
-                        }),
-                    })
-                    .then(blob => {
-                        // Create a temporary URL for the generated PDF
-                        const url = window.URL.createObjectURL(blob);
-
-                        // Open the PDF in a new tab
-                        window.open(url, '_blank');
-
-                        // Release the temporary URL
-                        window.URL.revokeObjectURL(url);
-                    })
-                    .catch(error => {
-                        console.error('Error generating client invoice:', error);
-                    });
+            checkboxes.forEach(checkbox => {
+                selectedShifts.push(checkbox.value);
             });
+
+            // Convert the array to a JSON string and set it in the hidden input field
+            selectedShiftsInput.value = JSON.stringify(selectedShifts);
+            document.getElementById('client-id-input').value = clientId;
         });
+    });
 
-        generateWorkerInvoiceButtons.forEach(button => {
+        generateInvoiceButtons.forEach(button => {
             button.addEventListener('click', function() {
-                const workerId = this.getAttribute('data-worker-id');
+                // Set the selected_shifts data in the hidden input field
+                const selectedShifts = [];
+                const checkboxes = document.querySelectorAll('.shift-checkbox:checked');
+                const container = document.querySelector(
+                    '.table-container'); // Replace with your container element
 
-                // Send an AJAX request to generate the worker invoice
-                fetch('{{ route('generate.worker-invoice') }}', {
+                checkboxes.forEach(checkbox => {
+                    selectedShifts.push(checkbox.value);
+                });
+
+                // Convert the array to a JSON string and set it in the hidden input field
+                document.getElementById('selected-shifts-input').value = JSON.stringify(
+                    selectedShifts);
+
+                // Update the client ID input field with the selected client's ID
+                const type = this.getAttribute('data-type');
+                const clientId = this.getAttribute('data-client-id');
+                clientIdInput.value = clientId;
+
+                // Define the appropriate URL based on the type (client or worker)
+                let url;
+                if (type === 'client') {
+                    url = '/generate-client-invoice'; // Update with your client invoice route
+                } else if (type === 'worker') {
+                    url = '/generate-worker-invoice'; // Update with your worker invoice route
+                } else {
+                    console.error('Invalid invoice type.');
+                    return;
+                }
+
+                // Submit the form
+                // Send an AJAX request to generate the invoice
+                fetch(url, {
                         method: 'POST',
                         headers: {
-                            'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}', // Replace with an actual CSRF token value
                             'Content-Type': 'application/json',
                         },
                         body: JSON.stringify({
-                            worker_id: workerId
+                            client_id: clientId, // You can pass other parameters as needed
                         }),
                     })
+                    .then(response => response.blob()) // Convert response to blob
                     .then(blob => {
-                        // Create a temporary URL for the generated PDF
+                        // Create a temporary URL for the blob
                         const url = window.URL.createObjectURL(blob);
 
                         // Open the PDF in a new tab
@@ -447,7 +477,7 @@
                         window.URL.revokeObjectURL(url);
                     })
                     .catch(error => {
-                        console.error('Error generating worker invoice:', error);
+                        console.error('Error generating invoice:', error);
                     });
             });
         });
