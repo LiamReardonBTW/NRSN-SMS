@@ -203,71 +203,62 @@
         <h2 class="text-xl font-semibold mb-2 py-4">Ready to invoice:</h2>
         <div class="relative overflow-auto border-2 border-blue-600 rounded mx-5"
             style="max-height: 300px; overflow-y: auto;"> <!-- User Invoices Table -->
-            <form action="{{ route('generate.worker-invoice') }}" method="POST" target="_blank">
-                @csrf
-                <table class="w-full text-left text-gray-800 bg-gray-100">
-                    <!-- Table Headers -->
-                    <thead class="text-xs uppercase text-gray-50 bg-blue-800">
-                        <tr>
-                            <!-- worker Name Table Header -->
-                            <th scope="col" class="px-2 py-1 border-r-2 border-blue-500 border-b-2 ">
-                                <div class="flex items-center">
-                                    Name
-                                    <!-- Sort By Name Button -->
-                                    <a href="#">
-                                        <svg class="w-3 h-3 ml-1.5" aria-hidden="true"
-                                            xmlns="http://www.w3.org/2000/svg" fill="currentColor"
-                                            viewBox="0 0 24 24">
-                                            <!-- Sort icon -->
-                                        </svg>
-                                    </a>
-                                </div>
-                            </th>
+            <table class="w-full text-left text-gray-800 bg-gray-100">
+                <!-- Table Headers -->
+                <thead class="text-xs uppercase text-gray-50 bg-blue-800">
+                    <tr>
+                        <!-- Client Name Table Header -->
+                        <th scope="col" class="px-2 py-1 border-r-2 border-blue-500 border-b-2 ">
+                            <div class="flex items-center">
+                                Name
+                                <!-- Sort By Name Button -->
+                                <a href="#">
+                                    <svg class="w-3 h-3 ml-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                        fill="currentColor" viewBox="0 0 24 24">
+                                        <!-- Sort icon -->
+                                    </svg>
+                                </a>
+                            </div>
+                        </th>
 
-                            <!-- Total Uninvoiced Shifts Table Header -->
-                            <th scope="col" class="px-2 py-1 border-r-2 border-blue-500 border-b-2 ">
-                                <div class="flex items-center">
-                                    Total Uninvoiced Shifts
-                                    <!-- Sort By Total Uninvoiced Shifts Button -->
-                                    <a href="#">
-                                        <svg class="w-3 h-3 ml-1.5" aria-hidden="true"
-                                            xmlns="http://www.w3.org/2000/svg" fill="currentColor"
-                                            viewBox="0 0 24 24">
-                                            <!-- Sort icon -->
-                                        </svg>
-                                    </a>
-                                </div>
-                            </th>
-                            <!-- Actions Table Header (For view/edit/delete buttons) -->
-                            <th scope="col"
-                                class="w-48 text-right px-2 py-1 border-r-2 border-blue-500 border-b-2 ">
-                                <span class="mr-28">Actions</span>
-                            </th>
-                        </tr>
-                    </thead>
-                    <!-- Table Content -->
-                    <tbody class="text-xs font-bold">
-                        <!-- Loop through clients/workers and display their information -->
-                        @foreach ($workers as $worker)
-                            <tr class="even:bg-gray-100 odd:bg-gray-200 hover:bg-gray-300 h-12 text-center">
-                                <!-- Client/Worker Information -->
-                                <td scope="row" class="px-1 py-1">
-                                    {{ $worker->first_name }} {{ $worker->last_name }}
-                                </td>
-                                <td scope="row" class="px-1 py-1">
-                                    <!-- List the uninvoiced and approved shifts with checkboxes -->
-                                    @foreach ($worker->shifts->where('approved', 1)->where('workerinvoice_id', null) as $shift)
-                                        <label>
-                                            <input type="checkbox" name="shifts[{{ $worker->id }}][]"
-                                                value="{{ $shift->id }}">
-                                            {{ $shift->id }}
-                                            <!-- Add more attributes as needed -->
-                                        </label>
-                                        <br>
-                                    @endforeach
-                                </td>
-                                <td class="whitespace-nowrap text-sm text-white font-bold float-right py-3">
-                                    <!-- Generate Invoice Button with Form -->
+                        <!-- Total Uninvoiced Shifts Table Header -->
+                        <th scope="col" class="px-2 py-1 border-r-2 border-blue-500 border-b-2 ">
+                            <div class="flex items-center">
+                                Total Uninvoiced Shifts
+                                <!-- Sort By Total Uninvoiced Shifts Button -->
+                                <a href="#">
+                                    <svg class="w-3 h-3 ml-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                        fill="currentColor" viewBox="0 0 24 24">
+                                        <!-- Sort icon -->
+                                    </svg>
+                                </a>
+                            </div>
+                        </th>
+                        <!-- Actions Table Header (For view/edit/delete buttons) -->
+                        <th scope="col" class="w-48 text-right px-2 py-1 border-r-2 border-blue-500 border-b-2 ">
+                            <span class="mr-28">Actions</span>
+                        </th>
+                    </tr>
+                </thead>
+
+                <!-- Table Content -->
+                <tbody class="text-xs font-bold">
+                    <!-- Loop through clients/workers and display their information -->
+                    @foreach ($workers as $worker)
+                        <tr class="even:bg-gray-100 odd:bg-gray-200 hover:bg-gray-300 h-12 text-center">
+                            <!-- Client/Worker Information -->
+                            <td scope="row" class="px-1 py-1">
+                                {{ $worker->first_name }} {{ $worker->last_name }}
+                            </td>
+                            <td scope="row" class="px-1 py-1">
+                                <!-- Calculate and display the total uninvoiced and approved shifts -->
+                                {{ $worker->shifts->where('approved', 1)->where('workerinvoice_id', null)->count() }}
+                            </td>
+                            <td class="whitespace-nowrap text-sm text-white font-bold float-right py-3">
+                                <!-- Generate Invoice Button with Form -->
+                                <form action="{{ route('generate.worker-invoice') }}" target="_blank"
+                                    method="POST">
+                                    @csrf
                                     <input type="hidden" name="worker_id" value="{{ $worker->id }}">
                                     <div class="text-black flex items-center grid-rows-2 grid">
                                         <button type="submit"
@@ -282,12 +273,12 @@
                                             class="invoice-number-field hidden text-sm py-1 text-center px-2 mx-1 rounded-b-md"
                                             placeholder="Invoice #: {{ $nextInvoiceNumbers['workers'][$worker->id] }}">
                                     </div>
-                                </td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </form>
+                                </form>
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
         </div>
 
         <!-- Add this section for Worker Invoices -->
@@ -448,29 +439,16 @@
 
                     })
                     .catch(error => {
-                        return redirect() - > back() - > with('alert-fail',
-                            'Error: Please make sure to only select shifts of the one client to invoice. A client may not reuse the same invoice number.'
-                        );
+                        return redirect()->back()->with('alert-fail', 'Error: Please make sure to only select shifts of the one client to invoice. A client may not reuse the same invoice number.');
                     });
             });
         });
 
         generateWorkerInvoiceButtons.forEach(button => {
             button.addEventListener('click', function() {
-
-                // Get the worker ID associated with the clicked button
                 const workerId = this.getAttribute('data-worker-id');
 
-                // Collect selected checkbox values (shift IDs) for the specific worker
-                const selectedShiftsArray = [];
-                const checkboxes = document.querySelectorAll(
-                    `input[name="shifts[${workerId}][]"]:checked`);
-
-                checkboxes.forEach(checkbox => {
-                    selectedShiftsArray.push(checkbox.value);
-                });
-
-                // Send an AJAX request to generate the client invoice
+                // Send an AJAX request to generate the worker invoice
                 fetch('{{ route('generate.worker-invoice') }}', {
                         method: 'POST',
                         headers: {
@@ -478,7 +456,7 @@
                             'Content-Type': 'application/json',
                         },
                         body: JSON.stringify({
-                            worker_id: workerId,
+                            worker_id: workerId
                         }),
                     })
                     .then(blob => {
@@ -490,15 +468,11 @@
 
                         // Release the temporary URL
                         window.URL.revokeObjectURL(url);
-
                     })
                     .catch(error => {
-                        return redirect() - > back() - > with('alert-fail',
-                            'Error: Please make sure to only select shifts of the one worker to invoice. A worker may not reuse the same invoice number.'
-                        );
+                        console.error('Error generating worker invoice:', error);
                     });
             });
         });
-
     });
 </script>
