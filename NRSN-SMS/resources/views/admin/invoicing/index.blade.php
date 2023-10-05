@@ -507,10 +507,13 @@
 
         setInvoiceNumberButtons.forEach(button => {
             button.addEventListener('click', function() {
-                // Find the corresponding input field
-                const inputField = this.nextElementSibling;
+                // Display the warning
+                alert(
+                    "Warning! Continuing may overwrite an existing invoice if the client or worker already has an invoice of that number."
+                );
 
-                // Toggle the visibility of the input field
+                // Find the corresponding input field and toggle its visibility
+                const inputField = this.nextElementSibling;
                 inputField.classList.toggle('hidden');
             });
         });
@@ -524,7 +527,14 @@
 
                 checkboxes.forEach(checkbox => {
                     selectedShifts.push(checkbox.value);
+
+                    // Change the background color of the shift to green
+                    checkbox.closest('.grid').style.backgroundColor = 'lightgreen';
                 });
+
+                // Change the text and background color of the button
+                this.innerText = "Selected";
+                this.style.backgroundColor = 'green';
 
                 // Convert the array to a JSON string and set it in the hidden input field
                 selectedShiftsInput.value = JSON.stringify(selectedShifts);
@@ -541,7 +551,14 @@
 
                 checkboxes.forEach(checkbox => {
                     workerSelectedShifts.push(checkbox.value);
+
+                    // Change the background color of the shift to green
+                    checkbox.closest('.grid').style.backgroundColor = 'lightgreen';
                 });
+
+                // Change the text and background color of the button
+                this.innerText = "Selected";
+                this.style.backgroundColor = 'green';
 
                 // Convert the array to a JSON string and set it in the hidden input field for worker shifts
                 selectedWorkerShiftsInput.value = JSON.stringify(workerSelectedShifts);
