@@ -61,9 +61,9 @@
                                 <!-- Client/Worker Information -->
                                 <td scope="row" class="px-1 py-1 w-32">
                                     {{ $client->first_name }} {{ $client->last_name }}
-                                <td scope="row" class="px-1">
+                                <td scope="row" class="px-1 py-6">
                                     @foreach ($client->shifts->where('approved', 1)->where('clientinvoice_id', null) as $shift)
-                                        <div class="rounded-md hover:bg-blue-400 grid grid-cols-6 gap-2 w-full text-sm mb-2 items-center border-y border-x border-gray-400  "
+                                        <div class="rounded-md hover:bg-blue-400 grid grid-cols-6 gap-2 w-full text-sm items-center my-3 border-y border-x border-gray-400  "
                                             style="grid-template-columns: 1fr 2fr 1fr 1fr 1fr 1fr;">
                                             <div class="px-2">
                                                 <strong>Select</strong><br>
@@ -139,14 +139,24 @@
                 <!-- Table Headers -->
                 <thead class="text-xs uppercase text-gray-50 bg-blue-800">
                     <tr>
+                        <!-- Client Name Header -->
+                        <th scope="col" class="px-2 py-1 border-r-2 border-blue-500 border-b-2">
+                            Client Name
+                        </th>
+
                         <!-- Invoice Number Header -->
                         <th scope="col" class="px-2 py-1 border-r-2 border-blue-500 border-b-2">
                             Invoice Number
                         </th>
 
-                        <!-- Client Name Header -->
+                        <!-- Invoice Number Header -->
                         <th scope="col" class="px-2 py-1 border-r-2 border-blue-500 border-b-2">
-                            Client Name
+                            Date
+                        </th>
+
+                        <!-- Invoice Number Header -->
+                        <th scope="col" class="px-2 py-1 border-r-2 border-blue-500 border-b-2">
+                            Total Amount
                         </th>
 
                         <!-- Actions Header (For view/download buttons) -->
@@ -163,15 +173,21 @@
                         <tr class="even:bg-gray-100 odd:bg-gray-200 hover:bg-gray-300 h-12 text-center">
                             <!-- Invoice Information -->
                             <td scope="row" class="px-1 py-1">
-                                {{ $invoice->invoice_number }}
-                            </td>
-                            <td scope="row" class="px-1 py-1">
                                 <!-- Retrieve and display the recipient's first_name and last_name -->
                                 @if ($invoice->recipient)
                                     {{ $invoice->recipient->first_name }} {{ $invoice->recipient->last_name }}
                                 @else
                                     N/A <!-- Handle the case when recipient is not found -->
                                 @endif
+                            </td>
+                            <td scope="row" class="px-1 py-1">
+                                {{ $invoice->invoice_number }}
+                            </td>
+                            <td scope="row" class="px-1 py-1">
+                                {{ $invoice->date }}
+                            </td>
+                            <td scope="row" class="px-1 py-1">
+                                {{ $invoice->totalamount }}
                             </td>
                             <td class="whitespace-nowrap text-sm text-white font-bold float-right py-2">
                                 <div class="flex">
@@ -276,9 +292,9 @@
                             <td scope="row" class="px-1 py-1 w-32">
                                 {{ $worker->first_name }} {{ $worker->last_name }}
                             </td>
-                            <td scope="row" class="px-1 py-1">
+                            <td scope="row" class="px-1 py-6">
                                 @foreach ($worker->shifts->where('approved', 1)->where('workerinvoice_id', null) as $shift)
-                                    <div class="rounded-md hover:bg-blue-400 grid grid-cols-6 gap-2 w-full text-sm mb-2 items-center border-y border-x border-gray-400  "
+                                    <div class="rounded-md hover:bg-blue-400 grid grid-cols-6 gap-2 w-full text-sm items-center my-3 border-y border-x border-gray-400  "
                                         style="grid-template-columns: 1fr 2fr 1fr 1fr 1fr 1fr;">
                                         <div class="px-2">
                                             <strong>Select</strong><br>
@@ -351,14 +367,24 @@
                 <!-- Table Headers -->
                 <thead class="text-xs uppercase text-gray-50 bg-blue-800">
                     <tr>
+                        <!-- Worker Name Header -->
+                        <th scope="col" class="px-2 py-1 border-r-2 border-blue-500 border-b-2">
+                            Worker Name
+                        </th>
+
                         <!-- Invoice Number Header -->
                         <th scope="col" class="px-2 py-1 border-r-2 border-blue-500 border-b-2">
                             Invoice Number
                         </th>
 
-                        <!-- Worker Name Header -->
+                        <!-- Date Number Header -->
                         <th scope="col" class="px-2 py-1 border-r-2 border-blue-500 border-b-2">
-                            Worker Name
+                            Date
+                        </th>
+
+                        <!-- Total Number Header -->
+                        <th scope="col" class="px-2 py-1 border-r-2 border-blue-500 border-b-2">
+                            Total Amount
                         </th>
 
                         <!-- Actions Header (For view/download buttons) -->
@@ -375,15 +401,21 @@
                         <tr class="even:bg-gray-100 odd:bg-gray-200 hover:bg-gray-300 h-12 text-center">
                             <!-- Invoice Information -->
                             <td scope="row" class="px-1 py-1">
-                                {{ $invoice->invoice_number }}
-                            </td>
-                            <td scope="row" class="px-1 py-1">
                                 <!-- Retrieve and display the recipient's first_name and last_name -->
                                 @if ($invoice->recipient)
                                     {{ $invoice->recipient->first_name }} {{ $invoice->recipient->last_name }}
                                 @else
                                     N/A <!-- Handle the case when recipient is not found -->
                                 @endif
+                            </td>
+                            <td scope="row" class="px-1 py-1">
+                                {{ $invoice->invoice_number }}
+                            </td>
+                            <td scope="row" class="px-1 py-1">
+                                {{ $invoice->date }}
+                            </td>
+                            <td scope="row" class="px-1 py-1">
+                                {{ $invoice->totalamount }}
                             </td>
                             <td class="whitespace-nowrap text-sm text-white font-bold float-right py-2">
                                 <div class="flex">
